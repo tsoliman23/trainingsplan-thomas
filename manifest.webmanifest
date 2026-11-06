@@ -1,6 +1,6 @@
 {
   "id": "./",
-  "name": "Thomas – Persönlicher Trainingsplan",
+  "name": "Mein Trainingsplan",
   "short_name": "Training",
   "description": "Offline-Trainingscheckliste mit Gewichten, Fortschritt und PDF-Export.",
   "start_url": "./index.html",

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="de"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Thomas | Trainingsplan</title><meta name="theme-color" content="#2f5be8"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta name="apple-mobile-web-app-title" content="Training"/><meta name="description" content="Dein persönlicher Offline-Trainingsplan mit automatischer Speicherung."/><link rel="manifest" href="./manifest.webmanifest"/><link rel="icon" href="./icons/icon-192.png"/><link rel="apple-touch-icon" href="./icons/icon-180.png"/><style>
+<html lang="de"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Mein Trainingsplan</title><meta name="theme-color" content="#2f5be8"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta name="apple-mobile-web-app-title" content="Training"/><meta name="description" content="Dein persönlicher Offline-Trainingsplan mit automatischer Speicherung."/><link rel="manifest" href="./manifest.webmanifest"/><link rel="icon" href="./icons/icon-192.png"/><link rel="apple-touch-icon" href="./icons/icon-180.png"/><style>
 :root{
   --bg1:#eef4ff;
   --bg2:#f6f9ff;
@@ -12,7 +12,7 @@
   --blue:#2f5be8;
   --blue-dark:#1f43b8;
   --blue-soft:#dfe8ff;
-  --success:#2f8c67;
+  --success:#2f5be8;
   --shadow:0 18px 46px rgba(26,55,128,.12);
   --radius-xl:24px;
   --radius-lg:18px;
@@ -133,12 +133,23 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   h1{font-size:19pt;color:#000}h2{font-size:15pt}h3{font-size:12pt}
 }
 
-</style></head><body><div class="wrap"><header>
+
+.hero-logo img{width:100%;height:100%;object-fit:contain;border-radius:14px}
+.profile-overlay{position:fixed;inset:0;z-index:9999;background:rgba(10,26,63,.78);display:flex;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(6px)}
+.profile-overlay[hidden]{display:none!important}
+.profile-dialog{width:min(440px,100%);border-radius:24px;background:white;padding:28px;box-shadow:0 25px 90px rgba(0,0,0,.3);color:#1a2740}
+.profile-dialog img{width:64px;height:64px;border-radius:15px;display:block;margin-bottom:14px}
+.profile-dialog h2{margin:0 0 6px}.profile-dialog p{color:#5b6d8c;line-height:1.5}
+.profile-dialog label{display:block;margin:16px 0 6px;font-weight:700}
+.profile-dialog input{width:100%;border:1px solid #bbcced;border-radius:12px;padding:12px;font-size:17px}
+.profile-dialog button{margin-top:22px;width:100%;background:#2f5be8;color:#fff}
+.profile-dialog .profile-cancel{margin-top:8px;background:#eff3ff;color:#2447aa}
+</style></head><body><div class="profile-overlay" id="profileOverlay" hidden><form class="profile-dialog" id="profileForm"><img src="./icons/icon-192.png" alt="App-Logo"><h2>Dein Trainingsprofil</h2><p>Bitte gib beim ersten Start deinen Vornamen und dein Zielgewicht ein. Die Angaben werden nur auf deinem Gerät gespeichert.</p><label for="profileFirstName">Vorname *</label><input id="profileFirstName" name="firstName" autocomplete="given-name" maxlength="40" required placeholder="Dein Vorname"><label for="profileGoal">Zielgewicht in kg *</label><input id="profileGoal" name="goalWeight" type="number" inputmode="decimal" min="20" max="350" step="0.1" required placeholder="z. B. 80"><button type="submit">Profil speichern</button><button type="button" class="profile-cancel" id="profileCancel" hidden>Abbrechen</button></form></div><div class="wrap"><header>
   <div class="hero-top">
-    <div class="hero-logo">TS</div>
+    <div class="hero-logo"><img src="./icons/icon-192.png" alt="Trainingsplan-Logo" /></div>
     <div class="hero-copy">
       <div class="eyebrow">TRAIN. TRACK. IMPROVE:</div>
-      <h1>Hallo Thomas Soliman!</h1>
+      <h1 id="personalGreeting">Dein Trainingsplan</h1>
       <div class="subtitle" style="font-weight:700;margin:4px 0 0">Dein persönlicher Trainingsplan</div>
     </div>
   </div>
@@ -152,7 +163,7 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
       </div>
       <div class="panel-card">
         <div class="goal-ring">
-          <div class="goal-number">80</div>
+          <div class="goal-number" id="goalNumber">–</div>
           <div class="goal-text"><strong>Zielgewicht</strong><br/>Fokus: Muskelaufbau, Routine und sauberer Wochenfortschritt.</div>
         </div>
       </div>
@@ -163,7 +174,7 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
       <span class="hero-tag">Freitag · Ganzkörper & Boxen</span>
     </div>
     <div class="buttons header-actions" style="margin-top:16px">
-      <button id="installApp" type="button" hidden>App installieren</button>
+      <button id="installApp" type="button" hidden>App installieren</button><button id="editProfile" type="button">Profil bearbeiten</button>
       <button id="exportJsonTop" type="button">Datensicherung herunterladen (JSON)</button>
       <button class="pdf-export" type="button">PDF erstellen und teilen</button>
       <button id="loadTop" type="button">Sicherungscode laden</button>
@@ -214,6 +225,30 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   var weight=document.getElementById('bodyWeight'), label=document.getElementById('saveState');
   var panel=document.getElementById('manualPanel'),code=document.getElementById('manualCode');
   var available=false,mode='code';
+  var profile={firstName:'',goalWeight:''};
+  var profileOverlay=document.getElementById('profileOverlay');
+  function validProfile(p){return !!(p&&typeof p.firstName==='string'&&p.firstName.trim()&&Number(p.goalWeight)>=20&&Number(p.goalWeight)<=350);}
+  function profileDisplay(){
+    document.getElementById('personalGreeting').textContent=validProfile(profile)?'Hallo '+profile.firstName.trim()+'!':'Dein Trainingsplan';
+    document.getElementById('goalNumber').textContent=validProfile(profile)?String(profile.goalWeight).replace('.',','):'–';
+  }
+  function showProfile(canCancel){
+    document.getElementById('profileFirstName').value=profile.firstName||'';
+    document.getElementById('profileGoal').value=profile.goalWeight||'';
+    document.getElementById('profileCancel').hidden=!canCancel;
+    profileOverlay.hidden=false;document.getElementById('profileFirstName').focus();
+  }
+  document.getElementById('profileForm').addEventListener('submit',function(e){
+    e.preventDefault();var first=document.getElementById('profileFirstName').value.trim();
+    var goal=document.getElementById('profileGoal').value;
+    if(!first||!(Number(goal)>=20&&Number(goal)<=350))return;
+    profile={firstName:first,goalWeight:String(goal)};profileDisplay();profileOverlay.hidden=true;
+    try{localStorage.setItem('training-profile-v1',JSON.stringify(profile));}catch(_){}
+    if(!loading)save();
+  });
+  document.getElementById('profileCancel').addEventListener('click',function(){profileOverlay.hidden=true;});
+  document.getElementById('editProfile').addEventListener('click',function(){showProfile(validProfile(profile));});
+
   var custom={montag:[],mittwoch:[],freitag:[]};
   var customCounter=0;
   function getBoxes(){return Array.prototype.slice.call(document.querySelectorAll('input[data-check]'));}
@@ -248,14 +283,14 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   }
   function downloadJson(){
     var text=JSON.stringify(data(),null,2),blob=new Blob([text],{type:'application/json;charset=utf-8'});
-    var filename='Trainingscheckliste_Thomas_Sicherung_'+new Date().toISOString().slice(0,10)+'.json';
+    var filename='Trainingscheckliste_'+(profile.firstName||'Training').replace(/[^a-zA-Z0-9äöüÄÖÜß_-]/g,'_')+'_Sicherung_'+new Date().toISOString().slice(0,10)+'.json';
     var url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},60000);
     label.textContent='JSON-Sicherung erstellt. Bitte die Datei außerhalb der App aufbewahren.';
   }
   document.querySelector('header').appendChild(panel);
   try{localStorage.setItem('__cf_test','1');localStorage.removeItem('__cf_test');available=true;}catch(e){}
-  function data(){refreshBoxes();var d={version:19,savedAt:Date.now(),checks:{},notes:{},results:{},weight:weight.value,custom:JSON.parse(JSON.stringify(custom))};boxes.forEach(function(b){d.checks[b.name]=b.checked;});notes.forEach(function(n){d.notes[n.name]=n.value;});results.forEach(function(r){d.results[r.name]=r.value;});return d;}
-  function apply(d){if(!d||typeof d!=='object'||!d.checks||!d.notes)throw Error('Ungültige Sicherung');custom=normalizeCustom(d.custom);renderCustom();refreshBoxes();boxes.forEach(function(b){b.checked=!!d.checks[b.name];});notes.forEach(function(n){if(typeof d.notes[n.name]==='string')n.value=d.notes[n.name];});if(d.weight!==undefined&&d.weight!==null)weight.value=String(d.weight);results=Array.prototype.slice.call(document.querySelectorAll('input[data-result]'));results.forEach(function(r){r.value=d.results&&d.results[r.name]!==undefined?String(d.results[r.name]):'';});update();}
+  function data(){refreshBoxes();var d={version:19,savedAt:Date.now(),checks:{},notes:{},results:{},weight:weight.value,profile:{firstName:profile.firstName,goalWeight:profile.goalWeight},custom:JSON.parse(JSON.stringify(custom))};boxes.forEach(function(b){d.checks[b.name]=b.checked;});notes.forEach(function(n){d.notes[n.name]=n.value;});results.forEach(function(r){d.results[r.name]=r.value;});return d;}
+  function apply(d){if(!d||typeof d!=='object'||!d.checks||!d.notes)throw Error('Ungültige Sicherung');custom=normalizeCustom(d.custom);if(validProfile(d.profile)){profile={firstName:d.profile.firstName,goalWeight:String(d.profile.goalWeight)};profileDisplay();}renderCustom();refreshBoxes();boxes.forEach(function(b){b.checked=!!d.checks[b.name];});notes.forEach(function(n){if(typeof d.notes[n.name]==='string')n.value=d.notes[n.name];});if(d.weight!==undefined&&d.weight!==null)weight.value=String(d.weight);results=Array.prototype.slice.call(document.querySelectorAll('input[data-result]'));results.forEach(function(r){r.value=d.results&&d.results[r.name]!==undefined?String(d.results[r.name]):'';});update();}
   function update(){refreshBoxes();var n=boxes.filter(function(b){return b.checked;}).length;document.getElementById('status').textContent=n+' von '+boxes.length+' Schritten erledigt';document.getElementById('bar').style.width=(boxes.length?100*n/boxes.length:0)+'%';}
   function save(){
     if(loading)return;
@@ -274,7 +309,10 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
     var dbSnapshot=await readDb();
     if(dbSnapshot && (!snapshot || Number(dbSnapshot.savedAt||0)>=Number(snapshot.savedAt||0)))snapshot=dbSnapshot;
     if(snapshot){try{apply(snapshot);}catch(e){label.textContent='Ein gespeicherter Stand konnte nicht gelesen werden.';}}
+    try{var existingProfile=JSON.parse(localStorage.getItem('training-profile-v1')||'null');if(!validProfile(profile)&&validProfile(existingProfile))profile=existingProfile;}catch(_){}
+    profileDisplay();
     loading=false;
+    if(!validProfile(profile))showProfile(false);
     if(snapshot){backupLocal(snapshot);label.textContent=db?'Trainingsstand aus sicherem Gerätespeicher geladen.':'Trainingsstand aus Browser-Speicher geladen.';}
     else label.textContent=db?'IndexedDB bereit: Änderungen werden automatisch gespeichert.':'Browser-Speicher bereit. Bitte zusätzlich JSON-Sicherungen erstellen.';
     if(!snapshot)save();
@@ -457,102 +495,16 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
     }
     return out;
   }
-  function makePdf(){
-    var lines=[], days=[['montag','Montag'],['mittwoch','Mittwoch'],['freitag','Freitag']];
-    function add(text,type){lines.push({text:String(text||''),type:type||'normal'});}
-    add('Thomas - Persönlicher Trainingsplan','title');
-    add('Gewicht: '+(weight.value||'-')+' kg | Ziel: 80 kg','normal');
-    add('Erstellt am '+new Date().toLocaleDateString('de-DE'),'normal');
-    days.forEach(function(entry){
-      var root=document.getElementById(entry[0]);
-      add(entry[1]+' - Trainingscheckliste','day');
-      var subtitle=root.querySelector('.subtitle');if(subtitle)add(subtitle.textContent,'normal');
-      Array.prototype.forEach.call(root.querySelectorAll('.item'),function(item){
-        var check=item.querySelector('input[data-check]');
-        var heading=item.querySelector('label strong');
-        if(!heading)return;
-        add((check&&check.checked?'[X] ':'[ ] ')+heading.textContent,'exercise');
-        var small=item.querySelector('label small');
-        if(small)add(small.textContent.replace(/\s+/g,' ').trim(),'detail');
-        var fields=item.querySelectorAll('input[data-result]');
-        if(fields.length){
-          var pairs=[];Array.prototype.forEach.call(fields,function(input){
-            var holder=input.closest('.value-field');var name=holder&&holder.querySelector('span');
-            pairs.push((name?name.textContent:'Wert')+': '+(input.value||'-'));
-          });add(pairs.join(' | '),'values');
-        }
-      });
-      var notes=root.querySelector('textarea[name]');
-      add('Trainingsnotizen: '+(notes&&notes.value?notes.value:'Keine Notizen'),'notes');
-    });
-    var pages=[], current=[], ypos=790;
-    function newPage(){if(current.length)pages.push(current);current=[];ypos=790;}
-    function wrap(text,max){
-      var result=[];
-      String(text).split(/\r?\n/).forEach(function(para){
-        var words=pdfSafe(para).split(/\s+/),line='';
-        words.forEach(function(word){
-          while(word.length>max){if(line){result.push(line);line='';}result.push(word.slice(0,max));word=word.slice(max);}
-          if(!word)return;
-          if((line+' '+word).trim().length>max){if(line)result.push(line);line=word;}
-          else line=(line?line+' ':'')+word;
-        });result.push(line||' ');
-      });return result;
-    }
-    lines.forEach(function(entry){
-      if(entry.type==='day' && ypos<715)newPage();
-      var font=(entry.type==='title'?17:entry.type==='day'?14:entry.type==='exercise'?10:9);
-      var step=(entry.type==='title'?24:entry.type==='day'?22:entry.type==='exercise'?15:12);
-      var max=(entry.type==='title'?58:entry.type==='day'?68:entry.type==='values'?92:entry.type==='detail'?94:88);
-      var block=wrap(entry.text,max);
-      if(ypos - block.length*step < 58)newPage();
-      if(entry.type==='day')ypos-=9;
-      block.forEach(function(line){
-        if(ypos<55)newPage();
-        current.push({text:line,x:(entry.type==='detail'||entry.type==='values'?55:entry.type==='notes'?45:40),y:ypos,font:font,bold:entry.type==='title'||entry.type==='day'||entry.type==='exercise'});
-        ypos-=step;
-      });
-      if(entry.type==='exercise'||entry.type==='notes')ypos-=3;
-    });
-    if(current.length)pages.push(current);
-    var objects=[null], pageRefs=[], contents=[];
-    function obj(v){objects.push(v);return objects.length-1;}
-    var fontRegular=obj('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>');
-    var fontBold=obj('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
-    pages.forEach(function(page,ix){
-      var text='';page.forEach(function(row){
-        text+='BT /'+(row.bold?'F2':'F1')+' '+row.font+' Tf 1 0 0 1 '+row.x+' '+row.y+' Tm <'+pdfHex(row.text)+'> Tj ET\n';
-      });
-      text+='BT /F1 8 Tf 1 0 0 1 490 30 Tm <'+pdfHex('Seite '+(ix+1)+' / '+pages.length)+'> Tj ET\n';
-      var stream=obj('<< /Length '+text.length+' >>\nstream\n'+text+'endstream');
-      contents.push(stream);
-      pageRefs.push(obj(''));
-    });
-    var pagesRef=obj('');
-    pageRefs.forEach(function(ref,i){objects[ref]='<< /Type /Page /Parent '+pagesRef+' 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 '+fontRegular+' 0 R /F2 '+fontBold+' 0 R >> >> /Contents '+contents[i]+' 0 R >>';});
-    objects[pagesRef]='<< /Type /Pages /Count '+pageRefs.length+' /Kids ['+pageRefs.map(function(r){return r+' 0 R';}).join(' ')+'] >>';
-    var catalog=obj('<< /Type /Catalog /Pages '+pagesRef+' 0 R >>');
-    var pdf='%PDF-1.4\n%PDF\n',offsets=[0];
-    for(var i=1;i<objects.length;i++){
-      offsets[i]=pdf.length;pdf+=i+' 0 obj\n'+objects[i]+'\nendobj\n';
-    }
-    var xref=pdf.length;
-    pdf+='xref\n0 '+objects.length+'\n0000000000 65535 f \n';
-    for(var j=1;j<objects.length;j++)pdf+=('0000000000'+offsets[j]).slice(-10)+' 00000 n \n';
-    pdf+='trailer\n<< /Size '+objects.length+' /Root '+catalog+' 0 R >>\nstartxref\n'+xref+'\n%%EOF';
-    var bytes=new Uint8Array(pdf.length);for(var k=0;k<pdf.length;k++)bytes[k]=pdf.charCodeAt(k)&255;
-    return new Blob([bytes],{type:'application/pdf'});
-  }
   function informPdf(msg){var l=document.getElementById('pdf-status');if(l)l.textContent=msg;}
   Array.prototype.forEach.call(document.querySelectorAll('.pdf-export'),function(btn){
     btn.addEventListener('click',async function(){
       var pdf;
       try{pdf=await makeModernPdf();}catch(error){informPdf('PDF-Erstellung fehlgeschlagen: '+error.message);return;}
-      var filename='Trainingscheckliste_Thomas_'+new Date().toISOString().slice(0,10)+'.pdf';
+      var filename='Trainingscheckliste_'+(profile.firstName||'Training').replace(/[^a-zA-Z0-9äöüÄÖÜß_-]/g,'_')+'_'+new Date().toISOString().slice(0,10)+'.pdf';
       var file=new File([pdf],filename,{type:'application/pdf'});
       // On iOS Safari the native share sheet can save the real PDF to Files.
       if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
-        navigator.share({files:[file],title:'Trainingscheckliste Thomas'}).then(function(){informPdf('PDF bereitgestellt. Über "In Dateien sichern" ablegen.');}).catch(function(e){if(e.name!=='AbortError')downloadPdf();});
+        navigator.share({files:[file],title:'Trainingscheckliste '+(profile.firstName||'')}).then(function(){informPdf('PDF bereitgestellt. Über "In Dateien sichern" ablegen.');}).catch(function(e){if(e.name!=='AbortError')downloadPdf();});
       }else downloadPdf();
       function downloadPdf(){
         var url=URL.createObjectURL(pdf),a=document.createElement('a');
