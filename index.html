@@ -368,6 +368,20 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
     try{localStorage.setItem('training-profile-v1',JSON.stringify(profile));}catch(_){}
     if(!loading)save();
   });
+  // Explicit onboarding handoff: a language choice must always open the profile form
+  // for a new user, even when IndexedDB finishes loading after the click.
+  var profileStorageReady=false;
+  var profileNeedsSetup=false;
+  function continueAfterLanguage(){
+    if(!profileStorageReady)return;
+    if(profileNeedsSetup){
+      if(profileOverlay.hidden)showProfile(false);
+    }else{
+      profileOverlay.hidden=true;
+    }
+  }
+  window.MyTrainingContinueOnboarding=continueAfterLanguage;
+  document.addEventListener('mytraining-initial-language-confirmed',continueAfterLanguage);
   document.getElementById('profileCancel').addEventListener('click',function(){profileOverlay.hidden=true;});
   document.getElementById('editProfile').addEventListener('click',function(){showProfile(validProfile(profile));});
 
@@ -435,7 +449,13 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
     profileDisplay();
     loading=false;
     var extraReady=false;try{var x=JSON.parse(localStorage.getItem('training-full-profile-v1')||'null');extraReady=!!(x&&x.lastName&&x.birthday&&Number(x.heightCm)>=100&&Number(x.currentWeight)>=20&&x.trainingGoal);}catch(_){}
-    if(!validProfile(profile)||!extraReady)showProfile(false);
+    profileNeedsSetup=!validProfile(profile)||!extraReady;
+    profileStorageReady=true;
+    // Do not expose the dashboard while the first language screen is active.
+    if(document.getElementById('languageOnboarding')?.hidden && profileNeedsSetup){
+      showProfile(false);
+    }
+
     if(snapshot){backupLocal(snapshot);label.textContent=db?'Trainingsstand aus sicherem Gerätespeicher geladen.':'Trainingsstand aus Browser-Speicher geladen.';}
     else label.textContent=db?'IndexedDB bereit: Änderungen werden automatisch gespeichert.':'Browser-Speicher bereit. Bitte zusätzlich JSON-Sicherungen erstellen.';
     if(!snapshot)save();

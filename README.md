@@ -169,3 +169,13 @@ Die Sprachwahl ist bei einer Neuinstallation im initialen HTML enthalten. Die Ap
 ## Sprachauswahl als erster Einrichtungsschritt
 
 Die erste Seite zeigt ausschließlich **WILLKOMMEN**, **Wähle deine Sprache**, vier Sprachoptionen und den Button **Weiter**. Beim Antippen einer Sprache wird sie lediglich markiert; die Überschrift und der Weiter-Button wechseln sofort in die ausgewählte Sprache. Die Auswahl wird erst durch **Weiter** dauerhaft gespeichert. Danach öffnet sich die bestehende Profilerstellung. Bei vorhandener Spracheinstellung wird die Sprachwahl übersprungen. Die Versionsnummer des Offline-Caches wurde aktualisiert.
+
+## Home-Bildschirm statt Browser
+
+**iPhone (iOS):** Die GitHub-Pages-HTTPS-Adresse in **Safari** öffnen, auf **Teilen** tippen, **Zum Home-Bildschirm** auswählen und mit **Hinzufügen** bestätigen. Danach die App über ihr neues Symbol auf dem Home-Bildschirm öffnen (nicht über den Safari-Tab). Die vorhandene `manifest.webmanifest` definiert `display: standalone`; auf iOS ergänzen die Apple-Web-App-Metadaten den Vollbild-/Standalone-Start. Bei manchen iOS-Versionen ist die Safari-Aktion erst unter „Aktionen bearbeiten“ sichtbar.
+
+**Android:** GitHub-Pages-Seite in Chrome öffnen, Menü (drei Punkte) → **App installieren** beziehungsweise **Zum Startbildschirm hinzufügen**. Danach über das App-Symbol öffnen.
+
+GitHub Pages dient nur zur Veröffentlichung. Die Trainingsdaten werden weiterhin lokal im Browser-/App-Speicher gehalten. Vor einem Wechsel zwischen Safari und Home-Bildschirm-App bitte eine JSON-Sicherung anlegen; Speicherbereiche können je nach Plattform getrennt sein.
+
+**Ersteinrichtung:** Sprache markieren, **Weiter** drücken; daraufhin öffnet sich für neue Nutzer der vierstufige Profilassistent. Er startet auch dann, wenn die lokale Datenbank erst nach der Sprachauswahl geladen ist.

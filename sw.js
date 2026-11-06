@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v21-language-continue';
+const CACHE = 'mytraining-v22-onboarding-navigation-fix';
 
 const ASSETS = [
     './',

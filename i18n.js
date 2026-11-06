@@ -67,14 +67,25 @@ function renderIntroSelection(){
 function finishIntro(){
  if(!selectedIntroLanguage)return;
  const chosen=selectedIntroLanguage;
- lang=chosen;
- localStorage.setItem(KEY,chosen);
- if(ready)apply();
- initialGate.hidden=true;
- document.documentElement.classList.remove('language-boot-first','language-boot-loading');
- document.documentElement.lang=chosen;
- document.documentElement.dir=chosen==='ar-EG'?'rtl':'ltr';
- document.dispatchEvent(new CustomEvent('mytraining-language-change',{detail:{language:chosen}}));
+ const nextButton=initialGate.querySelector('#languageContinue');
+ nextButton.disabled=true;
+ try {
+  lang=chosen;
+  localStorage.setItem(KEY,chosen);
+  initialGate.hidden=true;
+  document.documentElement.classList.remove('language-boot-first','language-boot-loading');
+  document.documentElement.lang=chosen;
+  document.documentElement.dir=chosen==='ar-EG'?'rtl':'ltr';
+  if(ready)apply();
+  // This explicit transition works whether local data loaded before or after the click.
+  document.dispatchEvent(new CustomEvent('mytraining-initial-language-confirmed',{detail:{language:chosen}}));
+  window.MyTrainingContinueOnboarding?.();
+  document.dispatchEvent(new CustomEvent('mytraining-language-change',{detail:{language:chosen}}));
+ }catch(e){
+  console.error('Language onboarding failed:',e);
+  nextButton.disabled=false;
+  initialGate.hidden=false;
+ }
 }
 function languageGate(){
  if(!initialGate)return;
