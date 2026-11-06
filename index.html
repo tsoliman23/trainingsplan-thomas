@@ -64,6 +64,7 @@ button:active{transform:translateY(0);background:#edf3ff}
 .bar{height:100%;width:0;background:linear-gradient(90deg,#ffffff 0%,#cfe0ff 100%)}
 .stat{font-size:14px;margin:10px 0 8px;font-weight:700}
 .sticky{position:sticky;top:0;background:transparent;padding:6px 0;z-index:2}
+.training-day:not(.day-active) {display: none;}
 nav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0}
 nav button{width:100%;padding:14px 8px;font-weight:800;border:1px solid #d9e4fb;background:rgba(255,255,255,.78);color:var(--muted);touch-action:manipulation;-webkit-tap-highlight-color:transparent;box-shadow:0 10px 24px rgba(25,51,143,.08)}
 nav button.active{background:linear-gradient(180deg,#2f5be8 0%,#244bd0 100%);color:#fff;border-color:#244bd0}
@@ -136,8 +137,8 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   <div class="hero-top">
     <div class="hero-logo">TS</div>
     <div class="hero-copy">
-      <div class="eyebrow">IMESO Blue Edition</div>
-      <h1>Hallo Thomas!</h1>
+      <div class="eyebrow">TRAIN. TRACK. IMPROVE:</div>
+      <h1>Hallo Thomas Soliman!</h1>
       <div class="subtitle" style="font-weight:700;margin:4px 0 0">Dein persönlicher Trainingsplan</div>
     </div>
   </div>
@@ -417,14 +418,19 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   var dayNames=['montag','mittwoch','freitag'];
   var dayButtons=Array.prototype.slice.call(document.querySelectorAll('[data-open-day]'));
   dayNames.forEach(function(day){document.getElementById(day).classList.add('training-day');});
-  function openDay(day){
-    dayNames.forEach(function(name){
-      document.getElementById(name).classList.toggle('day-active',name===day);
+  function openDay(day) {
+    dayNames.forEach(function(name) {
+      document.getElementById(name).classList.toggle(
+        'day-active',
+        name === day
+      );
     });
-    dayButtons.forEach(function(btn){
-      var chosen=btn.getAttribute('data-open-day')===day;
-      btn.classList.toggle('active',chosen);
-      btn.setAttribute('aria-pressed',String(chosen));
+
+    dayButtons.forEach(function(btn) {
+      var chosen = btn.getAttribute('data-open-day') === day;
+
+      btn.classList.toggle('active', chosen);
+      btn.setAttribute('aria-pressed', String(chosen));
     });
   }
   dayButtons.forEach(function(btn){btn.addEventListener('click',function(){
