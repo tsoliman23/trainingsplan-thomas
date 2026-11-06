@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v26-reset-weight-and-accessibility';
+const CACHE = 'mytraining-v27-navigation-help-i18n';
 
 const ASSETS = [
     './',

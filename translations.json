@@ -397,12 +397,12 @@
   "Info anzeigen": {
     "en": "Show info",
     "fr": "Afficher les infos",
-    "ar-EG": "عرض المعلومات"
+    "ar-EG": "اعرض التفاصيل"
   },
   "Info ausblenden": {
     "en": "Hide info",
     "fr": "Masquer les infos",
-    "ar-EG": "إخفاء المعلومات"
+    "ar-EG": "اخفي التفاصيل"
   },
   "ERLEDIGT": {
     "en": "DONE",
@@ -482,11 +482,11 @@
   "Erinnerungen aktivieren": {
     "en": "Enable reminders",
     "fr": "Activer les rappels",
-    "ar-EG": "تفعيل التذكير"
+    "ar-EG": "فعّل التذكيرات"
   },
   "Trainingserinnerung um 08:00 Uhr": {
     "en": "Training reminder at 08:00",
-    "fr": "Rappel d'entraînement à 08h00",
+    "fr": "Rappel sportif à 08 h",
     "ar-EG": "تذكير التمرين الساعة ٨ الصبح"
   },
   "Montag, Mittwoch und Freitag um 08:00 Uhr": {
@@ -502,12 +502,12 @@
   "Dateisicherung öffnen": {
     "en": "Open backup",
     "fr": "Ouvrir la sauvegarde",
-    "ar-EG": "فتح النسخ الاحتياطي"
+    "ar-EG": "افتح النسخة الاحتياطية"
   },
   "PDF-Archiv öffnen": {
     "en": "Open PDF archive",
-    "fr": "Ouvrir les PDF",
-    "ar-EG": "فتح ملفات PDF"
+    "fr": "Ouvrir les PDF archivés",
+    "ar-EG": "افتح أرشيف PDF"
   },
   "Über die App": {
     "en": "About the app",
@@ -535,9 +535,9 @@
     "ar-EG": "شوف التقويم"
   },
   "Gewicht eintragen": {
-    "en": "Record weight",
-    "fr": "Noter le poids",
-    "ar-EG": "تسجيل الوزن"
+    "en": "Log weight",
+    "fr": "Enregistrer le poids",
+    "ar-EG": "سجّل الوزن"
   },
   "Seit Beginn deiner Aufzeichnungen": {
     "en": "Since you started tracking",
@@ -700,9 +700,9 @@
     "ar-EG": "تمرين جسم كامل بتركيز على الجزء العلوي والبوكس"
   },
   "Beine, Rumpf und ergänzender Oberkörper": {
-    "en": "Legs, core and supplementary upper body",
-    "fr": "Jambes, tronc et haut du corps complémentaire",
-    "ar-EG": "رجلين وبطن وجزء علوي"
+    "en": "Legs, core and upper-body support",
+    "fr": "Jambes, gainage et haut du corps",
+    "ar-EG": "الرجلين والبطن والجزء العلوي"
   },
   "Ganzkörpertraining + intensivere Boxintervalle": {
     "en": "Full body + higher-intensity boxing intervals",
@@ -902,7 +902,7 @@
   "Nächster Tag": {
     "en": "Next day",
     "fr": "Jour suivant",
-    "ar-EG": "اليوم اللي بعده"
+    "ar-EG": "اليوم الجاي"
   },
   "Vorschau schließen": {
     "en": "Close preview",
@@ -1225,7 +1225,7 @@
     "ar-EG": "تقدر تختار أكتر من هدف، بس مينفعش تختار التخسيس وزيادة الوزن مع بعض."
   },
   "Körperwerte": {
-    "en": "Body measurements",
+    "en": "Body metrics",
     "fr": "Mesures corporelles",
     "ar-EG": "قياسات الجسم"
   },
@@ -1235,14 +1235,14 @@
     "ar-EG": "الوزن"
   },
   "Ziel:": {
-    "en": "Target:",
+    "en": "Goal:",
     "fr": "Objectif :",
     "ar-EG": "الهدف:"
   },
   "Startgewicht:": {
     "en": "Starting weight:",
     "fr": "Poids de départ :",
-    "ar-EG": "الوزن في البداية:"
+    "ar-EG": "وزن البداية:"
   },
   "Tagesgewicht für heute. Deine Einträge werden nach Datum gespeichert.": {
     "en": "Today’s weight. Your entries are saved by date.",
@@ -1252,12 +1252,12 @@
   "App zurücksetzen": {
     "en": "Reset app",
     "fr": "Réinitialiser l’application",
-    "ar-EG": "إعادة ضبط التطبيق"
+    "ar-EG": "امسح بيانات التطبيق"
   },
   "App wirklich zurücksetzen?": {
-    "en": "Really reset the app?",
-    "fr": "Vraiment réinitialiser l’application ?",
-    "ar-EG": "متأكد إنك عايز تعيد ضبط التطبيق؟"
+    "en": "Reset this app?",
+    "fr": "Réinitialiser cette application ?",
+    "ar-EG": "متأكد إنك عايز تمسح بيانات التطبيق؟"
   },
   "Alle lokalen Daten dieser App werden gelöscht: Profil, Trainingsstand, Historie, PDFs und Einstellungen.": {
     "en": "All local app data will be deleted: profile, training records, history, PDFs and settings.",
@@ -1277,6 +1277,356 @@
   "Alles löschen": {
     "en": "Delete everything",
     "fr": "Tout supprimer",
-    "ar-EG": "مسح الكل"
+    "ar-EG": "امسح الكل"
+  },
+  "Planen · Trainieren · Fortschritt": {
+    "en": "Plan · Train · Progress",
+    "fr": "Planifier · S’entraîner · Progresser",
+    "ar-EG": "خطط · اتمرن · اتقدم"
+  },
+  "Übersicht": {
+    "en": "Overview",
+    "fr": "Vue générale",
+    "ar-EG": "نظرة عامة"
+  },
+  "Dein Dashboard": {
+    "en": "Your dashboard",
+    "fr": "Ton tableau de bord",
+    "ar-EG": "لوحة المتابعة بتاعتك"
+  },
+  "Dein persönlicher Trainingsfortschritt auf einen Blick.": {
+    "en": "Your training progress at a glance.",
+    "fr": "Tes progrès sportifs en un coup d’œil.",
+    "ar-EG": "تقدمك في التمرين في نظرة واحدة."
+  },
+  "Heute ist": {
+    "en": "Today is",
+    "fr": "Aujourd’hui, nous sommes",
+    "ar-EG": "النهاردة"
+  },
+  "Dein Trainingsziel": {
+    "en": "Your training goal",
+    "fr": "Ton objectif sportif",
+    "ar-EG": "هدف التمرين بتاعك"
+  },
+  "Training abgeschlossen": {
+    "en": "Training completed",
+    "fr": "Entraînement terminé",
+    "ar-EG": "التمرين خلص"
+  },
+  "Nicht eingetragen": {
+    "en": "Not logged",
+    "fr": "Non enregistré",
+    "ar-EG": "مش متسجل"
+  },
+  "Ruhetag / Regeneration": {
+    "en": "Rest / Recovery",
+    "fr": "Repos / Récupération",
+    "ar-EG": "راحة / استشفاء"
+  },
+  "Nur Montag, Mittwoch und Freitag sind Trainingstage. Künftige Termine sind nicht bearbeitbar.": {
+    "en": "Training days are Monday, Wednesday and Friday. Future dates are read-only.",
+    "fr": "Les entraînements ont lieu le lundi, le mercredi et le vendredi. Les dates futures ne sont pas modifiables.",
+    "ar-EG": "أيام التمرين الاتنين والأربع والجمعة. الأيام الجاية للعرض بس."
+  },
+  "Information anzeigen oder ausblenden": {
+    "en": "Show or hide information",
+    "fr": "Afficher ou masquer les informations",
+    "ar-EG": "عرض أو إخفاء المعلومات"
+  },
+  "Monat auswählen": {
+    "en": "Select month",
+    "fr": "Choisir le mois",
+    "ar-EG": "اختار الشهر"
+  },
+  "Jahr auswählen": {
+    "en": "Select year",
+    "fr": "Choisir l’année",
+    "ar-EG": "اختار السنة"
+  },
+  "Vorheriger Monat": {
+    "en": "Previous month",
+    "fr": "Mois précédent",
+    "ar-EG": "الشهر اللي فات"
+  },
+  "Vorheriger Tag": {
+    "en": "Previous day",
+    "fr": "Jour précédent",
+    "ar-EG": "اليوم اللي فات"
+  },
+  "Erinnerung vorgemerkt. Für zuverlässige iPhone-Benachrichtigungen bei geschlossener App muss zuerst der Push-Dienst eingerichtet werden.": {
+    "en": "Reminder preference saved. Set up push for notifications when the app is closed.",
+    "fr": "Rappel enregistré. Configure les notifications push pour les recevoir lorsque l’application est fermée.",
+    "ar-EG": "اختيار التذكير اتحفظ. عشان توصلك إشعارات والتطبيق مقفول لازم تفعّل خدمة Push."
+  },
+  "Erinnerungen deaktiviert.": {
+    "en": "Reminders off.",
+    "fr": "Rappels désactivés.",
+    "ar-EG": "التذكيرات متقفلة."
+  },
+  "Künftige Termine sind nicht bearbeitbar.": {
+    "en": "Future dates are read-only.",
+    "fr": "Les dates futures ne sont pas modifiables.",
+    "ar-EG": "الأيام الجاية للعرض بس."
+  },
+  "Körpergewicht": {
+    "en": "Body weight",
+    "fr": "Poids corporel",
+    "ar-EG": "وزن الجسم"
+  },
+  "Daten und PDFs liegen lokal im Speicher dieser App. Für einen Gerätewechsel die JSON-Sicherung und PDF-Dateien separat herunterladen.": {
+    "en": "Data and PDFs are stored locally. Download the JSON backup and PDF files separately before switching devices.",
+    "fr": "Les données et PDF restent sur cet appareil. Télécharge la sauvegarde JSON et les PDF séparément avant de changer d’appareil.",
+    "ar-EG": "بياناتك وملفات PDF محفوظة على الجهاز. نزّل نسخة JSON وملفات PDF لو هتغير الجهاز."
+  },
+  "Lokale Trainingsverwaltung · Offline-PWA · Keine Cloud, keine Anmeldung, kein Tracking.": {
+    "en": "Local training tracker · Offline PWA · No cloud, account, or tracking.",
+    "fr": "Suivi sportif local · Application hors ligne · Sans cloud, compte ni pistage.",
+    "ar-EG": "متابعة تمرين محلية من غير نت · من غير حساب أو تتبع."
+  },
+  "Benachrichtigungen aktivieren": {
+    "en": "Enable notifications",
+    "fr": "Activer les notifications",
+    "ar-EG": "فعّل الإشعارات"
+  },
+  "Noch nicht abgeschlossen": {
+    "en": "Not completed yet",
+    "fr": "Pas encore terminé",
+    "ar-EG": "لسه مخلصش"
+  },
+  "Gewichtsveränderung seit Trainingsbeginn": {
+    "en": "Weight change since starting",
+    "fr": "Évolution du poids depuis le début",
+    "ar-EG": "تغيّر الوزن من أول التمرين"
+  },
+  "Einheiten abgeschlossen": {
+    "en": "Sessions completed",
+    "fr": "Séances terminées",
+    "ar-EG": "تمارين خلصت"
+  },
+  "Übungen erledigt": {
+    "en": "Exercises completed",
+    "fr": "Exercices terminés",
+    "ar-EG": "تمارين متسجلة"
+  },
+  "Keine Erfassung": {
+    "en": "No record",
+    "fr": "Pas de suivi",
+    "ar-EG": "مفيش تسجيل"
+  },
+  "Vor deiner Ersteinrichtung werden keine Trainingstage erfasst.": {
+    "en": "Days before setup are not recorded.",
+    "fr": "Les jours avant l’installation ne sont pas enregistrés.",
+    "ar-EG": "الأيام اللي قبل ما بدأت مش بتتحسب."
+  },
+  "Dieser Tag liegt in der Zukunft. Du kannst den Trainingsplan ansehen, aber keine Werte eingeben.": {
+    "en": "This date is in the future. View only.",
+    "fr": "Cette date est future. Consultation uniquement.",
+    "ar-EG": "اليوم ده لسه مجاش. للعرض بس."
+  },
+  "Gewichtsverlauf": {
+    "en": "Weight history",
+    "fr": "Évolution du poids",
+    "ar-EG": "متابعة الوزن"
+  },
+  "Wiederholungen je Satz": {
+    "en": "Repetitions per set",
+    "fr": "Répétitions par série",
+    "ar-EG": "العدات في كل مجموعة"
+  },
+  "Wdh. alt": {
+    "en": "Previous reps",
+    "fr": "Anciennes répétitions",
+    "ar-EG": "العدات القديمة"
+  },
+  "Abgeschlossene Trainingstage in den letzten 8 Wochen": {
+    "en": "Completed training days in the last 8 weeks",
+    "fr": "Jours d’entraînement terminés sur les 8 dernières semaines",
+    "ar-EG": "أيام التمرين المكتملة في آخر ٨ أسابيع"
+  },
+  "Aktuellen Trainingstag abschließen": {
+    "en": "Finish current training day",
+    "fr": "Terminer la séance du jour",
+    "ar-EG": "أنهي تمرين النهاردة"
+  },
+  "Ansehen": {
+    "en": "View",
+    "fr": "Afficher",
+    "ar-EG": "عرض"
+  },
+  "Bei einem Gerätewechsel oder gelöschten App-Daten musst du PDFs separat sichern.": {
+    "en": "Back up PDFs separately before switching devices or deleting app data.",
+    "fr": "Sauvegarde tes PDF séparément avant de changer d’appareil ou de supprimer les données.",
+    "ar-EG": "احفظ ملفات PDF لوحدها قبل ما تغير الجهاز أو تمسح بيانات التطبيق."
+  },
+  "Datensicherung": {
+    "en": "Data backup",
+    "fr": "Sauvegarde des données",
+    "ar-EG": "نسخة احتياطية للبيانات"
+  },
+  "Deine Trainingswoche": {
+    "en": "Your training week",
+    "fr": "Ta semaine d’entraînement",
+    "ar-EG": "أسبوع التمرين بتاعك"
+  },
+  "Download": {
+    "en": "Download",
+    "fr": "Télécharger",
+    "ar-EG": "تنزيل"
+  },
+  "Erster Wiegeeintrag noch offen.": {
+    "en": "No weight entry yet.",
+    "fr": "Aucun poids enregistré pour le moment.",
+    "ar-EG": "لسه مفيش تسجيل للوزن."
+  },
+  "Für diesen Tag ist kein Training im Wochenplan vorgesehen.": {
+    "en": "No training scheduled for this day.",
+    "fr": "Aucun entraînement prévu ce jour-là.",
+    "ar-EG": "مفيش تمرين متخطط لليوم ده."
+  },
+  "Gespeicherte Einheiten": {
+    "en": "Saved workouts",
+    "fr": "Séances enregistrées",
+    "ar-EG": "التمارين المحفوظة"
+  },
+  "Gewicht kg": {
+    "en": "Weight kg",
+    "fr": "Poids kg",
+    "ar-EG": "الوزن بالكيلو"
+  },
+  "Letzte Trainingstage": {
+    "en": "Recent training days",
+    "fr": "Derniers jours d’entraînement",
+    "ar-EG": "آخر أيام تمرين"
+  },
+  "Lokale Browser-Erinnerung, solange Benachrichtigungen erlaubt sind. Optional zusätzlich per Cloudflare Worker als Push bei geschlossener App.": {
+    "en": "Local browser reminder if notifications are allowed. Cloudflare Push is optional for closed-app delivery.",
+    "fr": "Rappel local du navigateur si les notifications sont autorisées. Push Cloudflare en option pour l’application fermée.",
+    "ar-EG": "تذكير من المتصفح لو الإشعارات مسموحة. وممكن تفعّل Cloudflare علشان توصلك والتطبيق مقفول."
+  },
+  "Neuen PDF-Report erstellen": {
+    "en": "Create new PDF report",
+    "fr": "Créer un nouveau rapport PDF",
+    "ar-EG": "اعمل تقرير PDF جديد"
+  },
+  "Noch keine Trainingstage erfasst.": {
+    "en": "No training days logged yet.",
+    "fr": "Aucun jour d’entraînement enregistré.",
+    "ar-EG": "لسه مفيش أيام تمرين متسجلة."
+  },
+  "Noch keine Trainingswochen seit der Einrichtung.": {
+    "en": "No training weeks since setup.",
+    "fr": "Aucune semaine d’entraînement depuis l’installation.",
+    "ar-EG": "لسه مفيش أسابيع تمرين من وقت الإعداد."
+  },
+  "Noch keine abgeschlossenen Trainingseinheiten vorhanden.": {
+    "en": "No completed workouts yet.",
+    "fr": "Aucune séance terminée pour le moment.",
+    "ar-EG": "لسه مفيش تمرين مكتمل."
+  },
+  "Noch keine historischen Werte vorhanden.": {
+    "en": "No historical values yet.",
+    "fr": "Pas encore de valeurs historiques.",
+    "ar-EG": "لسه مفيش بيانات قديمة."
+  },
+  "Nächstes Training:": {
+    "en": "Next workout:",
+    "fr": "Prochain entraînement :",
+    "ar-EG": "التمرين الجاي:"
+  },
+  "PDFs": {
+    "en": "PDFs",
+    "fr": "PDF",
+    "ar-EG": "ملفات PDF"
+  },
+  "Regenerationstag": {
+    "en": "Recovery day",
+    "fr": "Jour de récupération",
+    "ar-EG": "يوم استشفاء"
+  },
+  "Schließe einen Trainingstag ab, um die Ergebnisse dauerhaft in der Historie zu erfassen. Vergangene Einheiten bleiben beim Zurücksetzen der Woche erhalten.": {
+    "en": "Complete a workout to save its results in history. Previous sessions remain after resetting a week.",
+    "fr": "Termine une séance pour enregistrer ses résultats. Les anciennes séances sont conservées après la réinitialisation de la semaine.",
+    "ar-EG": "خلّص التمرين علشان يتحفظ في السجل. التمارين القديمة بتفضل محفوظة حتى لو بدأت أسبوع جديد."
+  },
+  "Sicherung herunterladen": {
+    "en": "Download backup",
+    "fr": "Télécharger la sauvegarde",
+    "ar-EG": "نزّل النسخة الاحتياطية"
+  },
+  "Sicherung wiederherstellen": {
+    "en": "Restore backup",
+    "fr": "Restaurer la sauvegarde",
+    "ar-EG": "استرجع النسخة الاحتياطية"
+  },
+  "Training öffnen": {
+    "en": "Open workout",
+    "fr": "Ouvrir l’entraînement",
+    "ar-EG": "افتح التمرين"
+  },
+  "Trainingshistorie und Fortschritt": {
+    "en": "Training history and progress",
+    "fr": "Historique et progrès sportifs",
+    "ar-EG": "سجل التمارين والتقدم"
+  },
+  "Verlauf": {
+    "en": "Progress over time",
+    "fr": "Évolution",
+    "ar-EG": "التطور"
+  },
+  "Wdh. Sätze": {
+    "en": "Set reps",
+    "fr": "Répétitions par série",
+    "ar-EG": "العدات"
+  },
+  "Weiter →": {
+    "en": "Continue →",
+    "fr": "Continuer →",
+    "ar-EG": "التالي ←"
+  },
+  "Woche archivieren und neu starten": {
+    "en": "Archive week and start fresh",
+    "fr": "Archiver la semaine et recommencer",
+    "ar-EG": "احفظ الأسبوع وابدأ من جديد"
+  },
+  "Änderungen werden automatisch gespeichert. „Speichern“ legt einen zusätzlichen Wiederherstellungspunkt auf diesem Gerät an. Dieser bleibt auch nach „Zurücksetzen“ verfügbar.": {
+    "en": "Changes are saved automatically. Save also creates a local recovery point that survives a weekly reset.",
+    "fr": "Les modifications sont enregistrées automatiquement. Enregistrer crée aussi un point de restauration local.",
+    "ar-EG": "التغييرات بتتحفظ تلقائي. وزر الحفظ بيعمل نقطة استرجاع على الجهاز."
+  },
+  "Übung für Gewichtsverlauf": {
+    "en": "Exercise for weight trend",
+    "fr": "Exercice pour l’évolution des charges",
+    "ar-EG": "تمرين لمتابعة الأوزان"
+  },
+  "0 von 3 Trainingstagen abgeschlossen": {
+    "en": "0 of 3 training days completed",
+    "fr": "0 jour sur 3 terminé",
+    "ar-EG": "٠ من ٣ أيام تمرين خلصوا"
+  },
+  "Es gibt keinen automatischen Zugriff auf einen frei wählbaren Geräteordner.": {
+    "en": "No automatic access to arbitrary device folders.",
+    "fr": "Pas d’accès automatique aux dossiers de l’appareil.",
+    "ar-EG": "مفيش وصول تلقائي لأي مجلد على الجهاز."
+  },
+  "Erzeugte PDFs werden unter ihrem Dateinamen und Erstellungsdatum im lokalen App-Speicher abgelegt. Du kannst sie in der App ansehen, herunterladen oder löschen. Es gibt keinen automatischen Zugriff auf einen frei wählbaren Geräteordner.": {
+    "en": "PDFs are stored locally with their names and creation dates. View, download, or delete them in the app.",
+    "fr": "Les PDF sont stockés localement avec leur nom et leur date de création. Tu peux les ouvrir, télécharger ou supprimer.",
+    "ar-EG": "ملفات PDF بتتحفظ على الجهاز بالاسم والتاريخ. تقدر تفتحها أو تنزلها أو تمسحها."
+  },
+  "TRAIN. TRACK. IMPROVE:": {
+    "en": "TRAIN. TRACK. IMPROVE:",
+    "fr": "ENTRAÎNE-TOI. SUIS. PROGRESSE :",
+    "ar-EG": "اتمرن. تابع. اتقدم:"
+  },
+  "Versäumter Trainingstag": {
+    "en": "Missed workout",
+    "fr": "Entraînement manqué",
+    "ar-EG": "تمرين فاتك"
+  },
+  "Vor deiner Ersteinrichtung": {
+    "en": "Before you first set up the app",
+    "fr": "Avant ta première configuration",
+    "ar-EG": "قبل ما بدأت تستخدم التطبيق"
   }
 }

@@ -31,7 +31,7 @@ const existingWeight=$('bodyWeight')?.closest('.panel-card');if(existingWeight)w
 hero.insertAdjacentElement('afterend',weightCard);
 
 const stats=$('view-stats'); const info=document.createElement('div');info.className='cal-panel xp-info';info.innerHTML='<h3>Seit Beginn deiner Aufzeichnungen</h3><p>Die Auswertung berücksichtigt ausschließlich Termine seit dem Tag deiner Ersteinrichtung: <strong id="xp-start">–</strong>.</p><p>Gewichtsveränderungen beziehen sich auf gespeicherte Wiegeeinträge, nicht auf das Zielgewicht.</p>';stats.insertBefore(info,stats.firstChild);
-const calendar=$('view-calendar');const jump=document.createElement('button');jump.type='button';jump.className='xp-today-link';jump.textContent='Heute';jump.onclick=()=>window.TrainingCalendar?.openDate(TODAY());calendar.insertBefore(jump,calendar.firstChild);
+const calendar=$('view-calendar');const jump=document.createElement('button');jump.type='button';jump.className='xp-today-link';jump.textContent='Heute';jump.onclick=()=>window.TrainingCalendar?.calendarToday?.();calendar.insertBefore(jump,calendar.firstChild);
 const settingsView=document.createElement('section');settingsView.className='cal-view xp-settings';settingsView.id='xp-settings';settingsView.hidden=true;settingsView.innerHTML=`<h2>Einstellungen</h2>
 <div class="cal-panel"><h3>Dein Profil</h3><p class="muted">Vorname, Nachname, Geburtstag, Körpergröße, Startgewicht, Ziel und Zielgewicht.</p><button type="button" id="xp-edit-profile">Profil bearbeiten</button></div>
 <div class="cal-panel"><h3>Design</h3><div class="xp-theme-switch" role="group" aria-label="Farbschema"><button type="button" data-theme="light">Hell</button><button type="button" data-theme="dark">Dunkel</button><button type="button" data-theme="system">System</button></div><p class="muted">Blautöne passend zu deinem App-Logo. Dein Wunsch wird lokal gespeichert.</p></div>
@@ -45,6 +45,7 @@ const items=[['dashboard','⌂','Heute'],['calendar','▦','Kalender'],['trainin
 navEl.innerHTML=items.map(([v,icon,label])=>`<button type="button" data-xp-view="${v}" aria-label="${label}"><span class="xp-nav-icon" aria-hidden="true">${icon}</span><small>${label}</small></button>`).join('');document.body.append(navEl);
 navEl.querySelectorAll('[data-xp-view]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.xpView)));
 function show(view){settingsView.hidden=view!=='settings';if(view==='settings'){for(const v of ['dashboard','calendar','training','stats','documents']){const e=$('view-'+v);if(e)e.hidden=true;}document.querySelectorAll('.cal-tabs button').forEach(x=>x.classList.remove('active'));}else{nav(view);}document.querySelectorAll('[data-xp-view]').forEach(b=>{const a=b.dataset.xpView===view;b.classList.toggle('selected',a);b.setAttribute('aria-current',a?'page':'false');});window.scrollTo(0,0);}
+document.addEventListener('mytraining-navigate',e=>{if(e.detail?.view)show(e.detail.view);});
 $('xp-go-today').onclick=()=>{window.TrainingCalendar?.openDate(TODAY());show('training');};$('xp-go-calendar').onclick=()=>show('calendar');$('xp-edit-profile').onclick=()=>$('editProfile').click();$('xp-to-backup').onclick=()=>{show('stats');$('download-backup')?.scrollIntoView({behavior:'smooth',block:'center'});};$('xp-to-pdfs').onclick=()=>show('documents');
 settingsView.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{settings.theme=b.dataset.theme;saveSettings();paintTheme();});
 function paintTheme(){settingsView.querySelectorAll('[data-theme]').forEach(b=>b.classList.toggle('selected',b.dataset.theme===settings.theme));}
@@ -79,15 +80,15 @@ $('xp-remind').addEventListener('change',async e=>{
  const desired=e.target.checked;
  if(window.MyTrainingPush?.configured){
   const result=await window.MyTrainingPush.update(desired);
-  if(result===null||result===undefined){e.target.checked=!desired;settings.reminder=!desired;saveSettings();return;}
+  if(result===null||result===undefined){e.target.checked=!!settings.reminder;return;}
   settings.reminder=result;saveSettings();e.target.checked=result;return;
  }
- if(desired&&!('Notification' in window)){e.target.checked=false;settings.reminder=false;saveSettings();$('xp-reminder-state').textContent='Dieses Gerät unterstützt lokale Browser-Benachrichtigungen hier nicht. Für Erinnerungen bei geschlossener App ist der Push-Dienst erforderlich.';return;}
- if(desired&&'Notification' in window&&Notification.permission!=='granted'){
-  try{const permission=await Notification.requestPermission();if(permission!=='granted'){e.target.checked=false;settings.reminder=false;saveSettings();return;}}catch(_){e.target.checked=false;settings.reminder=false;saveSettings();return;}
- }
- settings.reminder=desired;saveSettings();e.target.checked=desired;
+ // Save a local preference even when iOS does not expose Notification from this browser view.
+ // Never describe this setting as a working background push subscription.
+ settings.reminder=desired;saveSettings();
+ $('xp-reminder-state').textContent=desired?'Erinnerung vorgemerkt. Für zuverlässige iPhone-Benachrichtigungen bei geschlossener App muss zuerst der Push-Dienst eingerichtet werden.':'Erinnerungen deaktiviert.';
 });
+
 async function deleteDatabase(name){
  return await new Promise(resolve=>{
   if(!('indexedDB' in window)){resolve(true);return;}
@@ -143,11 +144,21 @@ document.querySelectorAll('.cal-tabs [data-view]').forEach(b=>b.addEventListener
 $('view-dashboard').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{if(b.id==='dash-open-training')nav('training');}));
 const obs=new MutationObserver(()=>{title();});obs.observe($('personalGreeting'),{childList:true});
 title();show('dashboard');
+  // Compact optional explanations; preserve all text for translation and accessibility.
+  const helpSelectors=['.xp-settings .cal-panel>p.muted','#view-documents>p.muted','.xp-info>p','#xp-weight-hint','#view-stats>.muted','.history-panel>p.muted','#view-calendar .cal-legend-note','#trainingsform .muted'];
+  const helpTexts=[...document.querySelectorAll(helpSelectors.join(','))];
+  helpTexts.forEach((el,i)=>{if(el.closest('.xp-danger-zone')||el.id==='xp-reminder-state')return;
+    const id='xp-help-'+i;el.id=el.id||id;el.hidden=true;el.classList.add('xp-help-text');
+    const toggle=document.createElement('button');toggle.type='button';toggle.className='xp-info-toggle';toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-controls',el.id);
+    toggle.setAttribute('aria-label','Information anzeigen oder ausblenden');toggle.textContent='i';
+    toggle.onclick=()=>{el.hidden=!el.hidden;toggle.setAttribute('aria-expanded',String(!el.hidden));};
+    el.before(toggle);
+  });
 }
 async function remind(){if(window.MyTrainingPush?.configured)return;if(!settings.reminder||!('Notification'in window)||Notification.permission!=='granted')return;const now=new Date();if(now.getHours()!==8||![1,3,5].includes(now.getDay()))return;const id='train-remind-'+TODAY();if(localStorage.getItem(id))return;const d=read('training-calendar-days-v1',{});if(d[TODAY()]?.completed)return;localStorage.setItem(id,'1');const opts={body:'Dein Training steht heute an. Öffne die App und dokumentiere deine Einheit.',icon:'./icons/icon-192.png',tag:'training-morning'};try{const sw=await navigator.serviceWorker?.ready;if(sw?.showNotification){await sw.showNotification('Dein Training um 08:00 Uhr',opts);}else new Notification('Dein Training um 08:00 Uhr',opts);}catch(e){console.warn('Erinnerung nicht verfügbar',e);}}
 theme();try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',theme);}catch{}
 let attempts=0;const ready=setInterval(()=>{if($('view-dashboard')){clearInterval(ready);build();remind();setInterval(remind,60000);}else if(++attempts>150)clearInterval(ready);},100);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden){remind();title();}});
-document.addEventListener('mytraining-language-change',()=>{title();const t=$('xp-today');if(t)t.textContent=pretty(TODAY());});
+document.addEventListener('mytraining-language-change',()=>{window.TrainingCalendar?.refreshCalendarLocale?.();title();const t=$('xp-today');if(t)t.textContent=pretty(TODAY());});
 
 })();

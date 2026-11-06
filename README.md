@@ -241,3 +241,22 @@ git add .
 git commit -m "Gewichtserfassung und App-Reset korrigiert sowie Darstellung verbessert"
 git push
 ```
+
+
+## Update 27 – Navigation, Sprachwahl, Lesbarkeit
+
+- Schritt 2 (Vor- und Nachname) hat nun einen Zurück-Knopf zum Sprachschritt. Eingegebene Werte bleiben beim Zurück- und Weitergehen erhalten. Die Schritte 3 bis 5 behalten ebenfalls ihre Werte.
+- Kalender-Monat und gewählter Trainingstag sind separate Zustände. Datum antippen: Trainingsansicht öffnen, Monat im Kalender behalten. „Heute“ im Kalender setzt die Monatsansicht auf heute zurück. Monat und Jahr können direkt über die zentralen Auswahlfelder geändert werden.
+- Trainingstage vor dem Einrichtungsdatum zeigen nur den Hinweis; keine editierbare Trainingsmaske und keinen Abschluss-Button. Zukünftige Termine bleiben schreibgeschützt.
+- Zusätzliche Übersetzungen für Bedienflächen und Hilfetexte in Deutsch, Englisch, Französisch und ägyptischem Arabisch. Der App-Name MyTraining bleibt unverändert. Freie Nutzernotizen werden nicht automatisch übersetzt.
+- Informations-Buttons (i) schalten ergänzende Hinweise ein oder aus. Wichtige Fehlermeldungen bleiben sichtbar.
+- Überflüssige weiße Rahmen entfernt und Kalenderkopf auf kleine, zentrierte Monats- und Jahreswahl umgestellt.
+- Erinnerungsschalter: Die Einstellung ist auch ohne Push-Dienst auswählbar, wird jedoch ausdrücklich nur als Präferenz gespeichert. Eine Push-Zustellung bei geschlossener App setzt die konfigurierte Cloudflare-Anbindung voraus.
+
+### Tests vor dem Deployment
+
+1. Erstinstallation: Sprache auswählen; in Profil-Schritt 2 zurück zur Sprachwahl und wieder vorgehen, ohne den Namen zu verlieren.
+2. Kalender: zu einem anderen Monat wechseln, Datum antippen, zum Kalender zurückkehren; derselbe Monat bleibt gewählt. „Heute“ setzt den Kalender zurück.
+3. Vor Einrichtungsdatum: keine Eingabefelder und kein aktiver Abschluss-Knopf.
+4. Einstellungen: Sprachwechsel und Hilfeknöpfe prüfen. Den Schalter für Erinnerungen nicht als erfolgreich aktivierte iOS-Push-Zustellung interpretieren, bevor der Worker konfiguriert wurde.
+5. Vor dem Update JSON-Sicherung und PDFs separat sichern.

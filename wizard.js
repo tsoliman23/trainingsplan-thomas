@@ -16,7 +16,7 @@
     steps.forEach((el,i)=>{el.hidden=i!==index;el.setAttribute('aria-hidden',String(i!==index));});
     counter.textContent=`Schritt ${index+2} von ${steps.length+1}`;
     segments.forEach((el,i)=>el.classList.toggle('onboarding-active',i<=index+1));
-    back.hidden=index===0;
+    back.hidden=false;
     next.hidden=index===steps.length-1;
     submit.hidden=index!==steps.length-1;
     error.hidden=true;
@@ -48,11 +48,12 @@
     error.hidden=true;
   }));
   next.addEventListener('click',()=>{if(validateStep())setStep(index+1);});
-  back.addEventListener('click',()=>setStep(index-1));
+  back.addEventListener('click',()=>{if(index===0&&!localStorage.getItem('training-setup-date-v1')){overlay.hidden=true;window.MyTrainingI18n?.reopenIntro?.();return;}setStep(index-1);});
   form.addEventListener('keydown',e=>{
     if(e.key==='Enter'&&e.target.matches('input:not([type=radio])')&&index<steps.length-1){e.preventDefault();if(validateStep())setStep(index+1);}
   });
   form.addEventListener('submit',e=>{if(index!==steps.length-1){e.preventDefault();if(validateStep())setStep(index+1);return;}if(!validateStep())e.preventDefault();},true);
+  window.MyTrainingWizard={resume:()=>{overlay.hidden=false;setStep(0);}};
   const observer=new MutationObserver(()=>{if(!overlay.hidden)setStep(0);});
   observer.observe(overlay,{attributes:true,attributeFilter:['hidden']});
   setStep(0);

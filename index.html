@@ -387,12 +387,12 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
     if(!profileStorageReady){
       // Render the profile screen immediately instead of exposing the dashboard
       // while IndexedDB is still loading. Reconcile profile once loading finishes.
-      if(profileOverlay.hidden)showProfile(false);
+      if(profileOverlay.hidden){if(window.MyTrainingWizard?.resuming){window.MyTrainingWizard.resume();window.MyTrainingWizard.resuming=false;}else showProfile(false);}
       return;
     }
     if(profileNeedsSetup){
       document.documentElement.classList.add('profile-boot-active');
-      showProfile(false);
+      if(window.MyTrainingWizard?.resuming){window.MyTrainingWizard.resume();window.MyTrainingWizard.resuming=false;}else showProfile(false);
     }else{
       profileOverlay.hidden=true;
       document.documentElement.classList.remove('profile-boot-active');
