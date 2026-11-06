@@ -41,27 +41,57 @@ function setting(){const view=document.getElementById('xp-settings');if(!view||v
 const p=document.createElement('div');p.id='mytraining-language-settings';p.className='cal-panel language-settings';p.innerHTML='<h3>Sprache</h3><div class="language-choices"></div>';
 const design=view.querySelector('.xp-theme-switch')?.closest('.cal-panel');(design||view.firstElementChild).after(p);
 fillChoices(p.querySelector('.language-choices'),false);requestApply();}
-function fillChoices(container,intro){container.replaceChildren(...Object.entries(LOCALES).map(([code,x])=>{const b=document.createElement('button');b.type='button';b.className='lang-option';b.dataset.lang=code;b.setAttribute('aria-pressed',String(code===lang));b.innerHTML=`<span class="lang-flag" aria-hidden="true">${x.flag}</span><span>${x.name}</span><span class="lang-tick" aria-hidden="true">${lang===code?'✓':''}</span>`;b.addEventListener('click',()=>{setLanguage(code);if(intro){document.getElementById('languageOnboarding').hidden=true;document.documentElement.classList.remove('language-boot-first','language-boot-loading');}else fillChoices(container,false);});return b;}));}
-function languageGate(){
- const gate=document.getElementById('languageOnboarding');
- if(!gate)return;
- const pending=!localStorage.getItem(KEY);
- gate.hidden=!pending;
- if(pending){fillChoices(gate.querySelector('.language-choices'),true);}
-}
-// Attach listeners to the first-frame language buttons synchronously, before loading the JSON file.
+function fillChoices(container,intro){container.replaceChildren(...Object.entries(LOCALES).map(([code,x])=>{const b=document.createElement('button');b.type='button';b.className='lang-option';b.dataset.lang=code;b.setAttribute('aria-pressed',String(code===lang));b.innerHTML=`<span class="lang-flag" aria-hidden="true">${x.flag}</span><span>${x.name}</span><span class="lang-tick" aria-hidden="true">${lang===code?'✓':''}</span>`;b.addEventListener('click',()=>{if(!intro){setLanguage(code);fillChoices(container,false);}});return b;}));}
 const initialGate=document.getElementById('languageOnboarding');
-if(initialGate){
- const firstChoices=initialGate.querySelector('.language-choices');
- firstChoices.addEventListener('click',event=>{
-  const button=event.target.closest('button[data-lang]');
-  if(!button)return;
-  const code=button.dataset.lang;
-  if(!LOCALES[code])return;
-  lang=code;localStorage.setItem(KEY,code);
-  if(ready){apply();initialGate.hidden=true;document.documentElement.classList.remove('language-boot-first','language-boot-loading');document.dispatchEvent(new CustomEvent('mytraining-language-change',{detail:{language:lang}}));}
-  else{initialGate.querySelector('h2').textContent='MyTraining';initialGate.querySelector('p').textContent='Sprache wird geladen …';initialGate.querySelectorAll('button').forEach(b=>b.disabled=true);}
+let selectedIntroLanguage=null;
+const INTRO_TEXT={
+ de:{welcome:'WILLKOMMEN',title:'Wähle deine Sprache',next:'Weiter →'},
+ en:{welcome:'WELCOME',title:'Choose your language',next:'Continue →'},
+ fr:{welcome:'BIENVENUE',title:'Choisis ta langue',next:'Continuer →'},
+ 'ar-EG':{welcome:'أهلاً بيك',title:'اختار لغتك',next:'التالي ←'}
+};
+function renderIntroSelection(){
+ if(!initialGate)return;
+ const intro=INTRO_TEXT[selectedIntroLanguage]||INTRO_TEXT.de;
+ initialGate.querySelector('#languageWelcome').textContent=intro.welcome;
+ initialGate.querySelector('#languageTitle').textContent=intro.title;
+ initialGate.querySelector('#languageContinue').textContent=intro.next;
+ initialGate.querySelector('#languageContinue').disabled=!selectedIntroLanguage;
+ initialGate.querySelector('.language-dialog').dir=selectedIntroLanguage==='ar-EG'?'rtl':'ltr';
+ initialGate.querySelectorAll('.lang-option').forEach(button=>{
+  const chosen=button.dataset.lang===selectedIntroLanguage;
+  button.setAttribute('aria-pressed',String(chosen));
+  const tick=button.querySelector('.lang-tick');if(tick)tick.textContent=chosen?'✓':'';
  });
+}
+function finishIntro(){
+ if(!selectedIntroLanguage)return;
+ const chosen=selectedIntroLanguage;
+ lang=chosen;
+ localStorage.setItem(KEY,chosen);
+ if(ready)apply();
+ initialGate.hidden=true;
+ document.documentElement.classList.remove('language-boot-first','language-boot-loading');
+ document.documentElement.lang=chosen;
+ document.documentElement.dir=chosen==='ar-EG'?'rtl':'ltr';
+ document.dispatchEvent(new CustomEvent('mytraining-language-change',{detail:{language:chosen}}));
+}
+function languageGate(){
+ if(!initialGate)return;
+ const pending=!localStorage.getItem(KEY);
+ initialGate.hidden=!pending;
+ if(pending)renderIntroSelection();
+}
+// First-frame markup remains available immediately without waiting for translations.json.
+if(initialGate){
+ initialGate.querySelector('.language-choices').addEventListener('click',event=>{
+  const button=event.target.closest('button[data-lang]');
+  if(!button||!LOCALES[button.dataset.lang])return;
+  selectedIntroLanguage=button.dataset.lang;
+  renderIntroSelection();
+ });
+ initialGate.querySelector('#languageContinue').addEventListener('click',finishIntro);
+ renderIntroSelection();
 }
 window.MyTrainingI18n={t,current,setLanguage,monthNames:()=>MONTHS[lang],apply};
 fetch('./translations.json').then(r=>{if(!r.ok)throw Error('Translation data unavailable');return r.json();}).then(v=>{

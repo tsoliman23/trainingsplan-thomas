@@ -164,3 +164,8 @@ Zum Aktualisieren bei GitHub Pages müssen die neue `translations.json`, `i18n.j
 ### Startbildschirm und Sprachwahl (v20)
 
 Die Sprachwahl ist bei einer Neuinstallation im initialen HTML enthalten. Die App-Oberfläche bleibt bis zum Laden der Übersetzungen verborgen, um das kurze Anzeigen des Dashboards zu verhindern. Die arabische Auswahl heißt **عربي** (ägyptisches Arabisch, Locale `ar-EG`). Bestehende Profil-, Trainings- und PDF-Daten werden nicht geändert. Nach dem Deployment die PWA einmal online öffnen, damit die neue Service-Worker-Version geladen wird.
+
+
+## Sprachauswahl als erster Einrichtungsschritt
+
+Die erste Seite zeigt ausschließlich **WILLKOMMEN**, **Wähle deine Sprache**, vier Sprachoptionen und den Button **Weiter**. Beim Antippen einer Sprache wird sie lediglich markiert; die Überschrift und der Weiter-Button wechseln sofort in die ausgewählte Sprache. Die Auswahl wird erst durch **Weiter** dauerhaft gespeichert. Danach öffnet sich die bestehende Profilerstellung. Bei vorhandener Spracheinstellung wird die Sprachwahl übersprungen. Die Versionsnummer des Offline-Caches wurde aktualisiert.

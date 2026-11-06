@@ -9,3 +9,19 @@
 [dir=rtl] .lang-option{text-align:right}
 [dir=rtl] .profile-dialog input[type=number]{direction:ltr;text-align:right}
 @media(max-width:350px){.language-choices{grid-template-columns:1fr}.lang-option{min-height:50px}}
+
+/* First onboarding step: same visual hierarchy as profile wizard. */
+.language-dialog{display:flex;flex-direction:column;min-height:min(540px,calc(100dvh - 32px));text-align:start;overflow-x:hidden}
+.language-brand{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.language-brand img{width:54px;height:54px;object-fit:contain;flex:none}
+.language-brand strong{font-size:18px;letter-spacing:.055em;color:var(--xp-text,#102342)}
+.language-welcome{font-weight:800;letter-spacing:.14em;font-size:12px;color:#2f71e9;margin:0 0 5px}
+.language-dialog #languageTitle{margin:0 0 20px;font-weight:800;font-size:clamp(24px,5vw,32px);line-height:1.2}
+.language-dialog .language-choices{margin-top:0;gap:12px}
+.language-dialog .lang-option{min-height:74px;justify-content:flex-start}
+.language-continue{display:block;width:100%;border:0;border-radius:14px;min-height:54px;margin-top:auto!important;padding:14px!important;background:#2f5be8!important;color:#fff!important;font-weight:800;font-size:16px;cursor:pointer}
+.language-continue:disabled{opacity:.45;cursor:not-allowed}
+.language-choices+.language-continue{margin-top:26px!important}
+[dir=rtl] .language-dialog{ text-align:right }
+.language-dialog[dir=rtl]{text-align:right}
+@media(max-height:600px){.language-dialog{min-height:0}.language-brand{margin-bottom:10px}.language-dialog .lang-option{min-height:54px}}

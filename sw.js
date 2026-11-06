@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v20-first-paint-language';
+const CACHE = 'mytraining-v21-language-continue';
 
 const ASSETS = [
     './',
