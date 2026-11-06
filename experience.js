@@ -44,7 +44,7 @@ $('xp-remind').addEventListener('change',async e=>{
  if(result===null||result===undefined){e.target.checked=!desired;settings.reminder=!desired;saveSettings();return;}
  settings.reminder=result;saveSettings();e.target.checked=result;
 });
-$('profileForm').addEventListener('submit',()=>setTimeout(()=>{title();window.TrainingCalendar?.refresh();},120));
+$('profileForm').addEventListener('submit',()=>setTimeout(()=>{title();window.TrainingCalendar?.refresh();show('dashboard');window.scrollTo({top:0,left:0,behavior:'instant'});},120));
 document.querySelectorAll('.cal-tabs [data-view]').forEach(b=>b.addEventListener('click',()=>{settingsView.hidden=true;nav(b.dataset.view); }));
 $('view-dashboard').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{if(b.id==='dash-open-training')nav('training');}));
 const obs=new MutationObserver(()=>{title();});obs.observe($('personalGreeting'),{childList:true});

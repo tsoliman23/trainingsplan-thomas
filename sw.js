@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v24-multiple-goals';
+const CACHE = 'mytraining-v25-native-date-and-blue-design';
 
 const ASSETS = [
     './',
@@ -17,6 +17,7 @@ const ASSETS = [
     './push-config.js',
     './push-client.js',
     './polish.css',
+    './design-v2.css',
     './pdf-preview.js',
     './manifest.webmanifest',
     './icons/icon-180.png',

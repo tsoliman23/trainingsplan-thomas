@@ -200,3 +200,21 @@ Die Sprachseite schaltet beim Klick auf **Weiter** unmittelbar auf die Profilers
 Bei der Profilerstellung und unter **Profil bearbeiten** können mehrere Trainingsziele ausgewählt werden. Die Ziele **Abnehmen** und **Zunehmen** schließen sich gegenseitig aus: Wird eines aktiviert, wird das jeweils andere automatisch deaktiviert. **Muskelaufbau**, **Gewicht halten** und **Ernährung / Diät** können zusätzlich ausgewählt werden. Mindestens ein Ziel ist erforderlich.
 
 Die Ziele werden im lokalen Profil unter `trainingGoals` als Liste gespeichert. Für ältere Funktionen bleibt `trainingGoal` als erstes ausgewähltes Ziel erhalten. Vorhandene Profile mit einem einzelnen `trainingGoal` bleiben kompatibel.
+
+## Design- und Bedienkorrekturen (Version 25)
+
+- **Geburtsdatum:** Drei gerätenative Auswahllisten für Tag, Monat und Jahr. Auf iOS erfolgt die Auswahl über den nativen iOS-Picker. Der Jahresbereich reicht von 1900 bis zum aktuellen Jahr. Die Tagesliste passt sich automatisch an den gewählten Monat und das Jahr an (28/29/30/31 Tage). Die tatsächliche Auswahl wird als `YYYY-MM-DD` gespeichert. Die früheren künstlichen Scrollräder wurden entfernt, da sie bei schnellen Wischgesten zu Synchronisationsproblemen führten.
+- **Zielauswahl:** Bei einem neu eingerichteten Benutzerprofil ist kein Trainingsziel vorausgewählt. Vorhandene gespeicherte Ziele bleiben beim Bearbeiten erhalten.
+- **Ersteinrichtung:** Nach dem Speichern wird das Dashboard aufgerufen und die Scrollposition auf den Seitenanfang gesetzt.
+- **Farbsystem:** Die zusätzliche Datei `design-v2.css` vereinheitlicht Hell- und Dunkelmodus in einer zusammenhängenden blauen Palette. Beide Modi verwenden konsistente Hintergründe, Karten, Eingabefelder und Navigation ohne harte weiße Hintergründe auf dunklen Seiten.
+- **Kalender:** Normale Tageszahlen mit kleinen **runden** Statusmarkierungen darunter: grün = Training abgeschlossen, rot = vergangener offener Trainingstag, blau = Regeneration. Tage vor dem Einrichtungsdatum werden nicht als versäumt gezählt. Zukünftige Tage sind nur einsehbar.
+
+### Technische Prüfpunkte
+
+1. Eine Ersteinrichtung ohne vorhandene Daten öffnen: Sprache wählen, Namen eingeben und bei der Zielauswahl sicherstellen, dass keine Option markiert ist.
+2. Geburtsdatum testen: Februar 2000 -> 29 Tage, Februar 2001 -> 28 Tage, April -> 30 Tage, Januar -> 31 Tage, Jahr 1900 auswählbar.
+3. Profil speichern: Dashboard wird am oberen Seitenanfang angezeigt. Daten nach Schließen und erneutem Öffnen kontrollieren.
+4. Einstellungen > Design zwischen Hell und Dunkel wechseln. Kalender in beiden Modi prüfen.
+5. GitHub Pages aktualisieren und die installierte Home-Bildschirm-App einmal online starten, damit der neue Service-Worker-Cache geladen wird.
+
+**Hinweis:** Die Datumauswahl verwendet bewusst native Auswahlfelder statt einer nachgebauten Scrollanimation. Das ist insbesondere für Safari/iOS zuverlässiger. Für iOS werden die Auswahloptionen als System-Picker dargestellt; unter Windows als Dropdown.

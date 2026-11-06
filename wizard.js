@@ -33,7 +33,7 @@
     }
     if(index===1){
       const birth=document.getElementById('profileBirth');
-      const date=new Date(birth.value+'T12:00:00');
+      const date=birth.value?new Date(birth.value+'T12:00:00'):new Date(NaN);
       if(!Number.isFinite(+date)||date>=new Date()||date.getFullYear()<1900)return fail('Bitte gib ein gültiges Geburtsdatum in der Vergangenheit ein.',birth);
     }
     if(index===3&&!form.querySelector('input[name=trainingGoal]:checked'))return fail('Bitte wähle dein Trainingsziel aus.');
