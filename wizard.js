@@ -39,6 +39,14 @@
     if(index===3&&!form.querySelector('input[name=trainingGoal]:checked'))return fail('Bitte wähle dein Trainingsziel aus.');
     error.hidden=true;return true;
   }
+  // Checkboxes allow combined goals, but opposing weight directions are exclusive.
+  const goalInputs=[...form.querySelectorAll('input[name="trainingGoal"]')];
+  goalInputs.forEach(input=>input.addEventListener('change',()=>{
+    if(!input.checked)return;
+    const opposite=input.value==='Abnehmen'?'Zunehmen':input.value==='Zunehmen'?'Abnehmen':null;
+    if(opposite){const other=goalInputs.find(x=>x.value===opposite);if(other)other.checked=false;}
+    error.hidden=true;
+  }));
   next.addEventListener('click',()=>{if(validateStep())setStep(index+1);});
   back.addEventListener('click',()=>setStep(index-1));
   form.addEventListener('keydown',e=>{

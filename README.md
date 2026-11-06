@@ -194,3 +194,9 @@ Die Einrichtung umfasst **fünf Schritte** mit einer einheitlichen segmentierten
 Die Sprachseite schaltet beim Klick auf **Weiter** unmittelbar auf die Profilerstellung um. Wenn IndexedDB noch lädt, wird der Übergang nach dem Laden nachgeholt. Die übrige App-Oberfläche bleibt während der ersten Einrichtung verborgen. Das Sprachmerkmal bleibt im bisherigen lokalen Speicher erhalten, ebenso alle Trainingsdaten.
 
 **Prüfung:** Browser-Test mit leerem Speicher, Sprachwahl, Übergang, Navigation und Wiederaufruf nach Profilerstellung.
+
+## Trainingsziele (Mehrfachauswahl)
+
+Bei der Profilerstellung und unter **Profil bearbeiten** können mehrere Trainingsziele ausgewählt werden. Die Ziele **Abnehmen** und **Zunehmen** schließen sich gegenseitig aus: Wird eines aktiviert, wird das jeweils andere automatisch deaktiviert. **Muskelaufbau**, **Gewicht halten** und **Ernährung / Diät** können zusätzlich ausgewählt werden. Mindestens ein Ziel ist erforderlich.
+
+Die Ziele werden im lokalen Profil unter `trainingGoals` als Liste gespeichert. Für ältere Funktionen bleibt `trainingGoal` als erstes ausgewähltes Ziel erhalten. Vorhandene Profile mit einem einzelnen `trainingGoal` bleiben kompatibel.

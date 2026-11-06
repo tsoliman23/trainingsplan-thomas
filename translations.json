@@ -1218,5 +1218,10 @@
     "en": "In progress",
     "fr": "En cours",
     "ar-EG": "جاري"
+  },
+  "Mehrere Ziele möglich. Abnehmen und Zunehmen können nicht gleichzeitig ausgewählt werden.": {
+    "en": "You can select multiple goals. Weight loss and weight gain cannot be selected together.",
+    "fr": "Tu peux choisir plusieurs objectifs. Perdre et prendre du poids ne peuvent pas être choisis ensemble.",
+    "ar-EG": "تقدر تختار أكتر من هدف، بس مينفعش تختار التخسيس وزيادة الوزن مع بعض."
   }
 }

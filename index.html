@@ -233,13 +233,13 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
     <section class="wizard-step" data-step="2" hidden><div class="wizard-eyebrow">DEIN STARTPUNKT</div><h2>Dein Gewicht</h2><p>Wir vergleichen deinen Fortschritt ab dem ersten Eintrag.</p>
       <div class="wizard-fields"><label for="profileCurrentWeight">Aktuelles Gewicht (kg) *<input id="profileCurrentWeight" name="currentWeight" type="number" inputmode="decimal" min="20" max="350" step="0.1" required placeholder="z. B. 85"></label><label for="profileGoal">Zielgewicht (kg) *<input id="profileGoal" name="goalWeight" type="number" inputmode="decimal" min="20" max="350" step="0.1" required placeholder="z. B. 80"></label></div>
     </section>
-    <section class="wizard-step" data-step="3" hidden><div class="wizard-eyebrow">DEIN TRAININGSZIEL</div><h2>Worauf liegt dein Fokus?</h2><p>Du kannst dein Ziel später in den Einstellungen ändern.</p>
+    <section class="wizard-step" data-step="3" hidden><div class="wizard-eyebrow">DEIN TRAININGSZIEL</div><h2>Worauf liegt dein Fokus?</h2><p>Mehrere Ziele möglich. Abnehmen und Zunehmen können nicht gleichzeitig ausgewählt werden.</p>
       <fieldset class="goal-choices"><legend class="visually-hidden">Dein Fokus *</legend>
-        <label><input type="radio" name="trainingGoal" value="Abnehmen" required><span class="goal-icon">↘</span><span>Abnehmen</span></label>
-        <label><input type="radio" name="trainingGoal" value="Zunehmen"><span class="goal-icon">↗</span><span>Zunehmen</span></label>
-        <label><input type="radio" name="trainingGoal" value="Muskelaufbau"><span class="goal-icon">▥</span><span>Muskelaufbau</span></label>
-        <label><input type="radio" name="trainingGoal" value="Gewicht halten"><span class="goal-icon">≈</span><span>Gewicht halten</span></label>
-        <label><input type="radio" name="trainingGoal" value="Ernährung / Diät"><span class="goal-icon">◒</span><span>Ernährung / Diät</span></label>
+        <label><input type="checkbox" name="trainingGoal" value="Abnehmen"><span class="goal-icon">↘</span><span>Abnehmen</span></label>
+        <label><input type="checkbox" name="trainingGoal" value="Zunehmen"><span class="goal-icon">↗</span><span>Zunehmen</span></label>
+        <label><input type="checkbox" name="trainingGoal" value="Muskelaufbau"><span class="goal-icon">▥</span><span>Muskelaufbau</span></label>
+        <label><input type="checkbox" name="trainingGoal" value="Gewicht halten"><span class="goal-icon">≈</span><span>Gewicht halten</span></label>
+        <label><input type="checkbox" name="trainingGoal" value="Ernährung / Diät"><span class="goal-icon">◒</span><span>Ernährung / Diät</span></label>
       </fieldset>
       <p class="wizard-disclaimer">Montag, Mittwoch und Freitag sind deine Trainingstage. Die Statistik startet erst mit der Einrichtung.</p>
     </section>
@@ -348,7 +348,8 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
     document.getElementById('profileGoal').value=profile.goalWeight||'';
     var extra={};try{extra=JSON.parse(localStorage.getItem('training-full-profile-v1')||'{}')}catch(_){}
     [['profileLastName','lastName'],['profileBirth','birthday'],['profileHeight','heightCm'],['profileCurrentWeight','currentWeight']].forEach(function(a){document.getElementById(a[0]).value=extra[a[1]]||'';});
-    var chosen=document.querySelector('input[name=trainingGoal][value="'+(extra.trainingGoal||'Muskelaufbau')+'"]');if(chosen)chosen.checked=true;
+    var goals=Array.isArray(extra.trainingGoals)&&extra.trainingGoals.length?extra.trainingGoals:(extra.trainingGoal?[extra.trainingGoal]:['Muskelaufbau']);
+    document.querySelectorAll('input[name=trainingGoal]').forEach(function(input){input.checked=goals.includes(input.value);});
     document.getElementById('profileCancel').hidden=!canCancel;
     profileOverlay.hidden=false;document.documentElement.classList.add('profile-boot-active');document.getElementById('profileFirstName').focus();
   }
@@ -356,8 +357,10 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
     e.preventDefault();var first=document.getElementById('profileFirstName').value.trim();
     var goal=document.getElementById('profileGoal').value;
     if(!first||!(Number(goal)>=20&&Number(goal)<=350))return;
-    var extra={lastName:document.getElementById('profileLastName').value.trim(),birthday:document.getElementById('profileBirth').value,heightCm:Number(document.getElementById('profileHeight').value),currentWeight:Number(document.getElementById('profileCurrentWeight').value),trainingGoal:document.querySelector('input[name=trainingGoal]:checked')?.value||''};
+    var selectedGoals=Array.from(document.querySelectorAll('input[name=trainingGoal]:checked'),function(input){return input.value;});
+    var extra={lastName:document.getElementById('profileLastName').value.trim(),birthday:document.getElementById('profileBirth').value,heightCm:Number(document.getElementById('profileHeight').value),currentWeight:Number(document.getElementById('profileCurrentWeight').value),trainingGoal:selectedGoals[0]||'',trainingGoals:selectedGoals};
     var isoToday=new Date().getFullYear()+'-'+String(new Date().getMonth()+1).padStart(2,'0')+'-'+String(new Date().getDate()).padStart(2,'0');
+    if(selectedGoals.includes('Abnehmen')&&selectedGoals.includes('Zunehmen')){alert('Abnehmen und Zunehmen können nicht gleichzeitig ausgewählt werden.');return;}
     if(!extra.lastName||!extra.birthday||!extra.trainingGoal||extra.heightCm<100||extra.heightCm>250||extra.currentWeight<20||extra.currentWeight>350){alert('Bitte alle Pflichtfelder korrekt ausfüllen.');return;}
     var birthdayDate=new Date(extra.birthday+'T12:00:00');if(!Number.isFinite(birthdayDate.getTime())||birthdayDate>=new Date()||birthdayDate.getFullYear()<1900){alert('Bitte ein gültiges Geburtsdatum in der Vergangenheit eingeben.');return;}
     if(!localStorage.getItem('training-setup-date-v1'))localStorage.setItem('training-setup-date-v1',isoToday);

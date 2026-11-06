@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v23-onboarding-unified-five-steps';
+const CACHE = 'mytraining-v24-multiple-goals';
 
 const ASSETS = [
     './',
