@@ -1,4 +1,4 @@
-const CACHE = 'trainingsplan-design-v4';
+const CACHE = 'trainingsplan-design-v5';
 
 const ASSETS = [
     './',
