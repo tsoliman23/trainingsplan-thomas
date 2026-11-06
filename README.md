@@ -109,3 +109,42 @@ git push
 ```
 
 **Technologie:** Weiterhin eine offlinefähige PWA. Für eine echte native iOS-App wären ein eigener SwiftUI- oder Flutter-Build, Apple-Signierung und Datenmigration nötig. Ein solcher nativer Build ist nicht Teil dieser ZIP.
+
+## 9. Neu: Geburtsdatum mit Scrollrädern
+
+Im zweiten Einrichtungsschritt werden Tag, Monat und Jahr in drei getrennten vertikalen Auswahlrädern gewählt (Wischen, Tippen oder Pfeiltasten). Der Tag passt sich dem ausgewählten Monat an; der Februar berücksichtigt Schaltjahre. Eine bewusste Auswahl ist erforderlich. Intern wird das Datum weiterhin im ISO-Format `YYYY-MM-DD` gespeichert. Vorhandene Profile lassen sich ohne Datenmigration bearbeiten.
+
+## 10. Kostenloser Push-Dienst mit Cloudflare Workers
+
+**Wichtig:** Die ZIP enthält die Push-Anbindung und den Cloudflare-Worker als **Quellcode**, aber keinen bereits bereitgestellten Worker. Hintergrund-Push funktioniert erst nach der folgenden Einrichtung. Ohne Worker bleibt der Erinnerungs-Schalter deaktiviert; es wird keine bereits funktionierende Erinnerung vorgetäuscht.
+
+### Voraussetzungen
+
+- MyTraining über HTTPS / GitHub Pages veröffentlicht.
+- Auf dem iPhone (iOS 16.4+) über Safari zum Home-Bildschirm hinzugefügt und **über das App-Symbol geöffnet**.
+- Kostenloses Cloudflare-Konto; Node.js 22+ und npm auf dem Computer.
+- Für Push ein gültiges VAPID-Schlüsselpaar (Private Key bleibt **ausschließlich** als Cloudflare-Secret).
+
+### Cloudflare Worker bereitstellen
+
+1. Im Terminal in `cloudflare-push/` wechseln und `npm install` ausführen.
+2. In Cloudflare eine KV-Namespace anlegen. Alternativ im Worker-Verzeichnis `npx wrangler kv namespace create SUBSCRIPTIONS` ausführen und die ausgegebene Namespace-ID in `cloudflare-push/wrangler.toml` beim Feld `id` einsetzen.
+3. Ein VAPID-Schlüsselpaar generieren, zum Beispiel mit `npx web-push generate-vapid-keys`. Den **Public Key** in `wrangler.toml` als `VAPID_SERVER_PUBLIC_KEY` eintragen. `VAPID_SUBJECT` auf die eigene `mailto:`-Adresse ändern. **Private Key niemals ins Repository eintragen.**
+4. Im Worker-Verzeichnis `npx wrangler secret put VAPID_SERVER_PRIVATE_KEY` ausführen und den privaten VAPID-Key im Terminal eingeben.
+5. `ALLOWED_ORIGIN` in `wrangler.toml` auf die GitHub-Pages-**Origin** setzen, normalerweise `https://tsoliman23.github.io` (ohne Repository-Pfad).
+6. `npm run deploy` starten. Die ausgegebene Worker-URL in `push-config.js` bei `MYTRAINING_PUSH_URL` eintragen. Die Konfigurationsdatei enthält **nur die öffentliche Worker-Adresse**, keine geheimen Schlüssel.
+7. Änderungen in Git committen und GitHub Pages aktualisieren. Danach MyTraining auf dem iPhone einmal online starten, in **Mehr → Einstellungen** die Erinnerungen aktivieren und die Berechtigung erlauben.
+
+### Funktion und Datenschutz
+
+- Der Cloudflare-Cron-Trigger läuft Montag, Mittwoch und Freitag um 06:00 bzw. 07:00 UTC und sendet ausschließlich, wenn es in der Zeitzone `Europe/Berlin` tatsächlich 08:00 Uhr ist. Eine exakte Zustellsekunde wird nicht garantiert.
+- Der Worker speichert nur Push-Endpunkt, kryptografische Subscription-Schlüssel und ein zufälliges Registrierungstoken in Cloudflare KV. **Keine Namen, Geburtsdaten, Körpergewichte, Trainingsinhalte oder PDF-Dateien.**
+- Nach einer Abmeldung wird die Registrierung am Server gelöscht und die Browser-Push-Subscription beendet (Internetverbindung erforderlich).
+- Der Worker weiß nicht, ob du das heutige Training bereits abgeschlossen hast. Die Erinnerung wird unabhängig vom lokal gespeicherten Trainingsstatus versendet.
+- Ein ausgefallener Push-Service oder Offline-Zustand des Geräts kann Zustellungen verzögern oder verhindern.
+- Cloudflare Workers und KV besitzen kostenlose Nutzungskontingente; bei deren Überschreitung gelten aktuelle Cloudflare-Bedingungen. Die App selbst bleibt auf GitHub Pages hostbar.
+- **Sicherheit:** Das Worker-Projekt enthält keine privaten Schlüssel. `cloudflare-push/node_modules/` und `.dev.vars` gehören nicht ins Repository. Vor dem produktiven Einsatz Endgeräte- und Zugriffsverhalten testen.
+
+### Lokales Testen und Grenzen
+
+Die JavaScript-Syntax kann mit `node --check` geprüft werden. Damit ist noch nicht bestätigt, dass eine echte iOS-Benachrichtigung ankommt; das erfordert das reale Cloudflare-Deployment und einen Push-Test auf dem Gerät. **Die App ist ohne Cloudflare weiterhin als Offline-Trainingsplan nutzbar**, nur Hintergrund-Push bleibt dann aus.

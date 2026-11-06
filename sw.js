@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v17-polish-pdf-preview';
+const CACHE = 'mytraining-v18-wheel-cloudflare-push';
 
 const ASSETS = [
     './',
@@ -10,6 +10,9 @@ const ASSETS = [
     './theme.css',
     './wizard.css',
     './wizard.js',
+    './birth-wheel.js',
+    './push-config.js',
+    './push-client.js',
     './polish.css',
     './pdf-preview.js',
     './manifest.webmanifest',
@@ -72,4 +75,17 @@ self.addEventListener('fetch', event => {
         caches.match(event.request)
             .then(cached => cached || fetch(event.request))
     );
+});
+// Standard Web Push: auch bei geschlossener installierter PWA (iOS 16.4+).
+self.addEventListener('push',event=>{
+ let data={};try{data=event.data?.json()||{};}catch{}
+ const title=data.title||'MyTraining';
+ event.waitUntil(self.registration.showNotification(title,{body:data.body||'Dein Training steht an.',icon:'./icons/icon-192.png',badge:'./icons/icon-192.png',tag:'mytraining-reminder',data:{url:'./index.html'}}));
+});
+self.addEventListener('notificationclick',event=>{
+ event.notification.close();
+ event.waitUntil(self.clients.matchAll({type:'window',includeUncontrolled:true}).then(async clients=>{
+  for(const c of clients){if(c.url.startsWith(self.registration.scope)){await c.focus();return;}}
+  return self.clients.openWindow('./index.html');
+ }));
 });

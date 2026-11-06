@@ -36,3 +36,18 @@
 .profile-dialog .profile-cancel:not([hidden]){flex:none;width:100%!important;margin:8px 0 0!important;padding:8px!important;background:transparent!important;border:0!important;color:var(--xp-muted,#667790)!important;font-size:12px!important}
 @media (max-width:480px){.profile-dialog{border-radius:21px!important}.wizard-header{min-height:42px}.profile-dialog .goal-choices label{padding:8px!important;gap:6px!important}.profile-dialog .goal-icon{width:22px!important;height:22px!important;min-width:22px!important}.profile-dialog .goal-choices label>span:last-child{overflow-wrap:anywhere}}
 @media(max-height:620px){.profile-dialog{max-height:calc(100dvh - 12px)!important;height:calc(100dvh - 12px)!important;padding:12px!important}.wizard-progress{margin:8px 0 2px}.wizard-body{justify-content:flex-start}.wizard-step{padding:7px 0!important}.profile-dialog .goal-choices label{min-height:47px!important;padding:6px!important}.wizard-actions{margin-top:7px}.profile-dialog .wizard-actions button{min-height:42px!important}}
+
+/* Geburtsdatum: drei zentrierte Scroll-Raeder mit iOS-artigem Snap. */
+.profile-dialog .wizard-progress{margin-bottom:11px!important}
+.profile-dialog .wizard-step::before,.profile-dialog .wizard-step::after{display:none!important;content:none!important}
+.profile-dialog .wizard-eyebrow{position:relative!important;z-index:1!important;margin-top:3px!important}
+.birth-field{min-width:0;max-width:100%}.birth-field>label{font-size:13px;font-weight:800;color:var(--xp-text,#142849)}
+.birth-hint{font-size:11px;color:var(--xp-muted,#687895);margin:3px 0 8px!important}
+.birth-wheels{display:grid;grid-template-columns: .9fr 1.35fr 1.05fr;gap:8px;width:100%;max-width:100%;min-width:0}
+.birth-wheel-wrap{position:relative;min-width:0;display:flex;flex-direction:column;gap:4px}
+.birth-wheel-wrap>span{text-align:center;font-size:11px;color:var(--xp-muted,#7185a5);font-weight:750}
+.birth-wheel{height:144px;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none;overscroll-behavior:contain;border:1px solid var(--xp-border,#c5d5ed);border-radius:14px;background:var(--xp-bg,#f5f8ff);padding:50px 0;box-sizing:border-box;-webkit-overflow-scrolling:touch}
+.birth-wheel::-webkit-scrollbar{display:none}.birth-wheel-wrap:after{content:'';position:absolute;pointer-events:none;left:3px;right:3px;top:calc(50% + 4px);height:44px;transform:translateY(-50%);border:1.5px solid #3478ee;background:color-mix(in srgb,#2f5be8 9%,transparent);border-radius:10px}
+.birth-option{display:flex;align-items:center;justify-content:center;height:44px;line-height:44px;width:100%;min-width:0;margin:0;padding:0 3px;scroll-snap-align:center;border:0;background:transparent!important;color:var(--xp-muted,#7185a5);font-size:15px;font-weight:550;text-align:center;cursor:pointer;white-space:nowrap}
+.birth-option.is-current{color:var(--xp-text,#142849);font-weight:850;font-size:16px}.birth-value{text-align:center;font-size:12px!important;color:var(--xp-text,#22375d)!important;font-weight:750;margin:9px 0 0!important}
+@media(max-height:690px){.birth-wheel{height:126px;padding:41px 0}.birth-wheel-wrap:after{height:44px}}

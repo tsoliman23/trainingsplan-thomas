@@ -1,0 +1,7 @@
+# No repository metadata or build dependencies in releases
+node_modules/
+cloudflare-push/node_modules/
+.dev.vars
+cloudflare-push/.dev.vars
+.wrangler/
+.DS_Store
