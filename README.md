@@ -81,3 +81,8 @@ Falls die neue Oberfläche nach dem Deployment nicht erscheint, App einmal onlin
 ## 8. Grenzen
 
 Die Trainingsplanung ist auf Montag/Mittwoch/Freitag ausgelegt. Eine abgeschlossene Einheit wird aktiv über die Abschlussfunktion markiert. Der PDF-Export ist auf drei Trainingstage optimiert; sehr viele selbst hinzugefügte Übungen oder lange Hinweise können die Lesbarkeit einschränken. Die App bietet keine verschlüsselte Cloud-Sicherung und keine medizinische oder ernährungsbezogene Beratung.
+
+
+## Responsiver Profilassistent
+
+Die Ersteinrichtung wird in vier Schritte gegliedert: Name, Basisdaten, Gewicht und Trainingsziel. Auf kleinen Bildschirmen passt sich der Dialog an die verfügbare Höhe an; nur bei eingeschränkter Höhe oder geöffnetem Tastaturfeld ist der Inhaltsbereich intern scrollbar. Die bestehende Profilspeicherung und das Datenformat bleiben unverändert. `wizard.css` und `wizard.js` gehören zum Offline-Cache in `sw.js`.

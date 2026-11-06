@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v15';
+const CACHE = 'mytraining-v16-wizard';
 
 const ASSETS = [
     './',
@@ -8,6 +8,8 @@ const ASSETS = [
     './calendar.js',
     './experience.js',
     './theme.css',
+    './wizard.css',
+    './wizard.js',
     './manifest.webmanifest',
     './icons/icon-180.png',
     './icons/icon-192.png',
