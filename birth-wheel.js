@@ -20,7 +20,7 @@ selects.year.value=match?String(Number(match[1])):'';selects.month.value=match?S
 refreshDays();selects.day.value=match?String(Number(match[3])):'';
 if(!match||!isoValid(Number(match[1]),Number(match[2]),Number(match[3]))){selects.day.value='';selects.month.value='';selects.year.value='';}
 holding=false;sync();}
-function refreshLabels(){const current=selects.month.value;const months=window.MyTrainingI18n?.monthNames?.()||fallbackMonths;options(selects.month,months.map((v,i)=>[i+1,v]),'Monat');selects.month.value=current;sync();}
+function refreshLabels(){const current=selects.month.value;const months=window.MyTrainingI18n?.monthNames?.()||fallbackMonths;const shown=[...selects.month.options].slice(1).map(o=>o.textContent);if(shown.length===months.length&&shown.every((v,i)=>v===months[i]))return;options(selects.month,months.map((v,i)=>[i+1,v]),'Monat');selects.month.value=current;sync();}
 Object.values(selects).forEach(el=>{el.addEventListener('change',()=>{if(holding)return;if(el!==selects.day)refreshDays();sync();});});
 if(overlay)new MutationObserver(()=>{if(!overlay.hidden)initialize(hidden.value);}).observe(overlay,{attributes:true,attributeFilter:['hidden']});
 window.MyTrainingBirthday={initialize,refreshLabels,getValue:()=>hidden.value};

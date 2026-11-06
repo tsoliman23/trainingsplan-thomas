@@ -28,7 +28,7 @@ if(original===undefined||old!==prev && old!==original){original=old;source.set(n
 const next=lang==='de'?original:translateString(original);
 if(old!==next){translated.set(n,next);n.nodeValue=next;}else translated.set(n,next);
 }
-function translateAttr(el,attr){if(!el.hasAttribute(attr))return;const prop='i18n'+attr[0].toUpperCase()+attr.slice(1);const current=el.getAttribute(attr);let orig=el.dataset[prop];if(!orig){orig=current;el.dataset[prop]=orig;}const val=lang==='de'?orig:translateString(orig);if(val!==current)el.setAttribute(attr,val);}
+function translateAttr(el,attr){if(!el.hasAttribute(attr))return;const prop='i18n'+attr.replace(/(^|-)([a-z])/g,(_,dash,letter)=>letter.toUpperCase());const current=el.getAttribute(attr);let orig=el.dataset[prop];if(!orig){orig=current;el.dataset[prop]=orig;}const val=lang==='de'?orig:translateString(orig);if(val!==current)el.setAttribute(attr,val);}
 function apply(root=document.body){if(!root)return;
 const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let node;while((node=walker.nextNode()))textNode(node);
 const attrs=root.querySelectorAll?.('[placeholder],[title],[aria-label]')||[];for(const e of attrs){for(const a of ['placeholder','title','aria-label'])translateAttr(e,a);}

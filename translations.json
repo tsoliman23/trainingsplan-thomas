@@ -1223,5 +1223,60 @@
     "en": "You can select multiple goals. Weight loss and weight gain cannot be selected together.",
     "fr": "Tu peux choisir plusieurs objectifs. Perdre et prendre du poids ne peuvent pas être choisis ensemble.",
     "ar-EG": "تقدر تختار أكتر من هدف، بس مينفعش تختار التخسيس وزيادة الوزن مع بعض."
+  },
+  "Körperwerte": {
+    "en": "Body measurements",
+    "fr": "Mesures corporelles",
+    "ar-EG": "قياسات الجسم"
+  },
+  "Gewicht": {
+    "en": "Weight",
+    "fr": "Poids",
+    "ar-EG": "الوزن"
+  },
+  "Ziel:": {
+    "en": "Target:",
+    "fr": "Objectif :",
+    "ar-EG": "الهدف:"
+  },
+  "Startgewicht:": {
+    "en": "Starting weight:",
+    "fr": "Poids de départ :",
+    "ar-EG": "الوزن في البداية:"
+  },
+  "Tagesgewicht für heute. Deine Einträge werden nach Datum gespeichert.": {
+    "en": "Today’s weight. Your entries are saved by date.",
+    "fr": "Poids du jour. Tes entrées sont enregistrées par date.",
+    "ar-EG": "وزنك النهارده. كل تسجيل بيتحفظ بتاريخ اليوم."
+  },
+  "App zurücksetzen": {
+    "en": "Reset app",
+    "fr": "Réinitialiser l’application",
+    "ar-EG": "إعادة ضبط التطبيق"
+  },
+  "App wirklich zurücksetzen?": {
+    "en": "Really reset the app?",
+    "fr": "Vraiment réinitialiser l’application ?",
+    "ar-EG": "متأكد إنك عايز تعيد ضبط التطبيق؟"
+  },
+  "Alle lokalen Daten dieser App werden gelöscht: Profil, Trainingsstand, Historie, PDFs und Einstellungen.": {
+    "en": "All local app data will be deleted: profile, training records, history, PDFs and settings.",
+    "fr": "Toutes les données locales seront supprimées : profil, entraînements, historique, PDF et paramètres.",
+    "ar-EG": "كل بيانات التطبيق المحلية هتتمسح: الملف الشخصي والتمارين والسجل وملفات PDF والإعدادات."
+  },
+  "Dein Profil, sämtliche Trainingsdaten und PDF-Dateien auf diesem Gerät werden unwiderruflich gelöscht.": {
+    "en": "Your profile, all training data and PDFs on this device will be permanently deleted.",
+    "fr": "Ton profil, toutes tes données d’entraînement et tes PDF seront supprimés définitivement de cet appareil.",
+    "ar-EG": "ملفك وكل بيانات التمرين وملفات PDF على الجهاز هتتمسح نهائي."
+  },
+  "Erstelle vorher eine Datensicherung. Dieser Vorgang kann nicht rückgängig gemacht werden.": {
+    "en": "Back up your data first. This action cannot be undone.",
+    "fr": "Sauvegarde d’abord tes données. Cette action est irréversible.",
+    "ar-EG": "اعمل نسخة احتياطية الأول. مش هتقدر ترجع البيانات بعد الحذف."
+  },
+  "Alles löschen": {
+    "en": "Delete everything",
+    "fr": "Tout supprimer",
+    "ar-EG": "مسح الكل"
   }
 }

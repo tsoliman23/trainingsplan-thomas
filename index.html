@@ -426,11 +426,13 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
     try{var txn=db.transaction(DB_STORE,'readonly');var req=txn.objectStore(DB_STORE).get('current');req.onsuccess=function(){resolve(req.result||null);};req.onerror=function(){resolve(null);};}catch(e){resolve(null);}
   });}
   function writeDb(snapshot){return new Promise(function(resolve){
+    if(window.__mytrainingResetting){resolve(false);return;}
     if(!db){resolve(false);return;}
     try{var txn=db.transaction(DB_STORE,'readwrite');txn.objectStore(DB_STORE).put(snapshot,'current');txn.oncomplete=function(){resolve(true);};txn.onerror=function(){resolve(false);};txn.onabort=function(){resolve(false);};}catch(e){resolve(false);}
   });}
-  function backupLocal(snapshot){try{localStorage.setItem(KEY,JSON.stringify(snapshot));return true;}catch(e){return false;}}
+  function backupLocal(snapshot){if(window.__mytrainingResetting)return false;try{localStorage.setItem(KEY,JSON.stringify(snapshot));return true;}catch(e){return false;}}
   function persist(snapshot){
+    if(window.__mytrainingResetting)return;
     var localOk=backupLocal(snapshot);
     lastWrite=lastWrite.then(function(){return writeDb(snapshot);}).then(function(dbOk){
       label.textContent=dbOk?'Automatisch auf diesem Gerät gespeichert (IndexedDB).':localOk?'Automatisch gespeichert (Browser-Speicher). Bitte eine vollständige Sicherung herunterladen.':'Speicherung fehlgeschlagen. Bitte eine vollständige Sicherung herunterladen.';
@@ -448,7 +450,7 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   function apply(d){if(!d||typeof d!=='object'||!d.checks||!d.notes)throw Error('Ungültige Sicherung');custom=normalizeCustom(d.custom);if(validProfile(d.profile)){profile={firstName:d.profile.firstName,goalWeight:String(d.profile.goalWeight)};profileDisplay();}renderCustom();refreshBoxes();boxes.forEach(function(b){b.checked=!!d.checks[b.name];});notes.forEach(function(n){if(typeof d.notes[n.name]==='string')n.value=d.notes[n.name];});if(d.weight!==undefined&&d.weight!==null)weight.value=String(d.weight);results=Array.prototype.slice.call(document.querySelectorAll('input[data-result]'));results.forEach(function(r){r.value=d.results&&d.results[r.name]!==undefined?String(d.results[r.name]):'';});update();}
   function update(){refreshBoxes();var n=boxes.filter(function(b){return b.checked;}).length;document.getElementById('status').textContent=n+' von '+boxes.length+' Schritten erledigt';document.getElementById('bar').style.width=(boxes.length?100*n/boxes.length:0)+'%';}
   function save(){
-    if(loading)return;
+    if(loading||window.__mytrainingResetting)return;
     var snapshot=data();
     // Immediate synchronous fallback protects entries even if the app is closed quickly.
     var localOk=backupLocal(snapshot);
@@ -716,8 +718,8 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   installButton.addEventListener('click',async function(){if(!installPrompt)return;installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;installButton.hidden=true;});
   window.addEventListener('appinstalled',function(){installButton.hidden=true;appStatus.textContent='App installiert. Deine Daten bleiben lokal auf dem Gerät.';});
   if(/iPhone|iPad|iPod/.test(navigator.userAgent)&&!window.navigator.standalone){appStatus.textContent='iPhone: In Safari öffnen, Teilen wählen und „Zum Home-Bildschirm“ hinzufügen. Danach auch offline nutzbar.';}
-  document.addEventListener('visibilitychange',function(){if(document.hidden&&!loading){if(queuedSave){clearTimeout(queuedSave);queuedSave=null;}persist(data());}});
-  window.TrainingApp={getSnapshot:data,applySnapshot:function(snapshot){apply(snapshot);save();},save:save,refresh:update};
+  document.addEventListener('visibilitychange',function(){if(document.hidden&&!loading&&!window.__mytrainingResetting){if(queuedSave){clearTimeout(queuedSave);queuedSave=null;}persist(data());}});
+  window.TrainingApp={getSnapshot:data,applySnapshot:function(snapshot){apply(snapshot);save();},save:save,refresh:update,closeStorage:async function(){if(queuedSave){clearTimeout(queuedSave);queuedSave=null;}try{await lastWrite;}catch(_){}if(db){db.close();db=null;}return true;}};
   window.addEventListener('beforeprint',preparePrint);
   update();
 })();

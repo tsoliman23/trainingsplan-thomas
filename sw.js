@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v25-native-date-and-blue-design';
+const CACHE = 'mytraining-v26-reset-weight-and-accessibility';
 
 const ASSETS = [
     './',

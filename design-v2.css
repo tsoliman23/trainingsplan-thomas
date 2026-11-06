@@ -122,3 +122,70 @@ html[data-theme="light"] #view-calendar .month-day.future small,
 html[data-theme="dark"] #view-calendar .month-day.before small,
 html[data-theme="light"] #view-calendar .month-day.before small{background:var(--xp-soft)!important;color:transparent!important}
 html[data-theme="dark"] .cal-month-head h2,html[data-theme="dark"] .month-weekday{color:var(--xp-text)!important}
+
+
+/* Readability + layout polish requested after review */
+html[data-theme="dark"] .muted,
+html[data-theme="dark"] .cal-panel p,
+html[data-theme="dark"] .cal-panel small,
+html[data-theme="dark"] .history-panel p,
+html[data-theme="dark"] .history-chart,
+html[data-theme="dark"] .history-toolbar label,
+html[data-theme="dark"] .pdf-entry small,
+html[data-theme="dark"] .xp-brand small,
+html[data-theme="dark"] .item small,
+html[data-theme="dark"] #view-documents p,
+html[data-theme="dark"] #view-stats p,
+html[data-theme="dark"] #view-dashboard p{color:#eef5ff!important;opacity:.96!important}
+html[data-theme="light"] .muted,
+html[data-theme="light"] .cal-panel p.muted,
+html[data-theme="light"] .pdf-entry small,
+html[data-theme="light"] .history-panel p{color:#35507a!important}
+#training-dashboard-shell>section:before,section.cal-view:before,section.xp-settings:before,.cal-view:before,.xp-settings:before{display:none!important;content:none!important}
+#training-dashboard-shell,.wrap{outline:none!important;box-shadow:none!important;border:0!important}
+.wrap>section,.wrap>.foot,.cal-panel,.history-entry,.history-chart,.pdf-entry,.cal-metrics>div,.xp-weight-card,.xp-settings>.cal-panel,.custom-block,.profile-dialog,.language-dialog,.pdf-options-dialog,#trainingsform section,.item,.panel-card,.history-panel{border-width:1px!important;border-style:solid!important}
+html[data-theme="dark"] .wrap>section,html[data-theme="dark"] .wrap>.foot,html[data-theme="dark"] .cal-panel,html[data-theme="dark"] .history-entry,html[data-theme="dark"] .history-chart,html[data-theme="dark"] .pdf-entry,html[data-theme="dark"] .cal-metrics>div,html[data-theme="dark"] .xp-weight-card,html[data-theme="dark"] .xp-settings>.cal-panel,html[data-theme="dark"] .custom-block,html[data-theme="dark"] #trainingsform section,html[data-theme="dark"] .item,html[data-theme="dark"] .panel-card,html[data-theme="dark"] .history-panel{border-color:#37506f!important}
+.xp-weight-hidden{display:none!important}
+.xp-weight-shell{display:grid;gap:14px}
+.xp-weight-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.xp-weight-meta strong{font-size:30px;color:var(--xp-text)!important;line-height:1}
+.xp-weight-meta small{font-size:18px;font-weight:700;color:var(--xp-muted)!important}
+.xp-weight-adjust{display:grid;grid-template-columns:64px 1fr 64px;gap:16px;align-items:center}
+.xp-weight-adjust button{min-height:64px;border-radius:50%!important;font-size:32px!important;font-weight:800!important;padding:0!important;background:var(--xp-card)!important;color:var(--xp-text)!important;border:2px solid var(--xp-border)!important}
+.xp-weight-value{text-align:center;display:grid;gap:6px}
+.xp-weight-value span{font-size:clamp(34px,8vw,48px);font-weight:900;line-height:1;color:var(--xp-text)!important}
+.xp-weight-value small{font-size:17px;color:var(--xp-muted)!important;font-weight:700}
+.xp-weight-hint{margin:0}
+.cal-legend-row{display:grid;gap:14px;align-items:start;margin-top:12px}
+.cal-legend{justify-content:flex-start!important;row-gap:10px!important}
+.cal-legend-note{margin:0!important;line-height:1.5!important}
+.xp-switch-row{gap:16px!important}
+.xp-toggle{position:relative;display:inline-flex;align-items:center;flex:none}
+.xp-toggle input{position:absolute;inset:0;opacity:0;width:52px;height:32px;cursor:pointer}
+.xp-toggle-slider{width:52px;height:32px;border-radius:999px;background:var(--xp-border);display:block;position:relative;transition:background .2s ease,box-shadow .2s ease}
+.xp-toggle-slider:before{content:"";position:absolute;left:3px;top:3px;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.18);transition:transform .2s ease}
+.xp-toggle input:checked+.xp-toggle-slider{background:var(--xp-primary)}
+.xp-toggle input:checked+.xp-toggle-slider:before{transform:translateX(20px)}
+.xp-settings-actions button,#download-backup,#import-backup,.pdf-entry button,.xp-weight-adjust button{box-shadow:none!important}
+#download-backup,#import-backup{background:#214fba!important;color:#fff!important;border-color:#214fba!important}
+#import-backup{background:#193f96!important;border-color:#193f96!important}
+.xp-danger-zone .muted{margin-bottom:12px}
+.xp-danger-button{background:#c93c4b!important;border-color:#c93c4b!important;color:#fff!important}
+.xp-danger-button:hover{background:#b83141!important}
+.xp-modal-overlay{position:fixed;inset:0;background:rgba(4,12,24,.58);display:flex;align-items:center;justify-content:center;padding:20px;z-index:120}
+.xp-modal-card{width:min(100%,420px);background:var(--xp-card);color:var(--xp-text);border:1px solid var(--xp-border);border-radius:24px;padding:22px;box-shadow:0 24px 90px rgba(0,0,0,.22);display:grid;gap:14px}
+.xp-modal-card h3{margin:0;color:var(--xp-text)!important}
+.xp-modal-card p{margin:0;color:var(--xp-muted)!important;line-height:1.55}
+.xp-modal-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.xp-modal-actions button{min-width:130px}
+@media(max-width:480px){.xp-weight-adjust{grid-template-columns:58px 1fr 58px;gap:12px}.xp-weight-adjust button{min-height:58px}.xp-weight-meta strong{font-size:26px}.xp-weight-meta small,.xp-weight-value small{font-size:15px}}
+
+/* Keep native hidden state stronger than flex/grid component presentation. */
+.xp-modal-overlay[hidden],#xp-reset-overlay[hidden]{display:none!important;}
+.xp-reset-warning{font-weight:650!important;color:var(--xp-text)!important;}
+#xp-reset-status{font-size:13px;color:var(--xp-text);}
+.xp-modal-overlay{z-index:100001!important;}
+.xp-toggle input:focus-visible+.xp-toggle-slider{outline:3px solid var(--xp-primary);outline-offset:3px;}
+#view-calendar .cal-legend{margin-inline:0!important;padding-inline:8px!important;}
+#view-calendar .cal-legend-note{padding-inline:8px!important;}
+@media(min-width:650px){#view-calendar .cal-legend-row{grid-template-columns:1fr;}}

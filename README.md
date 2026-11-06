@@ -156,14 +156,14 @@ Beim ersten Start erscheint zunächst die Sprachauswahl für Deutsch, Englisch, 
 
 Übersetzungen liegen in `translations.json` und werden offline über `i18n.js` geladen. Die Datei ist im Service-Worker-Cache enthalten. Bei Ergänzungen neuer Features müssen alle sichtbaren Texte in allen vier Sprachen gepflegt werden. Selbst eingegebene Notizen und Übungsnamen werden nicht automatisch übersetzt.
 
-Das Geburtsdatum wird mit den drei vertikal scrollbaren Auswahlrädern für Tag, Monat und Jahr gewählt. Die optisch mittig markierten Optionen werden direkt als `YYYY-MM-DD` im versteckten Formularfeld gespeichert. Eine zweite Datumsanzeige wurde entfernt. Die Tagesliste passt sich an Monat und Schaltjahr an.
+Das Geburtsdatum wird mit drei gerätenativen Auswahlfeldern für Tag, Monat und Jahr gewählt. Die gewählten Optionen werden direkt als `YYYY-MM-DD` im versteckten Formularfeld gespeichert. Eine zweite Datumsanzeige wurde entfernt. Die Tagesliste passt sich an Monat und Schaltjahr an.
 
 Zum Aktualisieren bei GitHub Pages müssen die neue `translations.json`, `i18n.js` und `language.css` mit veröffentlicht werden. Die Cache-Version in `sw.js` wurde erhöht. Nach der Installation der neuen Version die App online neu öffnen.
 
 
 ### Startbildschirm und Sprachwahl (v20)
 
-Die Sprachwahl ist bei einer Neuinstallation im initialen HTML enthalten. Die App-Oberfläche bleibt bis zum Laden der Übersetzungen verborgen, um das kurze Anzeigen des Dashboards zu verhindern. Die arabische Auswahl heißt **عربي** (ägyptisches Arabisch, Locale `ar-EG`). Bestehende Profil-, Trainings- und PDF-Daten werden nicht geändert. Nach dem Deployment die PWA einmal online öffnen, damit die neue Service-Worker-Version geladen wird.
+Die Sprachwahl ist bei einer Neuinstallation im initialen HTML enthalten. Die App-Oberfläche bleibt während der Ersteinrichtung verborgen, um das kurze Anzeigen des Dashboards zu verhindern. Die arabische Auswahl heißt **عربي** (ägyptisches Arabisch, Locale `ar-EG`). Bestehende Profil-, Trainings- und PDF-Daten werden nicht geändert. Nach dem Deployment die PWA einmal online öffnen, damit die neue Service-Worker-Version geladen wird.
 
 
 ## Sprachauswahl als erster Einrichtungsschritt
@@ -193,7 +193,7 @@ Die Einrichtung umfasst **fünf Schritte** mit einer einheitlichen segmentierten
 
 Die Sprachseite schaltet beim Klick auf **Weiter** unmittelbar auf die Profilerstellung um. Wenn IndexedDB noch lädt, wird der Übergang nach dem Laden nachgeholt. Die übrige App-Oberfläche bleibt während der ersten Einrichtung verborgen. Das Sprachmerkmal bleibt im bisherigen lokalen Speicher erhalten, ebenso alle Trainingsdaten.
 
-**Prüfung:** Browser-Test mit leerem Speicher, Sprachwahl, Übergang, Navigation und Wiederaufruf nach Profilerstellung.
+**Prüfhinweis:** Sprachwahl, Übergang und Wiederaufruf nach Profilerstellung zusätzlich auf dem Zielgerät testen.
 
 ## Trainingsziele (Mehrfachauswahl)
 
@@ -218,3 +218,26 @@ Die Ziele werden im lokalen Profil unter `trainingGoals` als Liste gespeichert. 
 5. GitHub Pages aktualisieren und die installierte Home-Bildschirm-App einmal online starten, damit der neue Service-Worker-Cache geladen wird.
 
 **Hinweis:** Die Datumauswahl verwendet bewusst native Auswahlfelder statt einer nachgebauten Scrollanimation. Das ist insbesondere für Safari/iOS zuverlässiger. Für iOS werden die Auswahloptionen als System-Picker dargestellt; unter Windows als Dropdown.
+
+
+## Fehlerkorrektur und Release-Prüfung (Version 26)
+
+- **Gewicht:** Die Karte „Körperwerte“ auf dem Dashboard erfasst ausschließlich das heutige Gewicht (Schrittweite 0,1 kg), auch wenn zuletzt ein anderer Kalendertag geöffnet war. Das Gewicht wird in `training-calendar-days-v1` unter dem Tagesdatum gespeichert. Das bei der Profilerstellung hinterlegte Startgewicht dient als unveränderter Ausgangswert. Zielgewicht steht daneben. Für frühere Werte den jeweiligen Tag in der Trainingsansicht öffnen.
+- **Zurücksetzen:** In **Mehr > App zurücksetzen** muss zuerst das Bestätigungsfenster mit rotem „Alles löschen“ bestätigt werden. Danach wird die laufende Speicherung gestoppt, die Trainings- und PDF-Datenbank geschlossen und gelöscht sowie die MyTraining-spezifischen lokalen Schlüssel entfernt. Andere Dateien auf dem Gerät werden nicht angerührt. Der Browser-Cache mit dem App-Code bleibt für die Offline-Nutzung erhalten. Bestehende PDF-Downloads in der Dateien-App können nicht automatisch gelöscht werden.
+- **Push:** Bei eingerichteter Cloudflare-Verbindung wird vor dem lokalen Reset auch die Push-Registrierung abgemeldet; bei nicht erreichbarem Server wird der Reset unterbrochen und ein Fehler angezeigt. Ohne Cloudflare ist die Erinnerung nur als lokale Prüfung bei laufender App verfügbar; 08:00 Uhr im geschlossenen Zustand ist damit nicht garantiert.
+- **Einstellungen:** Apple-artiger Schalter, lesbare Sicherungsbuttons, einheitliche Kontraste und der explizite Hidden-Zustand des Reset-Dialogs.
+- **Übersetzungen:** Korrigierter Zugriff auf `aria-label`-Attribute; Monatsnamen werden nur bei tatsächlichem Sprachwechsel neu aufgebaut.
+
+### Prüfstand
+
+JavaScript-Syntax, ZIP-Struktur und isolierte Browserprüfungen der Gewichtstasten, des Reset-Dialogs und der Sprachskripte wurden durchgeführt. Ein kompletter Browser-End-to-End-Test über einen lokalen HTTP-Server war in der Ausführungsumgebung durch eine Zugriffssperre nicht möglich. Ein Gerätetest unter iOS und Android ist deshalb weiterhin erforderlich.
+
+### Git
+
+Nur den Inhalt von `MyTraining/` ins vorhandene Repository kopieren. Die Release-ZIP enthält **keinen** `.git`-Ordner. Vor dem Update die JSON-Datensicherung und wichtige PDFs exportieren.
+
+```bash
+git add .
+git commit -m "Gewichtserfassung und App-Reset korrigiert sowie Darstellung verbessert"
+git push
+```
