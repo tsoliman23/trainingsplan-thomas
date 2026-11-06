@@ -51,28 +51,53 @@ async function makeModernPdf(options={}) {
     const title=item.querySelector('label strong')?.textContent?.trim()||'';
     const description=item.querySelector('label small')?.textContent?.trim()||'';
     const checked=!!item.querySelector('input[data-check]')?.checked;
-    const fields=[...item.querySelectorAll('input[data-result]')].map(x=>({label:x.closest('.value-field')?.querySelector('span')?.textContent?.trim()||'',value:x.value||'–'}));
-    const titleLines=lines(title,475,10.4,true);
+    const allFields=[...item.querySelectorAll('.exercise-values > .value-field')];
+    const fields=allFields.map(field=>({label:field.querySelector('span')?.textContent?.trim()||'',value:field.querySelector('input')?.value||'–'}));
+    const checkbox=item.querySelector('input[data-check]');
+    if(checkbox && fields.length>=5){
+      const key=checkbox.name,shared=item.querySelector('input[name="done_reps_'+key+'"]')?.value||'–';
+      fields[1]={label:'Wdh.',value:shared};
+      for(let i=1;i<=3;i++){
+        const reps=item.querySelector('input[name="reps_set'+i+'_'+key+'"]')?.value||shared;
+        const kg=item.querySelector('input[name="weight_set'+i+'_'+key+'"]')?.value||'–';
+        fields[i+1]={label:'S'+i+' Wdh./kg',value:reps+'/'+kg};
+      }
+    }
+    const titleLines=lines(title,390,10.4,true);
     const detailLines=includeInfo?lines(description,492,8.6):[];
     const valueLines=Math.ceil(fields.length/5);
-    const h=Math.max(34,9+titleLines.length*13+detailLines.length*10.6+(valueLines?valueLines*22+2:0)+6);
+    const h=Math.max(36,9+titleLines.length*13+detailLines.length*10.6+(valueLines?valueLines*22+2:0)+6);
     return{titleLines,detailLines,fields,checked,h};
   }
   function drawItem(d,n,y){
-    box(27,y,541,d.h,8,C.white);
-    box(37,y+8,25,24,7,C.pale);
-    if(d.checked){ctx.strokeStyle=C.blue;ctx.lineWidth=2.9;ctx.lineCap='round';ctx.lineJoin='round';ctx.beginPath();ctx.moveTo(43,y+20);ctx.lineTo(48,y+25);ctx.lineTo(57,y+15);ctx.stroke();}
-    else text(n,46,y+24,10,C.deep,true);
+    // State is shown redundantly through words, color and a small symbol.
+    // The exercise number is always visible and is never replaced by a check mark.
+    box(27,y,541,d.h,8,d.checked?'#dce8ff':C.white);
+    box(27,y,4,d.h,2,d.checked?C.blue:'#c8d5ee');
+    box(38,y+8,26,22,6,d.checked?'#b9d0ff':C.pale);
+    ctx.font='700 10px Arial, sans-serif';
+    const num=String(n),numW=ctx.measureText(num).width;
+    text(num,51-numW/2,y+23,10,C.deep,true);
+    const badgeX=486,badgeW=69,badgeY=y+8;
+    box(badgeX,badgeY,badgeW,21,6,d.checked?C.blue:'#eef2f9');
+    if(d.checked){
+      // Small tick kept fully within its own dedicated status badge.
+      ctx.strokeStyle=C.white;ctx.lineWidth=1.6;ctx.lineCap='round';ctx.lineJoin='round';
+      ctx.beginPath();ctx.moveTo(493,badgeY+11);ctx.lineTo(496,badgeY+14);ctx.lineTo(501,badgeY+8);ctx.stroke();
+      text('ERLEDIGT',505,badgeY+14,7.1,C.white,true);
+    }else{
+      text('OFFEN',505,badgeY+14,8,C.muted,true);
+    }
     let yy=y+19;
-    for(const l of d.titleLines){text(l,71,yy,10.4,C.ink,true);yy+=13;}
+    for(const l of d.titleLines){text(l,74,yy,10.4,C.ink,true);yy+=13;}
     for(const l of d.detailLines){text(l,39,yy,8.6,C.muted);yy+=10.6;}
     if(d.fields.length){
       yy+=1;
       d.fields.forEach((f,i)=>{
         const col=i%5,row=Math.floor(i/5),x=39+col*104,by=yy+row*22;
-        box(x,by-8,98,19,5,C.pale);
-        text(f.label,x+4,by+4,8,C.muted,true);
-        text(f.value,x+52,by+4,9,C.deep,true);
+        box(x,by-8,98,19,5,d.checked?'#c8daff':C.pale);
+        text(f.label,x+4,by+4,7.2,C.muted,true);
+        text(f.value,x+61,by+4,8,C.deep,true);
       });
     }
   }

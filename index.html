@@ -73,7 +73,7 @@ section:before{content:"";position:absolute;left:0;top:0;width:100%;height:5px;b
 .item{display:flex;align-items:flex-start;gap:12px;border-bottom:1px solid #e7eefb;padding:13px 0}.item:last-child{border-bottom:none}
 .item input{min-width:24px;width:24px;height:24px;margin:2px 0 0;accent-color:var(--blue)}
 .item label{flex:1;line-height:1.38}.item small{display:block;font-size:13px;line-height:1.48;color:var(--muted);margin-top:4px}
-input:checked+label strong{text-decoration:line-through;color:#7a8daa}
+input:checked+label strong{color:var(--deep-blue,#1f43b8)}
 input[type="number"],textarea,.add-editor input[type=text]{width:100%;padding:12px 13px;font:inherit;font-size:16px;border:1px solid #c9d7f0;border-radius:14px;background:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
 textarea{height:92px;resize:vertical}
 input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{outline:2px solid rgba(47,91,232,.22);border-color:#8aa8f8}
@@ -147,6 +147,11 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
 
 /* Informationen optional und ohne dauerhafte Beschreibungsblöcke */
 #trainingsform .item.info-collapsed:not(.info-open) label small{display:none!important}
+/* Clearly distinguish completed tasks, not only by the checkbox. */
+#trainingsform .item:has(> input[data-check]:checked){background:#eaf1ff;border-left:4px solid #2f5be8;border-radius:9px;padding-left:8px;padding-right:8px}
+#trainingsform .item:has(> input[data-check]:checked) > label > strong::after{content:"  · Erledigt";font-size:11px;font-weight:700;color:#1f43b8;white-space:nowrap}
+#trainingsform .item:has(> input[data-check]:not(:checked)) > label > strong::after{content:"  · Offen";font-size:11px;font-weight:500;color:#657896;white-space:nowrap}
+
 #trainingsform .info-toggle{margin:5px 0 1px 38px;padding:5px 11px;border-radius:8px;border:1px solid #bad0ff;background:#eaf1ff;color:#1f43b8;font-size:12px;font-weight:700;cursor:pointer}
 .pdf-options-overlay[hidden]{display:none!important}
 .pdf-options-overlay{position:fixed;inset:0;z-index:2000;background:rgba(10,28,65,.73);display:flex;align-items:center;justify-content:center;padding:18px}
@@ -154,6 +159,56 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
 .pdf-options-dialog h2{margin:0 0 12px;color:#1f43b8}.pdf-options-dialog p{line-height:1.5}
 .pdf-choice{display:flex;align-items:center;gap:11px;padding:15px;background:#eaf1ff;border-radius:12px;font-weight:700}
 .pdf-choice input{width:20px;height:20px;accent-color:#2f5be8;flex-shrink:0}
+
+/* Trainingsprotokoll, Verlauf und Backups */
+.set-reps-row{display:flex;flex:1 1 100%;align-items:end;flex-wrap:wrap;gap:8px;justify-content:flex-end;padding:9px 0 0;border-top:1px solid #e4ebf8}
+.set-reps-label{flex:1;min-width:135px;color:#435b80;font-size:12px;font-weight:700;align-self:center}
+.set-rep-field{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;font-weight:700;color:#526786}
+.set-rep-field input{width:60px;height:41px;text-align:center;background:#f9fbff;border:1px solid #bfd0ef;border-radius:10px;font-size:15px}
+.finish-inline{display:block;margin:12px 0 4px;background:#eaf1ff;color:#234cb4;border:1px solid #c9d9ff}
+.history-panel .history-actions{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}
+.history-panel .history-actions button:first-child,#download-backup{background:linear-gradient(145deg,#2f5be8,#1f43b8);color:white}
+.history-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}
+.history-stats .metric{background:#eef4ff;border-radius:15px;padding:16px;display:flex;flex-direction:column;gap:5px}
+.history-stats strong{color:#1f43b8;font-size:25px}.history-stats span{color:#536989;font-size:12px}
+.history-chart{border:1px solid #dae5f7;background:#f8fbff;border-radius:15px;padding:12px;margin:10px 0}
+.history-chart svg{display:block;width:100%;height:auto;max-height:185px}
+.chart-caption{font-size:12px;color:#536989;margin-top:5px}.chart-empty{padding:22px;color:#627390;text-align:center;font-size:13px}
+.history-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:12px 0}.history-toolbar label{font-weight:700;font-size:13px}
+.history-toolbar select{flex:1;min-width:170px;padding:10px;border-radius:10px;border:1px solid #bdceed;background:white;font-size:14px}
+.history-entry{border:1px solid #dce5f6;border-radius:14px;padding:12px 14px;margin:8px 0;background:#fff}
+.history-entry summary{cursor:pointer;line-height:1.5}.history-scroll{overflow-x:auto}.history-entry table{border-collapse:collapse;width:100%;font-size:12px;margin-top:12px}.history-entry th,.history-entry td{padding:8px;text-align:left;border-bottom:1px solid #e5ecf8}.history-entry th{color:#3655a0}
+@media(max-width:520px){.set-reps-label{flex-basis:100%}.set-reps-row{justify-content:space-between}.history-actions button{flex:1 1 100%}}
+@media print{#training-history,.finish-inline{display:none!important}}
+
+#training-dashboard-shell{max-width:1100px;margin:0 auto}.cal-tabs{position:sticky;top:0;z-index:30;display:flex;gap:5px;overflow-x:auto;padding:8px 0 12px;background:#eef4ff}.cal-tabs button{border:0;border-radius:11px;background:#dbe7ff;color:#1e4288;padding:12px 15px;font-weight:700;white-space:nowrap;flex:1}.cal-tabs button.active{color:#fff;background:#2f5be8}.cal-view{padding:14px 0}.cal-view[hidden]{display:none!important}.cal-panel{background:#fff;border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 3px 12px #1a409414}.cal-panel h3{margin:0 0 13px}.cal-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}.cal-metrics>div{background:#fff;border:1px solid #d9e5fa;border-radius:15px;padding:18px 12px}.cal-metrics strong{display:block;color:#1f43b8;font-size:28px}.cal-metrics small{font-size:12px;color:#536989}.cal-progress{height:12px;border-radius:20px;background:#deebff;margin:15px 0;overflow:hidden}.cal-progress>div{height:100%;background:#2f5be8;transition:width .25s}.dash-recent-row{width:100%;border:0;border-bottom:1px solid #e4edfb;background:transparent;display:flex;justify-content:space-between;align-items:center;text-align:left;padding:12px 4px;color:#203c73}.dash-recent-row span{display:grid;gap:3px}.dash-recent-row small{color:#678}.dash-recent-row .complete{font-weight:700;color:#245add}.cal-month-head,.cal-date-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.cal-month-head button,.cal-date-head button{width:42px;height:42px;flex:none;border:0;border-radius:12px;color:#2556cc;background:#dce8ff;font-size:27px}.cal-date-head>div{text-align:center}.cal-date-head h2{font-size:20px;margin:0}.cal-date-head p{margin:4px 0 0}.cal-month-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin:16px 0}.month-weekday{text-align:center;font-size:12px;font-weight:700;color:#526c9c;padding:8px 0}.month-day{border:1px solid #dce7f7;border-radius:12px;background:white;min-height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#253c68;gap:3px}.month-day small{color:#4a74ed}.month-day.today{border-color:#2f5be8}.month-day.done{background:#dce8ff}.month-day.active{background:#2f5be8;color:#fff}.month-day.active small{color:#fff}.cal-week-strip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin:15px 0}.cal-day{border:1px solid #d6e3f9;background:#fff;color:#24457b;border-radius:12px;min-height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;position:relative}.cal-day span{font-size:11px}.cal-day strong{font-size:17px}.cal-day i{font-size:8px;color:#2f5be8}.cal-day i.planned{color:#aabfe7}.cal-day.active{background:#2f5be8;color:#fff}.cal-day.active i{color:#fff}.cal-day.today{border-color:#2f5be8}.cal-future{background:#dce8ff;border-left:4px solid #2f5be8;padding:13px;border-radius:8px;color:#1b428c}.cal-readonly{opacity:.86}.cal-chart{height:145px;display:flex;align-items:flex-end;gap:7px;justify-content:space-around;padding:16px 0}.cal-chart-col{display:flex;align-items:center;justify-content:end;flex-direction:column;gap:5px;flex:1;height:100%}.cal-chart-col div{background:#2f5be8;width:70%;max-width:36px;border-radius:8px 8px 0 0}.cal-chart-col small{font-size:10px;color:#637a9d}.cal-chart-col span{font-size:11px;font-weight:700}.pdf-entry{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:#fff;border-radius:14px;padding:14px;margin:8px 0;border:1px solid #dce7fa}.pdf-entry>span{flex:1;min-width:180px;display:grid;gap:4px}.pdf-entry strong{font-size:13px;overflow-wrap:anywhere}.pdf-entry small{color:#637895}.pdf-entry button{border:0;border-radius:9px;background:#2f5be8;color:#fff;padding:10px;font-weight:600}.pdf-entry .pdf-delete{background:#e4ebf7;color:#25416f}#view-training .sticky{display:none!important}#view-training #trainingsform{margin-top:5px}#view-stats #training-history{margin-top:10px}@media(max-width:480px){.cal-tabs button{padding:10px 9px;font-size:12px}.cal-metrics strong{font-size:22px}.cal-metrics small{font-size:10px}.cal-panel{padding:14px}.month-day{min-height:48px}.cal-day{min-height:54px}.cal-date-head h2{font-size:16px}}
+
+
+/* Kalenderstatus mit eindeutiger Form und Farbe. */
+#view-stats #archive-week[hidden]{display:none!important}
+.cal-finish{width:100%;margin:12px 0;background:#2f5be8;color:#fff;font-weight:800}
+
+.month-day,.cal-day{position:relative;box-shadow:none;min-width:0}
+.month-day small{font-weight:900;line-height:1;font-size:19px;min-height:19px}
+.month-day.done{background:#e0f6ea;border-color:#8dd6ac;color:#176d43}
+.month-day.done small{color:#17804e}
+.month-day.missed{background:#fdebec;border-color:#f1b9c0;color:#9b3042}
+.month-day.missed small{color:#c93c52;font-size:21px}
+.month-day.rest{background:#e6efff;border-color:#bdd2fb;color:#234d9d}
+.month-day.rest small{color:#2f5be8;font-size:15px}
+.month-day.future{background:#f7f9fd;color:#8a9ab2;border-style:dashed}
+.month-day.before{background:#f6f8fc;color:#8b97a9}
+.month-day.active{outline:3px solid #2f5be8;outline-offset:1px}
+.month-day.today{box-shadow:inset 0 0 0 2px #2f5be8}
+.cal-day i{font-style:normal;font-weight:900;font-size:17px;min-height:17px;line-height:1}
+.cal-day.done i{color:#138154}.cal-day.missed i{color:#ce3d53}.cal-day.rest i{color:#2f5be8;font-size:12px}.cal-day.active i{color:inherit}
+.cal-legend{display:flex;gap:11px;flex-wrap:wrap;align-items:center;margin:12px 0;font-size:12px;font-weight:700;color:#405477}
+.cal-legend span{display:flex;align-items:center;gap:5px}
+.legend-mark{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;border-radius:50%;font-size:17px}
+.legend-mark.done{background:#e0f6ea;color:#168051}.legend-mark.missed{background:#fdebec;color:#c93c52}.legend-mark.rest{background:#e6efff;color:#2f5be8;font-size:13px}
+.weight-change{display:block;font-size:36px;font-weight:850;color:#2f5be8;letter-spacing:-.03em}
+#trainingsform[hidden]{display:none!important}
+@media(max-width:420px){.month-day{min-height:43px;padding:5px 0}.month-day strong{font-size:13px}.month-day small{font-size:16px;min-height:14px}.cal-month-grid{gap:4px}}
 </style></head><body><div class="profile-overlay" id="profileOverlay" hidden><form class="profile-dialog" id="profileForm"><img src="./icons/icon-192.png" alt="App-Logo"><h2>Dein Trainingsprofil</h2><p>Bitte gib beim ersten Start deinen Vornamen und dein Zielgewicht ein. Die Angaben werden nur auf deinem Gerät gespeichert.</p><label for="profileFirstName">Vorname *</label><input id="profileFirstName" name="firstName" autocomplete="given-name" maxlength="40" required placeholder="Dein Vorname"><label for="profileGoal">Zielgewicht in kg *</label><input id="profileGoal" name="goalWeight" type="number" inputmode="decimal" min="20" max="350" step="0.1" required placeholder="z. B. 80"><button type="submit">Profil speichern</button><button type="button" class="profile-cancel" id="profileCancel" hidden>Abbrechen</button></form></div><div class="pdf-options-overlay" id="pdfOptionsOverlay" hidden><div class="pdf-options-dialog" role="dialog" aria-modal="true" aria-labelledby="pdfOptionsTitle"><h2 id="pdfOptionsTitle">PDF exportieren</h2><p>Dein Trainingsplan wird kompakt auf drei Seiten dargestellt.</p><label class="pdf-choice"><input id="pdfIncludeInfo" type="checkbox"> Übungsinformationen und Beschreibungen in PDF einblenden</label><p class="muted">Ohne Informationen bleiben Übungsnamen, Trainingswerte und erledigte Übungen sichtbar.</p><div class="buttons"><button type="button" id="pdfCancel">Abbrechen</button><button type="button" id="pdfConfirm">PDF erstellen und teilen</button></div></div></div><div class="wrap"><header>
   <div class="hero-top">
     <div class="hero-logo"><img src="./icons/icon-192.png" alt="Trainingsplan-Logo" /></div>
@@ -232,7 +287,7 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   <p aria-live="polite" id="saveState">Speicherung wird geprüft.</p><p aria-live="polite" id="pdf-status" class="muted"></p>
   <div hidden aria-hidden="true"><button id="manualLoad" type="button"></button><button id="loadTop" type="button"></button><button id="exportJsonTop" type="button"></button><button id="backup" type="button"></button><button id="restore" type="button"></button><input accept="application/json,.json" hidden id="backupFile" type="file"></div>
   <div id="manualPanel" hidden style="display:none"><p id="manualHelp"></p><textarea id="manualCode"></textarea><button id="copyCode" type="button"></button><button id="pasteCode" type="button"></button><button id="applyCode" type="button"></button><button id="closeCode" type="button"></button></div>
-</div></div></form></div><script src="./modern-pdf.js"></script><script>
+</div></div></form></div><script src="./modern-pdf.js"></script><script src="./progress.js"></script><script>
 (function(){
   'use strict';
   var KEY='cleverfit_training_v16', OLDKEY='cleverfit_training_v5';
@@ -296,7 +351,7 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   function persist(snapshot){
     var localOk=backupLocal(snapshot);
     lastWrite=lastWrite.then(function(){return writeDb(snapshot);}).then(function(dbOk){
-      label.textContent=dbOk?'Automatisch auf diesem Gerät gespeichert (IndexedDB).':localOk?'Automatisch gespeichert (Browser-Speicher). Bitte JSON-Sicherung exportieren.':'Speicherung fehlgeschlagen. Bitte JSON-Sicherung exportieren.';
+      label.textContent=dbOk?'Automatisch auf diesem Gerät gespeichert (IndexedDB).':localOk?'Automatisch gespeichert (Browser-Speicher). Bitte eine vollständige Sicherung herunterladen.':'Speicherung fehlgeschlagen. Bitte eine vollständige Sicherung herunterladen.';
     });
   }
   function downloadJson(){
@@ -549,8 +604,8 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   document.getElementById('pdfConfirm').addEventListener('click',async function(){
       pdfOptionsOverlay.hidden=true;
       var pdf;
-      try{pdf=await makeModernPdf({includeInfo:document.getElementById('pdfIncludeInfo').checked});}catch(error){informPdf('PDF-Erstellung fehlgeschlagen: '+error.message);return;}
-      var filename='Trainingscheckliste_'+(profile.firstName||'Training').replace(/[^a-zA-Z0-9äöüÄÖÜß_-]/g,'_')+'_'+new Date().toISOString().slice(0,10)+'.pdf';
+      try{pdf=window.TrainingCalendar?await window.TrainingCalendar.makeWeeklyPdf(function(){return makeModernPdf({includeInfo:document.getElementById('pdfIncludeInfo').checked});}):await makeModernPdf({includeInfo:document.getElementById('pdfIncludeInfo').checked});}catch(error){informPdf('PDF-Erstellung fehlgeschlagen: '+error.message);return;}
+      var pdfDate=window.TrainingCalendar?window.TrainingCalendar.selectedDate():new Date().toISOString().slice(0,10);var filename='Trainingsplan_'+(profile.firstName||'Training').replace(/[^a-zA-Z0-9äöüÄÖÜß_-]/g,'_')+'_Woche_'+pdfDate+'.pdf';if(window.TrainingCalendar){try{await window.TrainingCalendar.savePdf(pdf,filename,pdfDate);}catch(e){informPdf('PDF wurde erzeugt, konnte aber nicht im Dokumentenarchiv gespeichert werden.');}}
       var file=new File([pdf],filename,{type:'application/pdf'});
       // On iOS Safari the native share sheet can save the real PDF to Files.
       if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
@@ -572,7 +627,8 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   window.addEventListener('appinstalled',function(){installButton.hidden=true;appStatus.textContent='App installiert. Deine Daten bleiben lokal auf dem Gerät.';});
   if(/iPhone|iPad|iPod/.test(navigator.userAgent)&&!window.navigator.standalone){appStatus.textContent='iPhone: In Safari öffnen, Teilen wählen und „Zum Home-Bildschirm“ hinzufügen. Danach auch offline nutzbar.';}
   document.addEventListener('visibilitychange',function(){if(document.hidden&&!loading){if(queuedSave){clearTimeout(queuedSave);queuedSave=null;}persist(data());}});
+  window.TrainingApp={getSnapshot:data,applySnapshot:function(snapshot){apply(snapshot);save();},save:save,refresh:update};
   window.addEventListener('beforeprint',preparePrint);
   update();
 })();
-</script></body></html>
+</script><script src="./calendar.js"></script></body></html>

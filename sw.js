@@ -1,9 +1,11 @@
-const CACHE = 'trainingsplan-design-v5';
+const CACHE = 'trainingsplan-dashboard-v13';
 
 const ASSETS = [
     './',
     './index.html',
     './modern-pdf.js',
+    './progress.js',
+    './calendar.js',
     './manifest.webmanifest',
     './icons/icon-180.png',
     './icons/icon-192.png',
