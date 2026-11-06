@@ -8,14 +8,14 @@
   const back=document.getElementById('wizardBack');
   const submit=document.getElementById('wizardSubmit');
   const counter=document.getElementById('wizardCount');
-  const fill=document.getElementById('wizardFill');
+  const segments=[...document.querySelectorAll('#wizardSegments i')];
   const error=document.getElementById('wizardError');
   let index=0;
   function setStep(n){
     index=Math.max(0,Math.min(steps.length-1,n));
     steps.forEach((el,i)=>{el.hidden=i!==index;el.setAttribute('aria-hidden',String(i!==index));});
-    counter.textContent=`Schritt ${index+1} von ${steps.length}`;
-    fill.style.width=((index+1)*100/steps.length)+'%';
+    counter.textContent=`Schritt ${index+2} von ${steps.length+1}`;
+    segments.forEach((el,i)=>el.classList.toggle('onboarding-active',i<=index+1));
     back.hidden=index===0;
     next.hidden=index===steps.length-1;
     submit.hidden=index!==steps.length-1;

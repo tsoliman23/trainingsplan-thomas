@@ -56,6 +56,7 @@ function renderIntroSelection(){
  initialGate.querySelector('#languageWelcome').textContent=intro.welcome;
  initialGate.querySelector('#languageTitle').textContent=intro.title;
  initialGate.querySelector('#languageContinue').textContent=intro.next;
+ const step=initialGate.querySelector('#languageStepCount');if(step)step.textContent=selectedIntroLanguage==='en'?'Step 1 of 5':selectedIntroLanguage==='fr'?'Étape 1 sur 5':selectedIntroLanguage==='ar-EG'?'الخطوة ١ من ٥':'Schritt 1 von 5';
  initialGate.querySelector('#languageContinue').disabled=!selectedIntroLanguage;
  initialGate.querySelector('.language-dialog').dir=selectedIntroLanguage==='ar-EG'?'rtl':'ltr';
  initialGate.querySelectorAll('.lang-option').forEach(button=>{
@@ -67,26 +68,26 @@ function renderIntroSelection(){
 function finishIntro(){
  if(!selectedIntroLanguage)return;
  const chosen=selectedIntroLanguage;
- const nextButton=initialGate.querySelector('#languageContinue');
- nextButton.disabled=true;
- try {
-  lang=chosen;
-  localStorage.setItem(KEY,chosen);
-  initialGate.hidden=true;
-  document.documentElement.classList.remove('language-boot-first','language-boot-loading');
-  document.documentElement.lang=chosen;
-  document.documentElement.dir=chosen==='ar-EG'?'rtl':'ltr';
-  if(ready)apply();
-  // This explicit transition works whether local data loaded before or after the click.
-  document.dispatchEvent(new CustomEvent('mytraining-initial-language-confirmed',{detail:{language:chosen}}));
-  window.MyTrainingContinueOnboarding?.();
-  document.dispatchEvent(new CustomEvent('mytraining-language-change',{detail:{language:chosen}}));
- }catch(e){
-  console.error('Language onboarding failed:',e);
-  nextButton.disabled=false;
-  initialGate.hidden=false;
- }
+ const button=initialGate.querySelector('#languageContinue');
+ button.disabled=true;
+ // Commit first. Profile overlay is opened synchronously when storage is ready,
+ // or by the storage-ready callback later. Do not depend on translation fetch.
+ try {localStorage.setItem(KEY,chosen);} catch(e){console.warn('Language not persisted',e);}
+ lang=chosen;
+ document.documentElement.classList.add('profile-boot-active');
+ document.documentElement.classList.remove('language-boot-first','language-boot-loading');
+ initialGate.hidden=true;
+ document.documentElement.lang=chosen;
+ document.documentElement.dir=chosen==='ar-EG'?'rtl':'ltr';
+ // Dispatch must not be held up by synchronous i18n translation.
+ document.dispatchEvent(new CustomEvent('mytraining-initial-language-confirmed',{detail:{language:chosen}}));
+ // Give rendering a chance before full translation and secondary updates.
+ requestAnimationFrame(()=>{
+   if(ready)requestApply();
+   document.dispatchEvent(new CustomEvent('mytraining-language-change',{detail:{language:chosen}}));
+ });
 }
+
 function languageGate(){
  if(!initialGate)return;
  const pending=!localStorage.getItem(KEY);

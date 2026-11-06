@@ -25,3 +25,14 @@
 [dir=rtl] .language-dialog{ text-align:right }
 .language-dialog[dir=rtl]{text-align:right}
 @media(max-height:600px){.language-dialog{min-height:0}.language-brand{margin-bottom:10px}.language-dialog .lang-option{min-height:54px}}
+
+/* Shared five-step progress for language + four profile pages. */
+.onboarding-segments{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-top:9px;width:100%}
+.onboarding-segments i{height:6px;border-radius:999px;background:var(--xp-soft,#d9e5f7);display:block}
+.onboarding-segments i.onboarding-active{background:#2f5be8}
+.language-progress{margin:0 0 24px}
+.language-step-caption{font-weight:800;font-size:12px;color:var(--xp-muted,#7185a5)}
+.language-dialog .language-brand{margin-bottom:22px}
+.language-dialog .language-welcome{margin-top:2px}
+.profile-dialog .wizard-progress .onboarding-segments{margin-top:9px}
+@media(max-height:650px){.language-progress{margin-bottom:14px}.language-dialog .language-brand{margin-bottom:14px}}

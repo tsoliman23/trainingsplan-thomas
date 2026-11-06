@@ -179,3 +179,18 @@ Die erste Seite zeigt ausschließlich **WILLKOMMEN**, **Wähle deine Sprache**, 
 GitHub Pages dient nur zur Veröffentlichung. Die Trainingsdaten werden weiterhin lokal im Browser-/App-Speicher gehalten. Vor einem Wechsel zwischen Safari und Home-Bildschirm-App bitte eine JSON-Sicherung anlegen; Speicherbereiche können je nach Plattform getrennt sein.
 
 **Ersteinrichtung:** Sprache markieren, **Weiter** drücken; daraufhin öffnet sich für neue Nutzer der vierstufige Profilassistent. Er startet auch dann, wenn die lokale Datenbank erst nach der Sprachauswahl geladen ist.
+
+
+## Einrichtungsablauf (Version 23)
+
+Die Einrichtung umfasst **fünf Schritte** mit einer einheitlichen segmentierten Fortschrittsanzeige:
+
+1. Sprache auswählen und mit **Weiter** bestätigen.
+2. Vor- und Nachname eingeben.
+3. Geburtsdatum und Körpergröße erfassen.
+4. Start- und Zielgewicht eingeben.
+5. Trainingsziel festlegen und Profil speichern.
+
+Die Sprachseite schaltet beim Klick auf **Weiter** unmittelbar auf die Profilerstellung um. Wenn IndexedDB noch lädt, wird der Übergang nach dem Laden nachgeholt. Die übrige App-Oberfläche bleibt während der ersten Einrichtung verborgen. Das Sprachmerkmal bleibt im bisherigen lokalen Speicher erhalten, ebenso alle Trainingsdaten.
+
+**Prüfung:** Browser-Test mit leerem Speicher, Sprachwahl, Übergang, Navigation und Wiederaufruf nach Profilerstellung.
