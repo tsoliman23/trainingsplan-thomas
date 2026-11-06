@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+
+<html lang="de"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Thomas | Trainingsplan</title><meta name="theme-color" content="#2f5be8"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta name="apple-mobile-web-app-title" content="Training"/><meta name="description" content="Dein persönlicher Offline-Trainingsplan mit automatischer Speicherung."/><link rel="manifest" href="./manifest.webmanifest"/><link rel="icon" href="./icons/icon-192.png"/><link rel="apple-touch-icon" href="./icons/icon-180.png"/><style>
+:root{
+  --bg1:#eef4ff;
+  --bg2:#f6f9ff;
+  --surface:#ffffff;
+  --surface-soft:#f4f8ff;
+  --line:#d7e2f5;
+  --text:#1a2740;
+  --muted:#5b6d8c;
+  --blue:#2f5be8;
+  --blue-dark:#1f43b8;
+  --blue-soft:#dfe8ff;
+  --success:#2f8c67;
+  --shadow:0 18px 46px rgba(26,55,128,.12);
+  --radius-xl:24px;
+  --radius-lg:18px;
+  --radius-md:14px;
+  --radius-sm:10px;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif;
+  color:var(--text);
+  background:linear-gradient(180deg,var(--bg1) 0%,#f8fbff 48%,#eef3fb 100%);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;padding:18px;background:linear-gradient(180deg,var(--bg1) 0%,#f8fbff 48%,#eef3fb 100%)}
+.wrap{max-width:880px;margin:auto}
+header,section,.foot{background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border:1px solid rgba(215,226,245,.95);border-radius:var(--radius-xl);margin-bottom:16px;padding:22px;box-shadow:var(--shadow)}
+header{background:linear-gradient(145deg,#2f5be8 0%,#274ccc 52%,#19338f 100%);color:#fff;position:relative;overflow:hidden}
+header:before,header:after{content:"";position:absolute;border-radius:999px;pointer-events:none;opacity:.22}
+header:before{width:270px;height:270px;right:-85px;top:-70px;background:radial-gradient(circle,#fff 0%,rgba(255,255,255,0) 68%)}
+header:after{width:180px;height:180px;left:-35px;bottom:-85px;background:radial-gradient(circle,#8fb0ff 0%,rgba(255,255,255,0) 72%)}
+h1{margin:0 0 6px;font-size:31px;letter-spacing:-.02em}
+h2{font-size:21px;margin:0 0 8px;color:var(--text);letter-spacing:-.01em}
+h3{font-size:17px;margin:18px 0 10px;color:var(--blue-dark)}
+.subtitle,.muted{color:var(--muted);line-height:1.55}.muted{font-size:13px}
+header .subtitle,header .muted,header #status,header #saveState,header #app-status{color:rgba(255,255,255,.9)}
+.hero-top{display:flex;align-items:center;gap:16px;position:relative;z-index:1}
+.hero-logo{width:60px;height:60px;min-width:60px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,.12));border:1px solid rgba(255,255,255,.24);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;box-shadow:inset 0 1px 1px rgba(255,255,255,.15)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px}
+.hero-copy{max-width:650px}
+.hero-panel{position:relative;z-index:1;margin-top:18px;padding:18px;border-radius:20px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16)}
+.hero-grid{display:grid;grid-template-columns:1.6fr .9fr;gap:14px;align-items:stretch;margin:16px 0}
+.panel-card{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:14px}
+.panel-card label{display:block;font-weight:700;margin:0 0 6px}
+#bodyWeight{background:rgba(255,255,255,.98)!important;border:1px solid rgba(255,255,255,.3)!important;color:var(--text)!important}
+.goal-ring{display:flex;align-items:center;gap:14px}
+.goal-number{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;color:var(--blue-dark);font-size:24px;font-weight:800;box-shadow:0 10px 24px rgba(16,35,86,.18)}
+.goal-text{font-size:14px;line-height:1.45;color:rgba(255,255,255,.95)}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 0}
+.hero-tag{display:inline-flex;align-items:center;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.14);font-size:13px;font-weight:700}
+.buttons{display:flex;gap:10px;flex-wrap:wrap}
+.header-actions button,.foot .buttons button,.pdf-export,.add-confirm,.add-cancel,.add-toggle,#installApp{border-radius:14px}
+button{appearance:none;background:#fff;border:1px solid var(--line);border-radius:12px;color:var(--text);font-size:15px;min-height:46px;padding:11px 14px;font-weight:700;transition:transform .12s ease, box-shadow .12s ease, background .12s ease;border-color:transparent;box-shadow:0 8px 20px rgba(31,67,184,.08)}
+button:hover{transform:translateY(-1px)}
+button:active{transform:translateY(0);background:#edf3ff}
+.header-actions button{background:rgba(255,255,255,.95)}
+.header-actions .pdf-export,.foot .pdf-export,#loadTop,#installApp,.add-confirm{background:linear-gradient(180deg,#ffffff 0%,#e9f0ff 100%);color:var(--blue-dark)}
+.foot .pdf-export,#loadTop,#installApp{background:linear-gradient(180deg,#4a74f0 0%,#2b57e5 100%);color:#fff}
+#loadTop{border:1px solid rgba(255,255,255,.2)!important}
+.progress{height:10px;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.12)}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#ffffff 0%,#cfe0ff 100%)}
+.stat{font-size:14px;margin:10px 0 8px;font-weight:700}
+.sticky{position:sticky;top:0;background:transparent;padding:6px 0;z-index:2}
+nav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0}
+nav button{width:100%;padding:14px 8px;font-weight:800;border:1px solid #d9e4fb;background:rgba(255,255,255,.78);color:var(--muted);touch-action:manipulation;-webkit-tap-highlight-color:transparent;box-shadow:0 10px 24px rgba(25,51,143,.08)}
+nav button.active{background:linear-gradient(180deg,#2f5be8 0%,#244bd0 100%);color:#fff;border-color:#244bd0}
+section{scroll-margin-top:85px;position:relative}
+section:before{content:"";position:absolute;left:0;top:0;width:100%;height:5px;border-radius:24px 24px 0 0;background:linear-gradient(90deg,#2f5be8 0%,#75a2ff 100%)}
+.item{display:flex;align-items:flex-start;gap:12px;border-bottom:1px solid #e7eefb;padding:13px 0}.item:last-child{border-bottom:none}
+.item input{min-width:24px;width:24px;height:24px;margin:2px 0 0;accent-color:var(--blue)}
+.item label{flex:1;line-height:1.38}.item small{display:block;font-size:13px;line-height:1.48;color:var(--muted);margin-top:4px}
+input:checked+label strong{text-decoration:line-through;color:#7a8daa}
+input[type="number"],textarea,.add-editor input[type=text]{width:100%;padding:12px 13px;font:inherit;font-size:16px;border:1px solid #c9d7f0;border-radius:14px;background:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
+textarea{height:92px;resize:vertical}
+input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{outline:2px solid rgba(47,91,232,.22);border-color:#8aa8f8}
+.item.exercise{align-items:flex-start;flex-wrap:wrap;gap:10px}.item.exercise>label{min-width:0;flex:1}
+.exercise-values{display:flex;flex:1 1 100%;justify-content:flex-end;flex-wrap:wrap;gap:8px;padding-left:32px}
+.exercise-values .value-field{display:flex;flex-direction:column;gap:5px;align-items:center;width:58px}
+.exercise-values .value-field>span{font-size:11px;color:var(--muted);font-weight:800;white-space:nowrap}
+.exercise-values input[type="number"]{min-width:0;width:58px;height:43px;padding:6px 4px;text-align:center;font-size:15px;border:1px solid #bfd0ef;border-radius:12px;background:#fbfdff}
+.exercise-values .weight-field,.exercise-values .weight-field input[type="number"]{width:66px}
+.boxing-round{display:block;margin:7px 0;line-height:1.55}.boxing-round b{color:var(--blue-dark)}
+.custom-block{margin-top:18px;padding-top:14px;border-top:1px solid #dce6f8}
+.custom-list .item{flex-wrap:wrap}
+.add-toggle{width:100%;font-weight:800;border-style:dashed;background:#f5f8ff;color:var(--blue-dark);border:2px dashed #bfd0ef;box-shadow:none}
+.add-editor{padding:14px;margin-top:12px;border:1px solid #d7e2f5;border-radius:18px;background:#f8fbff;box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
+.add-editor[hidden],button[hidden]{display:none !important}
+.edit-label{display:block;margin:10px 0 5px;font-weight:700;font-size:14px;color:var(--blue-dark)}
+.opt-toggle{display:flex;align-items:center;gap:9px;margin-top:12px;font-size:14px}.opt-toggle input{width:20px;height:20px}
+.remove-custom{min-height:34px;padding:6px 10px;font-size:12px;flex:0 0 auto;background:#eef3ff;color:#3552a6;box-shadow:none}
+.add-feedback{font-size:13px;margin-top:7px;color:#37539c;font-weight:600}
+.foot{font-size:13px;line-height:1.6;color:#455979;background:linear-gradient(180deg,#ffffff 0%,#f7faff 100%)}
+.print-note{display:none}
+#manualPanel{border:1px solid #d7e2f5!important;border-radius:18px!important;background:#f8fbff!important}
+#manualHelp{color:var(--blue-dark)}
+#saveState{font-weight:600}
+@media(max-width:720px){
+  body{padding:12px}
+  header,section,.foot{padding:18px;border-radius:20px}
+  .hero-grid{grid-template-columns:1fr;gap:12px}
+}
+@media(max-width:520px){
+  h1{font-size:27px}
+  .hero-top{align-items:flex-start}
+  .hero-logo{width:54px;height:54px;min-width:54px;border-radius:16px}
+  nav{gap:7px}
+  .exercise-values{padding-left:0;justify-content:space-between;gap:4px}
+  .exercise-values .value-field,.exercise-values input[type="number"]{width:49px}
+  .exercise-values .weight-field,.exercise-values .weight-field input[type="number"]{width:54px}
+  .exercise-values .value-field>span{font-size:10px}
+  .custom-list .item.exercise>label{flex-basis:100%}
+}
+@page{size:A4;margin:13mm}
+@media print{
+  body{background:white!important;padding:0;font-size:10pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .wrap{max-width:none} header,section{border:0;border-radius:0;padding:0;margin:0 0 12mm;box-shadow:none;background:white!important}
+  .sticky,.buttons,.foot,.custom-block .add-toggle,.custom-block .add-editor,.remove-custom,#manualPanel,#saveState,.progress,.stat,.eyebrow,.hero-tags,.hero-logo{display:none!important}
+  .training-day,.training-day:not(.day-active){display:block!important}
+  section{break-inside:auto;page-break-before:always;scroll-margin:0}
+  section#montag{page-break-before:auto}
+  section:before{display:none}
+  .item{break-inside:avoid;padding:6px 0;gap:8px}
+  .item input[type=checkbox]{width:16px;min-width:16px;height:16px}
+  .exercise-values input[type=number]{height:25px;width:43px;font-size:11px;padding:1px}
+  .exercise-values .value-field{width:43px}
+  textarea[name]{display:none!important}
+  .print-note{display:block;white-space:pre-wrap;overflow-wrap:anywhere;min-height:18px;border:1px solid #ddd;padding:7px}
+  .boxing-round{margin:2px 0}
+  h1{font-size:19pt;color:#000}h2{font-size:15pt}h3{font-size:12pt}
+}
+
+</style></head><body><div class="wrap"><header>
+  <div class="hero-top">
+    <div class="hero-logo">TS</div>
+    <div class="hero-copy">
+      <div class="eyebrow">IMESO Blue Edition</div>
+      <h1>Hallo Thomas!</h1>
+      <div class="subtitle" style="font-weight:700;margin:4px 0 0">Dein persönlicher Trainingsplan</div>
+    </div>
+  </div>
+  <div class="hero-panel">
+    <p class="muted" style="margin:0">Bei jeder Kraftübung: 3 Sätze. Trage das Trainingsgewicht für Satz 1, 2 und 3 jeweils getrennt in kg ein.</p>
+    <div class="hero-grid">
+      <div class="panel-card">
+        <label for="bodyWeight">Aktuelles Gewicht in kg</label>
+        <input id="bodyWeight" inputmode="decimal" max="350" min="20" name="bodyWeight" placeholder="z. B. 85,0" step="0.1" type="number"/>
+        <p class="muted" style="margin:8px 0 0">Das Gewicht wird automatisch gespeichert und bei Sicherungen mit übernommen.</p>
+      </div>
+      <div class="panel-card">
+        <div class="goal-ring">
+          <div class="goal-number">80</div>
+          <div class="goal-text"><strong>Zielgewicht</strong><br/>Fokus: Muskelaufbau, Routine und sauberer Wochenfortschritt.</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-tags">
+      <span class="hero-tag">Montag · Aufbau</span>
+      <span class="hero-tag">Mittwoch · Beine & Rumpf</span>
+      <span class="hero-tag">Freitag · Ganzkörper & Boxen</span>
+    </div>
+    <div class="buttons header-actions" style="margin-top:16px">
+      <button id="installApp" type="button" hidden>App installieren</button>
+      <button id="exportJsonTop" type="button">Datensicherung herunterladen (JSON)</button>
+      <button class="pdf-export" type="button">PDF erstellen und teilen</button>
+      <button id="loadTop" type="button">Sicherungscode laden</button>
+    </div>
+    <p id="app-status" class="muted" role="status" style="margin:14px 0 0">Offline-fähig nach dem ersten Laden über HTTPS.</p>
+    <p class="stat" id="status">Häkchen pro Trainingstag setzen</p>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <p class="muted" style="margin-top:12px">Als installierte App speichert die Trainingscheckliste automatisch auf diesem Gerät. Erstelle zusätzlich regelmäßig eine JSON-Sicherung, insbesondere vor einem Gerätewechsel oder dem Löschen von Website-Daten.</p>
+  </div>
+</header><div class="sticky"><nav aria-label="Trainingstag auswählen"><button aria-pressed="true" class="day-button active" data-open-day="montag" type="button">Montag</button><button aria-pressed="false" class="day-button" data-open-day="mittwoch" type="button">Mittwoch</button><button aria-pressed="false" class="day-button" data-open-day="freitag" type="button">Freitag</button></nav></div><form id="trainingsform"><section id="montag"><h2>Montag · ca. 90 Minuten</h2><div class="subtitle">Oberkörperbetontes Ganzkörpertraining + Boxtechnik</div><div class="item"><input data-check="1" id="montag_0" name="montag_0" type="checkbox"/><label for="montag_0"><strong>Aufwärmen</strong><small>5 Minuten zügiges Gehen, 3 Minuten Mobilität; vor der ersten schweren Übung 1–2 leichte Aufwärmsätze.</small></label></div><div class="item exercise"><input data-check="1" id="montag_1" name="montag_1" type="checkbox"/><label for="montag_1"><strong>Brustpresse · 3 × 8–12 · Pause 120 s</strong><small>Griffe auf Brusthöhe; Schulterblätter stabil; kontrolliert drücken und zurückführen.</small></label><div aria-label="Ergebnis für Brustpresse" class="exercise-values"><label class="value-field" for="done_sets_montag_1"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_montag_1" inputmode="numeric" max="30" min="0" name="done_sets_montag_1" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_montag_1"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_montag_1" inputmode="numeric" max="100" min="0" name="done_reps_montag_1" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_montag_1"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_montag_1" inputmode="decimal" max="1000" min="0" name="weight_set1_montag_1" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_montag_1"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_montag_1" inputmode="decimal" max="1000" min="0" name="weight_set2_montag_1" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_montag_1"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_montag_1" inputmode="decimal" max="1000" min="0" name="weight_set3_montag_1" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="montag_2" name="montag_2" type="checkbox"/><label for="montag_2"><strong>Latzug zur Brust · 3 × 8–12 · Pause 120 s</strong><small>Stange zur oberen Brust ziehen; Ellenbogen nach unten führen; kein Schwung.</small></label><div aria-label="Ergebnis für Latzug zur Brust" class="exercise-values"><label class="value-field" for="done_sets_montag_2"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_montag_2" inputmode="numeric" max="30" min="0" name="done_sets_montag_2" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_montag_2"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_montag_2" inputmode="numeric" max="100" min="0" name="done_reps_montag_2" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_montag_2"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_montag_2" inputmode="decimal" max="1000" min="0" name="weight_set1_montag_2" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_montag_2"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_montag_2" inputmode="decimal" max="1000" min="0" name="weight_set2_montag_2" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_montag_2"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_montag_2" inputmode="decimal" max="1000" min="0" name="weight_set3_montag_2" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="montag_3" name="montag_3" type="checkbox"/><label for="montag_3"><strong>Sitzendes Rudern · 3 × 8–12 · Pause 90 s</strong><small>Neutraler Rücken; Griff zum Oberbauch ziehen; kontrolliert zurückführen.</small></label><div aria-label="Ergebnis für Sitzendes Rudern" class="exercise-values"><label class="value-field" for="done_sets_montag_3"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_montag_3" inputmode="numeric" max="30" min="0" name="done_sets_montag_3" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_montag_3"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_montag_3" inputmode="numeric" max="100" min="0" name="done_reps_montag_3" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_montag_3"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_montag_3" inputmode="decimal" max="1000" min="0" name="weight_set1_montag_3" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_montag_3"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_montag_3" inputmode="decimal" max="1000" min="0" name="weight_set2_montag_3" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_montag_3"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_montag_3" inputmode="decimal" max="1000" min="0" name="weight_set3_montag_3" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="montag_4" name="montag_4" type="checkbox"/><label for="montag_4"><strong>Beinpresse · 3 × 10–12 · Pause 120 s</strong><small>Füße schulterbreit; Knie folgen den Zehen; Becken bleibt auf der Lehne.</small></label><div aria-label="Ergebnis für Beinpresse" class="exercise-values"><label class="value-field" for="done_sets_montag_4"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_montag_4" inputmode="numeric" max="30" min="0" name="done_sets_montag_4" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_montag_4"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_montag_4" inputmode="numeric" max="100" min="0" name="done_reps_montag_4" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_montag_4"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_montag_4" inputmode="decimal" max="1000" min="0" name="weight_set1_montag_4" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_montag_4"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_montag_4" inputmode="decimal" max="1000" min="0" name="weight_set2_montag_4" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_montag_4"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_montag_4" inputmode="decimal" max="1000" min="0" name="weight_set3_montag_4" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="montag_5" name="montag_5" type="checkbox"/><label for="montag_5"><strong>Seitheben · 3 × 12–15 · Pause 75 s</strong><small>Leicht gebeugte Arme bis Schulterhöhe heben; ohne Schwung absenken.</small></label><div aria-label="Ergebnis für Seitheben" class="exercise-values"><label class="value-field" for="done_sets_montag_5"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_montag_5" inputmode="numeric" max="30" min="0" name="done_sets_montag_5" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_montag_5"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_montag_5" inputmode="numeric" max="100" min="0" name="done_reps_montag_5" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_montag_5"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_montag_5" inputmode="decimal" max="1000" min="0" name="weight_set1_montag_5" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_montag_5"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_montag_5" inputmode="decimal" max="1000" min="0" name="weight_set2_montag_5" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_montag_5"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_montag_5" inputmode="decimal" max="1000" min="0" name="weight_set3_montag_5" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="montag_6" name="montag_6" type="checkbox"/><label for="montag_6"><strong>Trizepsdrücken am Kabel · 3 × 10–15 · Pause 60 s</strong><small>Ellenbogen am Oberkörper halten; Unterarme strecken und langsam beugen.</small></label><div aria-label="Ergebnis für Trizepsdrücken am Kabel" class="exercise-values"><label class="value-field" for="done_sets_montag_6"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_montag_6" inputmode="numeric" max="30" min="0" name="done_sets_montag_6" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_montag_6"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_montag_6" inputmode="numeric" max="100" min="0" name="done_reps_montag_6" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_montag_6"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_montag_6" inputmode="decimal" max="1000" min="0" name="weight_set1_montag_6" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_montag_6"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_montag_6" inputmode="decimal" max="1000" min="0" name="weight_set2_montag_6" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_montag_6"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_montag_6" inputmode="decimal" max="1000" min="0" name="weight_set3_montag_6" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="montag_7" name="montag_7" type="checkbox"/><label for="montag_7"><strong>Bizepscurls · 3 × 10–15 · Pause 60 s</strong><small>Oberarme ruhig halten; Hanteln anheben und langsam absenken.</small></label><div aria-label="Ergebnis für Bizepscurls" class="exercise-values"><label class="value-field" for="done_sets_montag_7"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_montag_7" inputmode="numeric" max="30" min="0" name="done_sets_montag_7" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_montag_7"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_montag_7" inputmode="numeric" max="100" min="0" name="done_reps_montag_7" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_montag_7"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_montag_7" inputmode="decimal" max="1000" min="0" name="weight_set1_montag_7" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_montag_7"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_montag_7" inputmode="decimal" max="1000" min="0" name="weight_set2_montag_7" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_montag_7"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_montag_7" inputmode="decimal" max="1000" min="0" name="weight_set3_montag_7" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item"><input data-check="1" id="montag_8" name="montag_8" type="checkbox"/><label for="montag_8"><strong>Boxsacktraining</strong><small><span class="boxing-round"><b>Runde 1 – 2 Minuten</b> – Jab üben: Abstand zum Boxsack halten und nach jedem Schlag die Deckung wiederherstellen.</span><span class="boxing-round"><b>Pause – 1 Minute</b> – Locker bewegen und ruhig atmen.</span><span class="boxing-round"><b>Runde 2 – 2 Minuten</b> – Jab und Cross abwechselnd schlagen. Handgelenke gerade halten und Hüfte kontrolliert mitdrehen.</span><span class="boxing-round"><b>Pause – 1 Minute</b> – Arme lockern und erholen.</span><span class="boxing-round"><b>Runde 3 – 2 Minuten</b> – Jab-Cross-Kombinationen schlagen und anschließend seitlich ausweichen.</span><span class="boxing-round"><b>Pause – 1 Minute</b> – Locker bewegen und gleichmäßig atmen.</span><span class="boxing-round"><b>Runde 4 – 2 Minuten</b> – Freie Kombinationen in kontrolliertem Tempo. Saubere Technik geht vor Schlagkraft.</span><span class="boxing-round"><b>Abschluss – 1 Minute</b> – Lockeres Schattenboxen und ausschütteln.</span></small></label></div><p class="muted"><b>Abschluss:</b> 5 Minuten lockeres Gehen.</p><h3>Gewichte und Trainingsnotizen</h3><textarea id="note_montag" name="note_montag" placeholder="Gewicht und Wiederholungen notieren"></textarea><div class="custom-block" data-day="montag"><div class="custom-list" id="custom-list-montag"></div>
+<button aria-expanded="false" class="add-toggle" data-day="montag" type="button">+ Übung hinzufügen</button>
+<div class="add-editor" hidden="" id="add-editor-montag">
+<label class="edit-label" for="new-title-montag">Name der Übung</label>
+<input id="new-title-montag" maxlength="120" placeholder="z. B. Planks oder Dehnen" type="text"/>
+<label class="edit-label" for="new-description-montag">Beschreibung (optional)</label>
+<textarea id="new-description-montag" placeholder="Dauer, Ausführung oder eigene Notiz" rows="2"></textarea>
+<label class="opt-toggle"><input id="new-with-values-montag" type="checkbox"/> Felder für Sätze und Wdh. anzeigen</label>
+<div class="buttons" style="margin-top:10px"><button class="add-confirm" data-day="montag" type="button">Übung hinzufügen</button><button class="add-cancel" data-day="montag" type="button">Abbrechen</button></div>
+<div class="add-feedback" id="add-feedback-montag" role="status"></div>
+</div></div></section><section id="mittwoch"><h2>Mittwoch · ca. 80 Minuten</h2><div class="subtitle">Beine, Rumpf und ergänzender Oberkörper</div><div class="item"><input data-check="1" id="mittwoch_0" name="mittwoch_0" type="checkbox"/><label for="mittwoch_0"><strong>Aufwärmen</strong><small>5 Minuten Fahrrad, 3 Minuten Hüft-, Knie- und Sprunggelenkmobilisation; leichte Aufwärmsätze vor der Beinpresse.</small></label></div><div class="item exercise"><input data-check="1" id="mittwoch_1" name="mittwoch_1" type="checkbox"/><label for="mittwoch_1"><strong>Beinpresse · 3 × 8–12 · Pause 120–180 s</strong><small>Kontrolliert tief führen, solange Rücken und Becken stabil bleiben; Knie entlang der Fußrichtung.</small></label><div aria-label="Ergebnis für Beinpresse" class="exercise-values"><label class="value-field" for="done_sets_mittwoch_1"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_mittwoch_1" inputmode="numeric" max="30" min="0" name="done_sets_mittwoch_1" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_mittwoch_1"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_mittwoch_1" inputmode="numeric" max="100" min="0" name="done_reps_mittwoch_1" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_mittwoch_1"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_mittwoch_1" inputmode="decimal" max="1000" min="0" name="weight_set1_mittwoch_1" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_mittwoch_1"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_mittwoch_1" inputmode="decimal" max="1000" min="0" name="weight_set2_mittwoch_1" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_mittwoch_1"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_mittwoch_1" inputmode="decimal" max="1000" min="0" name="weight_set3_mittwoch_1" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="mittwoch_2" name="mittwoch_2" type="checkbox"/><label for="mittwoch_2"><strong>Beinbeuger sitzend · 3 × 10–12 · Pause 90 s</strong><small>Polster mit den Unterschenkeln bewegen; Oberschenkel bleiben fixiert.</small></label><div aria-label="Ergebnis für Beinbeuger sitzend" class="exercise-values"><label class="value-field" for="done_sets_mittwoch_2"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_mittwoch_2" inputmode="numeric" max="30" min="0" name="done_sets_mittwoch_2" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_mittwoch_2"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_mittwoch_2" inputmode="numeric" max="100" min="0" name="done_reps_mittwoch_2" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_mittwoch_2"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_mittwoch_2" inputmode="decimal" max="1000" min="0" name="weight_set1_mittwoch_2" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_mittwoch_2"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_mittwoch_2" inputmode="decimal" max="1000" min="0" name="weight_set2_mittwoch_2" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_mittwoch_2"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_mittwoch_2" inputmode="decimal" max="1000" min="0" name="weight_set3_mittwoch_2" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="mittwoch_3" name="mittwoch_3" type="checkbox"/><label for="mittwoch_3"><strong>Beinstrecker · 3 × 12–15 · Pause 75 s</strong><small>Beine ohne Ruck strecken und kontrolliert beugen.</small></label><div aria-label="Ergebnis für Beinstrecker" class="exercise-values"><label class="value-field" for="done_sets_mittwoch_3"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_mittwoch_3" inputmode="numeric" max="30" min="0" name="done_sets_mittwoch_3" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_mittwoch_3"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_mittwoch_3" inputmode="numeric" max="100" min="0" name="done_reps_mittwoch_3" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_mittwoch_3"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_mittwoch_3" inputmode="decimal" max="1000" min="0" name="weight_set1_mittwoch_3" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_mittwoch_3"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_mittwoch_3" inputmode="decimal" max="1000" min="0" name="weight_set2_mittwoch_3" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_mittwoch_3"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_mittwoch_3" inputmode="decimal" max="1000" min="0" name="weight_set3_mittwoch_3" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="mittwoch_4" name="mittwoch_4" type="checkbox"/><label for="mittwoch_4"><strong>Wadenheben · 3 × 12–15 · Pause 60 s</strong><small>Fersen langsam senken, über den Fußballen hochdrücken; nicht federn.</small></label><div aria-label="Ergebnis für Wadenheben" class="exercise-values"><label class="value-field" for="done_sets_mittwoch_4"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_mittwoch_4" inputmode="numeric" max="30" min="0" name="done_sets_mittwoch_4" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_mittwoch_4"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_mittwoch_4" inputmode="numeric" max="100" min="0" name="done_reps_mittwoch_4" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_mittwoch_4"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_mittwoch_4" inputmode="decimal" max="1000" min="0" name="weight_set1_mittwoch_4" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_mittwoch_4"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_mittwoch_4" inputmode="decimal" max="1000" min="0" name="weight_set2_mittwoch_4" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_mittwoch_4"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_mittwoch_4" inputmode="decimal" max="1000" min="0" name="weight_set3_mittwoch_4" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="mittwoch_5" name="mittwoch_5" type="checkbox"/><label for="mittwoch_5"><strong>Schrägbank-Brustpresse · 3 × 8–12 · Pause 120 s</strong><small>Schulterblätter stabil; Griffe nach vorn/oben drücken; langsam absenken.</small></label><div aria-label="Ergebnis für Schrägbank-Brustpresse" class="exercise-values"><label class="value-field" for="done_sets_mittwoch_5"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_mittwoch_5" inputmode="numeric" max="30" min="0" name="done_sets_mittwoch_5" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_mittwoch_5"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_mittwoch_5" inputmode="numeric" max="100" min="0" name="done_reps_mittwoch_5" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_mittwoch_5"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_mittwoch_5" inputmode="decimal" max="1000" min="0" name="weight_set1_mittwoch_5" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_mittwoch_5"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_mittwoch_5" inputmode="decimal" max="1000" min="0" name="weight_set2_mittwoch_5" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_mittwoch_5"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_mittwoch_5" inputmode="decimal" max="1000" min="0" name="weight_set3_mittwoch_5" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="mittwoch_6" name="mittwoch_6" type="checkbox"/><label for="mittwoch_6"><strong>Unterstützte Klimmzüge · 3 × 8–12 · Pause 90 s</strong><small>Ellenbogen nach unten ziehen; kontrolliert ablassen. Alternative: Latzug.</small></label><div aria-label="Ergebnis für Unterstützte Klimmzüge" class="exercise-values"><label class="value-field" for="done_sets_mittwoch_6"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_mittwoch_6" inputmode="numeric" max="30" min="0" name="done_sets_mittwoch_6" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_mittwoch_6"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_mittwoch_6" inputmode="numeric" max="100" min="0" name="done_reps_mittwoch_6" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_mittwoch_6"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_mittwoch_6" inputmode="decimal" max="1000" min="0" name="weight_set1_mittwoch_6" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_mittwoch_6"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_mittwoch_6" inputmode="decimal" max="1000" min="0" name="weight_set2_mittwoch_6" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_mittwoch_6"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_mittwoch_6" inputmode="decimal" max="1000" min="0" name="weight_set3_mittwoch_6" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="mittwoch_7" name="mittwoch_7" type="checkbox"/><label for="mittwoch_7"><strong>Crunches am Kabel · 3 × 12–15 · Pause 60 s</strong><small>Brustkorb in Richtung Becken einrollen; nicht mit den Armen reißen.</small></label><div aria-label="Ergebnis für Crunches am Kabel" class="exercise-values"><label class="value-field" for="done_sets_mittwoch_7"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_mittwoch_7" inputmode="numeric" max="30" min="0" name="done_sets_mittwoch_7" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_mittwoch_7"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_mittwoch_7" inputmode="numeric" max="100" min="0" name="done_reps_mittwoch_7" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_mittwoch_7"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_mittwoch_7" inputmode="decimal" max="1000" min="0" name="weight_set1_mittwoch_7" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_mittwoch_7"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_mittwoch_7" inputmode="decimal" max="1000" min="0" name="weight_set2_mittwoch_7" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_mittwoch_7"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_mittwoch_7" inputmode="decimal" max="1000" min="0" name="weight_set3_mittwoch_7" placeholder="–" step="0.5" type="number"/></label></div></div><p class="muted"><b>Abschluss:</b> 5–7 Minuten lockeres Radfahren oder Gehen; kein intensiver Boxsack.</p><h3>Gewichte und Trainingsnotizen</h3><textarea id="note_mittwoch" name="note_mittwoch" placeholder="Gewicht und Wiederholungen notieren"></textarea><div class="custom-block" data-day="mittwoch"><div class="custom-list" id="custom-list-mittwoch"></div>
+<button aria-expanded="false" class="add-toggle" data-day="mittwoch" type="button">+ Übung hinzufügen</button>
+<div class="add-editor" hidden="" id="add-editor-mittwoch">
+<label class="edit-label" for="new-title-mittwoch">Name der Übung</label>
+<input id="new-title-mittwoch" maxlength="120" placeholder="z. B. Planks oder Dehnen" type="text"/>
+<label class="edit-label" for="new-description-mittwoch">Beschreibung (optional)</label>
+<textarea id="new-description-mittwoch" placeholder="Dauer, Ausführung oder eigene Notiz" rows="2"></textarea>
+<label class="opt-toggle"><input id="new-with-values-mittwoch" type="checkbox"/> Felder für Sätze und Wdh. anzeigen</label>
+<div class="buttons" style="margin-top:10px"><button class="add-confirm" data-day="mittwoch" type="button">Übung hinzufügen</button><button class="add-cancel" data-day="mittwoch" type="button">Abbrechen</button></div>
+<div class="add-feedback" id="add-feedback-mittwoch" role="status"></div>
+</div></div></section><section id="freitag"><h2>Freitag · ca. 95 Minuten</h2><div class="subtitle">Ganzkörpertraining + intensivere Boxintervalle</div><div class="item"><input data-check="1" id="freitag_0" name="freitag_0" type="checkbox"/><label for="freitag_0"><strong>Aufwärmen</strong><small>5 Minuten Crosstrainer, 3 Minuten Mobilität; 1–2 leichte Aufwärmsätze.</small></label></div><div class="item exercise"><input data-check="1" id="freitag_1" name="freitag_1" type="checkbox"/><label for="freitag_1"><strong>Schrägbankdrücken mit Kurzhanteln · 3 × 8–12 · Pause 120 s</strong><small>Bank ca. 15–30°; kontrolliert zur oberen Brust absenken; gleichmäßig hochdrücken.</small></label><div aria-label="Ergebnis für Schrägbankdrücken mit Kurzhanteln" class="exercise-values"><label class="value-field" for="done_sets_freitag_1"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_freitag_1" inputmode="numeric" max="30" min="0" name="done_sets_freitag_1" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_freitag_1"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_freitag_1" inputmode="numeric" max="100" min="0" name="done_reps_freitag_1" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_freitag_1"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_freitag_1" inputmode="decimal" max="1000" min="0" name="weight_set1_freitag_1" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_freitag_1"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_freitag_1" inputmode="decimal" max="1000" min="0" name="weight_set2_freitag_1" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_freitag_1"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_freitag_1" inputmode="decimal" max="1000" min="0" name="weight_set3_freitag_1" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="freitag_2" name="freitag_2" type="checkbox"/><label for="freitag_2"><strong>Rudermaschine mit Brustauflage · 3 × 8–12 · Pause 120 s</strong><small>Brust bleibt auf dem Polster; Ellenbogen nach hinten; ohne Schwung zurück.</small></label><div aria-label="Ergebnis für Rudermaschine mit Brustauflage" class="exercise-values"><label class="value-field" for="done_sets_freitag_2"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_freitag_2" inputmode="numeric" max="30" min="0" name="done_sets_freitag_2" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_freitag_2"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_freitag_2" inputmode="numeric" max="100" min="0" name="done_reps_freitag_2" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_freitag_2"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_freitag_2" inputmode="decimal" max="1000" min="0" name="weight_set1_freitag_2" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_freitag_2"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_freitag_2" inputmode="decimal" max="1000" min="0" name="weight_set2_freitag_2" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_freitag_2"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_freitag_2" inputmode="decimal" max="1000" min="0" name="weight_set3_freitag_2" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="freitag_3" name="freitag_3" type="checkbox"/><label for="freitag_3"><strong>Rumänisches Kreuzheben mit Kurzhanteln · 3 × 8–10 · Pause 120 s</strong><small>Hüfte nach hinten schieben; Rücken neutral; Hanteln körpernah. Technik einweisen lassen.</small></label><div aria-label="Ergebnis für Rumänisches Kreuzheben mit Kurzhanteln" class="exercise-values"><label class="value-field" for="done_sets_freitag_3"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_freitag_3" inputmode="numeric" max="30" min="0" name="done_sets_freitag_3" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_freitag_3"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_freitag_3" inputmode="numeric" max="100" min="0" name="done_reps_freitag_3" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_freitag_3"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_freitag_3" inputmode="decimal" max="1000" min="0" name="weight_set1_freitag_3" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_freitag_3"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_freitag_3" inputmode="decimal" max="1000" min="0" name="weight_set2_freitag_3" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_freitag_3"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_freitag_3" inputmode="decimal" max="1000" min="0" name="weight_set3_freitag_3" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="freitag_4" name="freitag_4" type="checkbox"/><label for="freitag_4"><strong>Schulterpresse · 3 × 8–12 · Pause 90 s</strong><small>Rücken an der Lehne; Griffe über Kopf drücken; nicht ins Hohlkreuz.</small></label><div aria-label="Ergebnis für Schulterpresse" class="exercise-values"><label class="value-field" for="done_sets_freitag_4"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_freitag_4" inputmode="numeric" max="30" min="0" name="done_sets_freitag_4" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_freitag_4"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_freitag_4" inputmode="numeric" max="100" min="0" name="done_reps_freitag_4" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_freitag_4"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_freitag_4" inputmode="decimal" max="1000" min="0" name="weight_set1_freitag_4" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_freitag_4"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_freitag_4" inputmode="decimal" max="1000" min="0" name="weight_set2_freitag_4" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_freitag_4"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_freitag_4" inputmode="decimal" max="1000" min="0" name="weight_set3_freitag_4" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="freitag_5" name="freitag_5" type="checkbox"/><label for="freitag_5"><strong>Reverse Butterfly · 3 × 12–15 · Pause 75 s</strong><small>Arme nach außen/hinten führen; Schultergürtel ruhig halten.</small></label><div aria-label="Ergebnis für Reverse Butterfly" class="exercise-values"><label class="value-field" for="done_sets_freitag_5"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_freitag_5" inputmode="numeric" max="30" min="0" name="done_sets_freitag_5" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_freitag_5"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_freitag_5" inputmode="numeric" max="100" min="0" name="done_reps_freitag_5" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_freitag_5"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_freitag_5" inputmode="decimal" max="1000" min="0" name="weight_set1_freitag_5" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_freitag_5"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_freitag_5" inputmode="decimal" max="1000" min="0" name="weight_set2_freitag_5" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_freitag_5"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_freitag_5" inputmode="decimal" max="1000" min="0" name="weight_set3_freitag_5" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="freitag_6" name="freitag_6" type="checkbox"/><label for="freitag_6"><strong>Bizepscurls am Kabel · 3 × 10–15 · Pause 60 s</strong><small>Oberarme still; kontrolliert beugen und strecken.</small></label><div aria-label="Ergebnis für Bizepscurls am Kabel" class="exercise-values"><label class="value-field" for="done_sets_freitag_6"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_freitag_6" inputmode="numeric" max="30" min="0" name="done_sets_freitag_6" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_freitag_6"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_freitag_6" inputmode="numeric" max="100" min="0" name="done_reps_freitag_6" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_freitag_6"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_freitag_6" inputmode="decimal" max="1000" min="0" name="weight_set1_freitag_6" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_freitag_6"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_freitag_6" inputmode="decimal" max="1000" min="0" name="weight_set2_freitag_6" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_freitag_6"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_freitag_6" inputmode="decimal" max="1000" min="0" name="weight_set3_freitag_6" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item exercise"><input data-check="1" id="freitag_7" name="freitag_7" type="checkbox"/><label for="freitag_7"><strong>Trizepsdrücken am Seil · 3 × 10–15 · Pause 60 s</strong><small>Ellenbogen dicht am Körper; nach unten drücken, langsam zurück.</small></label><div aria-label="Ergebnis für Trizepsdrücken am Seil" class="exercise-values"><label class="value-field" for="done_sets_freitag_7"><span>Sätze</span><input aria-label="Tatsächliche Sätze" data-result="1" id="done_sets_freitag_7" inputmode="numeric" max="30" min="0" name="done_sets_freitag_7" placeholder="–" step="1" type="number"/></label><label class="value-field" for="done_reps_freitag_7"><span>Wdh.</span><input aria-label="Tatsächliche Wiederholungen" data-result="1" id="done_reps_freitag_7" inputmode="numeric" max="100" min="0" name="done_reps_freitag_7" placeholder="–" step="1" type="number"/></label><label class="value-field weight-field" for="weight_set1_freitag_7"><span>1. kg</span><input aria-label="Gewicht Satz 1 in kg" data-result="1" id="weight_set1_freitag_7" inputmode="decimal" max="1000" min="0" name="weight_set1_freitag_7" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set2_freitag_7"><span>2. kg</span><input aria-label="Gewicht Satz 2 in kg" data-result="1" id="weight_set2_freitag_7" inputmode="decimal" max="1000" min="0" name="weight_set2_freitag_7" placeholder="–" step="0.5" type="number"/></label><label class="value-field weight-field" for="weight_set3_freitag_7"><span>3. kg</span><input aria-label="Gewicht Satz 3 in kg" data-result="1" id="weight_set3_freitag_7" inputmode="decimal" max="1000" min="0" name="weight_set3_freitag_7" placeholder="–" step="0.5" type="number"/></label></div></div><div class="item"><input data-check="1" id="freitag_8" name="freitag_8" type="checkbox"/><label for="freitag_8"><strong>Boxsacktraining</strong><small><span class="boxing-round"><b>Runde 1 – 3 Minuten</b> – Jab und Cross in gleichmäßigem Rhythmus; auf Deckung und Fußstellung achten.</span><span class="boxing-round"><b>Pause – 1 Minute</b> – Locker gehen und gleichmäßig atmen.</span><span class="boxing-round"><b>Runde 2 – 3 Minuten</b> – Zwei- und Dreierkombinationen mit kontrollierter Beinarbeit.</span><span class="boxing-round"><b>Pause – 1 Minute</b> – Arme ausschütteln und erholen.</span><span class="boxing-round"><b>Runde 3 – 3 Minuten</b> – Dreimal abwechseln: 20 Sekunden schneller schlagen und 40 Sekunden locker arbeiten.</span><span class="boxing-round"><b>Pause – 1 Minute</b> – Ruhig atmen und bewegen.</span><span class="boxing-round"><b>Runde 4 – 3 Minuten</b> – Technisch saubere Kombinationen mit seitlichen Schritten und anschließendem Zurückkehren in die Deckung.</span><span class="boxing-round"><b>Abschluss – 2 Minuten</b> – Lockeres Schattenboxen zum Herunterfahren.</span></small></label></div><p class="muted"><b>Abschluss:</b> 5–10 Minuten lockeres Gehen.</p><h3>Gewichte und Trainingsnotizen</h3><textarea id="note_freitag" name="note_freitag" placeholder="Gewicht und Wiederholungen notieren"></textarea><div class="custom-block" data-day="freitag"><div class="custom-list" id="custom-list-freitag"></div>
+<button aria-expanded="false" class="add-toggle" data-day="freitag" type="button">+ Übung hinzufügen</button>
+<div class="add-editor" hidden="" id="add-editor-freitag">
+<label class="edit-label" for="new-title-freitag">Name der Übung</label>
+<input id="new-title-freitag" maxlength="120" placeholder="z. B. Planks oder Dehnen" type="text"/>
+<label class="edit-label" for="new-description-freitag">Beschreibung (optional)</label>
+<textarea id="new-description-freitag" placeholder="Dauer, Ausführung oder eigene Notiz" rows="2"></textarea>
+<label class="opt-toggle"><input id="new-with-values-freitag" type="checkbox"/> Felder für Sätze und Wdh. anzeigen</label>
+<div class="buttons" style="margin-top:10px"><button class="add-confirm" data-day="freitag" type="button">Übung hinzufügen</button><button class="add-cancel" data-day="freitag" type="button">Abbrechen</button></div>
+<div class="add-feedback" id="add-feedback-freitag" role="status"></div>
+</div></div></section><div class="foot"><div class="buttons" style="margin-bottom:14px"><button class="pdf-export" type="button">PDF erstellen und teilen</button></div><p><b>Zurücksetzen</b></p><div class="buttons"><button id="resetAll" type="button">Ganze Woche zurücksetzen</button><button hidden="hidden" id="undoReset" type="button">Zurücksetzen wiederherstellen</button><button id="manualSave" type="button">Stand sichern</button><button hidden="" id="manualLoad" type="button">Stand laden</button><button id="backup" type="button">JSON-Sicherung herunterladen</button><button id="restore" type="button">JSON-Sicherung laden</button><input accept="application/json,.json" hidden="" id="backupFile" type="file"/></div><div id="manualPanel" style="display:none;margin-top:14px;padding:12px;border:1px solid #bdc5ce;border-radius:9px;background:#f8fafc"><p id="manualHelp" style="margin:0 0 8px;font-weight:600"></p><textarea aria-label="Sicherungscode hier einfügen" autocapitalize="off" autocomplete="off" id="manualCode" placeholder="Hier Sicherungscode einfügen" spellcheck="false" style="height:120px;font-size:12px"></textarea><div class="buttons" style="margin-top:8px"><button id="copyCode" type="button">Code kopieren</button><button id="pasteCode" style="display:none" type="button">Code einsetzen</button><button id="applyCode" type="button">Gespeicherten Stand übernehmen</button><button id="closeCode" type="button">Schließen</button></div><p class="muted">WICHTIG: Den Code außerhalb dieser Datei speichern (z. B. in der Notizen-App). Er enthält deine Häkchen und alle Trainingsnotizen. Den vorherigen Code bei jeder neuen Sicherung ersetzen.</p></div><p aria-live="polite" id="pdf-status" class="muted">PDF wird direkt erstellt. Auf dem iPhone über „In Dateien sichern“ speichern.</p><p aria-live="polite" id="saveState">Speicherung wird geprüft.</p><p>Bei „Woche zurücksetzen“ bleiben deine Trainingsnotizen erhalten. Sicherungen umfassen Häkchen, Satz- und Wiederholungswerte sowie Notizen. Auch wenn „automatisch gespeichert“ erscheint: Für dauerhafte Sicherungen eine JSON-Datei exportieren und außerhalb der App aufbewahren.</p></div></form></div><script>
+(function(){
+  'use strict';
+  var KEY='cleverfit_training_v16', OLDKEY='cleverfit_training_v5';
+  var DB_NAME='thomas-training-pwa',DB_STORE='snapshots',db=null,loading=true,queuedSave=null,lastWrite=Promise.resolve();
+  var boxes=Array.prototype.slice.call(document.querySelectorAll('input[data-check]'));
+  var notes=Array.prototype.slice.call(document.querySelectorAll('textarea[name]'));
+  var results=Array.prototype.slice.call(document.querySelectorAll('input[data-result]'));
+  var weight=document.getElementById('bodyWeight'), label=document.getElementById('saveState');
+  var panel=document.getElementById('manualPanel'),code=document.getElementById('manualCode');
+  var available=false,mode='code';
+  var custom={montag:[],mittwoch:[],freitag:[]};
+  var customCounter=0;
+  function getBoxes(){return Array.prototype.slice.call(document.querySelectorAll('input[data-check]'));}
+  function refreshBoxes(){boxes=getBoxes();}
+
+  function openDatabase(){
+    return new Promise(function(resolve){
+      if(!window.indexedDB){resolve(null);return;}
+      try{
+        var request=indexedDB.open(DB_NAME,1);
+        request.onupgradeneeded=function(){var store=request.result;if(!store.objectStoreNames.contains(DB_STORE))store.createObjectStore(DB_STORE);};
+        request.onsuccess=function(){resolve(request.result);};
+        request.onerror=function(){resolve(null);};
+        request.onblocked=function(){resolve(null);};
+      }catch(e){resolve(null);}
+    });
+  }
+  function readDb(){return new Promise(function(resolve){
+    if(!db){resolve(null);return;}
+    try{var txn=db.transaction(DB_STORE,'readonly');var req=txn.objectStore(DB_STORE).get('current');req.onsuccess=function(){resolve(req.result||null);};req.onerror=function(){resolve(null);};}catch(e){resolve(null);}
+  });}
+  function writeDb(snapshot){return new Promise(function(resolve){
+    if(!db){resolve(false);return;}
+    try{var txn=db.transaction(DB_STORE,'readwrite');txn.objectStore(DB_STORE).put(snapshot,'current');txn.oncomplete=function(){resolve(true);};txn.onerror=function(){resolve(false);};txn.onabort=function(){resolve(false);};}catch(e){resolve(false);}
+  });}
+  function backupLocal(snapshot){try{localStorage.setItem(KEY,JSON.stringify(snapshot));return true;}catch(e){return false;}}
+  function persist(snapshot){
+    var localOk=backupLocal(snapshot);
+    lastWrite=lastWrite.then(function(){return writeDb(snapshot);}).then(function(dbOk){
+      label.textContent=dbOk?'Automatisch auf diesem Gerät gespeichert (IndexedDB).':localOk?'Automatisch gespeichert (Browser-Speicher). Bitte JSON-Sicherung exportieren.':'Speicherung fehlgeschlagen. Bitte JSON-Sicherung exportieren.';
+    });
+  }
+  function downloadJson(){
+    var text=JSON.stringify(data(),null,2),blob=new Blob([text],{type:'application/json;charset=utf-8'});
+    var filename='Trainingscheckliste_Thomas_Sicherung_'+new Date().toISOString().slice(0,10)+'.json';
+    var url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},60000);
+    label.textContent='JSON-Sicherung erstellt. Bitte die Datei außerhalb der App aufbewahren.';
+  }
+  document.querySelector('header').appendChild(panel);
+  try{localStorage.setItem('__cf_test','1');localStorage.removeItem('__cf_test');available=true;}catch(e){}
+  function data(){refreshBoxes();var d={version:19,savedAt:Date.now(),checks:{},notes:{},results:{},weight:weight.value,custom:JSON.parse(JSON.stringify(custom))};boxes.forEach(function(b){d.checks[b.name]=b.checked;});notes.forEach(function(n){d.notes[n.name]=n.value;});results.forEach(function(r){d.results[r.name]=r.value;});return d;}
+  function apply(d){if(!d||typeof d!=='object'||!d.checks||!d.notes)throw Error('Ungültige Sicherung');custom=normalizeCustom(d.custom);renderCustom();refreshBoxes();boxes.forEach(function(b){b.checked=!!d.checks[b.name];});notes.forEach(function(n){if(typeof d.notes[n.name]==='string')n.value=d.notes[n.name];});if(d.weight!==undefined&&d.weight!==null)weight.value=String(d.weight);results=Array.prototype.slice.call(document.querySelectorAll('input[data-result]'));results.forEach(function(r){r.value=d.results&&d.results[r.name]!==undefined?String(d.results[r.name]):'';});update();}
+  function update(){refreshBoxes();var n=boxes.filter(function(b){return b.checked;}).length;document.getElementById('status').textContent=n+' von '+boxes.length+' Schritten erledigt';document.getElementById('bar').style.width=(boxes.length?100*n/boxes.length:0)+'%';}
+  function save(){
+    if(loading)return;
+    var snapshot=data();
+    // Immediate synchronous fallback protects entries even if the app is closed quickly.
+    var localOk=backupLocal(snapshot);
+    label.textContent=localOk?'Änderung lokal gespeichert.':'Speichere Änderung...';
+    if(queuedSave)clearTimeout(queuedSave);
+    queuedSave=setTimeout(function(){persist(snapshot);},250);
+  }
+  (async function initializeStorage(){
+    // Parse older browser backups first; IndexedDB takes precedence when present.
+    var snapshot=null;
+    try{var raw=localStorage.getItem(KEY)||localStorage.getItem(OLDKEY);if(raw)snapshot=JSON.parse(raw);}catch(e){}
+    db=await openDatabase();
+    var dbSnapshot=await readDb();
+    if(dbSnapshot && (!snapshot || Number(dbSnapshot.savedAt||0)>=Number(snapshot.savedAt||0)))snapshot=dbSnapshot;
+    if(snapshot){try{apply(snapshot);}catch(e){label.textContent='Ein gespeicherter Stand konnte nicht gelesen werden.';}}
+    loading=false;
+    if(snapshot){backupLocal(snapshot);label.textContent=db?'Trainingsstand aus sicherem Gerätespeicher geladen.':'Trainingsstand aus Browser-Speicher geladen.';}
+    else label.textContent=db?'IndexedDB bereit: Änderungen werden automatisch gespeichert.':'Browser-Speicher bereit. Bitte zusätzlich JSON-Sicherungen erstellen.';
+    if(!snapshot)save();
+  })();
+  document.getElementById('trainingsform').addEventListener('change',function(e){if(e.target.matches('input[data-check]')){update();save();}});notes.forEach(function(n){n.addEventListener('input',save);});document.getElementById('trainingsform').addEventListener('input',function(e){if(e.target.matches('input[data-result]'))save();});weight.addEventListener('input',save);
+  function exportCode(){return 'CF1.'+btoa(unescape(encodeURIComponent(JSON.stringify(data()))));}
+  function importCode(v){var t=v.trim();if(t.slice(0,4)==='CF1.')return JSON.parse(decodeURIComponent(escape(atob(t.slice(4)))));return JSON.parse(t);}
+  function showPanel(help,value,kind){mode=kind;panel.style.display='block';document.getElementById('manualHelp').textContent=help;code.value=value;document.getElementById('applyCode').style.display=kind==='load'?'inline-block':'none';document.getElementById('copyCode').style.display=kind==='load'?'none':'inline-block';document.getElementById('pasteCode').style.display=kind==='load'?'inline-block':'none';panel.scrollIntoView({block:'nearest'});}
+  document.getElementById('manualSave').addEventListener('click',function(){document.querySelector('.foot').appendChild(panel);showPanel('NEUEN Trainingsstand sichern: Unten „Code kopieren“ drücken und den Code in Notizen speichern.',exportCode(),'code');});
+  document.getElementById('manualLoad').addEventListener('click',function(){if(panel.parentNode!==document.querySelector('header'))document.querySelector('.foot').appendChild(panel);showPanel('Sicherungscode aus Notizen kopieren. Dann ins Feld tippen, gedrückt halten und im iPhone-Menü „Einsetzen“ wählen. Der Button „Code einsetzen“ versucht es zusätzlich automatisch, wenn iOS dies erlaubt.','', 'load');});
+  document.getElementById('loadTop').addEventListener('click',function(){var header=document.querySelector('header');header.appendChild(panel);showPanel('VORHANDENEN Trainingsstand laden: Code aus Notizen einfügen und anschließend „Gespeicherten Stand übernehmen“ drücken. Zum Sichern bitte unten „Stand sichern“ verwenden.','', 'load');});
+  document.getElementById('backup').addEventListener('click',downloadJson);document.getElementById('exportJsonTop').addEventListener('click',downloadJson);
+  function selectCode(){code.focus();code.select();code.setSelectionRange(0,code.value.length);}
+  document.getElementById('pasteCode').addEventListener('click',async function(){try{if(!navigator.clipboard||!navigator.clipboard.readText)throw Error('Zwischenablage gesperrt');var t=await navigator.clipboard.readText();if(!t)throw Error('Zwischenablage leer');code.value=t;code.focus();document.getElementById('manualHelp').textContent='Code eingefügt. Jetzt „Gespeicherten Stand übernehmen“ drücken.';}catch(e){code.focus();document.getElementById('manualHelp').textContent='Automatisches Einfügen durch iOS blockiert. Tippe im Eingabefeld etwas länger, bis „Einsetzen“ erscheint. Falls nötig, zweimal auf das Feld tippen.';}});
+  document.getElementById('copyCode').addEventListener('click',function(){
+    // Im Ladefenster den aktuellen Stand kopieren, ohne einen bereits eingefügten Code zu überschreiben.
+    var currentCode=code.value;
+    var originalValue=code.value;
+    
+    selectCode();
+    var copied=false;
+    try{copied=document.execCommand('copy');}catch(e){}
+    
+    if(copied){document.getElementById('manualHelp').textContent='Sicherungscode kopiert. Bitte in Notizen sichern.';return;}
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(currentCode).then(function(){
+        
+        document.getElementById('manualHelp').textContent='Code kopiert. Bitte in Notizen sichern.';
+      }).catch(function(){
+        document.getElementById('manualHelp').textContent='Automatisches Kopieren blockiert. Der Code ist markiert. Bitte im iPhone-Menü „Kopieren“ wählen.';
+      });
+    }else{
+      document.getElementById('manualHelp').textContent='Automatisches Kopieren blockiert. Der Code ist markiert. Bitte im iPhone-Menü „Kopieren“ wählen.';
+    }
+  });
+  document.getElementById('applyCode').addEventListener('click',function(){try{apply(importCode(code.value));save();panel.style.display='none';label.textContent='Trainingsstand wiederhergestellt. Vor dem Schließen einen neuen Sicherungscode erstellen.';}catch(e){label.textContent='Sicherungscode ungültig oder unvollständig. Bitte ganzen Code einfügen.';}});
+  document.getElementById('closeCode').addEventListener('click',function(){panel.style.display='none';});
+  // Reset all checkboxes without altering body weight or training notes.
+  var resetButton=document.getElementById('resetAll');
+  var resetInfo=document.createElement('p');
+  resetInfo.id='resetInfo';
+  resetInfo.setAttribute('role','status');
+  resetInfo.style.cssText='font-size:14px;line-height:1.5;margin:10px 0;color:#243d52;font-weight:600';
+  resetButton.parentNode.insertBefore(resetInfo,resetButton.nextSibling);
+  var beforeReset=null;
+  var undoButton=document.getElementById('undoReset');
+  function resetWholeWeek(){
+    // Snapshot of the complete state before clearing the checkboxes.
+    beforeReset=data();
+    resetButton.hidden=true;undoButton.hidden=false;
+    boxes.forEach(function(b){b.checked=false;b.defaultChecked=false;});
+    // Persist the reset state, where storage is available.
+    if(available){
+      try{
+        localStorage.setItem(KEY,JSON.stringify(data()));
+        localStorage.removeItem(OLDKEY);
+      }catch(e){}
+    }
+    update();
+    // Show a fresh backup immediately so an old code cannot accidentally undo the reset.
+    document.querySelector('.foot').appendChild(panel);
+    showPanel('WOCHE ZURÜCKGESETZT: Alle Häkchen sind gelöscht. Diesen NEUEN Sicherungscode kopieren und den alten Code in Notizen ersetzen.',exportCode(),'code');
+    resetInfo.textContent='Woche zurückgesetzt: 0 von '+boxes.length+' Schritten erledigt. Gewicht und Notizen bleiben erhalten. Neuen Code in Notizen sichern!';
+    label.textContent='Häkchen zurückgesetzt. Alten Sicherungscode nicht erneut laden.';
+  }
+  resetButton.onclick=function(event){if(event)event.preventDefault();resetWholeWeek();return false;};
+  undoButton.onclick=function(event){
+    if(event)event.preventDefault();
+    if(!beforeReset)return false;
+    apply(beforeReset);
+    save();
+    var restored=boxes.filter(function(b){return b.checked;}).length;
+    beforeReset=null;
+    undoButton.hidden=true;resetButton.hidden=false;
+    resetInfo.textContent='Zurücksetzen rückgängig gemacht: '+restored+' von '+boxes.length+' Schritten wiederhergestellt.';
+    label.textContent='Vorherige Häkchen wiederhergestellt. Bitte unten „Stand sichern“ und den neuen Sicherungscode aufbewahren.';
+    panel.style.display='none';
+    return false;
+  };
+  document.getElementById('restore').addEventListener('click',function(){var picker=document.getElementById('backupFile');try{picker.click();}catch(e){showPanel('Alternativ JSON-Inhalt oder CF1-Code hier einfügen und übernehmen.','','load');}});
+  document.getElementById('backupFile').addEventListener('change',function(){var file=this.files&&this.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(){try{apply(JSON.parse(reader.result));save();label.textContent='JSON-Sicherung geladen.';}catch(e){label.textContent='Ungültige JSON-Sicherung.';}};reader.readAsText(file);this.value='';});
+  function normalizeCustom(items){
+    var out={montag:[],mittwoch:[],freitag:[]};
+    ['montag','mittwoch','freitag'].forEach(function(day){
+      if(items && Array.isArray(items[day]))items[day].forEach(function(x){
+        if(!x || typeof x.title!=='string')return;
+        var id=String(x.id||('custom_'+day+'_'+(++customCounter))).replace(/[^a-zA-Z0-9_]/g,'');
+        out[day].push({id:id,title:x.title.slice(0,120),description:String(x.description||'').slice(0,1000),withValues:!!x.withValues});
+      });
+    });return out;
+  }
+  function renderCustom(){
+    // Preserve input values before replacing the custom-exercise DOM.
+    var priorChecks={},priorValues={};
+    document.querySelectorAll('.custom-list input[data-check]').forEach(function(el){priorChecks[el.name]=el.checked;});
+    document.querySelectorAll('.custom-list input[data-result]').forEach(function(el){priorValues[el.name]=el.value;});
+    ['montag','mittwoch','freitag'].forEach(function(day){
+      var root=document.getElementById('custom-list-'+day);
+      root.replaceChildren();
+      custom[day].forEach(function(x){
+        var outer=document.createElement('div');outer.className='item exercise';
+        var check=document.createElement('input');check.type='checkbox';check.name=x.id;check.id=x.id;check.setAttribute('data-check','1');
+        var lab=document.createElement('label');lab.htmlFor=x.id;
+        var st=document.createElement('strong');st.textContent=x.title;lab.appendChild(st);
+        if(x.description){var desc=document.createElement('small');desc.textContent=x.description;lab.appendChild(desc);}
+        outer.appendChild(check);outer.appendChild(lab);
+        if(x.withValues){
+          var vals=document.createElement('div');vals.className='exercise-values';
+          [['sets','Sätze'],['reps','Wdh.'],['weight1','1. kg'],['weight2','2. kg'],['weight3','3. kg']].forEach(function(spec){
+            var field=document.createElement('label');field.className='value-field'+(spec[0].indexOf('weight')===0?' weight-field':'');
+            var span=document.createElement('span');span.textContent=spec[1];
+            var inp=document.createElement('input');inp.type='number';inp.inputMode='numeric';inp.min='0';inp.max=spec[0]==='sets'?'30':spec[0]==='reps'?'100':'1000';inp.step=spec[0].indexOf('weight')===0?'0.5':'1';inp.inputMode=spec[0].indexOf('weight')===0?'decimal':'numeric';inp.name='done_'+spec[0]+'_'+x.id;inp.id=inp.name;inp.setAttribute('data-result','1');inp.placeholder='–';
+            field.appendChild(span);field.appendChild(inp);vals.appendChild(field);
+          });outer.appendChild(vals);
+        }
+        var del=document.createElement('button');del.type='button';del.className='remove-custom';del.textContent='Entfernen';del.title='Eigene Übung entfernen';
+        del.addEventListener('click',function(){
+          custom[day]=custom[day].filter(function(y){return y.id!==x.id;});renderCustom();refreshBoxes();update();save();
+        });outer.appendChild(del);root.appendChild(outer);
+      });
+    });
+    document.querySelectorAll('.custom-list input[data-check]').forEach(function(el){if(Object.prototype.hasOwnProperty.call(priorChecks,el.name))el.checked=priorChecks[el.name];});
+    document.querySelectorAll('.custom-list input[data-result]').forEach(function(el){if(Object.prototype.hasOwnProperty.call(priorValues,el.name))el.value=priorValues[el.name];});
+    refreshBoxes();results=Array.prototype.slice.call(document.querySelectorAll('input[data-result]'));
+  }
+  function closeEditor(day){var e=document.getElementById('add-editor-'+day);e.hidden=true;document.querySelector('.add-toggle[data-day="'+day+'"]').setAttribute('aria-expanded','false');}
+  Array.prototype.forEach.call(document.querySelectorAll('.add-toggle'),function(btn){btn.addEventListener('click',function(){var day=btn.getAttribute('data-day');var e=document.getElementById('add-editor-'+day);e.hidden=!e.hidden;btn.setAttribute('aria-expanded',String(!e.hidden));if(!e.hidden)document.getElementById('new-title-'+day).focus();});});
+  Array.prototype.forEach.call(document.querySelectorAll('.add-cancel'),function(btn){btn.addEventListener('click',function(){closeEditor(btn.getAttribute('data-day'));});});
+  Array.prototype.forEach.call(document.querySelectorAll('.add-confirm'),function(btn){btn.addEventListener('click',function(){
+    var day=btn.getAttribute('data-day');var title=document.getElementById('new-title-'+day).value.trim();
+    var feedback=document.getElementById('add-feedback-'+day);
+    if(!title){feedback.textContent='Bitte zuerst einen Übungsnamen eingeben.';return;}
+    var desc=document.getElementById('new-description-'+day).value.trim();var withValues=document.getElementById('new-with-values-'+day).checked;
+    var id='custom_'+day+'_'+Date.now()+'_'+(++customCounter);
+    custom[day].push({id:id,title:title,description:desc,withValues:withValues});
+    renderCustom();document.getElementById('new-title-'+day).value='';document.getElementById('new-description-'+day).value='';document.getElementById('new-with-values-'+day).checked=false;
+    feedback.textContent='Übung hinzugefügt.';closeEditor(day);update();save();
+  });});
+
+  // Reliable iOS day selection: change visible panel instead of scrolling to a hash.
+  var dayNames=['montag','mittwoch','freitag'];
+  var dayButtons=Array.prototype.slice.call(document.querySelectorAll('[data-open-day]'));
+  dayNames.forEach(function(day){document.getElementById(day).classList.add('training-day');});
+  function openDay(day){
+    dayNames.forEach(function(name){
+      document.getElementById(name).classList.toggle('day-active',name===day);
+    });
+    dayButtons.forEach(function(btn){
+      var chosen=btn.getAttribute('data-open-day')===day;
+      btn.classList.toggle('active',chosen);
+      btn.setAttribute('aria-pressed',String(chosen));
+    });
+  }
+  dayButtons.forEach(function(btn){btn.addEventListener('click',function(){
+    openDay(btn.getAttribute('data-open-day'));
+  });});
+  openDay('montag');
+
+  // Generate an actual PDF file locally; do not rely on window.print() on iOS.
+  function preparePrint(){
+    Array.prototype.forEach.call(document.querySelectorAll('textarea[name]'),function(area){
+      var mirror=document.getElementById('print-'+area.id);
+      if(!mirror){mirror=document.createElement('div');mirror.id='print-'+area.id;mirror.className='print-note';area.parentNode.insertBefore(mirror,area.nextSibling);}
+      mirror.textContent=area.value || 'Keine Notizen';
+    });
+  }
+  function pdfSafe(s){
+    var replacements={'\u2013':'-','\u2014':'-','\u2011':'-','\u2019':"'",'\u2018':"'",'\u201e':'"','\u201c':'"','\u201d':'"','\u2022':'-','\u00d7':'x','\u2026':'...','\u00a0':' ','\u202f':' '};
+    return String(s||'').replace(/[\u2013\u2014\u2011\u2019\u2018\u201e\u201c\u201d\u2022\u00d7\u2026\u00a0\u202f]/g,function(c){return replacements[c]||'-';}).replace(/[^\x20-\x7e\u00a0-\u00ff]/g,'?');
+  }
+  function pdfHex(s){
+    var clean=pdfSafe(s),out='';
+    for(var i=0;i<clean.length;i++){
+      var h=clean.charCodeAt(i).toString(16).toUpperCase();out+=(h.length===1?'0':'')+h;
+    }
+    return out;
+  }
+  function makePdf(){
+    var lines=[], days=[['montag','Montag'],['mittwoch','Mittwoch'],['freitag','Freitag']];
+    function add(text,type){lines.push({text:String(text||''),type:type||'normal'});}
+    add('Thomas - Persönlicher Trainingsplan','title');
+    add('Gewicht: '+(weight.value||'-')+' kg | Ziel: 80 kg','normal');
+    add('Erstellt am '+new Date().toLocaleDateString('de-DE'),'normal');
+    days.forEach(function(entry){
+      var root=document.getElementById(entry[0]);
+      add(entry[1]+' - Trainingscheckliste','day');
+      var subtitle=root.querySelector('.subtitle');if(subtitle)add(subtitle.textContent,'normal');
+      Array.prototype.forEach.call(root.querySelectorAll('.item'),function(item){
+        var check=item.querySelector('input[data-check]');
+        var heading=item.querySelector('label strong');
+        if(!heading)return;
+        add((check&&check.checked?'[X] ':'[ ] ')+heading.textContent,'exercise');
+        var small=item.querySelector('label small');
+        if(small)add(small.textContent.replace(/\s+/g,' ').trim(),'detail');
+        var fields=item.querySelectorAll('input[data-result]');
+        if(fields.length){
+          var pairs=[];Array.prototype.forEach.call(fields,function(input){
+            var holder=input.closest('.value-field');var name=holder&&holder.querySelector('span');
+            pairs.push((name?name.textContent:'Wert')+': '+(input.value||'-'));
+          });add(pairs.join(' | '),'values');
+        }
+      });
+      var notes=root.querySelector('textarea[name]');
+      add('Trainingsnotizen: '+(notes&&notes.value?notes.value:'Keine Notizen'),'notes');
+    });
+    var pages=[], current=[], ypos=790;
+    function newPage(){if(current.length)pages.push(current);current=[];ypos=790;}
+    function wrap(text,max){
+      var result=[];
+      String(text).split(/\r?\n/).forEach(function(para){
+        var words=pdfSafe(para).split(/\s+/),line='';
+        words.forEach(function(word){
+          while(word.length>max){if(line){result.push(line);line='';}result.push(word.slice(0,max));word=word.slice(max);}
+          if(!word)return;
+          if((line+' '+word).trim().length>max){if(line)result.push(line);line=word;}
+          else line=(line?line+' ':'')+word;
+        });result.push(line||' ');
+      });return result;
+    }
+    lines.forEach(function(entry){
+      if(entry.type==='day' && ypos<715)newPage();
+      var font=(entry.type==='title'?17:entry.type==='day'?14:entry.type==='exercise'?10:9);
+      var step=(entry.type==='title'?24:entry.type==='day'?22:entry.type==='exercise'?15:12);
+      var max=(entry.type==='title'?58:entry.type==='day'?68:entry.type==='values'?92:entry.type==='detail'?94:88);
+      var block=wrap(entry.text,max);
+      if(ypos - block.length*step < 58)newPage();
+      if(entry.type==='day')ypos-=9;
+      block.forEach(function(line){
+        if(ypos<55)newPage();
+        current.push({text:line,x:(entry.type==='detail'||entry.type==='values'?55:entry.type==='notes'?45:40),y:ypos,font:font,bold:entry.type==='title'||entry.type==='day'||entry.type==='exercise'});
+        ypos-=step;
+      });
+      if(entry.type==='exercise'||entry.type==='notes')ypos-=3;
+    });
+    if(current.length)pages.push(current);
+    var objects=[null], pageRefs=[], contents=[];
+    function obj(v){objects.push(v);return objects.length-1;}
+    var fontRegular=obj('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>');
+    var fontBold=obj('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+    pages.forEach(function(page,ix){
+      var text='';page.forEach(function(row){
+        text+='BT /'+(row.bold?'F2':'F1')+' '+row.font+' Tf 1 0 0 1 '+row.x+' '+row.y+' Tm <'+pdfHex(row.text)+'> Tj ET\n';
+      });
+      text+='BT /F1 8 Tf 1 0 0 1 490 30 Tm <'+pdfHex('Seite '+(ix+1)+' / '+pages.length)+'> Tj ET\n';
+      var stream=obj('<< /Length '+text.length+' >>\nstream\n'+text+'endstream');
+      contents.push(stream);
+      pageRefs.push(obj(''));
+    });
+    var pagesRef=obj('');
+    pageRefs.forEach(function(ref,i){objects[ref]='<< /Type /Page /Parent '+pagesRef+' 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 '+fontRegular+' 0 R /F2 '+fontBold+' 0 R >> >> /Contents '+contents[i]+' 0 R >>';});
+    objects[pagesRef]='<< /Type /Pages /Count '+pageRefs.length+' /Kids ['+pageRefs.map(function(r){return r+' 0 R';}).join(' ')+'] >>';
+    var catalog=obj('<< /Type /Catalog /Pages '+pagesRef+' 0 R >>');
+    var pdf='%PDF-1.4\n%PDF\n',offsets=[0];
+    for(var i=1;i<objects.length;i++){
+      offsets[i]=pdf.length;pdf+=i+' 0 obj\n'+objects[i]+'\nendobj\n';
+    }
+    var xref=pdf.length;
+    pdf+='xref\n0 '+objects.length+'\n0000000000 65535 f \n';
+    for(var j=1;j<objects.length;j++)pdf+=('0000000000'+offsets[j]).slice(-10)+' 00000 n \n';
+    pdf+='trailer\n<< /Size '+objects.length+' /Root '+catalog+' 0 R >>\nstartxref\n'+xref+'\n%%EOF';
+    var bytes=new Uint8Array(pdf.length);for(var k=0;k<pdf.length;k++)bytes[k]=pdf.charCodeAt(k)&255;
+    return new Blob([bytes],{type:'application/pdf'});
+  }
+  function informPdf(msg){var l=document.getElementById('pdf-status');if(l)l.textContent=msg;}
+  Array.prototype.forEach.call(document.querySelectorAll('.pdf-export'),function(btn){
+    btn.addEventListener('click',function(){
+      var pdf;
+      try{pdf=makePdf();}catch(error){informPdf('PDF-Erstellung fehlgeschlagen: '+error.message);return;}
+      var filename='Trainingscheckliste_Thomas_'+new Date().toISOString().slice(0,10)+'.pdf';
+      var file=new File([pdf],filename,{type:'application/pdf'});
+      // On iOS Safari the native share sheet can save the real PDF to Files.
+      if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
+        navigator.share({files:[file],title:'Trainingscheckliste Thomas'}).then(function(){informPdf('PDF bereitgestellt. Über "In Dateien sichern" ablegen.');}).catch(function(e){if(e.name!=='AbortError')downloadPdf();});
+      }else downloadPdf();
+      function downloadPdf(){
+        var url=URL.createObjectURL(pdf),a=document.createElement('a');
+        a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();
+        informPdf('PDF erstellt. Wenn kein Download erscheint: Datei in Safari öffnen und erneut versuchen.');
+        setTimeout(function(){URL.revokeObjectURL(url);},60000);
+      }
+    });
+  });
+  var appStatus=document.getElementById('app-status'),installButton=document.getElementById('installApp'),installPrompt=null;
+  if('serviceWorker' in navigator && (location.protocol==='https:'||location.hostname==='localhost')){
+    window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').then(function(){appStatus.textContent='Offline-Betrieb eingerichtet. App lässt sich über den Home-Bildschirm starten.';}).catch(function(){appStatus.textContent='Offline-Cache konnte nicht eingerichtet werden. Bitte die Website erneut öffnen.';});});
+  }else{appStatus.textContent='Für Installation und Offline-Betrieb über HTTPS bereitstellen. Direkt geöffnete HTML-Dateien sind keine installierbare PWA.';}
+  window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();installPrompt=e;installButton.hidden=false;});
+  installButton.addEventListener('click',async function(){if(!installPrompt)return;installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;installButton.hidden=true;});
+  window.addEventListener('appinstalled',function(){installButton.hidden=true;appStatus.textContent='App installiert. Deine Daten bleiben lokal auf dem Gerät.';});
+  if(/iPhone|iPad|iPod/.test(navigator.userAgent)&&!window.navigator.standalone){appStatus.textContent='iPhone: In Safari öffnen, Teilen wählen und „Zum Home-Bildschirm“ hinzufügen. Danach auch offline nutzbar.';}
+  document.addEventListener('visibilitychange',function(){if(document.hidden&&!loading){if(queuedSave){clearTimeout(queuedSave);queuedSave=null;}persist(data());}});
+  window.addEventListener('beforeprint',preparePrint);
+  update();
+})();
+</script></body></html>
