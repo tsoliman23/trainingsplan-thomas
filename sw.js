@@ -1,8 +1,9 @@
-const CACHE = 'thomas-trainingsplan-v2';
+const CACHE = 'thomas-trainingsplan-v3';
 
 const ASSETS = [
     './',
     './index.html',
+    './modern-pdf.js',
     './manifest.webmanifest',
     './icons/icon-180.png',
     './icons/icon-192.png',
