@@ -86,3 +86,26 @@ Die Trainingsplanung ist auf Montag/Mittwoch/Freitag ausgelegt. Eine abgeschloss
 ## Responsiver Profilassistent
 
 Die Ersteinrichtung wird in vier Schritte gegliedert: Name, Basisdaten, Gewicht und Trainingsziel. Auf kleinen Bildschirmen passt sich der Dialog an die verfügbare Höhe an; nur bei eingeschränkter Höhe oder geöffnetem Tastaturfeld ist der Inhaltsbereich intern scrollbar. Die bestehende Profilspeicherung und das Datenformat bleiben unverändert. `wizard.css` und `wizard.js` gehören zum Offline-Cache in `sw.js`.
+
+
+## Version 17 – Layout und PDF-Vorschau
+
+- Ersteinrichtung: vier Schritte, jeweils mit vertikalem Formular und eigenen responsiven Begrenzungen.
+- Die Profilansicht hat keine globalen Eingabefelder, die über den Dialogrand hinausreichen sollen.
+- Kein Einstellungsbutton mehr im oberen Kopfbereich; Einstellungen über **Mehr** in der unteren Navigation.
+- Hell/Dunkel/System bleiben in den Einstellungen umschaltbar; dunkle Formulare und Karten wurden hinsichtlich Kontrast nachgebessert.
+- PDF-Export: **Vorschau** öffnet den Bericht, ohne ihn sofort herunterzuladen. **Speichern / Teilen** speichert ihn im lokalen PDF-Archiv und bietet die gerätespezifische Exportfunktion an.
+- **PDFs**: gespeicherte Berichte mit Zeitstempel ansehen, herunterladen oder löschen. Die Dateiablage erfolgt in IndexedDB **dieses Browsers bzw. dieser PWA**, nicht automatisch im iOS-Dateisystem. Ein Download ist für langfristige Backups nötig.
+- Auf einigen iPhone-Versionen lässt sich ein PDF-Blob nicht im integrierten Vorschaufenster darstellen. Dafür gibt es **In neuem Tab öffnen** und **Herunterladen**.
+
+### Deployment
+
+Alle Dateien in den GitHub-Pages-Projektordner kopieren. Nicht die `.git`-Daten löschen.
+
+```bash
+git add .
+git commit -m "Profilansicht und Dark Mode verbessert sowie PDF-Vorschau ergänzt"
+git push
+```
+
+**Technologie:** Weiterhin eine offlinefähige PWA. Für eine echte native iOS-App wären ein eigener SwiftUI- oder Flutter-Build, Apple-Signierung und Datenmigration nötig. Ein solcher nativer Build ist nicht Teil dieser ZIP.

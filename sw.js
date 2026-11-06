@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v16-wizard';
+const CACHE = 'mytraining-v17-polish-pdf-preview';
 
 const ASSETS = [
     './',
@@ -10,6 +10,8 @@ const ASSETS = [
     './theme.css',
     './wizard.css',
     './wizard.js',
+    './polish.css',
+    './pdf-preview.js',
     './manifest.webmanifest',
     './icons/icon-180.png',
     './icons/icon-192.png',

@@ -1,0 +1,54 @@
+/* MyTraining UI refinement 2026-11: scoped, mobile-first layout. */
+html,body{max-width:100%;overflow-x:clip}
+.profile-overlay,.profile-overlay *,.pdf-options-overlay,.pdf-options-overlay *{box-sizing:border-box!important}
+.profile-overlay{padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom))!important;overflow:hidden!important;display:flex!important;align-items:center!important;justify-content:center!important;max-width:100vw!important}
+.profile-overlay[hidden]{display:none!important}
+.profile-dialog{width:min(100%,460px)!important;min-width:0!important;max-width:460px!important;height:min(660px,calc(100dvh - 30px))!important;max-height:calc(100dvh - 24px)!important;min-height:0!important;padding:clamp(16px,2.3vh,25px)!important;border-radius:23px!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;gap:0!important;box-shadow:0 24px 80px #0004!important}
+.profile-dialog .wizard-header,.profile-dialog .wizard-progress,.profile-dialog .wizard-actions{width:100%!important;min-width:0!important;max-width:100%!important}
+.profile-dialog .wizard-header{padding:0 0 4px!important}
+.profile-dialog .wizard-progress{margin:14px 0 5px!important}
+.profile-dialog .wizard-body{flex:1 1 0!important;min-height:0!important;min-width:0!important;width:100%!important;overflow-y:auto!important;overflow-x:hidden!important;display:block!important;padding:clamp(12px,3vh,30px) 2px 8px!important;scrollbar-width:thin}
+.profile-dialog .wizard-step{width:100%!important;max-width:100%!important;min-width:0!important;padding:0!important;margin:0!important;overflow:visible!important}
+.profile-dialog .wizard-step[hidden]{display:none!important}
+.profile-dialog .wizard-fields{width:100%!important;max-width:100%!important;min-width:0!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:16px!important}
+.profile-dialog .wizard-fields label{display:block!important;position:static!important;width:100%!important;max-width:100%!important;min-width:0!important;margin:0!important;padding:0!important;font-size:13px!important;line-height:1.5!important;overflow:visible!important}
+.profile-dialog .wizard-fields input{position:static!important;display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;height:54px!important;margin:7px 0 0!important;padding:0 15px!important;border-radius:13px!important;box-shadow:inset 0 1px 2px #1d4f8110!important;background:var(--xp-bg)!important;border:1.5px solid var(--xp-border)!important;color:var(--xp-text)!important;line-height:normal!important;font-size:16px!important;letter-spacing:normal!important}
+.profile-dialog .wizard-fields input:focus{outline:2px solid #4d90fb!important;outline-offset:0!important}
+.profile-dialog .wizard-actions{padding-top:12px!important;margin-top:auto!important;flex:none!important}
+.profile-dialog .goal-choices{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;width:100%!important;padding:0!important}
+.profile-dialog .goal-choices label{width:100%!important;max-width:100%!important;min-width:0!important;display:flex!important;align-items:center!important;gap:8px!important;min-height:62px!important;padding:10px!important;overflow:hidden!important;word-break:normal!important;white-space:normal!important;line-height:1.25!important;border-radius:14px!important}
+.profile-dialog .goal-choices input[type=radio]{width:17px!important;height:17px!important;min-width:17px!important;max-width:17px!important;flex:0 0 17px!important;position:static!important;accent-color:#2f5be8!important}
+.profile-dialog .goal-choices label>span:last-child{font-size:12px!important;overflow-wrap:break-word!important;min-width:0!important}
+.profile-dialog .goal-icon{flex:0 0 24px!important;min-width:24px!important;width:24px!important;height:27px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;border-radius:8px!important}
+.profile-dialog .wizard-brand{min-width:0!important}
+.profile-dialog .wizard-brand span{color:var(--xp-text)!important}
+/* Remove the redundant top-right settings shortcut; settings remains in bottom navigation. */
+#xp-settings-open{display:none!important}
+/* Consistent dark surfaces and legible form controls. */
+:root[data-theme="dark"]{--xp-bg:#0b172a;--xp-card:#182940;--xp-text:#f2f7ff;--xp-muted:#c0d1e7;--xp-border:#405676;--xp-soft:#243b59;--xp-primary:#81b3ff;--xp-shadow:0 12px 30px #0004}
+[data-theme="dark"] .profile-dialog,[data-theme="dark"] .pdf-options-dialog{background:#182940!important;color:#f2f7ff!important}
+[data-theme="dark"] .profile-dialog input:not([type=radio]){background:#0f2037!important;border-color:#496183!important;color:#fff!important}
+[data-theme="dark"] .goal-choices label{background:#213b59!important;border-color:#496183!important;color:#f2f7ff!important}
+[data-theme="dark"] .goal-choices label:has(input:checked){background:#284d82!important;border-color:#90bcff!important;color:#fff!important}
+[data-theme="dark"] .xp-settings .cal-panel,[data-theme="dark"] .cal-panel,[data-theme="dark"] .pdf-entry{background:#182940!important;border-color:#405676!important}
+[data-theme="dark"] .xp-theme-switch button.selected{color:#102345!important;background:#a9d1ff!important}
+[data-theme="dark"] .xp-bottom-nav{background:#101f34!important;border-color:#314765!important}
+[data-theme="dark"] #view-calendar .month-day{background:#1e3450!important;color:#f1f7ff!important}
+[data-theme="dark"] .month-day.done{background:#174335!important;color:#a7f1c8!important}
+[data-theme="dark"] .month-day.missed{background:#552c39!important;color:#ffd2d9!important}
+[data-theme="dark"] .month-day.rest{background:#203e68!important;color:#c4dfff!important}
+.pdf-action-row{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px!important}
+.pdf-action-row button{min-width:0!important;padding:10px 8px!important;white-space:normal!important;font-size:13px!important}
+.pdf-entry-actions{display:flex;gap:6px;flex-wrap:wrap}.pdf-entry-actions button{font-size:12px}
+#mytraining-pdf-viewer[hidden]{display:none!important}
+#mytraining-pdf-viewer{position:fixed;inset:0;z-index:12000;background:rgba(5,16,36,.87);display:flex;align-items:center;justify-content:center;padding:max(8px,env(safe-area-inset-top)) 8px max(8px,env(safe-area-inset-bottom))}
+.mt-viewer-panel{background:var(--xp-card,#fff);color:var(--xp-text,#102545);width:min(100%,820px);height:min(94dvh,1040px);border-radius:18px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 90px #0007}
+.mt-viewer-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 15px;border-bottom:1px solid var(--xp-border,#dde7f8)}
+.mt-viewer-heading{display:grid;gap:4px;min-width:0}.mt-viewer-heading small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--xp-muted,#667c9c);max-width:52vw}
+.mt-viewer-toolbar button,.mt-viewer-actions button{border:0;padding:11px 14px;border-radius:11px;font-weight:700;background:var(--xp-soft,#e5f0ff);color:var(--xp-text,#183454)}
+.mt-viewer-canvas{min-height:0;flex:1;background:#dde6f4}.mt-viewer-canvas iframe{display:block;width:100%;height:100%;border:0}
+.mt-viewer-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px 14px}.mt-viewer-actions button:last-child{background:#2f5be8;color:white}
+.mt-viewer-help{color:var(--xp-muted,#5d728e);font-size:12px;padding:0 14px 12px;margin:0;line-height:1.4}
+body.mt-modal-open{overflow:hidden!important}
+@media(max-width:480px){.profile-dialog{border-radius:21px!important;height:min(690px,calc(100dvh - 18px))!important;padding:16px!important}.profile-dialog .wizard-body{padding-top:clamp(12px,2vh,20px)!important}.profile-dialog .goal-choices label{min-height:60px!important;padding:7px!important;gap:5px!important}.profile-dialog .goal-icon{flex-basis:21px!important;min-width:21px!important;width:21px!important}.profile-dialog .goal-choices label>span:last-child{font-size:11px!important}.mt-viewer-panel{height:calc(100dvh - 16px)!important;border-radius:13px}.pdf-action-row button{font-size:12px!important}}
+@media(max-height:580px){.profile-dialog{height:calc(100dvh - 12px)!important;max-height:calc(100dvh - 12px)!important}.profile-dialog .wizard-body{padding-top:6px!important}.profile-dialog .wizard-progress{margin:6px 0!important}.profile-dialog .wizard-fields{gap:8px!important}.profile-dialog .wizard-fields input{height:43px!important}.profile-dialog .goal-choices label{min-height:47px!important}.profile-dialog .wizard-actions button{min-height:42px!important}}

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="de"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>MyTraining</title><meta name="theme-color" content="#2f5be8"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta name="apple-mobile-web-app-title" content="MyTraining"/><meta name="description" content="Dein persönlicher Offline-Trainingsplan mit automatischer Speicherung."/><link rel="manifest" href="./manifest.webmanifest"/><link rel="icon" href="./icons/icon-192.png"/><link rel="apple-touch-icon" href="./icons/icon-180.png"/><style>
+<html lang="de"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>MyTraining</title><meta name="theme-color" content="#2f5be8"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/><meta name="apple-mobile-web-app-title" content="MyTraining"/><meta name="description" content="Dein persönlicher Offline-Trainingsplan mit automatischer Speicherung."/><link rel="manifest" href="./manifest.webmanifest"/><link rel="icon" href="./icons/icon-192.png"/><link rel="apple-touch-icon" href="./icons/icon-180.png"/><style>
 :root{
   --bg1:#eef4ff;
   --bg2:#f6f9ff;
@@ -209,7 +209,7 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
 .weight-change{display:block;font-size:36px;font-weight:850;color:#2f5be8;letter-spacing:-.03em}
 #trainingsform[hidden]{display:none!important}
 @media(max-width:420px){.month-day{min-height:43px;padding:5px 0}.month-day strong{font-size:13px}.month-day small{font-size:16px;min-height:14px}.cal-month-grid{gap:4px}}
-</style><link rel="stylesheet" href="./theme.css"><link rel="stylesheet" href="./wizard.css"></head><body><div class="profile-overlay" id="profileOverlay" hidden>
+</style><link rel="stylesheet" href="./theme.css"><link rel="stylesheet" href="./wizard.css"><link rel="stylesheet" href="./polish.css"></head><body><div class="profile-overlay" id="profileOverlay" hidden>
 <form class="profile-dialog" id="profileForm" aria-labelledby="profileTitle">
   <div class="wizard-header"><img src="./icons/icon-192.png" alt="MyTraining Logo"><div class="wizard-brand"><span>MYTRAINING</span><small>Dein Training. Dein Fortschritt.</small></div></div>
   <div class="wizard-progress" aria-label="Fortschritt der Profilerstellung"><span id="wizardCount">Schritt 1 von 4</span><div class="wizard-track"><div id="wizardFill"></div></div></div>
@@ -237,7 +237,7 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   <p class="wizard-error" id="wizardError" role="alert" hidden></p>
   <div class="wizard-actions"><button type="button" id="wizardBack" class="wizard-secondary" hidden>Zurück</button><button type="button" id="wizardNext" class="wizard-primary">Weiter <span aria-hidden="true">→</span></button><button type="submit" id="wizardSubmit" class="wizard-primary" hidden>Profil speichern</button></div>
   <button type="button" class="profile-cancel" id="profileCancel" hidden>Abbrechen</button>
-</form></div><div class="pdf-options-overlay" id="pdfOptionsOverlay" hidden><div class="pdf-options-dialog" role="dialog" aria-modal="true" aria-labelledby="pdfOptionsTitle"><h2 id="pdfOptionsTitle">PDF exportieren</h2><p>Dein Trainingsplan wird kompakt auf drei Seiten dargestellt.</p><label class="pdf-choice"><input id="pdfIncludeInfo" type="checkbox"> Übungsinformationen und Beschreibungen in PDF einblenden</label><p class="muted">Ohne Informationen bleiben Übungsnamen, Trainingswerte und erledigte Übungen sichtbar.</p><div class="buttons"><button type="button" id="pdfCancel">Abbrechen</button><button type="button" id="pdfConfirm">PDF erstellen und teilen</button></div></div></div><div class="wrap"><header>
+</form></div><div class="pdf-options-overlay" id="pdfOptionsOverlay" hidden><div class="pdf-options-dialog" role="dialog" aria-modal="true" aria-labelledby="pdfOptionsTitle"><h2 id="pdfOptionsTitle">PDF exportieren</h2><p>Dein Trainingsplan wird kompakt auf drei Seiten dargestellt.</p><label class="pdf-choice"><input id="pdfIncludeInfo" type="checkbox"> Übungsinformationen und Beschreibungen in PDF einblenden</label><p class="muted">Ohne Informationen bleiben Übungsnamen, Trainingswerte und erledigte Übungen sichtbar.</p><div class="buttons pdf-action-row"><button type="button" id="pdfCancel">Schließen</button><button type="button" id="pdfPreview">Vorschau</button><button type="button" id="pdfConfirm">Speichern / Teilen</button></div></div></div><div class="wrap"><header>
   <div class="hero-top">
     <div class="hero-logo"><img src="./icons/icon-192.png" alt="Trainingsplan-Logo" /></div>
     <div class="hero-copy">
@@ -672,4 +672,4 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   window.addEventListener('beforeprint',preparePrint);
   update();
 })();
-</script><script src="./calendar.js"></script><script src="./experience.js"></script><script src="./wizard.js"></script></body></html>
+</script><script src="./calendar.js"></script><script src="./experience.js"></script><script src="./wizard.js"></script><script src="./pdf-preview.js"></script></body></html>
