@@ -42,7 +42,7 @@ async function makeModernPdf(options={}) {
     ctx.fillStyle=C.navy;ctx.fillRect(0,0,W,84);ctx.fillStyle=C.blue;ctx.fillRect(0,81,W,3);
     if(logo){box(28,16,49,49,10,C.white);ctx.drawImage(logo,32,20,41,41);}
     text(firstName.toLocaleUpperCase('de-DE'),90,30,11,'#cbd8fa',true);
-    text('TRAININGSPLAN',90,53,21,C.white,true);
+    text('MYTRAINING',90,53,21,C.white,true);
     text(date,511,33,9,'#cbd8fa');
     text(`${day}  ·  ${idx}/3`,29,H-14,9,C.muted);
   }

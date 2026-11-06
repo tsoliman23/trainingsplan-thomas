@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="de"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Mein Trainingsplan</title><meta name="theme-color" content="#2f5be8"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta name="apple-mobile-web-app-title" content="Training"/><meta name="description" content="Dein persönlicher Offline-Trainingsplan mit automatischer Speicherung."/><link rel="manifest" href="./manifest.webmanifest"/><link rel="icon" href="./icons/icon-192.png"/><link rel="apple-touch-icon" href="./icons/icon-180.png"/><style>
+<html lang="de"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>MyTraining</title><meta name="theme-color" content="#2f5be8"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="default"/><meta name="apple-mobile-web-app-title" content="MyTraining"/><meta name="description" content="Dein persönlicher Offline-Trainingsplan mit automatischer Speicherung."/><link rel="manifest" href="./manifest.webmanifest"/><link rel="icon" href="./icons/icon-192.png"/><link rel="apple-touch-icon" href="./icons/icon-180.png"/><style>
 :root{
   --bg1:#eef4ff;
   --bg2:#f6f9ff;
@@ -209,12 +209,17 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
 .weight-change{display:block;font-size:36px;font-weight:850;color:#2f5be8;letter-spacing:-.03em}
 #trainingsform[hidden]{display:none!important}
 @media(max-width:420px){.month-day{min-height:43px;padding:5px 0}.month-day strong{font-size:13px}.month-day small{font-size:16px;min-height:14px}.cal-month-grid{gap:4px}}
-</style></head><body><div class="profile-overlay" id="profileOverlay" hidden><form class="profile-dialog" id="profileForm"><img src="./icons/icon-192.png" alt="App-Logo"><h2>Dein Trainingsprofil</h2><p>Bitte gib beim ersten Start deinen Vornamen und dein Zielgewicht ein. Die Angaben werden nur auf deinem Gerät gespeichert.</p><label for="profileFirstName">Vorname *</label><input id="profileFirstName" name="firstName" autocomplete="given-name" maxlength="40" required placeholder="Dein Vorname"><label for="profileGoal">Zielgewicht in kg *</label><input id="profileGoal" name="goalWeight" type="number" inputmode="decimal" min="20" max="350" step="0.1" required placeholder="z. B. 80"><button type="submit">Profil speichern</button><button type="button" class="profile-cancel" id="profileCancel" hidden>Abbrechen</button></form></div><div class="pdf-options-overlay" id="pdfOptionsOverlay" hidden><div class="pdf-options-dialog" role="dialog" aria-modal="true" aria-labelledby="pdfOptionsTitle"><h2 id="pdfOptionsTitle">PDF exportieren</h2><p>Dein Trainingsplan wird kompakt auf drei Seiten dargestellt.</p><label class="pdf-choice"><input id="pdfIncludeInfo" type="checkbox"> Übungsinformationen und Beschreibungen in PDF einblenden</label><p class="muted">Ohne Informationen bleiben Übungsnamen, Trainingswerte und erledigte Übungen sichtbar.</p><div class="buttons"><button type="button" id="pdfCancel">Abbrechen</button><button type="button" id="pdfConfirm">PDF erstellen und teilen</button></div></div></div><div class="wrap"><header>
+</style><link rel="stylesheet" href="./theme.css"></head><body><div class="profile-overlay" id="profileOverlay" hidden><form class="profile-dialog" id="profileForm"><img src="./icons/icon-192.png" alt="App-Logo"><h2>Dein Trainingsprofil</h2><p>Dein Startpunkt. Alle Angaben bleiben lokal auf deinem Gerät.</p>
+<div class="onboard-grid"><label>Vorname *<input id="profileFirstName" name="firstName" autocomplete="given-name" maxlength="40" required placeholder="Vorname"></label><label>Nachname *<input id="profileLastName" name="lastName" autocomplete="family-name" maxlength="60" required placeholder="Nachname"></label></div>
+<div class="onboard-grid"><label>Geburtsdatum *<input id="profileBirth" name="birthday" type="date" required></label><label>Körpergröße (cm) *<input id="profileHeight" name="heightCm" type="number" inputmode="numeric" min="100" max="250" step="1" required placeholder="175"></label></div>
+<div class="onboard-grid"><label>Aktuelles Gewicht (kg) *<input id="profileCurrentWeight" name="currentWeight" type="number" inputmode="decimal" min="20" max="350" step="0.1" required placeholder="85"></label><label>Zielgewicht (kg) *<input id="profileGoal" name="goalWeight" type="number" inputmode="decimal" min="20" max="350" step="0.1" required placeholder="80"></label></div>
+<fieldset class="goal-choices"><legend>Dein Fokus *</legend><label><input type="radio" name="trainingGoal" value="Abnehmen" required><span class="goal-icon">↘</span><span>Abnehmen</span></label><label><input type="radio" name="trainingGoal" value="Zunehmen"><span class="goal-icon">↗</span><span>Zunehmen</span></label><label><input type="radio" name="trainingGoal" value="Muskelaufbau"><span class="goal-icon">▥</span><span>Muskelaufbau</span></label><label><input type="radio" name="trainingGoal" value="Gewicht halten"><span class="goal-icon">≈</span><span>Gewicht halten</span></label><label><input type="radio" name="trainingGoal" value="Ernährung / Diät"><span class="goal-icon">◒</span><span>Ernährung / Diät</span></label></fieldset>
+<p class="onboard-note">Dein Trainingsplan: Montag, Mittwoch und Freitag. Erfassung und Statistiken beginnen mit der ersten Einrichtung.</p><button type="submit">Profil speichern</button><button type="button" class="profile-cancel" id="profileCancel" hidden>Abbrechen</button></form></div><div class="pdf-options-overlay" id="pdfOptionsOverlay" hidden><div class="pdf-options-dialog" role="dialog" aria-modal="true" aria-labelledby="pdfOptionsTitle"><h2 id="pdfOptionsTitle">PDF exportieren</h2><p>Dein Trainingsplan wird kompakt auf drei Seiten dargestellt.</p><label class="pdf-choice"><input id="pdfIncludeInfo" type="checkbox"> Übungsinformationen und Beschreibungen in PDF einblenden</label><p class="muted">Ohne Informationen bleiben Übungsnamen, Trainingswerte und erledigte Übungen sichtbar.</p><div class="buttons"><button type="button" id="pdfCancel">Abbrechen</button><button type="button" id="pdfConfirm">PDF erstellen und teilen</button></div></div></div><div class="wrap"><header>
   <div class="hero-top">
     <div class="hero-logo"><img src="./icons/icon-192.png" alt="Trainingsplan-Logo" /></div>
     <div class="hero-copy">
       <div class="eyebrow">TRAIN. TRACK. IMPROVE:</div>
-      <h1 id="personalGreeting">Dein Trainingsplan</h1>
+      <h1 id="personalGreeting">MyTraining</h1>
       <div class="subtitle" style="font-weight:700;margin:4px 0 0">Dein persönlicher Trainingsplan</div>
     </div>
   </div>
@@ -302,12 +307,15 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   var profileOverlay=document.getElementById('profileOverlay');
   function validProfile(p){return !!(p&&typeof p.firstName==='string'&&p.firstName.trim()&&Number(p.goalWeight)>=20&&Number(p.goalWeight)<=350);}
   function profileDisplay(){
-    document.getElementById('personalGreeting').textContent=validProfile(profile)?'Hallo '+profile.firstName.trim()+'!':'Dein Trainingsplan';
+    document.getElementById('personalGreeting').textContent=validProfile(profile)?'Hallo '+profile.firstName.trim()+'!':'MyTraining';
     document.getElementById('goalNumber').textContent=validProfile(profile)?String(profile.goalWeight).replace('.',','):'–';
   }
   function showProfile(canCancel){
     document.getElementById('profileFirstName').value=profile.firstName||'';
     document.getElementById('profileGoal').value=profile.goalWeight||'';
+    var extra={};try{extra=JSON.parse(localStorage.getItem('training-full-profile-v1')||'{}')}catch(_){}
+    [['profileLastName','lastName'],['profileBirth','birthday'],['profileHeight','heightCm'],['profileCurrentWeight','currentWeight']].forEach(function(a){document.getElementById(a[0]).value=extra[a[1]]||'';});
+    var chosen=document.querySelector('input[name=trainingGoal][value="'+(extra.trainingGoal||'Muskelaufbau')+'"]');if(chosen)chosen.checked=true;
     document.getElementById('profileCancel').hidden=!canCancel;
     profileOverlay.hidden=false;document.getElementById('profileFirstName').focus();
   }
@@ -315,7 +323,16 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
     e.preventDefault();var first=document.getElementById('profileFirstName').value.trim();
     var goal=document.getElementById('profileGoal').value;
     if(!first||!(Number(goal)>=20&&Number(goal)<=350))return;
+    var extra={lastName:document.getElementById('profileLastName').value.trim(),birthday:document.getElementById('profileBirth').value,heightCm:Number(document.getElementById('profileHeight').value),currentWeight:Number(document.getElementById('profileCurrentWeight').value),trainingGoal:document.querySelector('input[name=trainingGoal]:checked')?.value||''};
+    var isoToday=new Date().getFullYear()+'-'+String(new Date().getMonth()+1).padStart(2,'0')+'-'+String(new Date().getDate()).padStart(2,'0');
+    if(!extra.lastName||!extra.birthday||!extra.trainingGoal||extra.heightCm<100||extra.heightCm>250||extra.currentWeight<20||extra.currentWeight>350){alert('Bitte alle Pflichtfelder korrekt ausfüllen.');return;}
+    var birthdayDate=new Date(extra.birthday+'T12:00:00');if(!Number.isFinite(birthdayDate.getTime())||birthdayDate>=new Date()||birthdayDate.getFullYear()<1900){alert('Bitte ein gültiges Geburtsdatum in der Vergangenheit eingeben.');return;}
+    if(!localStorage.getItem('training-setup-date-v1'))localStorage.setItem('training-setup-date-v1',isoToday);
+    localStorage.setItem('training-full-profile-v1',JSON.stringify(extra));
     profile={firstName:first,goalWeight:String(goal)};profileDisplay();profileOverlay.hidden=true;
+    if(!document.getElementById('bodyWeight').value)document.getElementById('bodyWeight').value=String(extra.currentWeight);
+    try{var cd=JSON.parse(localStorage.getItem('training-calendar-days-v1')||'{}');if(!cd[isoToday]?.weight){cd[isoToday]={...(cd[isoToday]||{}),weight:String(extra.currentWeight),updatedAt:Date.now()};localStorage.setItem('training-calendar-days-v1',JSON.stringify(cd));}}catch(_){}
+    window.TrainingCalendar?.refresh();window.TrainingUX?.refresh();
     try{localStorage.setItem('training-profile-v1',JSON.stringify(profile));}catch(_){}
     if(!loading)save();
   });
@@ -385,7 +402,8 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
     try{var existingProfile=JSON.parse(localStorage.getItem('training-profile-v1')||'null');if(!validProfile(profile)&&validProfile(existingProfile))profile=existingProfile;}catch(_){}
     profileDisplay();
     loading=false;
-    if(!validProfile(profile))showProfile(false);
+    var extraReady=false;try{var x=JSON.parse(localStorage.getItem('training-full-profile-v1')||'null');extraReady=!!(x&&x.lastName&&x.birthday&&Number(x.heightCm)>=100&&Number(x.currentWeight)>=20&&x.trainingGoal);}catch(_){}
+    if(!validProfile(profile)||!extraReady)showProfile(false);
     if(snapshot){backupLocal(snapshot);label.textContent=db?'Trainingsstand aus sicherem Gerätespeicher geladen.':'Trainingsstand aus Browser-Speicher geladen.';}
     else label.textContent=db?'IndexedDB bereit: Änderungen werden automatisch gespeichert.':'Browser-Speicher bereit. Bitte zusätzlich JSON-Sicherungen erstellen.';
     if(!snapshot)save();
@@ -631,4 +649,4 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   window.addEventListener('beforeprint',preparePrint);
   update();
 })();
-</script><script src="./calendar.js"></script></body></html>
+</script><script src="./calendar.js"></script><script src="./experience.js"></script></body></html>

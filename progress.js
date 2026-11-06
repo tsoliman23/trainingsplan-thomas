@@ -135,7 +135,7 @@
   function downloadFile(payload,name){const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);}
   function downloadBackup(){
     if(!window.TrainingApp){notify('App noch nicht bereit.');return;}
-    const payload={format:'training-full-backup',version:2,createdAt:new Date().toISOString(),snapshot:window.TrainingApp.getSnapshot(),history:listHistory(),calendarDays:JSON.parse(localStorage.getItem('training-calendar-days-v1')||'{}')};
+    const payload={format:'training-full-backup',version:2,createdAt:new Date().toISOString(),snapshot:window.TrainingApp.getSnapshot(),history:listHistory(),calendarDays:JSON.parse(localStorage.getItem('training-calendar-days-v1')||'{}'),fullProfile:JSON.parse(localStorage.getItem('training-full-profile-v1')||'null'),setupDate:localStorage.getItem('training-setup-date-v1'),preferences:JSON.parse(localStorage.getItem('training-preferences-v1')||'{}')};
     downloadFile(payload,'Trainingsplan_Sicherung_'+isoDay()+'.json');notify('Vollständige Sicherung heruntergeladen. Datei separat aufbewahren.');
   }
   async function importBackup(e){
@@ -149,6 +149,9 @@
       const history=payload.history.filter(r=>r&&typeof r==='object'&&typeof r.day==='string'&&Array.isArray(r.exercises));
       localStorage.setItem(HISTORY_KEY,JSON.stringify(history));
       if(payload.calendarDays&&typeof payload.calendarDays==='object'&&!Array.isArray(payload.calendarDays))localStorage.setItem('training-calendar-days-v1',JSON.stringify(payload.calendarDays));
+      if(payload.fullProfile&&typeof payload.fullProfile==='object')localStorage.setItem('training-full-profile-v1',JSON.stringify(payload.fullProfile));
+      if(/^\d{4}-\d{2}-\d{2}$/.test(payload.setupDate||''))localStorage.setItem('training-setup-date-v1',payload.setupDate);
+      if(payload.preferences&&typeof payload.preferences==='object')localStorage.setItem('training-preferences-v1',JSON.stringify(payload.preferences));
       window.TrainingApp.applySnapshot(payload.snapshot);
       // Profile is also stored separately in the legacy app.
       if(payload.snapshot.profile)localStorage.setItem('training-profile-v1',JSON.stringify(payload.snapshot.profile));

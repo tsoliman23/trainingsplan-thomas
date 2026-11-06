@@ -1,13 +1,13 @@
 {
   "id": "./",
-  "name": "Mein Trainingsplan",
-  "short_name": "Training",
-  "description": "Offline-Trainingscheckliste mit Gewichten, Fortschritt und PDF-Export.",
+  "name": "MyTraining",
+  "short_name": "MyTraining",
+  "description": "Privater Offline-Trainingsplan mit Dashboard, Kalender, Trainingshistorie und PDF-Archiv.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#eef4ff",
-  "theme_color": "#2f5be8",
+  "background_color": "#f3f8ff",
+  "theme_color": "#2359d5",
   "lang": "de",
   "icons": [
     {

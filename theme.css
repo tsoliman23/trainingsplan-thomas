@@ -1,0 +1,57 @@
+/* Premium Blue - responsive, light/dark, touch friendly. */
+:root{--xp-bg:#f3f8ff;--xp-card:#fff;--xp-text:#102547;--xp-muted:#647b9b;--xp-border:#d8e7f7;--xp-primary:#2359d5;--xp-accent:#8dc5ff;--xp-soft:#e4f0ff;--xp-shadow:0 8px 26px #17386c12}
+:root[data-theme="dark"]{--xp-bg:#0a172b;--xp-card:#182b46;--xp-text:#edf6ff;--xp-muted:#aec3dd;--xp-border:#36506e;--xp-primary:#68a7ff;--xp-accent:#5b9ce8;--xp-soft:#223b5b;--xp-shadow:0 10px 30px #0003}
+html{scroll-padding-top:35px}body{background:var(--xp-bg)!important;color:var(--xp-text)!important;transition:background .2s,color .2s}
+body::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:0;height:380px;background:radial-gradient(ellipse at 70% 0%,#79b7ff30,transparent 68%);pointer-events:none}
+.wrap{max-width:760px!important;padding-bottom:108px!important}
+.wrap>header{border-radius:0 0 28px 28px!important;box-shadow:none!important;background:transparent!important;border:0!important;color:var(--xp-text)!important}
+.hero-top,.hero-copy{color:var(--xp-text)}
+#training-dashboard-shell{max-width:760px!important}
+.xp-brand{display:flex;align-items:center;gap:12px;padding:16px 7px 17px;position:relative}
+.xp-brand::after{content:"";position:absolute;bottom:-8px;left:0;right:0;height:20px;border-radius:45% 55% 60% 40%;background:linear-gradient(90deg,#c9e9ff66,#91c7ff70,#daeefe30);pointer-events:none}
+.xp-brand img{width:49px;height:49px;object-fit:contain;border-radius:13px}.xp-brand span{display:grid;gap:3px;flex:1}.xp-brand strong{letter-spacing:.055em;font-size:19px;color:var(--xp-text)}.xp-brand small{font-size:11px;color:var(--xp-muted)}
+.xp-brand>button{width:44px;height:44px;background:var(--xp-card);border:1px solid var(--xp-border);color:var(--xp-primary);border-radius:14px;font-size:25px}
+.cal-tabs{display:none!important}
+.cal-view{padding:16px 0 28px!important}
+.cal-view>h2{font-size:24px;color:var(--xp-text)!important;letter-spacing:-.03em}
+.xp-hero{color:#fff;padding:26px 23px;margin:0 0 20px;border-radius:26px;background:linear-gradient(126deg,#102d64 0%,#235cdb 68%,#4388f0 100%);box-shadow:0 12px 32px #1d56c73b;overflow:hidden;position:relative}
+.xp-hero::before{content:"";position:absolute;right:-60px;top:-100px;width:250px;height:250px;border:40px solid #ffffff14;border-radius:50%}.xp-eyebrow{font-size:10px;letter-spacing:.14em;font-weight:750;color:#c5dcff}.xp-hero h2{color:#fff!important;font-size:29px;margin:12px 0 8px;letter-spacing:-.04em}.xp-hero p{color:#e6efff;margin:6px 0 17px}.xp-goal-pill{display:inline-flex;padding:7px 11px;background:#ffffff28;border:1px solid #ffffff30;border-radius:99px;font-size:12px;font-weight:750}
+.xp-hero-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:19px}.xp-hero-actions button{border:0;border-radius:12px;padding:12px;font-size:13px;font-weight:750;background:#fff;color:#2146a7}.xp-hero-actions button+button{background:#ffffff28;color:#fff;border:1px solid #ffffff60}
+.cal-panel,.cal-metrics>div,.history-entry,.pdf-entry,.history-chart,.item,.custom-block,.profile-dialog,.pdf-options-dialog{background:var(--xp-card)!important;color:var(--xp-text)!important;border-color:var(--xp-border)!important;box-shadow:var(--xp-shadow)!important}
+.cal-panel{border:1px solid var(--xp-border);border-radius:20px!important}.cal-panel h3,.cal-panel strong,.history-entry strong,.item strong{color:var(--xp-text)!important}
+.muted,.cal-panel p,.cal-metrics small,.history-stats span,.cal-chart-col small,.chart-caption,.history-entry summary{color:var(--xp-muted)!important}
+.cal-metrics>div{border-radius:18px!important;min-width:0;padding:15px 10px!important}.cal-metrics strong,.history-stats strong,.weight-change{color:var(--xp-primary)!important}
+.cal-progress,.history-stats .metric{background:var(--xp-soft)!important}.cal-progress>div{background:linear-gradient(90deg,#2770ec,#6da9ff)!important}
+#view-dashboard>h2,#view-dashboard>p.muted{display:none}
+.cal-date-head button,.cal-month-head button{background:var(--xp-soft)!important;color:var(--xp-primary)!important}.cal-date-head h2,.cal-month-head h2{color:var(--xp-text)!important}
+.cal-day,.month-day{background:var(--xp-card);border-color:var(--xp-border);color:var(--xp-text);border-radius:14px;min-width:0}
+.month-day.done{background:#d9f4e7!important;color:#126642!important}.month-day.missed{background:#ffe4e5!important;color:#9c2735!important}.month-day.rest{background:#d9eaff!important;color:#174ba9!important}
+.month-day.before,.month-day.future{background:var(--xp-soft)!important;color:var(--xp-muted)!important}
+.month-day.active{outline:2px solid var(--xp-primary)!important;outline-offset:1px}.month-day.today{box-shadow:inset 0 0 0 2px var(--xp-primary)!important}
+.cal-day.active{background:var(--xp-soft)!important;color:var(--xp-primary)!important;border:2px solid var(--xp-primary)}.cal-day.done{background:#d9f4e7}.cal-day.missed{background:#ffe4e5}.cal-day.rest{background:#d9eaff}
+.cal-finish,#dash-open-training,#download-backup,.xp-settings button:not(.xp-theme-switch button),.cal-panel button{background:var(--xp-primary);color:var(--xp-card);border-radius:13px}
+input,textarea,select{color:var(--xp-text);background:var(--xp-card);border-color:var(--xp-border)}input[type=checkbox]{accent-color:#387cef}
+.history-chart,.history-stats .metric,.exercise-values,.value-field,.set-rep-field input{background:var(--xp-soft)!important;color:var(--xp-text)!important}
+.history-chart svg text{fill:var(--xp-muted)}
+.xp-bottom-nav{position:fixed;z-index:80;bottom:0;left:0;right:0;padding:10px max(12px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px;background:var(--xp-card);border-top:1px solid var(--xp-border);box-shadow:0 -5px 22px #091d481a}
+.xp-bottom-nav button{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;border:0;border-radius:13px;background:transparent;color:var(--xp-muted);height:52px;font-weight:700}
+.xp-bottom-nav button.selected{color:var(--xp-primary);background:var(--xp-soft)}.xp-bottom-nav .xp-nav-icon{font-size:23px;line-height:1.15}.xp-bottom-nav small{font-size:10px}
+.xp-settings .cal-panel{margin:15px 0}.xp-theme-switch{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.xp-theme-switch button{border:1px solid var(--xp-border);border-radius:12px;padding:13px 5px;background:var(--xp-soft);color:var(--xp-text);font-weight:750}.xp-theme-switch button.selected{background:var(--xp-primary);color:#fff;border-color:var(--xp-primary)}.xp-setting-row{display:flex;align-items:center;justify-content:space-between;gap:12px}.xp-setting-row span{display:grid;gap:5px}.xp-setting-row small{color:var(--xp-muted)}.xp-setting-row input{width:23px;height:23px;flex:none}.xp-settings-actions{display:flex;flex-wrap:wrap;gap:10px}.xp-settings-actions button{flex:1;min-width:140px;padding:12px}
+.xp-today-link{float:right;border:0;background:var(--xp-soft);color:var(--xp-primary);border-radius:10px;padding:9px 15px;font-weight:750}
+.profile-overlay{overflow-y:auto;align-items:flex-start!important;padding:20px 12px!important}.profile-dialog{max-width:550px!important;margin:auto!important;max-height:none!important;padding:24px!important}.profile-dialog img{width:70px;height:70px;object-fit:contain}.profile-dialog h2{font-size:23px}.profile-dialog label{display:block;font-size:12px;font-weight:750;color:var(--xp-text);margin:9px 0}.profile-dialog input:not([type=radio]){width:100%;box-sizing:border-box;margin-top:6px;font-size:15px;min-height:46px;border:1px solid var(--xp-border);border-radius:11px;padding:11px;background:var(--xp-bg);color:var(--xp-text)}.onboard-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.goal-choices{border:0;padding:0;margin:18px 0 10px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.goal-choices legend{font-size:13px;font-weight:800;margin-bottom:7px}.goal-choices label{display:flex;align-items:center;gap:9px;padding:12px 10px;margin:0;cursor:pointer;background:var(--xp-soft);border:1px solid var(--xp-border);border-radius:13px}.goal-choices label:has(input:checked){border:2px solid #347cfa;background:#dceaff;color:#143e91}.goal-choices input{accent-color:#347cfa}.goal-icon{display:inline-flex;justify-content:center;align-items:center;width:29px;height:29px;border-radius:9px;background:#bcd9ff;color:#174baf;font-size:20px;font-weight:900}.onboard-note{color:var(--xp-muted);font-size:12px;line-height:1.5}
+[data-theme="dark"] .goal-choices label:has(input:checked){background:#284a7a;color:#fff}[data-theme="dark"] .xp-hero{background:linear-gradient(120deg,#091d3b,#183c70)}[data-theme="dark"] .xp-brand::after{background:linear-gradient(90deg,#20476a,#193b5b)}
+[data-theme="dark"] #trainingsform section,[data-theme="dark"] .foot,[data-theme="dark"] .history-panel{color:var(--xp-text)}
+[data-theme="dark"] .item label small,[data-theme="dark"] .subtitle{color:var(--xp-muted)!important}
+[data-theme="dark"] .item input[type=number],[data-theme="dark"] textarea{background:#233955!important;color:#f1f7ff!important}
+@media(max-width:480px){.wrap{padding-left:13px!important;padding-right:13px!important}.xp-brand{padding-top:10px}.xp-hero{padding:23px 19px}.cal-metrics{gap:7px}.cal-metrics strong{font-size:21px!important}.cal-metrics small{font-size:10px!important}.month-day{min-height:42px!important}.onboard-grid{gap:7px}.profile-dialog{padding:16px!important}.goal-choices label{padding:8px 5px;font-size:11px}}
+@media print{.xp-bottom-nav,.xp-settings,.xp-brand{display:none!important}}
+
+/* Legacy heading is replaced by the personalized dashboard; logic stays connected. */
+.wrap>header{display:none!important}
+.xp-weight-card{margin-top:10px!important}
+.xp-weight-card .panel-card{background:transparent;border:0;box-shadow:none;padding:0;max-width:100%;width:100%}
+.xp-weight-card label{font-size:13px;font-weight:750;color:var(--xp-muted)}
+.xp-weight-card input{display:block;width:100%;max-width:230px;margin-top:9px;border:1px solid var(--xp-border);border-radius:12px;padding:12px;font-size:19px;background:var(--xp-bg);color:var(--xp-text)}
+.xp-weight-card .muted{font-size:12px}
+.xp-settings #installApp:not([hidden]){display:block;margin:12px 0;padding:12px}
