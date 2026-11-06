@@ -1,7 +1,7 @@
 /* MyTraining translations. UI language is separate from exercise data and never changes stored keys. */
 (()=>{'use strict';
 const KEY='mytraining-language-v1';
-const LOCALES={de:{flag:'🇩🇪',name:'Deutsch'},en:{flag:'🇬🇧',name:'English'},fr:{flag:'🇫🇷',name:'Français'},'ar-EG':{flag:'🇪🇬',name:'مصري (عربي)'}};
+const LOCALES={de:{flag:'🇩🇪',name:'Deutsch'},en:{flag:'🇬🇧',name:'English'},fr:{flag:'🇫🇷',name:'Français'},'ar-EG':{flag:'🇪🇬',name:'عربي'}};
 const MONTHS={de:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],en:['January','February','March','April','May','June','July','August','September','October','November','December'],fr:['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'],'ar-EG':['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر']};
 let lang=localStorage.getItem(KEY)||'de',dict={},ready=false;
 const source=new WeakMap();const translated=new WeakMap();
@@ -41,9 +41,38 @@ function setting(){const view=document.getElementById('xp-settings');if(!view||v
 const p=document.createElement('div');p.id='mytraining-language-settings';p.className='cal-panel language-settings';p.innerHTML='<h3>Sprache</h3><div class="language-choices"></div>';
 const design=view.querySelector('.xp-theme-switch')?.closest('.cal-panel');(design||view.firstElementChild).after(p);
 fillChoices(p.querySelector('.language-choices'),false);requestApply();}
-function fillChoices(container,intro){container.replaceChildren(...Object.entries(LOCALES).map(([code,x])=>{const b=document.createElement('button');b.type='button';b.className='lang-option';b.dataset.lang=code;b.setAttribute('aria-pressed',String(code===lang));b.innerHTML=`<span class="lang-flag" aria-hidden="true">${x.flag}</span><span>${x.name}</span><span class="lang-tick" aria-hidden="true">${lang===code?'✓':''}</span>`;b.addEventListener('click',()=>{setLanguage(code);if(intro){document.getElementById('languageOnboarding')?.remove();}else fillChoices(container,false);});return b;}));}
-function languageGate(){if(localStorage.getItem(KEY))return;
-const wrap=document.createElement('div');wrap.id='languageOnboarding';wrap.className='language-overlay';wrap.innerHTML='<div class="language-dialog" role="dialog" aria-modal="true" aria-labelledby="languageTitle"><img src="./icons/icon-192.png" width="58" height="58" alt="MyTraining"><h2 id="languageTitle">Wähle deine Sprache</h2><p>Choose your language · Choisis ta langue · اختار لغتك</p><div id="initial-language-choices" class="language-choices"></div></div>';document.body.append(wrap);fillChoices(wrap.querySelector('.language-choices'),true);}
+function fillChoices(container,intro){container.replaceChildren(...Object.entries(LOCALES).map(([code,x])=>{const b=document.createElement('button');b.type='button';b.className='lang-option';b.dataset.lang=code;b.setAttribute('aria-pressed',String(code===lang));b.innerHTML=`<span class="lang-flag" aria-hidden="true">${x.flag}</span><span>${x.name}</span><span class="lang-tick" aria-hidden="true">${lang===code?'✓':''}</span>`;b.addEventListener('click',()=>{setLanguage(code);if(intro){document.getElementById('languageOnboarding').hidden=true;document.documentElement.classList.remove('language-boot-first','language-boot-loading');}else fillChoices(container,false);});return b;}));}
+function languageGate(){
+ const gate=document.getElementById('languageOnboarding');
+ if(!gate)return;
+ const pending=!localStorage.getItem(KEY);
+ gate.hidden=!pending;
+ if(pending){fillChoices(gate.querySelector('.language-choices'),true);}
+}
+// Attach listeners to the first-frame language buttons synchronously, before loading the JSON file.
+const initialGate=document.getElementById('languageOnboarding');
+if(initialGate){
+ const firstChoices=initialGate.querySelector('.language-choices');
+ firstChoices.addEventListener('click',event=>{
+  const button=event.target.closest('button[data-lang]');
+  if(!button)return;
+  const code=button.dataset.lang;
+  if(!LOCALES[code])return;
+  lang=code;localStorage.setItem(KEY,code);
+  if(ready){apply();initialGate.hidden=true;document.documentElement.classList.remove('language-boot-first','language-boot-loading');document.dispatchEvent(new CustomEvent('mytraining-language-change',{detail:{language:lang}}));}
+  else{initialGate.querySelector('h2').textContent='MyTraining';initialGate.querySelector('p').textContent='Sprache wird geladen …';initialGate.querySelectorAll('button').forEach(b=>b.disabled=true);}
+ });
+}
 window.MyTrainingI18n={t,current,setLanguage,monthNames:()=>MONTHS[lang],apply};
-fetch('./translations.json').then(r=>{if(!r.ok)throw Error('Translation data unavailable');return r.json();}).then(v=>{dict=v;ready=true;languageGate();apply();setting();new MutationObserver(requestApply).observe(document.body,{subtree:true,childList:true,characterData:true});const si=setInterval(()=>{setting();if(document.getElementById('mytraining-language-settings'))clearInterval(si);},350);}).catch(e=>{console.error('Could not load translations',e);ready=true;languageGate();});
+fetch('./translations.json').then(r=>{if(!r.ok)throw Error('Translation data unavailable');return r.json();}).then(v=>{
+ dict=v;ready=true;
+ const first=!localStorage.getItem(KEY);
+ languageGate();apply();setting();
+ if(!first){document.getElementById('languageOnboarding').hidden=true;document.documentElement.classList.remove('language-boot-first','language-boot-loading');document.dispatchEvent(new CustomEvent('mytraining-language-change',{detail:{language:lang}}));}
+ new MutationObserver(requestApply).observe(document.body,{subtree:true,childList:true,characterData:true});
+ const si=setInterval(()=>{setting();if(document.getElementById('mytraining-language-settings'))clearInterval(si);},350);
+}).catch(e=>{
+ console.error('Could not load translations',e);ready=true;languageGate();apply();
+ if(localStorage.getItem(KEY)){document.getElementById('languageOnboarding').hidden=true;document.documentElement.classList.remove('language-boot-first','language-boot-loading');}
+});
 })();

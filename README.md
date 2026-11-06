@@ -159,3 +159,8 @@ Beim ersten Start erscheint zunächst die Sprachauswahl für Deutsch, Englisch, 
 Das Geburtsdatum wird mit den drei vertikal scrollbaren Auswahlrädern für Tag, Monat und Jahr gewählt. Die optisch mittig markierten Optionen werden direkt als `YYYY-MM-DD` im versteckten Formularfeld gespeichert. Eine zweite Datumsanzeige wurde entfernt. Die Tagesliste passt sich an Monat und Schaltjahr an.
 
 Zum Aktualisieren bei GitHub Pages müssen die neue `translations.json`, `i18n.js` und `language.css` mit veröffentlicht werden. Die Cache-Version in `sw.js` wurde erhöht. Nach der Installation der neuen Version die App online neu öffnen.
+
+
+### Startbildschirm und Sprachwahl (v20)
+
+Die Sprachwahl ist bei einer Neuinstallation im initialen HTML enthalten. Die App-Oberfläche bleibt bis zum Laden der Übersetzungen verborgen, um das kurze Anzeigen des Dashboards zu verhindern. Die arabische Auswahl heißt **عربي** (ägyptisches Arabisch, Locale `ar-EG`). Bestehende Profil-, Trainings- und PDF-Daten werden nicht geändert. Nach dem Deployment die PWA einmal online öffnen, damit die neue Service-Worker-Version geladen wird.
