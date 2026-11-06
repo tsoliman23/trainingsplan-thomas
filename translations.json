@@ -1,0 +1,1222 @@
+{
+  "Dein Training. Dein Fortschritt.": {
+    "en": "Your training. Your progress.",
+    "fr": "Ton entraînement. Tes progrès.",
+    "ar-EG": "تمرينك. تقدمك."
+  },
+  "WILLKOMMEN": {
+    "en": "WELCOME",
+    "fr": "BIENVENUE",
+    "ar-EG": "أهلاً بيك"
+  },
+  "Wie heißt du?": {
+    "en": "What's your name?",
+    "fr": "Comment tu t'appelles ?",
+    "ar-EG": "اسمك إيه؟"
+  },
+  "Wir richten dein persönliches Trainingsprofil ein.": {
+    "en": "Let's set up your training profile.",
+    "fr": "Créons ton profil d'entraînement.",
+    "ar-EG": "يلا نظبط ملف التمرين بتاعك."
+  },
+  "Vorname *": {
+    "en": "First name *",
+    "fr": "Prénom *",
+    "ar-EG": "الاسم الأول *"
+  },
+  "Nachname *": {
+    "en": "Last name *",
+    "fr": "Nom *",
+    "ar-EG": "اسم العيلة *"
+  },
+  "DEINE ANGABEN": {
+    "en": "YOUR DETAILS",
+    "fr": "TES INFORMATIONS",
+    "ar-EG": "بياناتك"
+  },
+  "Ein paar Eckdaten": {
+    "en": "A few details",
+    "fr": "Quelques informations",
+    "ar-EG": "شوية بيانات عنك"
+  },
+  "Damit deine Auswertungen zu dir passen.": {
+    "en": "To tailor your statistics to you.",
+    "fr": "Pour adapter tes statistiques à ton profil.",
+    "ar-EG": "عشان الإحصائيات تناسبك."
+  },
+  "Geburtsdatum *": {
+    "en": "Date of birth *",
+    "fr": "Date de naissance *",
+    "ar-EG": "تاريخ الميلاد *"
+  },
+  "Tag, Monat und Jahr nach oben oder unten wischen": {
+    "en": "Swipe up or down to select day, month and year",
+    "fr": "Fais défiler le jour, le mois et l’année",
+    "ar-EG": "اسحب لفوق أو لتحت عشان تختار اليوم والشهر والسنة"
+  },
+  "Tag": {
+    "en": "Day",
+    "fr": "Jour",
+    "ar-EG": "يوم"
+  },
+  "Monat": {
+    "en": "Month",
+    "fr": "Mois",
+    "ar-EG": "شهر"
+  },
+  "Jahr": {
+    "en": "Year",
+    "fr": "Année",
+    "ar-EG": "سنة"
+  },
+  "Körpergröße (cm) *": {
+    "en": "Height (cm) *",
+    "fr": "Taille (cm) *",
+    "ar-EG": "الطول (سم) *"
+  },
+  "DEIN STARTPUNKT": {
+    "en": "YOUR STARTING POINT",
+    "fr": "TON POINT DE DÉPART",
+    "ar-EG": "نقطة البداية"
+  },
+  "Dein Gewicht": {
+    "en": "Your weight",
+    "fr": "Ton poids",
+    "ar-EG": "وزنك"
+  },
+  "Wir vergleichen deinen Fortschritt ab dem ersten Eintrag.": {
+    "en": "We track your progress from your first entry.",
+    "fr": "Nous suivons tes progrès dès ta première saisie.",
+    "ar-EG": "هنحسب تقدمك من أول تسجيل."
+  },
+  "Aktuelles Gewicht (kg) *": {
+    "en": "Current weight (kg) *",
+    "fr": "Poids actuel (kg) *",
+    "ar-EG": "الوزن الحالي (كجم) *"
+  },
+  "Zielgewicht (kg) *": {
+    "en": "Target weight (kg) *",
+    "fr": "Poids cible (kg) *",
+    "ar-EG": "الوزن المستهدف (كجم) *"
+  },
+  "DEIN TRAININGSZIEL": {
+    "en": "YOUR TRAINING GOAL",
+    "fr": "TON OBJECTIF",
+    "ar-EG": "هدف التمرين"
+  },
+  "Worauf liegt dein Fokus?": {
+    "en": "What's your main goal?",
+    "fr": "Quel est ton objectif ?",
+    "ar-EG": "إيه هدفك الأساسي؟"
+  },
+  "Du kannst dein Ziel später in den Einstellungen ändern.": {
+    "en": "You can change your goal later in settings.",
+    "fr": "Tu pourras modifier ton objectif dans les paramètres.",
+    "ar-EG": "تقدر تغير هدفك بعدين من الإعدادات."
+  },
+  "Dein Fokus *": {
+    "en": "Your goal *",
+    "fr": "Ton objectif *",
+    "ar-EG": "هدفك *"
+  },
+  "Abnehmen": {
+    "en": "Lose weight",
+    "fr": "Perdre du poids",
+    "ar-EG": "خسارة وزن"
+  },
+  "Zunehmen": {
+    "en": "Gain weight",
+    "fr": "Prendre du poids",
+    "ar-EG": "زيادة وزن"
+  },
+  "Muskelaufbau": {
+    "en": "Build muscle",
+    "fr": "Prendre du muscle",
+    "ar-EG": "بناء عضلات"
+  },
+  "Gewicht halten": {
+    "en": "Maintain weight",
+    "fr": "Maintenir le poids",
+    "ar-EG": "تثبيت الوزن"
+  },
+  "Ernährung / Diät": {
+    "en": "Nutrition / diet",
+    "fr": "Nutrition / régime",
+    "ar-EG": "تغذية / دايت"
+  },
+  "Montag, Mittwoch und Freitag sind deine Trainingstage. Die Statistik startet erst mit der Einrichtung.": {
+    "en": "Monday, Wednesday and Friday are your training days. Statistics start when you set up your profile.",
+    "fr": "Les entraînements sont prévus lundi, mercredi et vendredi. Les statistiques commencent à l'inscription.",
+    "ar-EG": "أيام التمرين الاثنين والأربع والجمعة. والإحصائيات بتبدأ من يوم التسجيل."
+  },
+  "Zurück": {
+    "en": "Back",
+    "fr": "Retour",
+    "ar-EG": "رجوع"
+  },
+  "Weiter": {
+    "en": "Continue",
+    "fr": "Continuer",
+    "ar-EG": "التالي"
+  },
+  "Profil speichern": {
+    "en": "Save profile",
+    "fr": "Enregistrer le profil",
+    "ar-EG": "حفظ الملف"
+  },
+  "Abbrechen": {
+    "en": "Cancel",
+    "fr": "Annuler",
+    "ar-EG": "إلغاء"
+  },
+  "Schritt": {
+    "en": "Step",
+    "fr": "Étape",
+    "ar-EG": "الخطوة"
+  },
+  "von": {
+    "en": "of",
+    "fr": "sur",
+    "ar-EG": "من"
+  },
+  "PDF exportieren": {
+    "en": "Export PDF",
+    "fr": "Exporter le PDF",
+    "ar-EG": "تصدير PDF"
+  },
+  "Dein Trainingsplan wird kompakt auf drei Seiten dargestellt.": {
+    "en": "Your training plan fits on three compact pages.",
+    "fr": "Ton programme tient sur trois pages.",
+    "ar-EG": "خطة التمرين في ٣ صفحات."
+  },
+  "Übungsinformationen und Beschreibungen in PDF einblenden": {
+    "en": "Include exercise descriptions in PDF",
+    "fr": "Inclure les descriptions dans le PDF",
+    "ar-EG": "إظهار شرح التمارين في PDF"
+  },
+  "Ohne Informationen bleiben Übungsnamen, Trainingswerte und erledigte Übungen sichtbar.": {
+    "en": "Without descriptions, exercises, results and completion status remain visible.",
+    "fr": "Sans les descriptions, les exercices, résultats et statuts restent visibles.",
+    "ar-EG": "من غير الشرح هتفضل أسماء التمارين والنتائج والحالة باينة."
+  },
+  "Schließen": {
+    "en": "Close",
+    "fr": "Fermer",
+    "ar-EG": "قفل"
+  },
+  "Vorschau": {
+    "en": "Preview",
+    "fr": "Aperçu",
+    "ar-EG": "معاينة"
+  },
+  "Speichern / Teilen": {
+    "en": "Save / Share",
+    "fr": "Enregistrer / Partager",
+    "ar-EG": "حفظ / مشاركة"
+  },
+  "Dein persönlicher Trainingsplan": {
+    "en": "Your personal training plan",
+    "fr": "Ton programme d'entraînement",
+    "ar-EG": "خطة تمرينك الشخصية"
+  },
+  "Bei jeder Kraftübung: 3 Sätze. Trage das Trainingsgewicht für Satz 1, 2 und 3 jeweils getrennt in kg ein.": {
+    "en": "For strength exercises: 3 sets. Record each set's weight separately in kg.",
+    "fr": "Pour chaque exercice de musculation : 3 séries. Note les poids de chaque série en kg.",
+    "ar-EG": "لكل تمرين مقاومة ٣ مجموعات. سجّل وزن كل مجموعة بالكيلو."
+  },
+  "Aktuelles Gewicht in kg": {
+    "en": "Current weight in kg",
+    "fr": "Poids actuel en kg",
+    "ar-EG": "وزنك الحالي بالكيلو"
+  },
+  "Das Gewicht wird automatisch gespeichert und bei Sicherungen mit übernommen.": {
+    "en": "Your weight is saved automatically and included in backups.",
+    "fr": "Ton poids est enregistré automatiquement et inclus dans les sauvegardes.",
+    "ar-EG": "وزنك بيتحفظ تلقائي وبيكون موجود في النسخة الاحتياطية."
+  },
+  "Zielgewicht": {
+    "en": "Target weight",
+    "fr": "Poids cible",
+    "ar-EG": "الوزن المستهدف"
+  },
+  "Fokus: Muskelaufbau, Routine und sauberer Wochenfortschritt.": {
+    "en": "Focus: strength, consistency and weekly progress.",
+    "fr": "Objectif : force, régularité et progrès hebdomadaires.",
+    "ar-EG": "التركيز: قوة وانتظام وتقدم أسبوعي."
+  },
+  "Montag · Aufbau": {
+    "en": "Monday · Strength",
+    "fr": "Lundi · Musculation",
+    "ar-EG": "الاثنين · قوة"
+  },
+  "Mittwoch · Beine & Rumpf": {
+    "en": "Wednesday · Legs & core",
+    "fr": "Mercredi · Jambes et tronc",
+    "ar-EG": "الأربع · رجلين وبطن"
+  },
+  "Freitag · Ganzkörper & Boxen": {
+    "en": "Friday · Full body & boxing",
+    "fr": "Vendredi · Corps entier et boxe",
+    "ar-EG": "الجمعة · جسم كامل وبوكس"
+  },
+  "App installieren": {
+    "en": "Install app",
+    "fr": "Installer l'application",
+    "ar-EG": "تثبيت التطبيق"
+  },
+  "Profil bearbeiten": {
+    "en": "Edit profile",
+    "fr": "Modifier le profil",
+    "ar-EG": "تعديل الملف"
+  },
+  "PDF erstellen und teilen": {
+    "en": "Create and share PDF",
+    "fr": "Créer et partager le PDF",
+    "ar-EG": "إنشاء ومشاركة PDF"
+  },
+  "Offline-fähig nach dem ersten Laden über HTTPS.": {
+    "en": "Available offline after the first load over HTTPS.",
+    "fr": "Disponible hors ligne après le premier chargement HTTPS.",
+    "ar-EG": "بيشتغل من غير نت بعد أول تحميل."
+  },
+  "Häkchen pro Trainingstag setzen": {
+    "en": "Tick exercises as you finish",
+    "fr": "Coche les exercices terminés",
+    "ar-EG": "علّم على التمارين اللي خلصتها"
+  },
+  "Deine Eingaben werden automatisch lokal gespeichert. Mit „Speichern“ kannst du zusätzlich einen Wiederherstellungspunkt auf diesem Gerät anlegen.": {
+    "en": "Your entries are saved locally. Use Save to make a restore point on this device.",
+    "fr": "Les données sont enregistrées sur ton appareil. Enregistrer crée un point de restauration.",
+    "ar-EG": "بياناتك بتتحفظ على الجهاز. زر حفظ بيعمل نقطة استرجاع."
+  },
+  "Montag": {
+    "en": "Monday",
+    "fr": "Lundi",
+    "ar-EG": "الاثنين"
+  },
+  "Mittwoch": {
+    "en": "Wednesday",
+    "fr": "Mercredi",
+    "ar-EG": "الأربع"
+  },
+  "Freitag": {
+    "en": "Friday",
+    "fr": "Vendredi",
+    "ar-EG": "الجمعة"
+  },
+  "Aufwärmen": {
+    "en": "Warm-up",
+    "fr": "Échauffement",
+    "ar-EG": "إحماء"
+  },
+  "Sätze": {
+    "en": "Sets",
+    "fr": "Séries",
+    "ar-EG": "مجموعات"
+  },
+  "Wdh.": {
+    "en": "Reps",
+    "fr": "Rép.",
+    "ar-EG": "تكرارات"
+  },
+  "Pause": {
+    "en": "Rest",
+    "fr": "Repos",
+    "ar-EG": "راحة"
+  },
+  "Boxsacktraining": {
+    "en": "Punching bag training",
+    "fr": "Entraînement au sac de frappe",
+    "ar-EG": "تمرين كيس الملاكمة"
+  },
+  "Abschluss:": {
+    "en": "Cool-down:",
+    "fr": "Retour au calme :",
+    "ar-EG": "تهدئة:"
+  },
+  "Gewichte und Trainingsnotizen": {
+    "en": "Weights and training notes",
+    "fr": "Poids et notes d'entraînement",
+    "ar-EG": "الأوزان وملاحظات التمرين"
+  },
+  "+ Übung hinzufügen": {
+    "en": "+ Add exercise",
+    "fr": "+ Ajouter un exercice",
+    "ar-EG": "+ إضافة تمرين"
+  },
+  "Name der Übung": {
+    "en": "Exercise name",
+    "fr": "Nom de l'exercice",
+    "ar-EG": "اسم التمرين"
+  },
+  "Beschreibung (optional)": {
+    "en": "Description (optional)",
+    "fr": "Description (facultatif)",
+    "ar-EG": "الشرح (اختياري)"
+  },
+  "Felder für Sätze und Wdh. anzeigen": {
+    "en": "Show sets and reps fields",
+    "fr": "Afficher séries et répétitions",
+    "ar-EG": "إظهار المجموعات والتكرارات"
+  },
+  "Übung hinzufügen": {
+    "en": "Add exercise",
+    "fr": "Ajouter l'exercice",
+    "ar-EG": "إضافة التمرين"
+  },
+  "Trainingsstand": {
+    "en": "Training progress",
+    "fr": "Suivi d'entraînement",
+    "ar-EG": "حالة التمرين"
+  },
+  "Speichern": {
+    "en": "Save",
+    "fr": "Enregistrer",
+    "ar-EG": "حفظ"
+  },
+  "Woche zurücksetzen": {
+    "en": "Reset week",
+    "fr": "Réinitialiser la semaine",
+    "ar-EG": "تصفير الأسبوع"
+  },
+  "Wiederherstellen": {
+    "en": "Restore",
+    "fr": "Restaurer",
+    "ar-EG": "استرجاع"
+  },
+  "Zurücksetzen rückgängig": {
+    "en": "Undo reset",
+    "fr": "Annuler la réinitialisation",
+    "ar-EG": "إلغاء التصفير"
+  },
+  "Speicherung wird geprüft.": {
+    "en": "Checking saved data.",
+    "fr": "Vérification des données.",
+    "ar-EG": "جاري فحص البيانات."
+  },
+  "Info anzeigen": {
+    "en": "Show info",
+    "fr": "Afficher les infos",
+    "ar-EG": "عرض المعلومات"
+  },
+  "Info ausblenden": {
+    "en": "Hide info",
+    "fr": "Masquer les infos",
+    "ar-EG": "إخفاء المعلومات"
+  },
+  "ERLEDIGT": {
+    "en": "DONE",
+    "fr": "TERMINÉ",
+    "ar-EG": "تم"
+  },
+  "OFFEN": {
+    "en": "OPEN",
+    "fr": "À FAIRE",
+    "ar-EG": "لسه"
+  },
+  "TRAININGSNOTIZEN": {
+    "en": "TRAINING NOTES",
+    "fr": "NOTES D'ENTRAÎNEMENT",
+    "ar-EG": "ملاحظات التمرين"
+  },
+  "Keine Notizen": {
+    "en": "No notes",
+    "fr": "Aucune note",
+    "ar-EG": "مفيش ملاحظات"
+  },
+  "Kalender": {
+    "en": "Calendar",
+    "fr": "Calendrier",
+    "ar-EG": "التقويم"
+  },
+  "Heute": {
+    "en": "Today",
+    "fr": "Aujourd'hui",
+    "ar-EG": "النهارده"
+  },
+  "Training": {
+    "en": "Training",
+    "fr": "Entraînement",
+    "ar-EG": "تمرين"
+  },
+  "Statistik": {
+    "en": "Statistics",
+    "fr": "Statistiques",
+    "ar-EG": "إحصائيات"
+  },
+  "Mehr": {
+    "en": "More",
+    "fr": "Plus",
+    "ar-EG": "المزيد"
+  },
+  "Einstellungen": {
+    "en": "Settings",
+    "fr": "Paramètres",
+    "ar-EG": "الإعدادات"
+  },
+  "Dein Profil": {
+    "en": "Your profile",
+    "fr": "Ton profil",
+    "ar-EG": "ملفك"
+  },
+  "Design": {
+    "en": "Appearance",
+    "fr": "Apparence",
+    "ar-EG": "المظهر"
+  },
+  "Hell": {
+    "en": "Light",
+    "fr": "Clair",
+    "ar-EG": "فاتح"
+  },
+  "Dunkel": {
+    "en": "Dark",
+    "fr": "Sombre",
+    "ar-EG": "غامق"
+  },
+  "System": {
+    "en": "System",
+    "fr": "Système",
+    "ar-EG": "حسب الجهاز"
+  },
+  "Erinnerungen aktivieren": {
+    "en": "Enable reminders",
+    "fr": "Activer les rappels",
+    "ar-EG": "تفعيل التذكير"
+  },
+  "Trainingserinnerung um 08:00 Uhr": {
+    "en": "Training reminder at 08:00",
+    "fr": "Rappel d'entraînement à 08h00",
+    "ar-EG": "تذكير التمرين الساعة ٨ الصبح"
+  },
+  "Montag, Mittwoch und Freitag um 08:00 Uhr": {
+    "en": "Monday, Wednesday and Friday at 08:00",
+    "fr": "Lundi, mercredi et vendredi à 08h00",
+    "ar-EG": "الاثنين والأربع والجمعة الساعة ٨ الصبح"
+  },
+  "Sicherung und Dokumente": {
+    "en": "Backup and documents",
+    "fr": "Sauvegarde et documents",
+    "ar-EG": "النسخ الاحتياطي والملفات"
+  },
+  "Dateisicherung öffnen": {
+    "en": "Open backup",
+    "fr": "Ouvrir la sauvegarde",
+    "ar-EG": "فتح النسخ الاحتياطي"
+  },
+  "PDF-Archiv öffnen": {
+    "en": "Open PDF archive",
+    "fr": "Ouvrir les PDF",
+    "ar-EG": "فتح ملفات PDF"
+  },
+  "Über die App": {
+    "en": "About the app",
+    "fr": "À propos",
+    "ar-EG": "عن التطبيق"
+  },
+  "Dein Training": {
+    "en": "Your training",
+    "fr": "Ton entraînement",
+    "ar-EG": "تمرينك"
+  },
+  "DEIN PERSÖNLICHES DASHBOARD": {
+    "en": "YOUR PERSONAL DASHBOARD",
+    "fr": "TON TABLEAU DE BORD",
+    "ar-EG": "لوحة التحكم بتاعتك"
+  },
+  "Heutigen Tag öffnen": {
+    "en": "Open today",
+    "fr": "Ouvrir aujourd'hui",
+    "ar-EG": "فتح النهارده"
+  },
+  "Kalender ansehen": {
+    "en": "View calendar",
+    "fr": "Voir le calendrier",
+    "ar-EG": "شوف التقويم"
+  },
+  "Gewicht eintragen": {
+    "en": "Record weight",
+    "fr": "Noter le poids",
+    "ar-EG": "تسجيل الوزن"
+  },
+  "Seit Beginn deiner Aufzeichnungen": {
+    "en": "Since you started tracking",
+    "fr": "Depuis le début du suivi",
+    "ar-EG": "من أول ما بدأت تسجل"
+  },
+  "Gewichtsveränderungen beziehen sich auf gespeicherte Wiegeeinträge, nicht auf das Zielgewicht.": {
+    "en": "Weight changes use logged weigh-ins, not your target weight.",
+    "fr": "Les changements de poids utilisent les pesées enregistrées, pas le poids cible.",
+    "ar-EG": "تغيير الوزن بيتحسب من القياسات اللي سجلتها مش الوزن المستهدف."
+  },
+  "Die Auswertung berücksichtigt ausschließlich Termine seit dem Tag deiner Ersteinrichtung:": {
+    "en": "Statistics only include dates since setup:",
+    "fr": "Les statistiques commencent à la date de création du profil :",
+    "ar-EG": "الإحصائيات بتبدأ من يوم التسجيل:"
+  },
+  "Vorname, Nachname, Geburtstag, Körpergröße, Startgewicht, Ziel und Zielgewicht.": {
+    "en": "First name, last name, birthday, height, starting weight, goal and target weight.",
+    "fr": "Prénom, nom, naissance, taille, poids de départ, objectif et poids cible.",
+    "ar-EG": "الاسم وتاريخ الميلاد والطول والوزن والهدف."
+  },
+  "Blautöne passend zu deinem App-Logo. Dein Wunsch wird lokal gespeichert.": {
+    "en": "Blue colors matching your logo. Your choice is stored locally.",
+    "fr": "Des tons bleus assortis au logo. Choix enregistré sur l'appareil.",
+    "ar-EG": "درجات أزرق مناسبة للّوجو. اختيارك بيتحفظ عندك."
+  },
+  "PDF-Archiv": {
+    "en": "PDF archive",
+    "fr": "Archives PDF",
+    "ar-EG": "ملفات PDF"
+  },
+  "Sprache": {
+    "en": "Language",
+    "fr": "Langue",
+    "ar-EG": "اللغة"
+  },
+  "Sprache ändern": {
+    "en": "Change language",
+    "fr": "Changer la langue",
+    "ar-EG": "تغيير اللغة"
+  },
+  "Wähle deine Sprache": {
+    "en": "Choose your language",
+    "fr": "Choisis ta langue",
+    "ar-EG": "اختار لغتك"
+  },
+  "Du kannst deine Sprache später in den Einstellungen ändern.": {
+    "en": "You can change this later in Settings.",
+    "fr": "Tu peux la changer dans les paramètres.",
+    "ar-EG": "تقدر تغير اللغة بعدين من الإعدادات."
+  },
+  "Sprache bestätigen": {
+    "en": "Confirm language",
+    "fr": "Confirmer la langue",
+    "ar-EG": "تأكيد اللغة"
+  },
+  "Brustpresse": {
+    "en": "Chest press",
+    "fr": "Presse pectorale",
+    "ar-EG": "ضغط صدر"
+  },
+  "Latzug zur Brust": {
+    "en": "Lat pulldown",
+    "fr": "Tirage vertical",
+    "ar-EG": "سحب عالي للصدر"
+  },
+  "Sitzendes Rudern": {
+    "en": "Seated row",
+    "fr": "Tirage assis",
+    "ar-EG": "تجديف قاعد"
+  },
+  "Beinpresse": {
+    "en": "Leg press",
+    "fr": "Presse à cuisses",
+    "ar-EG": "ضغط رجل"
+  },
+  "Seitheben": {
+    "en": "Lateral raises",
+    "fr": "Élévations latérales",
+    "ar-EG": "رفرفة جانبي"
+  },
+  "Trizepsdrücken am Kabel": {
+    "en": "Cable triceps pushdown",
+    "fr": "Extension triceps à la poulie",
+    "ar-EG": "ترايسبس بالكابل"
+  },
+  "Bizepscurls": {
+    "en": "Biceps curls",
+    "fr": "Flexions biceps",
+    "ar-EG": "بايسبس"
+  },
+  "Beinbeuger sitzend": {
+    "en": "Seated leg curl",
+    "fr": "Leg curl assis",
+    "ar-EG": "ثني رجل قاعد"
+  },
+  "Beinstrecker": {
+    "en": "Leg extension",
+    "fr": "Extension des jambes",
+    "ar-EG": "فرد الرجل"
+  },
+  "Wadenheben": {
+    "en": "Calf raises",
+    "fr": "Élévations de mollets",
+    "ar-EG": "رفع السمانة"
+  },
+  "Schrägbank-Brustpresse": {
+    "en": "Incline chest press",
+    "fr": "Presse inclinée",
+    "ar-EG": "ضغط صدر مائل"
+  },
+  "Unterstützte Klimmzüge": {
+    "en": "Assisted pull-ups",
+    "fr": "Tractions assistées",
+    "ar-EG": "عقلة بمساعدة"
+  },
+  "Crunches am Kabel": {
+    "en": "Cable crunches",
+    "fr": "Crunch à la poulie",
+    "ar-EG": "بطن بالكابل"
+  },
+  "Schrägbankdrücken mit Kurzhanteln": {
+    "en": "Incline dumbbell press",
+    "fr": "Développé incliné haltères",
+    "ar-EG": "ضغط دامبل مائل"
+  },
+  "Rudermaschine mit Brustauflage": {
+    "en": "Chest-supported row",
+    "fr": "Rowing avec appui pectoral",
+    "ar-EG": "تجديف بسند صدر"
+  },
+  "Rumänisches Kreuzheben mit Kurzhanteln": {
+    "en": "Dumbbell Romanian deadlift",
+    "fr": "Soulevé de terre roumain haltères",
+    "ar-EG": "ديدليفت روماني بالدامبل"
+  },
+  "Schulterpresse": {
+    "en": "Shoulder press",
+    "fr": "Développé épaules",
+    "ar-EG": "ضغط كتف"
+  },
+  "Reverse Butterfly": {
+    "en": "Reverse fly",
+    "fr": "Oiseau inversé",
+    "ar-EG": "رفرفة خلفي"
+  },
+  "Bizepscurls am Kabel": {
+    "en": "Cable biceps curls",
+    "fr": "Curl biceps à la poulie",
+    "ar-EG": "بايسبس بالكابل"
+  },
+  "Trizepsdrücken am Seil": {
+    "en": "Rope triceps pushdown",
+    "fr": "Extension triceps à la corde",
+    "ar-EG": "ترايسبس بالحبل"
+  },
+  "Oberkörperbetontes Ganzkörpertraining + Boxtechnik": {
+    "en": "Full-body workout focused on upper body + boxing",
+    "fr": "Corps entier, accent sur le haut du corps + boxe",
+    "ar-EG": "تمرين جسم كامل بتركيز على الجزء العلوي والبوكس"
+  },
+  "Beine, Rumpf und ergänzender Oberkörper": {
+    "en": "Legs, core and supplementary upper body",
+    "fr": "Jambes, tronc et haut du corps complémentaire",
+    "ar-EG": "رجلين وبطن وجزء علوي"
+  },
+  "Ganzkörpertraining + intensivere Boxintervalle": {
+    "en": "Full body + higher-intensity boxing intervals",
+    "fr": "Corps entier + intervalles de boxe plus intenses",
+    "ar-EG": "جسم كامل وجولات بوكس أقوى"
+  },
+  "5 Minuten zügiges Gehen, 3 Minuten Mobilität; vor der ersten schweren Übung 1–2 leichte Aufwärmsätze.": {
+    "en": "5 min brisk walk, 3 min mobility; 1–2 light warm-up sets before lifting.",
+    "fr": "5 min de marche rapide, 3 min de mobilité ; 1 à 2 séries légères avant les charges lourdes.",
+    "ar-EG": "٥ دقايق مشي سريع و٣ دقايق حركة؛ ١–٢ مجموعة خفيفة قبل التمرين التقيل."
+  },
+  "Griffe auf Brusthöhe; Schulterblätter stabil; kontrolliert drücken und zurückführen.": {
+    "en": "Handles at chest height, shoulder blades steady; press and return with control.",
+    "fr": "Poignées à hauteur de poitrine ; omoplates stables ; pousser et revenir lentement.",
+    "ar-EG": "المقابض عند الصدر، ثبّت كتفك واضغط وارجع ببطء."
+  },
+  "Stange zur oberen Brust ziehen; Ellenbogen nach unten führen; kein Schwung.": {
+    "en": "Pull bar to upper chest, elbows down; avoid momentum.",
+    "fr": "Tirer la barre vers le haut de la poitrine, coudes vers le bas, sans élan.",
+    "ar-EG": "اسحب البار لأعلى الصدر والكوع لتحت من غير مرجحة."
+  },
+  "Neutraler Rücken; Griff zum Oberbauch ziehen; kontrolliert zurückführen.": {
+    "en": "Neutral spine; pull handle toward upper abdomen, return slowly.",
+    "fr": "Dos neutre ; tirer vers le haut du ventre et revenir avec contrôle.",
+    "ar-EG": "خلي ضهرك مستقيم واسحب المقبض لأعلى البطن وارجع ببطء."
+  },
+  "Füße schulterbreit; Knie folgen den Zehen; Becken bleibt auf der Lehne.": {
+    "en": "Feet shoulder-width, knees aligned with toes, hips stay on the pad.",
+    "fr": "Pieds à largeur d’épaules, genoux alignés sur les orteils, bassin collé au siège.",
+    "ar-EG": "رجليك بعرض الكتف والركب مع اتجاه صوابعك والحوض ثابت."
+  },
+  "Leicht gebeugte Arme bis Schulterhöhe heben; ohne Schwung absenken.": {
+    "en": "Lift slightly bent arms to shoulder height; lower without swinging.",
+    "fr": "Lever les bras légèrement fléchis jusqu’aux épaules sans élan.",
+    "ar-EG": "ارفع دراعاتك مثنية شوية لحد الكتف وانزل من غير مرجحة."
+  },
+  "Ellenbogen am Oberkörper halten; Unterarme strecken und langsam beugen.": {
+    "en": "Keep elbows at your sides; extend arms and return slowly.",
+    "fr": "Garder les coudes près du corps, tendre puis fléchir lentement.",
+    "ar-EG": "ثبّت كوعك جنب جسمك وافرد دراعك وارجع ببطء."
+  },
+  "Oberarme ruhig halten; Hanteln anheben und langsam absenken.": {
+    "en": "Keep upper arms steady; lift and lower the dumbbells slowly.",
+    "fr": "Garder les bras fixes ; soulever et descendre lentement les haltères.",
+    "ar-EG": "ثبّت دراعك وارفع الدامبل وانزله ببطء."
+  },
+  "5 Minuten Fahrrad, 3 Minuten Hüft-, Knie- und Sprunggelenkmobilisation; leichte Aufwärmsätze vor der Beinpresse.": {
+    "en": "5 min cycling, 3 min hip, knee and ankle mobility; light sets before leg press.",
+    "fr": "5 min de vélo, 3 min de mobilité hanches/genoux/chevilles ; séries légères avant la presse.",
+    "ar-EG": "٥ دقايق عجلة و٣ دقايق حركة للمفاصل ومجموعات خفيفة قبل ضغط الرجل."
+  },
+  "Kontrolliert tief führen, solange Rücken und Becken stabil bleiben; Knie entlang der Fußrichtung.": {
+    "en": "Lower with control while your back and hips remain stable; knees align with feet.",
+    "fr": "Descendre en contrôle, dos et bassin stables ; genoux alignés avec les pieds.",
+    "ar-EG": "انزل بتحكم والظهر والحوض ثابتين والركب في اتجاه الرجل."
+  },
+  "Polster mit den Unterschenkeln bewegen; Oberschenkel bleiben fixiert.": {
+    "en": "Move the pad with your lower legs; keep thighs still.",
+    "fr": "Déplacer le coussin avec les jambes, cuisses immobiles.",
+    "ar-EG": "حرّك الوسادة بالساق وثبّت الفخذ."
+  },
+  "Beine ohne Ruck strecken und kontrolliert beugen.": {
+    "en": "Extend legs without jerking and bend slowly.",
+    "fr": "Tendre les jambes sans à-coups et revenir lentement.",
+    "ar-EG": "افرد رجليك من غير نطر وارجع ببطء."
+  },
+  "Fersen langsam senken, über den Fußballen hochdrücken; nicht federn.": {
+    "en": "Lower heels slowly, press up through balls of feet; don't bounce.",
+    "fr": "Abaisser les talons lentement puis pousser sur l’avant-pied, sans rebond.",
+    "ar-EG": "انزل بكعبك ببطء واطلع على مشط رجلك من غير نط."
+  },
+  "Schulterblätter stabil; Griffe nach vorn/oben drücken; langsam absenken.": {
+    "en": "Shoulder blades stable; press handles forward and up, lower slowly.",
+    "fr": "Omoplates stables ; pousser vers l’avant et vers le haut, abaisser lentement.",
+    "ar-EG": "ثبّت كتفك واضغط لقدام وفوق وانزل ببطء."
+  },
+  "Ellenbogen nach unten ziehen; kontrolliert ablassen. Alternative: Latzug.": {
+    "en": "Pull elbows down, lower with control. Alternative: lat pulldown.",
+    "fr": "Tirer les coudes vers le bas, descendre lentement. Alternative : tirage vertical.",
+    "ar-EG": "اسحب كوعك لتحت وانزل بهدوء. البديل: سحب عالي."
+  },
+  "Brustkorb in Richtung Becken einrollen; nicht mit den Armen reißen.": {
+    "en": "Curl your rib cage toward pelvis; don't pull with your arms.",
+    "fr": "Enrouler le buste vers le bassin sans tirer avec les bras.",
+    "ar-EG": "قرب صدرك للحوض من غير شد بالدراع."
+  },
+  "5 Minuten Crosstrainer, 3 Minuten Mobilität; 1–2 leichte Aufwärmsätze.": {
+    "en": "5 min elliptical, 3 min mobility; 1–2 light warm-up sets.",
+    "fr": "5 min d'elliptique, 3 min de mobilité ; 1 à 2 séries légères.",
+    "ar-EG": "٥ دقايق إليبتيكال و٣ دقايق حركة ومجموعتين خفاف."
+  },
+  "Bank ca. 15–30°; kontrolliert zur oberen Brust absenken; gleichmäßig hochdrücken.": {
+    "en": "Bench at 15–30°; lower toward upper chest and press evenly.",
+    "fr": "Banc à 15–30° ; descendre vers le haut de poitrine et pousser régulièrement.",
+    "ar-EG": "ميل البنش ١٥–٣٠ درجة، انزل ناحية أعلى الصدر واطلع بتحكم."
+  },
+  "Brust bleibt auf dem Polster; Ellenbogen nach hinten; ohne Schwung zurück.": {
+    "en": "Chest on pad; pull elbows backward, return without swinging.",
+    "fr": "Poitrine sur le coussin ; coudes vers l'arrière, retour sans élan.",
+    "ar-EG": "ثبّت صدرك على الوسادة واسحب كوعك لورا وارجع بهدوء."
+  },
+  "Hüfte nach hinten schieben; Rücken neutral; Hanteln körpernah. Technik einweisen lassen.": {
+    "en": "Push hips back, keep spine neutral and dumbbells close. Get technique guidance.",
+    "fr": "Pousser les hanches en arrière, dos neutre, haltères près du corps. Demander conseil.",
+    "ar-EG": "رجّع الحوض لورا، ضهرك مستقيم والدامبل قريب من جسمك. اتعلم الحركة صح."
+  },
+  "Rücken an der Lehne; Griffe über Kopf drücken; nicht ins Hohlkreuz.": {
+    "en": "Back against pad; press overhead without arching the lower back.",
+    "fr": "Dos contre le dossier ; pousser au-dessus de la tête sans cambrer.",
+    "ar-EG": "ضهرك على المسند واضغط لفوق من غير تقوّس ضهرك."
+  },
+  "Arme nach außen/hinten führen; Schultergürtel ruhig halten.": {
+    "en": "Move arms outward and back, keeping shoulders steady.",
+    "fr": "Écarter les bras vers l'arrière, épaules stables.",
+    "ar-EG": "افتح دراعاتك لورا وثبّت كتفك."
+  },
+  "Oberarme still; kontrolliert beugen und strecken.": {
+    "en": "Keep upper arms steady; curl and extend slowly.",
+    "fr": "Bras fixes ; plier et tendre avec contrôle.",
+    "ar-EG": "ثبّت دراعك واثني وافرد ببطء."
+  },
+  "Ellenbogen dicht am Körper; nach unten drücken, langsam zurück.": {
+    "en": "Keep elbows close to body; push down and return slowly.",
+    "fr": "Coudes près du corps ; pousser vers le bas puis revenir lentement.",
+    "ar-EG": "خلي كوعك قريب من جسمك واضغط لتحت وارجع ببطء."
+  },
+  "Trainingstag abschließen": {
+    "en": "Finish training day",
+    "fr": "Terminer la séance",
+    "ar-EG": "إنهاء يوم التمرين"
+  },
+  "Übung": {
+    "en": "Exercise",
+    "fr": "Exercice",
+    "ar-EG": "تمرين"
+  },
+  "Status": {
+    "en": "Status",
+    "fr": "Statut",
+    "ar-EG": "الحالة"
+  },
+  "Eintrag löschen": {
+    "en": "Delete entry",
+    "fr": "Supprimer l'entrée",
+    "ar-EG": "مسح التسجيل"
+  },
+  "Eintrag gelöscht.": {
+    "en": "Entry deleted.",
+    "fr": "Entrée supprimée.",
+    "ar-EG": "التسجيل اتمسح."
+  },
+  "Sicherung": {
+    "en": "Backup",
+    "fr": "Sauvegarde",
+    "ar-EG": "نسخة احتياطية"
+  },
+  "Höchstes dokumentiertes Satzgewicht": {
+    "en": "Highest logged set weight",
+    "fr": "Poids maximal enregistré par série",
+    "ar-EG": "أعلى وزن متسجل لمجموعة"
+  },
+  "Körpergewicht im Verlauf": {
+    "en": "Body weight over time",
+    "fr": "Évolution du poids",
+    "ar-EG": "تغير الوزن مع الوقت"
+  },
+  "Vollständige Sicherung heruntergeladen. Datei separat aufbewahren.": {
+    "en": "Backup downloaded. Keep the file in a safe place.",
+    "fr": "Sauvegarde téléchargée. Conserve le fichier en lieu sûr.",
+    "ar-EG": "النسخة الاحتياطية اتحملت. احتفظ بيها في مكان آمن."
+  },
+  "Datei ist kein gültiges JSON.": {
+    "en": "Not a valid JSON file.",
+    "fr": "Ce fichier JSON n’est pas valide.",
+    "ar-EG": "الملف مش JSON صحيح."
+  },
+  "Keine gültige vollständige Trainingsplan-Sicherung.": {
+    "en": "This is not a valid training backup.",
+    "fr": "Ce fichier n'est pas une sauvegarde valide.",
+    "ar-EG": "دي مش نسخة احتياطية صحيحة."
+  },
+  "Ersten Wiegeeintrag speichern, um die Veränderung zu sehen.": {
+    "en": "Log your first weigh-in to see changes.",
+    "fr": "Enregistre une première pesée pour voir l’évolution.",
+    "ar-EG": "سجّل أول وزن عشان تشوف التغيير."
+  },
+  "Geplant – zukünftige Tage sind schreibgeschützt": {
+    "en": "Planned – future dates are read-only",
+    "fr": "Prévu – les dates futures sont en lecture seule",
+    "ar-EG": "مخطط – الأيام الجاية للعرض بس"
+  },
+  "Nächster Monat": {
+    "en": "Next month",
+    "fr": "Mois suivant",
+    "ar-EG": "الشهر الجاي"
+  },
+  "Nächster Tag": {
+    "en": "Next day",
+    "fr": "Jour suivant",
+    "ar-EG": "اليوم اللي بعده"
+  },
+  "Vorschau schließen": {
+    "en": "Close preview",
+    "fr": "Fermer l’aperçu",
+    "ar-EG": "قفل المعاينة"
+  },
+  "Öffnen": {
+    "en": "Open",
+    "fr": "Ouvrir",
+    "ar-EG": "فتح"
+  },
+  "Herunterladen": {
+    "en": "Download",
+    "fr": "Télécharger",
+    "ar-EG": "تحميل"
+  },
+  "Löschen": {
+    "en": "Delete",
+    "fr": "Supprimer",
+    "ar-EG": "مسح"
+  },
+  "PDF erstellen": {
+    "en": "Create PDF",
+    "fr": "Créer un PDF",
+    "ar-EG": "إنشاء PDF"
+  },
+  "Noch keine PDFs gespeichert. Erstelle einen Bericht über „Neuen PDF-Report erstellen“.": {
+    "en": "No PDFs saved yet. Create a new PDF report.",
+    "fr": "Aucun PDF enregistré. Crée un nouveau rapport.",
+    "ar-EG": "مفيش ملفات PDF محفوظة. اعمل تقرير جديد."
+  },
+  "Trainingstag": {
+    "en": "Training day",
+    "fr": "Jour d'entraînement",
+    "ar-EG": "يوم تمرين"
+  },
+  "Trainingstage": {
+    "en": "Training days",
+    "fr": "Jours d'entraînement",
+    "ar-EG": "أيام التمرين"
+  },
+  "Ruhetag": {
+    "en": "Rest day",
+    "fr": "Jour de repos",
+    "ar-EG": "يوم راحة"
+  },
+  "Regeneration": {
+    "en": "Recovery",
+    "fr": "Récupération",
+    "ar-EG": "استشفاء"
+  },
+  "Trainingsnotizen": {
+    "en": "Training notes",
+    "fr": "Notes d'entraînement",
+    "ar-EG": "ملاحظات التمرين"
+  },
+  "Mittwoch · ca. 80 Minuten": {
+    "en": "Wednesday · approx. 80 min",
+    "fr": "Mercredi · env. 80 min",
+    "ar-EG": "الأربع · حوالي ٨٠ دقيقة"
+  },
+  "Montag · ca. 90 Minuten": {
+    "en": "Monday · approx. 90 min",
+    "fr": "Lundi · env. 90 min",
+    "ar-EG": "الاثنين · حوالي ٩٠ دقيقة"
+  },
+  "Freitag · ca. 95 Minuten": {
+    "en": "Friday · approx. 95 min",
+    "fr": "Vendredi · env. 95 min",
+    "ar-EG": "الجمعة · حوالي ٩٥ دقيقة"
+  },
+  "Trainingsstand speichern": {
+    "en": "Save training progress",
+    "fr": "Enregistrer le suivi",
+    "ar-EG": "حفظ حالة التمرين"
+  },
+  "Runde 1 – 2 Minuten": {
+    "en": "Round 1 – 2 min",
+    "fr": "Round 1 – 2 min",
+    "ar-EG": "الجولة الأولى – دقيقتين"
+  },
+  "Runde 2 – 2 Minuten": {
+    "en": "Round 2 – 2 min",
+    "fr": "Round 2 – 2 min",
+    "ar-EG": "الجولة التانية – دقيقتين"
+  },
+  "Runde 3 – 2 Minuten": {
+    "en": "Round 3 – 2 min",
+    "fr": "Round 3 – 2 min",
+    "ar-EG": "الجولة التالتة – دقيقتين"
+  },
+  "Runde 4 – 2 Minuten": {
+    "en": "Round 4 – 2 min",
+    "fr": "Round 4 – 2 min",
+    "ar-EG": "الجولة الرابعة – دقيقتين"
+  },
+  "Runde 1 – 3 Minuten": {
+    "en": "Round 1 – 3 min",
+    "fr": "Round 1 – 3 min",
+    "ar-EG": "الجولة الأولى – ٣ دقايق"
+  },
+  "Runde 2 – 3 Minuten": {
+    "en": "Round 2 – 3 min",
+    "fr": "Round 2 – 3 min",
+    "ar-EG": "الجولة التانية – ٣ دقايق"
+  },
+  "Runde 3 – 3 Minuten": {
+    "en": "Round 3 – 3 min",
+    "fr": "Round 3 – 3 min",
+    "ar-EG": "الجولة التالتة – ٣ دقايق"
+  },
+  "Runde 4 – 3 Minuten": {
+    "en": "Round 4 – 3 min",
+    "fr": "Round 4 – 3 min",
+    "ar-EG": "الجولة الرابعة – ٣ دقايق"
+  },
+  "Pause – 1 Minute": {
+    "en": "Rest – 1 min",
+    "fr": "Pause – 1 min",
+    "ar-EG": "راحة – دقيقة"
+  },
+  "Abschluss – 1 Minute": {
+    "en": "Cool-down – 1 min",
+    "fr": "Retour au calme – 1 min",
+    "ar-EG": "تهدئة – دقيقة"
+  },
+  "Abschluss – 2 Minuten": {
+    "en": "Cool-down – 2 min",
+    "fr": "Retour au calme – 2 min",
+    "ar-EG": "تهدئة – دقيقتين"
+  },
+  "– Jab üben: Abstand zum Boxsack halten und nach jedem Schlag die Deckung wiederherstellen.": {
+    "en": "– Practice jabs: keep distance from the bag and reset your guard after each punch.",
+    "fr": "– Travailler le jab : garder la distance et revenir en garde après chaque coup.",
+    "ar-EG": "– اتدرب على الجاب: حافظ على المسافة وارجع للدفاع بعد كل ضربة."
+  },
+  "– Locker bewegen und ruhig atmen.": {
+    "en": "– Move lightly and breathe calmly.",
+    "fr": "– Bouger légèrement et respirer calmement.",
+    "ar-EG": "– اتحرك براحة وخد نفسك بهدوء."
+  },
+  "– Jab und Cross abwechselnd schlagen. Handgelenke gerade halten und Hüfte kontrolliert mitdrehen.": {
+    "en": "– Alternate jabs and crosses; keep wrists straight and rotate hips with control.",
+    "fr": "– Alterner jab et direct ; poignets droits et rotation contrôlée des hanches.",
+    "ar-EG": "– بدّل بين الجاب والكروس وخلي رسغك مستقيم ولف الحوض بتحكم."
+  },
+  "– Arme lockern und erholen.": {
+    "en": "– Relax your arms and recover.",
+    "fr": "– Relâcher les bras et récupérer.",
+    "ar-EG": "– ريّح دراعاتك وخد نفس."
+  },
+  "– Jab-Cross-Kombinationen schlagen und anschließend seitlich ausweichen.": {
+    "en": "– Throw jab-cross combinations, then slip sideways.",
+    "fr": "– Enchaîner jab-direct, puis esquiver sur le côté.",
+    "ar-EG": "– العب جاب وكروس وبعدها اتحرك للجنب."
+  },
+  "– Locker bewegen und gleichmäßig atmen.": {
+    "en": "– Move lightly and breathe evenly.",
+    "fr": "– Bouger souplement et respirer régulièrement.",
+    "ar-EG": "– اتحرك براحة واتنفس بانتظام."
+  },
+  "– Freie Kombinationen in kontrolliertem Tempo. Saubere Technik geht vor Schlagkraft.": {
+    "en": "– Free combinations at a controlled pace. Technique over power.",
+    "fr": "– Enchaînements libres, rythme contrôlé. Technique avant puissance.",
+    "ar-EG": "– مجموعات ضربات بحرية وبسرعة متحكم فيها. التقنية أهم من القوة."
+  },
+  "– Lockeres Schattenboxen und ausschütteln.": {
+    "en": "– Light shadowboxing and shake out.",
+    "fr": "– Shadowboxing léger et relâchement.",
+    "ar-EG": "– شادو بوكس خفيف وفك عضلاتك."
+  },
+  "5 Minuten lockeres Gehen.": {
+    "en": "5 min easy walking.",
+    "fr": "5 min de marche tranquille.",
+    "ar-EG": "٥ دقايق مشي خفيف."
+  },
+  "– Jab und Cross in gleichmäßigem Rhythmus; auf Deckung und Fußstellung achten.": {
+    "en": "– Jab and cross at a steady pace; keep guard and footwork.",
+    "fr": "– Jab et direct à rythme régulier ; garder la garde et les appuis.",
+    "ar-EG": "– جاب وكروس بإيقاع ثابت، ركز في الدفاع ووقفة رجلك."
+  },
+  "– Locker gehen und gleichmäßig atmen.": {
+    "en": "– Walk lightly and breathe evenly.",
+    "fr": "– Marcher tranquillement et respirer régulièrement.",
+    "ar-EG": "– امشي بهدوء واتنفس بانتظام."
+  },
+  "– Zwei- und Dreierkombinationen mit kontrollierter Beinarbeit.": {
+    "en": "– Two- and three-punch combos with controlled footwork.",
+    "fr": "– Séries de deux et trois coups avec déplacements contrôlés.",
+    "ar-EG": "– مجموعات ضربتين وتلات ضربات مع حركة رجلين مظبوطة."
+  },
+  "– Arme ausschütteln und erholen.": {
+    "en": "– Shake out arms and recover.",
+    "fr": "– Relâcher les bras et récupérer.",
+    "ar-EG": "– ريّح دراعاتك واسترد نفسك."
+  },
+  "– Dreimal abwechseln: 20 Sekunden schneller schlagen und 40 Sekunden locker arbeiten.": {
+    "en": "– Repeat three times: 20 sec fast punches, 40 sec relaxed.",
+    "fr": "– Trois fois : 20 s rapides et 40 s légères.",
+    "ar-EG": "– كرر ٣ مرات: ٢٠ ثانية ضرب سريع و٤٠ ثانية خفيف."
+  },
+  "– Ruhig atmen und bewegen.": {
+    "en": "– Breathe calmly and keep moving.",
+    "fr": "– Respirer calmement et bouger.",
+    "ar-EG": "– اتنفس بهدوء وخليك بتتحرك."
+  },
+  "– Technisch saubere Kombinationen mit seitlichen Schritten und anschließendem Zurückkehren in die Deckung.": {
+    "en": "– Clean combinations with side steps, then return to guard.",
+    "fr": "– Enchaînements propres avec pas latéraux, puis retour en garde.",
+    "ar-EG": "– ضربات مظبوطة مع خطوات جانبية وارجع للدفاع."
+  },
+  "– Lockeres Schattenboxen zum Herunterfahren.": {
+    "en": "– Light shadowboxing to cool down.",
+    "fr": "– Shadowboxing léger pour récupérer.",
+    "ar-EG": "– شادو بوكس خفيف عشان تهدى."
+  },
+  "5–10 Minuten lockeres Gehen.": {
+    "en": "5–10 min easy walking.",
+    "fr": "5 à 10 min de marche tranquille.",
+    "ar-EG": "٥–١٠ دقايق مشي خفيف."
+  },
+  "5–7 Minuten lockeres Radfahren oder Gehen; kein intensiver Boxsack.": {
+    "en": "5–7 min easy cycling or walking; no intense bag work.",
+    "fr": "5 à 7 min de vélo ou marche facile ; pas de sac intense.",
+    "ar-EG": "٥–٧ دقايق عجلة أو مشي خفيف؛ من غير بوكس عنيف."
+  },
+  "Dein Vorname": {
+    "en": "Your first name",
+    "fr": "Ton prénom",
+    "ar-EG": "اسمك الأول"
+  },
+  "Dein Nachname": {
+    "en": "Your last name",
+    "fr": "Ton nom",
+    "ar-EG": "اسم العيلة"
+  },
+  "z. B. 175": {
+    "en": "e.g. 175",
+    "fr": "ex. 175",
+    "ar-EG": "مثلاً ١٧٥"
+  },
+  "z. B. 85": {
+    "en": "e.g. 85",
+    "fr": "ex. 85",
+    "ar-EG": "مثلاً ٨٥"
+  },
+  "z. B. 80": {
+    "en": "e.g. 80",
+    "fr": "ex. 80",
+    "ar-EG": "مثلاً ٨٠"
+  },
+  "z. B. 85,0": {
+    "en": "e.g. 85.0",
+    "fr": "ex. 85,0",
+    "ar-EG": "مثلاً ٨٥"
+  },
+  "Bitte fülle die Pflichtfelder korrekt aus.": {
+    "en": "Please complete the required fields correctly.",
+    "fr": "Remplis correctement les champs obligatoires.",
+    "ar-EG": "املا البيانات المطلوبة صح."
+  },
+  "Bitte gib ein gültiges Geburtsdatum in der Vergangenheit ein.": {
+    "en": "Please select a valid date of birth in the past.",
+    "fr": "Choisis une date de naissance valide dans le passé.",
+    "ar-EG": "اختار تاريخ ميلاد صحيح في الماضي."
+  },
+  "Bitte wähle dein Trainingsziel aus.": {
+    "en": "Please choose your training goal.",
+    "fr": "Choisis ton objectif d'entraînement.",
+    "ar-EG": "اختار هدف التمرين."
+  },
+  "Bitte alle Pflichtfelder korrekt ausfüllen.": {
+    "en": "Please complete all required fields.",
+    "fr": "Remplis tous les champs obligatoires.",
+    "ar-EG": "املا كل البيانات المطلوبة."
+  },
+  "Bitte ein gültiges Geburtsdatum in der Vergangenheit eingeben.": {
+    "en": "Please enter a valid date of birth in the past.",
+    "fr": "Saisis une date de naissance valide dans le passé.",
+    "ar-EG": "اكتب تاريخ ميلاد صحيح في الماضي."
+  },
+  "Woche": {
+    "en": "Week",
+    "fr": "Semaine",
+    "ar-EG": "أسبوع"
+  },
+  "Trainingsplan": {
+    "en": "Training plan",
+    "fr": "Programme d'entraînement",
+    "ar-EG": "خطة التمرين"
+  },
+  "Nächstes Training": {
+    "en": "Next training",
+    "fr": "Prochain entraînement",
+    "ar-EG": "التمرين الجاي"
+  },
+  "Abgeschlossen": {
+    "en": "Completed",
+    "fr": "Terminé",
+    "ar-EG": "خلص"
+  },
+  "Geplant": {
+    "en": "Planned",
+    "fr": "Prévu",
+    "ar-EG": "مخطط"
+  },
+  "Verpasst": {
+    "en": "Missed",
+    "fr": "Manqué",
+    "ar-EG": "فات"
+  },
+  "In Bearbeitung": {
+    "en": "In progress",
+    "fr": "En cours",
+    "ar-EG": "جاري"
+  }
+}

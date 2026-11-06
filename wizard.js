@@ -22,7 +22,7 @@
     error.hidden=true;
     form.querySelector('.wizard-body').scrollTop=0;
   }
-  function fail(text,el){error.textContent=text;error.hidden=false;if(el){el.focus();}return false;}
+  function fail(text,el){error.textContent=window.MyTrainingI18n?.t(text)||text;error.hidden=false;if(el){el.focus();}return false;}
   function validateStep(){
     const active=steps[index];
     for(const input of active.querySelectorAll('input:not([type=radio])')){

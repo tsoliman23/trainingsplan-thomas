@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v18-wheel-cloudflare-push';
+const CACHE = 'mytraining-v19-language-birth-fix';
 
 const ASSETS = [
     './',
@@ -11,6 +11,9 @@ const ASSETS = [
     './wizard.css',
     './wizard.js',
     './birth-wheel.js',
+    './i18n.js',
+    './translations.json',
+    './language.css',
     './push-config.js',
     './push-client.js',
     './polish.css',

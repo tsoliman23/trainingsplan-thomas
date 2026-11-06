@@ -62,3 +62,8 @@ body.mt-modal-open{overflow:hidden!important}
 .profile-dialog .wizard-track{display:none!important}
 .profile-dialog .wizard-progress{margin-bottom:10px!important}
 .profile-dialog .wizard-body{padding-top:16px!important}
+/* The selected item is the actual stored birthday. No duplicate value below. */
+.birth-value{display:none!important}
+.profile-dialog .birth-wheel{scrollbar-width:none;touch-action:pan-y;overscroll-behavior-y:contain;direction:ltr!important}
+.profile-dialog .birth-option{min-height:44px;flex:none;line-height:1.25!important}
+.profile-dialog .birth-wheel-wrap:after{top:calc(50% + 4px)!important}

@@ -1,14 +1,17 @@
 /* Offline PDF: exactly one A4 page per training day, with optional exercise details. */
 async function makeModernPdf(options={}) {
   const includeInfo=!!options.includeInfo;
+  const tr=s=>window.MyTrainingI18n?.t(s)||s;
+  const locale=window.MyTrainingI18n?.current?.()||'de';
+  const appProfile=JSON.parse(localStorage.getItem('training-profile-v1')||'{}');
   const W=595,H=842,S=2;
   const C={navy:'#132a5a',blue:'#2f5be8',deep:'#1f43b8',page:'#edf3ff',white:'#ffffff',ink:'#1a2740',muted:'#526786',pale:'#eaf1ff'};
   const greeting=document.getElementById('personalGreeting')?.textContent||'';
-  const firstName=greeting.replace(/^Hallo\s+/,'').replace(/!$/,'').trim()||'Training';
+  const firstName=appProfile.firstName||greeting.replace(/^(Hallo|Hello|Bonjour|أهلاً يا)\s+/,'').replace(/!$/,'').trim()||'Training';
   const goal=document.getElementById('goalNumber')?.textContent||'–';
   const weight=document.getElementById('bodyWeight')?.value||'–';
   const all=[...document.querySelectorAll('input[data-check]')],done=all.filter(x=>x.checked).length;
-  const date=new Date().toLocaleDateString('de-DE');
+  const date=new Date().toLocaleDateString(locale==='ar-EG'?'ar-EG':locale==='en'?'en-GB':locale==='fr'?'fr-FR':'de-DE');
   let logo=null;
   try{logo=new Image();logo.src='./icons/icon-192.png';await logo.decode();}catch(_){logo=null;}
   const pages=[];let canvas,ctx;
@@ -44,7 +47,7 @@ async function makeModernPdf(options={}) {
     text(firstName.toLocaleUpperCase('de-DE'),90,30,11,'#cbd8fa',true);
     text('MYTRAINING',90,53,21,C.white,true);
     text(date,511,33,9,'#cbd8fa');
-    text(`${day}  ·  ${idx}/3`,29,H-14,9,C.muted);
+    text(`${tr(day)}  ·  ${idx}/3`,29,H-14,9,C.muted);
   }
   function savePage(){pages.push(canvas.toDataURL('image/jpeg',0.92).split(',')[1]);}
   function measured(item){
@@ -56,11 +59,11 @@ async function makeModernPdf(options={}) {
     const checkbox=item.querySelector('input[data-check]');
     if(checkbox && fields.length>=5){
       const key=checkbox.name,shared=item.querySelector('input[name="done_reps_'+key+'"]')?.value||'–';
-      fields[1]={label:'Wdh.',value:shared};
+      fields[1]={label:tr('Wdh.'),value:shared};
       for(let i=1;i<=3;i++){
         const reps=item.querySelector('input[name="reps_set'+i+'_'+key+'"]')?.value||shared;
         const kg=item.querySelector('input[name="weight_set'+i+'_'+key+'"]')?.value||'–';
-        fields[i+1]={label:'S'+i+' Wdh./kg',value:reps+'/'+kg};
+        fields[i+1]={label:'S'+i+' '+tr('Wdh.')+'/kg',value:reps+'/'+kg};
       }
     }
     const titleLines=lines(title,390,10.4,true);
@@ -84,9 +87,9 @@ async function makeModernPdf(options={}) {
       // Small tick kept fully within its own dedicated status badge.
       ctx.strokeStyle=C.white;ctx.lineWidth=1.6;ctx.lineCap='round';ctx.lineJoin='round';
       ctx.beginPath();ctx.moveTo(493,badgeY+11);ctx.lineTo(496,badgeY+14);ctx.lineTo(501,badgeY+8);ctx.stroke();
-      text('ERLEDIGT',505,badgeY+14,7.1,C.white,true);
+      text(tr('ERLEDIGT'),505,badgeY+14,7.1,C.white,true);
     }else{
-      text('OFFEN',505,badgeY+14,8,C.muted,true);
+      text(tr('OFFEN'),505,badgeY+14,8,C.muted,true);
     }
     let yy=y+19;
     for(const l of d.titleLines){text(l,74,yy,10.4,C.ink,true);yy+=13;}
@@ -110,8 +113,8 @@ async function makeModernPdf(options={}) {
       const pct=all.length?Math.round(100*done/all.length):0;
       box(27,y,541,48,9,C.white);
       text(pct+'%',40,y+30,24,C.blue,true);
-      text(`${done} von ${all.length} Übungen erledigt`,104,y+21,10.6,C.ink,true);
-      text(`Gewicht: ${weight} kg  ·  Ziel: ${goal} kg`,104,y+35,9.3,C.muted);
+      text(locale==='en'?`${done} of ${all.length} exercises done`:locale==='fr'?`${done} exercices sur ${all.length} terminés`:locale==='ar-EG'?`${done} من ${all.length} تمرين خلصوا`:`${done} von ${all.length} Übungen erledigt`,104,y+21,10.6,C.ink,true);
+      text(`${locale==='en'?'Weight':locale==='fr'?'Poids':locale==='ar-EG'?'الوزن':'Gewicht'}: ${weight} kg  ·  ${locale==='en'?'Target':locale==='fr'?'Objectif':locale==='ar-EG'?'الهدف':'Ziel'}: ${goal} kg`,104,y+35,9.3,C.muted);
       y+=56;
     }
     const items=[...root.querySelectorAll('.item')].filter(x=>x.querySelector('label strong'));
@@ -127,12 +130,12 @@ async function makeModernPdf(options={}) {
     ctx.save();ctx.translate(0,y);ctx.scale(1,scale);
     let yy=0;
     box(27,yy,541,dayHeaderH,9,C.blue);
-    text(day.toLocaleUpperCase('de-DE'),42,yy+22,18,C.white,true);
-    text(`${completed}/${items.length} erledigt`,471,yy+19,9.8,C.white,true);
+    text(tr(day).toLocaleUpperCase(locale),42,yy+22,18,C.white,true);
+    text(`${completed}/${items.length} ${tr('ERLEDIGT')}`,471,yy+19,9.8,C.white,true);
     for(const [i,l] of lines(subtitle,490,8.9).slice(0,1).entries())text(l,42,yy+36+i*10,8.9,'#ebf2ff');
     yy+=dayHeaderH+8;
     data.forEach((d,i)=>{drawItem(d,i+1,yy);yy+=d.h+gap;});
-    if(noteLines.length){box(27,yy,541,noteH,8,C.white);text('TRAININGSNOTIZEN',40,yy+15,10,C.deep,true);noteLines.forEach((l,i)=>text(l,40,yy+28+i*11,8.9,C.ink));}
+    if(noteLines.length){box(27,yy,541,noteH,8,C.white);text(tr('TRAININGSNOTIZEN'),40,yy+15,10,C.deep,true);noteLines.forEach((l,i)=>text(l,40,yy+28+i*11,8.9,C.ink));}
     ctx.restore();
     savePage();
   }

@@ -148,3 +148,14 @@ Im zweiten Einrichtungsschritt werden Tag, Monat und Jahr in drei getrennten ver
 ### Lokales Testen und Grenzen
 
 Die JavaScript-Syntax kann mit `node --check` geprüft werden. Damit ist noch nicht bestätigt, dass eine echte iOS-Benachrichtigung ankommt; das erfordert das reale Cloudflare-Deployment und einen Push-Test auf dem Gerät. **Die App ist ohne Cloudflare weiterhin als Offline-Trainingsplan nutzbar**, nur Hintergrund-Push bleibt dann aus.
+
+
+## Mehrsprachigkeit und Geburtsdatumsauswahl
+
+Beim ersten Start erscheint zunächst die Sprachauswahl für Deutsch, Englisch, Französisch oder ägyptisches Arabisch. Die Sprache bleibt unter dem Schlüssel `mytraining-language-v1` lokal gespeichert und lässt sich unter **Mehr > Einstellungen > Sprache** ändern. Das Datenmodell (Trainingsziele, IDs, historische Daten und ISO-Datumswerte) bleibt unabhängig von der Oberflächensprache.
+
+Übersetzungen liegen in `translations.json` und werden offline über `i18n.js` geladen. Die Datei ist im Service-Worker-Cache enthalten. Bei Ergänzungen neuer Features müssen alle sichtbaren Texte in allen vier Sprachen gepflegt werden. Selbst eingegebene Notizen und Übungsnamen werden nicht automatisch übersetzt.
+
+Das Geburtsdatum wird mit den drei vertikal scrollbaren Auswahlrädern für Tag, Monat und Jahr gewählt. Die optisch mittig markierten Optionen werden direkt als `YYYY-MM-DD` im versteckten Formularfeld gespeichert. Eine zweite Datumsanzeige wurde entfernt. Die Tagesliste passt sich an Monat und Schaltjahr an.
+
+Zum Aktualisieren bei GitHub Pages müssen die neue `translations.json`, `i18n.js` und `language.css` mit veröffentlicht werden. Die Cache-Version in `sw.js` wurde erhöht. Nach der Installation der neuen Version die App online neu öffnen.
