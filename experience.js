@@ -68,7 +68,11 @@ const settingsView=document.createElement('section');settingsView.className='cal
 <div class="cal-panel xp-about"><h3>Über die App</h3><strong>MyTraining</strong><p>Version 1.0</p><p>Dein persönlicher Trainingsbegleiter für Planung, Fortschritt und Motivation.</p></div>`;
 shell.append(settingsView);const install=$('installApp');if(install)settingsView.querySelector('.xp-settings .cal-panel:last-child')?.append(install);
 const navEl=document.createElement('nav');navEl.id='xp-bottom-nav';navEl.className='xp-bottom-nav';navEl.setAttribute('aria-label','Untere Hauptnavigation');
-const items=[['dashboard','⌂','Heute'],['calendar','▦','Kalender'],['training','▥','Training'],['stats','▤','Statistik'],['settings','⚙','Mehr']];
+const icons={
+ training:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11M21 21l-1-1M3 3l1 1M18 22l4-4M2 6l4-4M3 10l7-7M14 21l7-7"/></svg>',
+ stats:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18M7 17v-5m5 5V7m5 10V9"/></svg>'
+};
+const items=[['dashboard','⌂','Heute'],['calendar','▦','Kalender'],['training',icons.training,'Training'],['stats',icons.stats,'Statistik'],['settings','⚙','Mehr']];
 navEl.innerHTML=items.map(([v,icon,label])=>`<button type="button" data-xp-view="${v}" aria-label="${label}"><span class="xp-nav-icon" aria-hidden="true">${icon}</span><small>${label}</small></button>`).join('');document.body.append(navEl);
 navEl.querySelectorAll('[data-xp-view]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.xpView)));
 function show(view){settingsView.hidden=view!=='settings';if(view==='settings'){for(const v of ['dashboard','calendar','training','stats','documents']){const e=$('view-'+v);if(e)e.hidden=true;}document.querySelectorAll('.cal-tabs button').forEach(x=>x.classList.remove('active'));}else{nav(view);}document.querySelectorAll('[data-xp-view]').forEach(b=>{const a=b.dataset.xpView===view;b.classList.toggle('selected',a);b.setAttribute('aria-current',a?'page':'false');});window.scrollTo(0,0);}

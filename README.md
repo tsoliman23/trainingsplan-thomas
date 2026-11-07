@@ -303,3 +303,7 @@ Die erweiterte ZIP enthaelt keine Git-Verzeichnisse, node_modules oder lokalen W
 - Das Geburtsdatumsfeld in der separaten Profilbearbeitung ist auf die Dialogbreite begrenzt.
 - Der PDF-Erstellungsbutton ist im Dunkelmodus blau mit weißer Schrift.
 - Speicher-, Sicherungs-, PDF- und Profilaktionen zeigen kurz eine Bestätigung unten am Bildschirm. Häufige automatische Speichervorgänge werden gedrosselt.
+
+## Profilanzeige und Navigation
+
+Die Profilübersicht zeigt das Geburtsdatum sprachabhängig mit `Intl.DateTimeFormat` (`de-DE`, `en-GB`, `fr-FR`, `ar-EG`). Intern bleibt das unveränderte ISO-Datum (`YYYY-MM-DD`) gespeichert und in Datumsformularen verwendet. Die Navigation nutzt für Training ein Hantelsymbol und für Statistik ein Balkendiagramm. Diese Änderung benötigt kein erneutes Cloudflare-Deployment.

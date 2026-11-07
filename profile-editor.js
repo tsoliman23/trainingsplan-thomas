@@ -6,6 +6,17 @@ const goals=['Abnehmen','Zunehmen','Muskelaufbau','Gewicht halten','Ernährung /
 function load(key){try{return JSON.parse(localStorage.getItem(key)||'{}')||{};}catch{return {};}}
 function text(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function tr(s){return window.MyTrainingI18n?.t(s)||s;}
+// Keep ISO 8601 in storage and HTML date inputs; format only the profile overview.
+function displayBirthday(iso){
+ const match=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso||''));
+ if(!match)return '–';
+ const year=Number(match[1]),month=Number(match[2]),day=Number(match[3]);
+ const date=new Date(year,month-1,day,12);
+ if(date.getFullYear()!==year||date.getMonth()!==month-1||date.getDate()!==day)return '–';
+ const lang=window.MyTrainingI18n?.current?.()||'de';
+ const locale=({'de':'de-DE','en':'en-GB','fr':'fr-FR','ar-EG':'ar-EG'})[lang]||'de-DE';
+ return new Intl.DateTimeFormat(locale,{day:'2-digit',month:'2-digit',year:'numeric'}).format(date);
+}
 function validBirth(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s))return false;const d=new Date(s+'T12:00:00');return !isNaN(+d)&&d.getFullYear()>=1900&&d.getFullYear()==Number(s.slice(0,4))&&d.getMonth()+1==Number(s.slice(5,7))&&d.getDate()==Number(s.slice(8,10))&&d<new Date();}
 let overlay=null,screen='overview',lastFocus=null;
 function create(){if(overlay)return;overlay=document.createElement('div');overlay.id='xp-profile-editor';overlay.className='xp-profile-overlay';overlay.hidden=true;
@@ -20,7 +31,7 @@ function current(){return {base:load(BASE),full:load(STORE)};}
 function overview(){screen='overview';const {base,full}=current();const selected=Array.isArray(full.trainingGoals)?full.trainingGoals:(full.trainingGoal?[full.trainingGoal]:[]);
 $('xp-profile-title').textContent=tr('Profilübersicht');$('xp-profile-error').hidden=true;
 $('xp-profile-content').innerHTML=`<div class="xp-edit-cards">
-<button type="button" data-edit="personal"><span><strong>${tr('Persönliche Angaben')}</strong><small>${text([base.firstName,full.lastName].filter(Boolean).join(' '))} · ${text(full.birthday||'–')}</small></span><b aria-hidden="true">›</b></button>
+<button type="button" data-edit="personal"><span><strong>${tr('Persönliche Angaben')}</strong><small>${text([base.firstName,full.lastName].filter(Boolean).join(' '))} · ${text(displayBirthday(full.birthday))}</small></span><b aria-hidden="true">›</b></button>
 <button type="button" data-edit="weight"><span><strong>${tr('Gewicht und Ziel')}</strong><small>${text(full.currentWeight||'–')} kg · ${text(base.goalWeight||'–')} kg</small></span><b aria-hidden="true">›</b></button>
 <button type="button" data-edit="goals"><span><strong>${tr('Trainingsziele bearbeiten')}</strong><small>${selected.map(text).join(' · ')||'–'}</small></span><b aria-hidden="true">›</b></button></div>`;
 $('xp-profile-content').querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>detail(b.dataset.edit));
@@ -55,5 +66,6 @@ if(which==='personal'){
 try{localStorage.setItem(STORE,JSON.stringify(nextFull));localStorage.setItem(BASE,JSON.stringify(nextBase));window.TrainingApp?.updateProfile?.(nextBase);window.TrainingUX?.refresh?.();window.TrainingCalendar?.refresh?.();overview();window.MyTrainingToast?.success('Änderungen gespeichert');}catch(e){error('Speichern fehlgeschlagen.');}
 }
 function open(){create();lastFocus=document.activeElement;overlay.hidden=false;overview();$('xp-profile-close').focus();}
+document.addEventListener('mytraining-language-change',()=>{if(overlay&&!overlay.hidden&&screen==='overview')overview();});
 window.MyTrainingProfileEditor={open,close};
 })();

@@ -301,3 +301,7 @@ html[data-theme="dark"] #view-documents .pdf-bottom-actions .pdf-export{backgrou
 #mytraining-toast{position:fixed;z-index:90000;left:50%;bottom:calc(94px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;align-items:center;justify-content:center;gap:10px;width:max-content;max-width:calc(100vw - 36px);min-height:44px;padding:11px 18px;border-radius:14px;background:#173a72;color:#fff;border:1px solid #5476a5;box-shadow:0 10px 32px #0005;font-size:14px;font-weight:700;text-align:center;pointer-events:none}
 #mytraining-toast .toast-check{font-size:21px;font-weight:900;color:#9af3c7;line-height:1}
 html[data-theme="light"] #mytraining-toast{background:#193b73;color:#fff}
+
+/* Uniform, scalable navigation icons (dumbbell and statistics chart). */
+.xp-bottom-nav .xp-nav-icon svg{display:block;width:25px;height:25px;stroke:currentColor;overflow:visible}
+.xp-bottom-nav .xp-nav-icon{display:flex;align-items:center;justify-content:center;height:27px;min-height:27px}

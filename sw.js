@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v31-zoom-profile-feedback';
+const CACHE = 'mytraining-v32-locale-birthday-nav-icons';
 
 const ASSETS = [
     './',
