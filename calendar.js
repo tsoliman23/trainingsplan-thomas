@@ -13,7 +13,7 @@ const addDays=(s,n)=>{const d=fromIso(s);d.setDate(d.getDate()+n);return localIs
 const monday=s=>{const d=fromIso(s), n=d.getDay();d.setDate(d.getDate()-((n+6)%7));return localIso(d);};
 const setupDate=()=>localStorage.getItem('training-setup-date-v1')||today;
 const read=()=>{try{const v=JSON.parse(localStorage.getItem(KEY)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{};}catch{return {};}};
-const store=()=>{if(!window.__mytrainingResetting)localStorage.setItem(KEY,JSON.stringify(calendarData));};
+const store=()=>{if(!window.__mytrainingResetting){localStorage.setItem(KEY,JSON.stringify(calendarData));document.dispatchEvent(new CustomEvent('mytraining-data-updated'));}};
 const roots=()=>training.map(x=>$(x)).filter(Boolean);
 function inputs(day){return [...$(day).querySelectorAll('input[data-check],input[data-result],textarea[name]')].filter(x=>x.name);}
 function capture(day){const o={};inputs(day).forEach(x=>o[x.name]=x.type==='checkbox'?x.checked:x.value);return o;}

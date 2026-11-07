@@ -1310,9 +1310,9 @@
     "ar-EG": "هدف التمرين بتاعك"
   },
   "Training abgeschlossen": {
-    "en": "Training completed",
-    "fr": "Entraînement terminé",
-    "ar-EG": "التمرين خلص"
+    "en": "Workouts completed",
+    "fr": "Séances terminées",
+    "ar-EG": "التمارين المكتملة"
   },
   "Nicht eingetragen": {
     "en": "Not logged",
@@ -1888,5 +1888,195 @@
     "en": "Could not save. Please check your backup.",
     "fr": "Enregistrement impossible. Vérifie ta sauvegarde.",
     "ar-EG": "الحفظ فشل. راجع النسخة الاحتياطية."
+  },
+  "Dein Gewichtsverlauf": {
+    "en": "Your weight trend",
+    "fr": "Évolution de ton poids",
+    "ar-EG": "تطور وزنك"
+  },
+  "Zeitraum": {
+    "en": "Period",
+    "fr": "Période",
+    "ar-EG": "الفترة"
+  },
+  "Zeitraum auswählen": {
+    "en": "Choose period",
+    "fr": "Choisir une période",
+    "ar-EG": "اختار الفترة"
+  },
+  "30 Tage": {
+    "en": "30 days",
+    "fr": "30 jours",
+    "ar-EG": "٣٠ يوم"
+  },
+  "90 Tage": {
+    "en": "90 days",
+    "fr": "90 jours",
+    "ar-EG": "٩٠ يوم"
+  },
+  "Gesamter Zeitraum": {
+    "en": "All time",
+    "fr": "Toute la période",
+    "ar-EG": "كل الفترة"
+  },
+  "Aktuelles Gewicht": {
+    "en": "Current weight",
+    "fr": "Poids actuel",
+    "ar-EG": "الوزن الحالي"
+  },
+  "7-Tage-Durchschnitt": {
+    "en": "7-day average",
+    "fr": "Moyenne sur 7 jours",
+    "ar-EG": "متوسط ٧ أيام"
+  },
+  "Abstand zum Ziel": {
+    "en": "Distance to goal",
+    "fr": "Écart par rapport à l’objectif",
+    "ar-EG": "المتبقي للهدف"
+  },
+  "Gemessenes Gewicht": {
+    "en": "Recorded weight",
+    "fr": "Poids mesuré",
+    "ar-EG": "الوزن المسجل"
+  },
+  "Gewichtsverlauf und 7-Tage-Durchschnitt": {
+    "en": "Weight trend and 7-day average",
+    "fr": "Évolution du poids et moyenne sur 7 jours",
+    "ar-EG": "تطور الوزن ومتوسط ٧ أيام"
+  },
+  "Noch keine Gewichtseinträge vorhanden.": {
+    "en": "No weight entries yet.",
+    "fr": "Aucune mesure de poids enregistrée.",
+    "ar-EG": "مفيش قياسات وزن لسه."
+  },
+  "Ein Messwert vorhanden. Für einen Verlauf weitere Tage erfassen.": {
+    "en": "One measurement available. Log more days to see a trend.",
+    "fr": "Une mesure disponible. Ajoute d’autres jours pour voir une tendance.",
+    "ar-EG": "في قياس واحد. سجل أيام أكتر عشان تشوف الاتجاه."
+  },
+  "Der 7-Tage-Durchschnitt berücksichtigt nur vorhandene Messungen innerhalb der letzten sieben Kalendertage.": {
+    "en": "The 7-day average uses only recorded measurements from the last seven calendar days.",
+    "fr": "La moyenne sur 7 jours tient compte uniquement des mesures enregistrées au cours des sept derniers jours calendaires.",
+    "ar-EG": "متوسط ٧ أيام بيحسب القياسات المسجلة بس خلال آخر ٧ أيام."
+  },
+  "Messungen": {
+    "en": "measurements",
+    "fr": "mesures",
+    "ar-EG": "قياسات"
+  },
+  "Letzter Wert": {
+    "en": "Last value",
+    "fr": "Dernière valeur",
+    "ar-EG": "آخر قيمة"
+  },
+  "Messungen in sieben Tagen": {
+    "en": "measurements in seven days",
+    "fr": "mesures en sept jours",
+    "ar-EG": "قياسات خلال ٧ أيام"
+  },
+  "Noch keine Messung": {
+    "en": "No measurements yet",
+    "fr": "Aucune mesure",
+    "ar-EG": "مفيش قياسات"
+  },
+  "DEINE WOCHE": {
+    "en": "YOUR WEEK",
+    "fr": "TA SEMAINE",
+    "ar-EG": "أسبوعك"
+  },
+  "Wochenrückblick": {
+    "en": "Weekly review",
+    "fr": "Bilan hebdomadaire",
+    "ar-EG": "ملخص الأسبوع"
+  },
+  "Vorherige Woche": {
+    "en": "Previous week",
+    "fr": "Semaine précédente",
+    "ar-EG": "الأسبوع اللي فات"
+  },
+  "Nächste Woche": {
+    "en": "Next week",
+    "fr": "Semaine suivante",
+    "ar-EG": "الأسبوع اللي بعده"
+  },
+  "Regeneration dokumentiert": {
+    "en": "Recovery days logged",
+    "fr": "Jours de récupération notés",
+    "ar-EG": "أيام الراحة المسجلة"
+  },
+  "Ø Schritte": {
+    "en": "Avg. steps",
+    "fr": "Pas moyens",
+    "ar-EG": "متوسط الخطوات"
+  },
+  "Ø Schlaf": {
+    "en": "Avg. sleep",
+    "fr": "Sommeil moyen",
+    "ar-EG": "متوسط النوم"
+  },
+  "Ø Wasser": {
+    "en": "Avg. water",
+    "fr": "Eau moyenne",
+    "ar-EG": "متوسط المياه"
+  },
+  "Letztes Wochengewicht": {
+    "en": "Latest weekly weight",
+    "fr": "Dernier poids de la semaine",
+    "ar-EG": "آخر وزن في الأسبوع"
+  },
+  "Gewichtsveränderung": {
+    "en": "Weight change",
+    "fr": "Variation du poids",
+    "ar-EG": "تغير الوزن"
+  },
+  "Alle bisherigen Trainingstage dieser Woche abgeschlossen.": {
+    "en": "All scheduled training days so far this week completed.",
+    "fr": "Tous les jours d’entraînement prévus jusqu’ici cette semaine sont terminés.",
+    "ar-EG": "خلصت كل أيام التمرين اللي فاتت في الأسبوع ده."
+  },
+  "Trainingstagen abgeschlossen": {
+    "en": "training days completed",
+    "fr": "jours d’entraînement terminés",
+    "ar-EG": "أيام تمرين خلصت"
+  },
+  "Regenerationstage dokumentiert": {
+    "en": "recovery days logged",
+    "fr": "jours de récupération enregistrés",
+    "ar-EG": "أيام راحة متسجلة"
+  },
+  "Durchschnittlich": {
+    "en": "Average",
+    "fr": "En moyenne",
+    "ar-EG": "في المتوسط"
+  },
+  "Schritte pro erfasstem Tag": {
+    "en": "steps per logged day",
+    "fr": "pas par jour enregistré",
+    "ar-EG": "خطوة لكل يوم متسجل"
+  },
+  "Für diese Woche sind noch keine Aktivitäten erfasst.": {
+    "en": "No activities recorded for this week yet.",
+    "fr": "Aucune activité enregistrée cette semaine.",
+    "ar-EG": "لسه مفيش نشاط متسجل للأسبوع ده."
+  },
+  "Trainingstage abgeschlossen": {
+    "en": "training days completed",
+    "fr": "jours d’entraînement terminés",
+    "ar-EG": "أيام تمرين مكتملة"
+  },
+  "Durchschnittswerte beziehen sich ausschließlich auf Tage mit entsprechenden Einträgen. Fehlende Werte werden nicht als Null gezählt. Die aktuelle Woche umfasst nur vergangene Tage.": {
+    "en": "Averages include only days with recorded values. Missing entries are not counted as zero. The current week includes only days up to today.",
+    "fr": "Les moyennes ne tiennent compte que des jours renseignés. Les valeurs manquantes ne comptent pas comme zéro. La semaine en cours inclut uniquement les jours écoulés.",
+    "ar-EG": "المتوسطات بتحسب الأيام اللي فيها بيانات بس. الأيام الناقصة مش بتتحسب صفر. الأسبوع الحالي بيشمل الأيام لحد النهارده بس."
+  },
+  "Deine Woche im Überblick": {
+    "en": "Your week at a glance",
+    "fr": "Ta semaine en bref",
+    "ar-EG": "أسبوعك في لمحة"
+  },
+  "Wochenrückblick ansehen": {
+    "en": "View weekly review",
+    "fr": "Voir le bilan hebdomadaire",
+    "ar-EG": "شوف ملخص الأسبوع"
   }
 }

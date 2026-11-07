@@ -316,3 +316,14 @@ Die Profilübersicht zeigt das Geburtsdatum sprachabhängig mit `Intl.DateTimeFo
 - Daten vor der Ersteinrichtung und in der Zukunft sind nicht bearbeitbar. Der bestehende Krafttrainingsplan bleibt unverändert.
 - Eine kompakte Übersicht der letzten dokumentierten Tage wird unter Statistik angezeigt.
 - Für diese Änderung ist kein erneutes Cloudflare-Deployment nötig.
+
+
+## MyTraining 1.2 – Gewichtsverlauf und Wochenrückblick
+
+- Unter Statistik: neues Diagramm mit aufgezeichneten Wiegewerten und gleitendem 7-Kalendertage-Durchschnitt. Die Linie verwendet nur tatsächlich gemessene Tage, fehlende Werte werden nicht künstlich ergänzt.
+- Zeitraumwahl 30 Tage, 90 Tage oder gesamter Zeitraum. Aktuelles Gewicht, gleitender Durchschnitt, Ziel und Abstand zum Ziel.
+- Wochenrückblick mit Wochenwechsel: abgeschlossene Trainings im Verhältnis zu bereits vergangenen, geplanten Trainingstagen, dokumentierte Regenerationstage, Ø Schritte, Schlaf und Wasser sowie letzter Wiegewert und Gewichtsveränderung.
+- Einträge werden nicht erneut gespeichert: Die Auswertung liest ausschließlich `training-calendar-days-v1` und `training-profile-v1`, deshalb bleibt der bisherige JSON-Export kompatibel.
+- Ergänzende Wochenkarte im Dashboard. Englische, französische und ägyptisch-arabische Oberflächentexte ergänzt.
+- Keine Online-Schnittstelle; die Statistiken funktionieren offline nach Cache-Aktualisierung. Der Cloudflare-Push-Worker wurde nicht verändert; kein erneutes Worker-Deployment nötig.
+- Der 7-Tage-Durchschnitt berücksichtigt nur echte Messungen in den vorherigen sechs Kalendertagen plus Messtag. Ein Durchschnitt mit nur einem vorhandenen Messpunkt ist keine belastbare Trendprognose.

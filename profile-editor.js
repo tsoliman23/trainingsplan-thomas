@@ -63,7 +63,7 @@ if(which==='personal'){
  if(chosen.includes('Abnehmen')&&chosen.includes('Zunehmen')){error('Abnehmen und Zunehmen können nicht gleichzeitig gewählt werden.');return;}
  nextFull.trainingGoals=chosen;nextFull.trainingGoal=chosen[0];
 }
-try{localStorage.setItem(STORE,JSON.stringify(nextFull));localStorage.setItem(BASE,JSON.stringify(nextBase));window.TrainingApp?.updateProfile?.(nextBase);window.TrainingUX?.refresh?.();window.TrainingCalendar?.refresh?.();overview();window.MyTrainingToast?.success('Änderungen gespeichert');}catch(e){error('Speichern fehlgeschlagen.');}
+try{localStorage.setItem(STORE,JSON.stringify(nextFull));localStorage.setItem(BASE,JSON.stringify(nextBase));window.TrainingApp?.updateProfile?.(nextBase);window.TrainingUX?.refresh?.();window.TrainingCalendar?.refresh?.();window.MyTrainingAnalytics?.refresh?.();overview();window.MyTrainingToast?.success('Änderungen gespeichert');}catch(e){error('Speichern fehlgeschlagen.');}
 }
 function open(){create();lastFocus=document.activeElement;overlay.hidden=false;overview();$('xp-profile-close').focus();}
 document.addEventListener('mytraining-language-change',()=>{if(overlay&&!overlay.hidden&&screen==='overview')overview();});

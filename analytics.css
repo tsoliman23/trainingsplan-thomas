@@ -1,0 +1,34 @@
+/* MyTraining 1.2 - responsive statistics; matches the existing light/dark palette */
+.mt12-panel,.mt12-dashboard{background:var(--xp-card)!important;color:var(--xp-text)!important;border-color:var(--xp-border)!important}
+.mt12-header,.mt12-dash-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.mt12-header h3,.mt12-dash-head h3{margin:4px 0!important;font-size:22px!important;color:var(--xp-text)!important}
+.mt12-kicker{font-size:10px;font-weight:800;letter-spacing:.13em;color:var(--xp-primary)}
+.mt12-filter-label{display:grid;gap:5px;color:var(--xp-text)!important;font-size:12px;font-weight:800}
+#mt12-range{min-width:132px;max-width:180px;min-height:42px;padding:8px 12px;border:1px solid var(--xp-border);border-radius:11px;background:var(--xp-soft);color:var(--xp-text);font-size:15px}
+.mt12-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0}
+.mt12-metrics>div{border-radius:14px;padding:13px;min-width:0;background:var(--xp-soft)}
+.mt12-metrics small{display:block;color:var(--xp-muted)!important;font-size:12px;font-weight:650;line-height:1.3}
+.mt12-metrics strong{display:block;margin-top:7px;color:var(--xp-text)!important;font-size:clamp(17px,4vw,23px);font-weight:850;overflow-wrap:anywhere}
+.mt12-chartbox{border:1px solid var(--xp-border);border-radius:15px;background:var(--xp-soft);padding:6px 7px;min-height:180px;display:grid;align-items:center}
+#mt12-chart{width:100%;height:auto;max-height:265px;display:block;overflow:visible}
+#mt12-chart[hidden],#mt12-empty[hidden]{display:none!important}
+#mt12-empty{text-align:center;padding:45px 10px;color:var(--xp-text)!important}
+#mt12-chart .mt12-gridline{stroke:var(--xp-border);stroke-width:1}
+#mt12-chart .mt12-tick{fill:var(--xp-muted);font-size:13px;font-weight:600}
+#mt12-chart .mt12-line-measured{fill:none;stroke:var(--xp-primary);stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
+#mt12-chart .mt12-line-average{fill:none;stroke:#169c84;stroke-width:3;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:7 5}
+#mt12-chart .mt12-dot{fill:var(--xp-card);stroke:var(--xp-primary);stroke-width:2.8}
+.mt12-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:15px;color:var(--xp-text);font-size:13px;font-weight:700}
+.mt12-legend span{display:flex;align-items:center;gap:7px}
+.mt12-legend i{width:20px;height:0;border-top:3px solid var(--xp-primary)}
+.mt12-legend .mt12-key-average{border-top:3px dashed #169c84}
+.mt12-caption,.mt12-footnote{font-size:12px;color:var(--xp-muted)!important;line-height:1.55;margin:9px 0}
+.mt12-weeks{display:flex;gap:8px}.mt12-weeks button{min-width:44px;min-height:43px;background:var(--xp-soft)!important;color:var(--xp-text)!important;border:1px solid var(--xp-border)!important;border-radius:11px}
+.mt12-weeks button:disabled{opacity:.4;cursor:not-allowed}
+.mt12-dates{font-size:14px;font-weight:750;color:var(--xp-muted)!important;margin:10px 0 4px!important}
+.mt12-summary{border-radius:12px;background:var(--xp-soft);padding:13px 15px;color:var(--xp-text)!important;line-height:1.55}
+.mt12-dash-head button{background:var(--xp-soft)!important;color:var(--xp-text)!important;border:1px solid var(--xp-border)!important;padding:8px 11px;font-size:13px;min-height:40px}
+#mt12-dash-summary{color:var(--xp-text)!important;font-size:14px;line-height:1.5;margin:12px 0 2px}
+html[data-theme="dark"] .mt12-caption,html[data-theme="dark"] .mt12-footnote,html[data-theme="dark"] .mt12-metrics small{color:#ecf3ff!important}
+@media(min-width:620px){.mt12-metrics:not(.mt12-week-grid){grid-template-columns:repeat(4,minmax(0,1fr))}.mt12-week-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:390px){.mt12-panel{padding:14px!important}.mt12-metrics{gap:7px}.mt12-metrics>div{padding:10px}.mt12-header h3{font-size:19px!important}.mt12-dash-head{align-items:flex-start}}

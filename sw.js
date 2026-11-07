@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v33-daily-recovery';
+const CACHE = 'mytraining-v34-weekly-progress';
 
 const ASSETS = [
     './',
@@ -8,6 +8,8 @@ const ASSETS = [
     './calendar.js',
     './daily.js',
     './daily.css',
+    './analytics.js',
+    './analytics.css',
     './experience.js',
     './toast.js',
   './profile-editor.js',
