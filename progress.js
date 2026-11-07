@@ -31,7 +31,7 @@
       const shared=el.querySelector('input[name="done_reps_'+ck.name+'"]');
       const row=el.querySelector('.exercise-values');if(!row)return;
       el.dataset.setRepsInstalled='1';
-      if(shared){const label=shared.closest('.value-field')?.querySelector('span');if(label){label.textContent='Wdh. alt';label.title='Bisheriger gemeinsamer Wiederholungswert';}}
+      if(shared){const legacy=shared.closest('.value-field');if(legacy){legacy.hidden=true;legacy.classList.add('mt13-legacy-reps');}}
       const group=document.createElement('div');group.className='set-reps-row';
       group.innerHTML='<span class="set-reps-label">Wiederholungen je Satz</span>';
       for(let i=1;i<=3;i++){
@@ -135,7 +135,7 @@
   function downloadFile(payload,name){const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);}
   function downloadBackup(){
     if(!window.TrainingApp){notify('App noch nicht bereit.');return;}
-    const payload={format:'training-full-backup',version:2,createdAt:new Date().toISOString(),snapshot:window.TrainingApp.getSnapshot(),history:listHistory(),calendarDays:JSON.parse(localStorage.getItem('training-calendar-days-v1')||'{}'),fullProfile:JSON.parse(localStorage.getItem('training-full-profile-v1')||'null'),setupDate:localStorage.getItem('training-setup-date-v1'),preferences:JSON.parse(localStorage.getItem('training-preferences-v1')||'{}')};
+    const payload={format:'training-full-backup',version:2,createdAt:new Date().toISOString(),snapshot:window.TrainingApp.getSnapshot(),history:listHistory(),calendarDays:JSON.parse(localStorage.getItem('training-calendar-days-v1')||'{}'),fullProfile:JSON.parse(localStorage.getItem('training-full-profile-v1')||'null'),setupDate:localStorage.getItem('training-setup-date-v1'),preferences:JSON.parse(localStorage.getItem('training-preferences-v1')||'{}'),nutritionTargets:JSON.parse(localStorage.getItem('training-nutrition-targets-v1')||'{}')};
     downloadFile(payload,'Trainingsplan_Sicherung_'+isoDay()+'.json');notify('Vollständige Sicherung heruntergeladen. Datei separat aufbewahren.');window.MyTrainingToast?.success('Sicherung erstellt');
   }
   async function importBackup(e){
@@ -152,6 +152,7 @@
       if(payload.fullProfile&&typeof payload.fullProfile==='object')localStorage.setItem('training-full-profile-v1',JSON.stringify(payload.fullProfile));
       if(/^\d{4}-\d{2}-\d{2}$/.test(payload.setupDate||''))localStorage.setItem('training-setup-date-v1',payload.setupDate);
       if(payload.preferences&&typeof payload.preferences==='object')localStorage.setItem('training-preferences-v1',JSON.stringify(payload.preferences));
+      if(payload.nutritionTargets&&typeof payload.nutritionTargets==='object'&&!Array.isArray(payload.nutritionTargets))localStorage.setItem('training-nutrition-targets-v1',JSON.stringify(payload.nutritionTargets));
       window.TrainingApp.applySnapshot(payload.snapshot);
       // Profile is also stored separately in the legacy app.
       if(payload.snapshot.profile)localStorage.setItem('training-profile-v1',JSON.stringify(payload.snapshot.profile));

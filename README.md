@@ -327,3 +327,16 @@ Die Profilübersicht zeigt das Geburtsdatum sprachabhängig mit `Intl.DateTimeFo
 - Ergänzende Wochenkarte im Dashboard. Englische, französische und ägyptisch-arabische Oberflächentexte ergänzt.
 - Keine Online-Schnittstelle; die Statistiken funktionieren offline nach Cache-Aktualisierung. Der Cloudflare-Push-Worker wurde nicht verändert; kein erneutes Worker-Deployment nötig.
 - Der 7-Tage-Durchschnitt berücksichtigt nur echte Messungen in den vorherigen sechs Kalendertagen plus Messtag. Ein Durchschnitt mit nur einem vorhandenen Messpunkt ist keine belastbare Trendprognose.
+
+
+## MyTraining 1.3 – Ernährung und Trainingsansicht (07.11.2026)
+
+- Mahlzeiten pro Tag: Frühstück, Mittagessen, Abendessen und Snacks mit Kalorien, Protein, Kohlenhydraten und Fett. Nur manuelle Eingabe, keine Lebensmitteldatenbank und keine externen Dienste.
+- Tagesgesamtwerte und optional eigene Tagesziele (keine automatisch erfundenen Ernährungsvorgaben). Die Ziele werden lokal in `training-nutrition-targets-v1` gespeichert.
+- Tägliche Mahlzeitenwerte werden in `training-calendar-days-v1[YYYY-MM-DD].nutrition` gespeichert und damit in bestehende vollständige JSON-Sicherungen aufgenommen. Keine Bearbeitung zukünftiger Tage oder vor der Einrichtung.
+- Vorhandene Kalorien- und Protein-Einträge der Regenerationstage werden in der neuen Ansicht als Altdaten berücksichtigt. Sie bleiben unangetastet, bis ein neuer Ernährungseintrag gespeichert wird.
+- Statistik: die letzten sieben Tage mit Ernährungseinträgen, einschließlich des Mittelwerts der Kalorien- und Proteinmengen.
+- Alte gemeinsame Wiederholungsfelder bleiben technisch für bestehende Sicherungen erhalten, werden aber ausgeblendet; Wiederholungen weiterhin pro Satz eingeben.
+- Die Übungsvorgaben (Sätze, Wiederholungsbereich und Satzpause in Minuten) stehen in der aufklappbaren Übungsbeschreibung, während die Titel den Übungsnamen zeigen.
+- Hinweise lassen sich über ein `i` direkt neben der jeweiligen Übung anzeigen. Im Dark Mode sind die Trainingsstand-Aktionsbuttons blau mit weißer Schrift.
+- Für dieses Update ist kein erneutes Cloudflare-Deployment notwendig.

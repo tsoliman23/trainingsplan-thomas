@@ -51,8 +51,7 @@ function build(){if(ready||!$('cal-rest')||!$('view-stats'))return;ready=true;
  <label>Bewegung (Minuten)<input name="minutes" type="number" inputmode="numeric" min="0" max="1440" step="1" placeholder="z. B. 30"></label>
  <label>Wasser (Liter)<input name="water" type="number" inputmode="decimal" min="0" max="20" step="0.1" placeholder="z. B. 2,0"></label>
  <label>Schlaf (Stunden)<input name="sleep" type="number" inputmode="decimal" min="0" max="24" step="0.1" placeholder="z. B. 7,5"></label>
- <label>Kalorien (kcal)<input name="calories" type="number" inputmode="numeric" min="0" max="15000" step="1" placeholder="optional"></label>
- <label>Protein (g)<input name="protein" type="number" inputmode="decimal" min="0" max="800" step="0.1" placeholder="optional"></label>
+
  <label>Energiegefühl<select name="energy"><option value="">Nicht angegeben</option><option value="Sehr gut">Sehr gut</option><option value="Gut">Gut</option><option value="Mittel">Mittel</option><option value="Erschöpft">Erschöpft</option></select></label>
  <label>Muskelkater<select name="soreness"><option value="">Nicht angegeben</option><option value="Keiner">Keiner</option><option value="Leicht">Leicht</option><option value="Mittel">Mittel</option><option value="Stark">Stark</option></select></label>
  </div>

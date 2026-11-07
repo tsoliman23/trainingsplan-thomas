@@ -7,6 +7,17 @@ let lang=localStorage.getItem(KEY)||'de',dict={},ready=false;
 const source=new WeakMap();const translated=new WeakMap();
 function current(){return lang;}
 function t(s){const value=String(s??'');if(value==='MyTraining'||value==='MYTRAINING')return value;if(lang==='de')return value;if(dict[value]?.[lang])return dict[value][lang];
+// MyTraining 1.3: translate the moved set/rep/rest instructions while retaining
+// the precise exercise-specific numbers and the pre-existing technique text.
+const target=/^Vorgabe: (\d+) Sätze mit ([\d–-]+) Wiederholungen\. Satzpause: ([\d,]+) Min\. (.*)$/.exec(value);
+if(target){
+ const technique=dict[target[4]]?.[lang]||target[4];
+ const prep=lang==='en'?`Target: ${target[1]} sets of ${target[2]} reps. Rest: ${target[3]} min. `:
+  lang==='fr'?`Objectif : ${target[1]} séries de ${target[2]} répétitions. Pause : ${target[3]} min. `:
+  `المطلوب: ${target[1]} مجموعات × ${target[2]} تكرار. الراحة: ${target[3]} دقيقة. `;
+ return prep+technique;
+}
+
 // Compound exercise headings preserve numeric sets, reps and pause values.
 let output=value;for(const key of Object.keys(dict).sort((a,b)=>b.length-a.length)){
  if(key.length<7||!dict[key][lang]||!output.includes(key))continue;

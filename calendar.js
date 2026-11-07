@@ -105,6 +105,12 @@ function createUI(){const top=document.createElement('div');top.id='training-das
  $('view-stats').addEventListener('click',e=>{if(e.target.id==='finish-day'&&!isFuture(selected)&&training.includes(dayOf(selected))){setTimeout(()=>{calendarData[selected]={...(calendarData[selected]||{}),fields:capture(dayOf(selected)),weight:$('bodyWeight').value,completed:true,updatedAt:Date.now()};store();renderDashboard();},60);}},true);
 }
 function init(){if(!window.TrainingApp){setTimeout(init,50);return;}createUI();setTimeout(()=>{seed();initialized=true;openDate(today);selectView('dashboard');},650);}
+function setNutritionForDate(date, values){
+ if(date<setupDate()||date>today||window.__mytrainingResetting)return false;
+ if(!values||typeof values!=='object')return false;
+ calendarData[date]={...(calendarData[date]||{}),nutrition:values,updatedAt:Date.now()};
+ store();return true;
+}
 function setDailyForDate(date,values){if(date<setupDate()||date>today||window.__mytrainingResetting)return false;calendarData[date]={...(calendarData[date]||{}),daily:{...values},updatedAt:Date.now()};store();return true;}
-window.TrainingCalendar={selectView,openDate,selectedDate:()=>selected,savePdf,makeWeeklyPdf,getCalendarData:()=>calendarData,refresh:()=>{calendarData=read();openDate(selected,true);renderDashboard();renderCalendar();},refreshCalendarLocale:()=>{if($('view-calendar'))renderCalendar();},calendarToday:()=>{calendarCursor=today;renderCalendar();},getWeightForDate,setWeightForDate,setDailyForDate,closeArchive:()=>{if(pdfDb){try{pdfDb.close();}catch(_){}pdfDb=null;}}};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+window.TrainingCalendar={selectView,openDate,selectedDate:()=>selected,savePdf,makeWeeklyPdf,getCalendarData:()=>calendarData,refresh:()=>{calendarData=read();openDate(selected,true);renderDashboard();renderCalendar();},refreshCalendarLocale:()=>{if($('view-calendar'))renderCalendar();},calendarToday:()=>{calendarCursor=today;renderCalendar();},getWeightForDate,setWeightForDate,setDailyForDate,setNutritionForDate,closeArchive:()=>{if(pdfDb){try{pdfDb.close();}catch(_){}pdfDb=null;}}};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
