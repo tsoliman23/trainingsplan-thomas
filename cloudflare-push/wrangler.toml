@@ -8,10 +8,10 @@ crons = ["0 6,7 * * 1,3,5"]
 
 [[kv_namespaces]]
 binding = "SUBSCRIPTIONS"
-id = "HIER_DEINE_KV_NAMESPACE_ID_EINTRAGEN"
+id = "b1a51094d8bd4ae196c8f2cbb096e854"
 
 [vars]
 ALLOWED_ORIGIN = "https://tsoliman23.github.io"
-VAPID_SUBJECT = "mailto:DEINE_EMAIL_ADRESSE_HIER"
-VAPID_SERVER_PUBLIC_KEY = "HIER_DEN_GENERIERTEN_PUBLIC_KEY_EINTRAGEN"
+VAPID_SUBJECT = "mailto:thomassoliman236@gmail.com"
+VAPID_SERVER_PUBLIC_KEY = "BHLOqRgStco4nafKPAM9J-kmZIdzBjx0mwdD7AhHoqi9fVrcaoAB93eMOyupNfQnL_qTusV3yAP1AwzNFnWCKkU"
 # VAPID_SERVER_PRIVATE_KEY via: npx wrangler secret put VAPID_SERVER_PRIVATE_KEY
