@@ -272,3 +272,17 @@ git push
 - **Datenschutz:** Der Worker speichert nur Push-Empfangsdaten und das zufällige Registrierungstoken, keine Trainingsdaten. Bei Deaktivierung wird die Registrierung gelöscht.
 
 Die App wurde nicht auf einem realen iPhone mit einem aktiven Cloudflare-Worker end-to-end getestet. Eine erfolgreiche Syntaxprüfung ersetzt weder Deployment noch einen Zustelltest auf dem Gerät.
+
+## Aktualisierung 1.0.1 – 07.11.2026
+
+- Sprachwechsel im ersten Einrichtungsschritt aktualisiert die Schreibrichtung unmittelbar (Arabisch RTL; Deutsch/Englisch/Franzoesisch LTR).
+- Koerperwerte lesen Startgewicht aus dem Profil, Zielgewicht aus dem gespeicherten Ziel und das Tagesgewicht aus dem Kalender. Die Tasten + / - aendern das heutige Gewicht in 0,1-kg-Schritten und speichern es sofort.
+- Kalender: Monat/Jahr bleiben direkt auswaehlbar, aber ohne sichtbare Auswahlpfeile.
+- Uebungs- und Zusatzinformationen: kleine i-Schalter mit wiederholtem Ein-/Ausblenden.
+- Kontrastkorrekturen fuer Abbrechen-Button beim Zuruecksetzen sowie PDF-Aktionen im Dunkelmodus.
+- Bereich „Ueber die App“ auf App-Name, Version 1.0 und Kurzbeschreibung umgestellt.
+- Der zuvor vorhandene, aber durch einen JavaScript-Laufzeitfehler nicht erreichte Push-Einstellungsbereich ist wieder erreichbar. Das Vorhandensein einer Worker-URL bedeutet noch nicht, dass die Push-Zustellung getestet wurde.
+- PDF-Archiv: Schaltflaeche „Zurueck zu Einstellungen“.
+- Kalender: Regenerationstage nutzen denselben blauen Statuspunkt wie die Legende.
+
+Die erweiterte ZIP enthaelt keine Git-Verzeichnisse, node_modules oder lokalen Wrangler-Caches. Ein kompletter iPhone-Test muss auf dem Endgeraet erfolgen.

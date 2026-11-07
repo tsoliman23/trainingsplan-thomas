@@ -373,8 +373,8 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
     window.scrollTo({top:0,left:0,behavior:'instant'});
     if(!document.getElementById('bodyWeight').value)document.getElementById('bodyWeight').value=String(extra.currentWeight);
     try{var cd=JSON.parse(localStorage.getItem('training-calendar-days-v1')||'{}');if(!cd[isoToday]?.weight){cd[isoToday]={...(cd[isoToday]||{}),weight:String(extra.currentWeight),updatedAt:Date.now()};localStorage.setItem('training-calendar-days-v1',JSON.stringify(cd));}}catch(_){}
-    window.TrainingCalendar?.refresh();window.TrainingUX?.refresh();
     try{localStorage.setItem('training-profile-v1',JSON.stringify(profile));}catch(_){}
+    window.TrainingCalendar?.refresh();window.TrainingUX?.refresh();
     if(!loading)save();
   });
   // Explicit onboarding handoff: a language choice must always open the profile form
@@ -655,7 +655,7 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
       if(!detail || item.querySelector('.info-toggle'))return;
       item.classList.add('info-collapsed');
       var button=document.createElement('button');button.type='button';button.className='info-toggle';
-      button.textContent='Info anzeigen';button.setAttribute('aria-expanded','false');
+      button.textContent='i';button.setAttribute('aria-label','Information anzeigen');button.title='Information anzeigen';button.setAttribute('aria-expanded','false');
       detail.id=detail.id||'info_'+Math.random().toString(36).slice(2);
       button.setAttribute('aria-controls',detail.id);
       item.appendChild(button);
@@ -664,7 +664,7 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   document.getElementById('trainingsform').addEventListener('click',function(event){
     var btn=event.target.closest('.info-toggle');if(!btn)return;
     var item=btn.closest('.item'),show=item.classList.toggle('info-open');
-    btn.textContent=show?'Info ausblenden':'Info anzeigen';btn.setAttribute('aria-expanded',String(show));
+    btn.textContent='i';btn.setAttribute('aria-label',show?'Information ausblenden':'Information anzeigen');btn.title=show?'Information ausblenden':'Information anzeigen';btn.setAttribute('aria-expanded',String(show));
   });
   var infoObserver=new MutationObserver(function(){setupInfoToggles();});
   infoObserver.observe(document.getElementById('trainingsform'),{childList:true,subtree:true});

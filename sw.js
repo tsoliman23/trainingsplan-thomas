@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v28-web-push-test';
+const CACHE = 'mytraining-v29-ui-weight-fixes';
 
 const ASSETS = [
     './',

@@ -1628,5 +1628,35 @@
     "en": "Before you first set up the app",
     "fr": "Avant ta première configuration",
     "ar-EG": "قبل ما بدأت تستخدم التطبيق"
+  },
+  "Version 1.0": {
+    "en": "Version 1.0",
+    "fr": "Version 1.0",
+    "ar-EG": "الإصدار 1.0"
+  },
+  "Dein persönlicher Trainingsbegleiter für Planung, Fortschritt und Motivation.": {
+    "en": "Your personal training companion for planning, progress and motivation.",
+    "fr": "Ton compagnon pour planifier tes entraînements, suivre tes progrès et rester motivé.",
+    "ar-EG": "رفيقك الشخصي لتنظيم التمرين ومتابعة التقدم والتحفيز."
+  },
+  "Zurück zu Einstellungen": {
+    "en": "Back to settings",
+    "fr": "Retour aux paramètres",
+    "ar-EG": "الرجوع للإعدادات"
+  },
+  "Cloudflare Worker konfiguriert. Schalter aktivieren, um die Push-Berechtigung anzufordern.": {
+    "en": "Cloudflare Worker configured. Enable the switch to request push permission.",
+    "fr": "Worker Cloudflare configuré. Active l’interrupteur pour autoriser les notifications.",
+    "ar-EG": "خدمة كلاودفلير جاهزة. فعّل الزر للسماح بالإشعارات."
+  },
+  "Cloudflare Worker konfiguriert. Erinnerungen sind derzeit ausgeschaltet.": {
+    "en": "Cloudflare Worker configured. Reminders are currently off.",
+    "fr": "Worker Cloudflare configuré. Les rappels sont désactivés.",
+    "ar-EG": "خدمة كلاودفلير جاهزة. التذكيرات مقفولة حالياً."
+  },
+  "Cloudflare Worker konfiguriert. Für Push auf dem iPhone MyTraining zum Home-Bildschirm hinzufügen und dort öffnen.": {
+    "en": "Cloudflare Worker configured. On iPhone, add MyTraining to the Home Screen and open it there.",
+    "fr": "Worker Cloudflare configuré. Sur iPhone, ajoute MyTraining à l’écran d’accueil et ouvre-le depuis cet écran.",
+    "ar-EG": "خدمة كلاودفلير جاهزة. على آيفون ضيف MyTraining للشاشة الرئيسية وافتحه منها."
   }
 }

@@ -60,6 +60,8 @@ function renderIntroSelection(){
  const step=initialGate.querySelector('#languageStepCount');if(step)step.textContent=selectedIntroLanguage==='en'?'Step 1 of 5':selectedIntroLanguage==='fr'?'Étape 1 sur 5':selectedIntroLanguage==='ar-EG'?'الخطوة ١ من ٥':'Schritt 1 von 5';
  initialGate.querySelector('#languageContinue').disabled=!selectedIntroLanguage;
  initialGate.querySelector('.language-dialog').dir=selectedIntroLanguage==='ar-EG'?'rtl':'ltr';
+ initialGate.querySelector('.language-dialog').style.direction=selectedIntroLanguage==='ar-EG'?'rtl':'ltr';
+ initialGate.querySelector('.language-dialog').style.textAlign=selectedIntroLanguage==='ar-EG'?'right':'left';
  initialGate.querySelectorAll('.lang-option').forEach(button=>{
   const chosen=button.dataset.lang===selectedIntroLanguage;
   button.setAttribute('aria-pressed',String(chosen));

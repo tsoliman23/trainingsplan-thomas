@@ -30,6 +30,33 @@ const weightCard=document.createElement('div');weightCard.className='cal-panel x
 const existingWeight=$('bodyWeight')?.closest('.panel-card');if(existingWeight)weightCard.querySelector('.xp-weight-hidden')?.append(existingWeight);
 hero.insertAdjacentElement('afterend',weightCard);
 
+// Body weight is always edited for TODAY on the dashboard, independently of the selected training date.
+function syncWeightCard(){
+ const full=read('training-full-profile-v1',{}),profile=read('training-profile-v1',{});
+ const stored=window.TrainingCalendar?.getWeightForDate?.(TODAY());
+ const start=Number(full.currentWeight);
+ const current=Number(stored||start);
+ const goal=Number(profile.goalWeight||full.goalWeight);
+ const fmt=n=>Number.isFinite(n)&&n>=20&&n<=350?n.toLocaleString('de-DE',{minimumFractionDigits:1,maximumFractionDigits:1})+' kg':'–';
+ $('xp-weight-display').textContent=fmt(current);
+ $('xp-weight-start').textContent='Startgewicht: '+fmt(start);
+ $('xp-weight-target').textContent='Ziel: '+fmt(goal);
+ const allowed=Boolean(full.currentWeight)&&Boolean(window.TrainingCalendar?.setWeightForDate);
+ $('xp-weight-minus').disabled=!allowed;
+ $('xp-weight-plus').disabled=!allowed;
+}
+function adjustBodyWeight(delta){
+ const full=read('training-full-profile-v1',{});
+ const stored=window.TrainingCalendar?.getWeightForDate?.(TODAY());
+ const start=Number(stored||full.currentWeight);
+ if(!Number.isFinite(start)||start<20||start>350)return;
+ const next=Math.round((start+delta)*10)/10;
+ if(next<20||next>350)return;
+ if(window.TrainingCalendar?.setWeightForDate?.(TODAY(),next))syncWeightCard();
+}
+$('xp-weight-minus').addEventListener('click',()=>adjustBodyWeight(-0.1));
+$('xp-weight-plus').addEventListener('click',()=>adjustBodyWeight(0.1));
+
 const stats=$('view-stats'); const info=document.createElement('div');info.className='cal-panel xp-info';info.innerHTML='<h3>Seit Beginn deiner Aufzeichnungen</h3><p>Die Auswertung berücksichtigt ausschließlich Termine seit dem Tag deiner Ersteinrichtung: <strong id="xp-start">–</strong>.</p><p>Gewichtsveränderungen beziehen sich auf gespeicherte Wiegeeinträge, nicht auf das Zielgewicht.</p>';stats.insertBefore(info,stats.firstChild);
 const calendar=$('view-calendar');const jump=document.createElement('button');jump.type='button';jump.className='xp-today-link';jump.textContent='Heute';jump.onclick=()=>window.TrainingCalendar?.calendarToday?.();calendar.insertBefore(jump,calendar.firstChild);
 const settingsView=document.createElement('section');settingsView.className='cal-view xp-settings';settingsView.id='xp-settings';settingsView.hidden=true;settingsView.innerHTML=`<h2>Einstellungen</h2>
@@ -38,7 +65,7 @@ const settingsView=document.createElement('section');settingsView.className='cal
 <div class="cal-panel"><h3>Trainingserinnerung um 08:00 Uhr</h3><label class="xp-setting-row xp-switch-row" for="xp-remind"><span><strong>Erinnerungen aktivieren</strong><small>Montag, Mittwoch und Freitag um 08:00 Uhr</small></span><span class="xp-toggle"><input id="xp-remind" type="checkbox" aria-label="Erinnerungen einschalten"><span class="xp-toggle-slider" aria-hidden="true"></span></span></label><p id="xp-reminder-state" class="muted" role="status" aria-live="polite">Push-Dienst wird geprüft.</p><button type="button" id="xp-push-test" hidden>Testbenachrichtigung senden</button></div>
 <div class="cal-panel"><h3>Sicherung und Dokumente</h3><div class="xp-settings-actions"><button type="button" id="xp-to-backup">Dateisicherung öffnen</button><button type="button" id="xp-to-pdfs">PDF-Archiv öffnen</button></div><p class="muted">Daten und PDFs liegen lokal im Speicher dieser App. Für einen Gerätewechsel die JSON-Sicherung und PDF-Dateien separat herunterladen.</p></div>
 <div class="cal-panel xp-danger-zone"><h3>App zurücksetzen</h3><p class="muted">Alle lokalen Daten dieser App werden gelöscht: Profil, Trainingsstand, Historie, PDFs und Einstellungen.</p><button type="button" id="xp-reset-app" class="xp-danger-button">App zurücksetzen</button></div>
-<div class="cal-panel"><h3>Über die App</h3><p>Lokale Trainingsverwaltung · Offline-PWA · Keine Cloud, keine Anmeldung, kein Tracking.</p></div>`;
+<div class="cal-panel xp-about"><h3>Über die App</h3><strong>MyTraining</strong><p>Version 1.0</p><p>Dein persönlicher Trainingsbegleiter für Planung, Fortschritt und Motivation.</p></div>`;
 shell.append(settingsView);const install=$('installApp');if(install)settingsView.querySelector('.xp-settings .cal-panel:last-child')?.append(install);
 const navEl=document.createElement('nav');navEl.id='xp-bottom-nav';navEl.className='xp-bottom-nav';navEl.setAttribute('aria-label','Untere Hauptnavigation');
 const items=[['dashboard','⌂','Heute'],['calendar','▦','Kalender'],['training','▥','Training'],['stats','▤','Statistik'],['settings','⚙','Mehr']];
@@ -58,11 +85,11 @@ if(!window.MyTrainingPush?.configured){
  pushState.textContent='Push noch nicht eingerichtet. Bitte zuerst den kostenlosen Cloudflare Worker bereitstellen (README, Abschnitt 10).';
 }else if(!window.MyTrainingPush.support()){
  pushSwitch.checked=false;pushSwitch.disabled=true;pushTest.hidden=true;
- pushState.textContent='Web Push wird in dieser Browseransicht nicht unterstützt. Auf iOS die App zum Home-Bildschirm hinzufügen und dort öffnen.';
+ pushState.textContent='Cloudflare Worker konfiguriert. Für Push auf dem iPhone MyTraining zum Home-Bildschirm hinzufügen und dort öffnen.';
 }else{
  pushSwitch.disabled=false;pushTest.hidden=false;pushTest.disabled=true;
- pushState.textContent='Tippe auf den Schalter, um die Push-Berechtigung anzufordern.';
- window.MyTrainingPush.isSubscribed().then(active=>{updatePushUi(active);pushState.textContent=active?'Push-Registrierung vorhanden. Mit dem Test-Button die Zustellung prüfen.':'Push ist noch ausgeschaltet.';});
+ pushState.textContent='Cloudflare Worker konfiguriert. Schalter aktivieren, um die Push-Berechtigung anzufordern.';
+ window.MyTrainingPush.isSubscribed().then(active=>{updatePushUi(active);pushState.textContent=active?'Push-Registrierung vorhanden. Mit dem Test-Button die Zustellung prüfen.':'Cloudflare Worker konfiguriert. Erinnerungen sind derzeit ausgeschaltet.';});
 }
 pushSwitch.addEventListener('change',async e=>{
  if(pushBusy)return;
@@ -97,7 +124,7 @@ function ensureResetDialog(){
  if($('xp-reset-overlay'))return;
  const overlay=document.createElement('div');
  overlay.id='xp-reset-overlay';overlay.className='xp-modal-overlay';overlay.hidden=true;
- overlay.innerHTML=`<div class="xp-modal-card" role="dialog" aria-modal="true" aria-labelledby="xp-reset-title"><h3 id="xp-reset-title">App wirklich zurücksetzen?</h3><p>Dein Profil, sämtliche Trainingsdaten und PDF-Dateien auf diesem Gerät werden unwiderruflich gelöscht.</p><p class="xp-reset-warning">Erstelle vorher eine Datensicherung. Dieser Vorgang kann nicht rückgängig gemacht werden.</p><p id="xp-reset-status" role="status" hidden></p><div class="xp-modal-actions"><button type="button" id="xp-reset-cancel">Abbrechen</button><button type="button" id="xp-reset-confirm" class="xp-danger-button">Alles löschen</button></div></div>`;
+ overlay.innerHTML=`<div class="xp-modal-card" role="dialog" aria-modal="true" aria-labelledby="xp-reset-title"><h3 id="xp-reset-title">App wirklich zurücksetzen?</h3><p>Dein Profil, sämtliche Trainingsdaten und PDF-Dateien auf diesem Gerät werden unwiderruflich gelöscht.</p><p class="xp-reset-warning">Erstelle vorher eine Datensicherung. Dieser Vorgang kann nicht rückgängig gemacht werden.</p><p id="xp-reset-status" role="status" hidden></p><div class="xp-modal-actions"><button type="button" id="xp-reset-cancel" class="xp-reset-cancel">Abbrechen</button><button type="button" id="xp-reset-confirm" class="xp-danger-button">Alles löschen</button></div></div>`;
  document.body.append(overlay);
  $('xp-reset-cancel').onclick=()=>{overlay.hidden=true;};
  overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.hidden=true;});
@@ -131,11 +158,11 @@ function ensureResetDialog(){
 ensureResetDialog();
 $('xp-reset-app').onclick=()=>{$('xp-reset-overlay').hidden=false;};
  $('profileForm').addEventListener('submit',()=>setTimeout(()=>{title();syncWeightCard();window.TrainingCalendar?.refresh();show('dashboard');window.scrollTo({top:0,left:0,behavior:'instant'});},120));
- window.TrainingUX={refresh:title,syncWeightCard};
+ window.TrainingUX={refresh:()=>{title();syncWeightCard();},syncWeightCard};
 document.querySelectorAll('.cal-tabs [data-view]').forEach(b=>b.addEventListener('click',()=>{settingsView.hidden=true;nav(b.dataset.view); }));
 $('view-dashboard').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{if(b.id==='dash-open-training')nav('training');}));
 const obs=new MutationObserver(()=>{title();});obs.observe($('personalGreeting'),{childList:true});
-title();show('dashboard');
+title();syncWeightCard();show('dashboard');
   // Compact optional explanations; preserve all text for translation and accessibility.
   const helpSelectors=['.xp-settings .cal-panel>p.muted','#view-documents>p.muted','.xp-info>p','#xp-weight-hint','#view-stats>.muted','.history-panel>p.muted','#view-calendar .cal-legend-note','#trainingsform .muted'];
   const helpTexts=[...document.querySelectorAll(helpSelectors.join(','))];
@@ -151,6 +178,6 @@ async function remind(){if(window.MyTrainingPush?.configured)return;if(!settings
 theme();try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',theme);}catch{}
 let attempts=0;const ready=setInterval(()=>{if($('view-dashboard')){clearInterval(ready);build();remind();setInterval(remind,60000);}else if(++attempts>150)clearInterval(ready);},100);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden){remind();title();}});
-document.addEventListener('mytraining-language-change',()=>{window.TrainingCalendar?.refreshCalendarLocale?.();title();const t=$('xp-today');if(t)t.textContent=pretty(TODAY());});
+document.addEventListener('mytraining-language-change',()=>{window.TrainingCalendar?.refreshCalendarLocale?.();title();window.TrainingUX?.syncWeightCard?.();const t=$('xp-today');if(t)t.textContent=pretty(TODAY());});
 
 })();
