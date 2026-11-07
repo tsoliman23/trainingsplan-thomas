@@ -1,6 +1,6 @@
 # MyTraining
 
-**Aktuelle App-Version: 1.4.** Diese Versionsnummer erscheint unter „Mehr → Über die App“. Frühere Versionsnummern in diesem Dokument sind Teil der Änderungshistorie.
+**Aktuelle App-Version: 1.4.1.** Diese Versionsnummer erscheint unter „Mehr → Über die App“. Frühere Versionsnummern in diesem Dokument sind Teil der Änderungshistorie.
 
 Eine installierbare, offlinefähige Trainingsplan-App (Progressive Web App, PWA) mit eigener lokaler Datenspeicherung. Die ANIMUS-Mockups dienten nur als gestalterische Referenz. Die App ist ein **Trainingsplan**, kein Mood- oder Ernährungstracker.
 
@@ -403,3 +403,12 @@ Der Bereich **Training** zeigt für Montag, Mittwoch und Freitag den aufklappbar
 - Die Wasser-Glasanzeige erweitert sich ab Überschreiten des Tagesziels automatisch: Pro 250 ml wird ein weiteres Glas dargestellt. Angefangene Gläser werden anteilig gefüllt. Das Wasserziel begrenzt nicht die Darstellung der tatsächlich getrunkenen Menge.
 - Die Ernährungsübersicht zeigt beim Öffnen von **Training → Ernährung** die vier Fortschrittsringe für Kalorien, Eiweiß, Kohlenhydrate und Fett. Der Fehler bei der Initialisierung des Ringbereichs und der Lebensmittelbibliothek wurde behoben.
 - Die Datenformate bleiben unverändert; Trainings- und Ernährungsdaten werden nicht migriert oder gelöscht. Der Offline-Cache wurde aktualisiert.
+
+
+## MyTraining 1.4.1 – Kompakte Ernährung
+
+- Neue kompakte Ernährungstagesübersicht mit einem Kalorienring und drei Makro-Fortschrittsbalken.
+- Vier direkt wählbare Mahlzeiten-Tabs ersetzen die gleichzeitig sichtbaren Mahlzeitenblöcke.
+- Lebensmittelsuche, Barcode und Online-Suche sind über kompakte Schaltflächen erreichbar.
+- Produkte der gewählten Mahlzeit werden übersichtlich angezeigt; eigene Lebensmittel und manuelle Eingaben bleiben aufklappbar erhalten.
+- Unveränderte lokale Speicherung für bestehende Tage, Mahlzeiten und Nährwerte.

@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v42-140-water-rings-fix';
+const CACHE = 'mytraining-v43-141-nutrition-ui';
 
 const ASSETS = [
     './',
@@ -13,6 +13,8 @@ const ASSETS = [
     './nutrition.js',
     './nutrition.css',
     './nutrition132.css',
+    './nutrition141.css',
+    './nutrition141.js',
     './nutrition132.js',
     './food-search14.css',
     './food-search14.js',
