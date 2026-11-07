@@ -1,6 +1,6 @@
 # MyTraining
 
-**Aktuelle App-Version: 1.4.3.** Diese Versionsnummer erscheint unter „Mehr → Über die App“. Frühere Versionsnummern in diesem Dokument sind Teil der Änderungshistorie.
+**Aktuelle App-Version: 1.4.4.** Diese Versionsnummer erscheint unter „Mehr → Über die App“. Frühere Versionsnummern in diesem Dokument sind Teil der Änderungshistorie.
 
 Eine installierbare, offlinefähige Trainingsplan-App (Progressive Web App, PWA) mit eigener lokaler Datenspeicherung. Die ANIMUS-Mockups dienten nur als gestalterische Referenz. Die App verbindet **Trainingsplan, Ernährung und Regeneration** in einer lokalen, offlinefähigen Anwendung.
 
@@ -422,3 +422,12 @@ Der Bereich **Training** zeigt für Montag, Mittwoch und Freitag den aufklappbar
 - Training zeigt kompakte Übungszeilen. Satz- und Gewichtsangaben lassen sich individuell oder gesammelt ein- und ausklappen.
 - Regeneration wird auf der Startseite als eigener Tagesbereich geführt, damit Training nicht mit Ernährung und Regeneration überladen ist.
 - Push-Dienst unverändert. Keine Cloudflare-Neubereitstellung erforderlich.
+
+
+## MyTraining 1.4.4 – Layout- und Navigationskorrekturen
+
+- Kalender-Button oben rechts schaltet zwischen Kalender und vorheriger Ansicht um.
+- Gleichmäßig hohe untere Navigation; Home mittig mit dezenter Markierung.
+- Waagerechtes Hantelsymbol und blauer Button zum Hinzufügen von Übungen ohne zusätzliche Hintergrundkarte.
+- Vollständig deckender, feststehender Header; Inhalt beginnt erst darunter.
+- Kompakte Navigationsleiste am unteren Bildschirmrand unter Berücksichtigung der iPhone-Safe-Area.

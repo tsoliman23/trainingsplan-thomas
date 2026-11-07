@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v44-navigation-142';
+const CACHE = 'mytraining-v45-layout-144';
 
 const ASSETS = [
     './',
@@ -23,6 +23,7 @@ const ASSETS = [
     './day-sections.css',
     './training142.js',
     './navigation142.css',
+    './layout144.css',
     './experience.js',
     './toast.js',
   './profile-editor.js',
