@@ -1,0 +1,53 @@
+/* MyTraining 1.4.2 – one-tap calendar, independent Nutrition tab and compact workout. */
+.mt15-app-header{position:sticky!important;top:env(safe-area-inset-top,0px);z-index:55!important;width:min(calc(100% - 26px),736px);margin:0 auto;background:var(--xp-bg)!important;box-shadow:0 4px 12px color-mix(in srgb,var(--xp-bg) 90%,transparent);border-radius:0 0 15px 15px;box-sizing:border-box;padding:9px 4px 10px!important;isolation:isolate}
+.mt15-app-header .mt15-calendar-shortcut{display:flex;align-items:center;justify-content:center;gap:7px;width:auto;min-width:100px;max-width:134px;padding:8px 11px!important;min-height:42px!important;height:auto!important;border-radius:13px!important;font-size:12px!important;font-weight:800!important;box-shadow:none!important;background:var(--xp-soft)!important;border:1px solid var(--xp-border)!important;color:var(--xp-text)!important;white-space:nowrap}
+.mt15-calendar-shortcut svg{width:19px;height:19px;flex:none}.mt15-calendar-shortcut span{display:inline!important;font-size:12px;font-weight:800;flex:none}
+#view-nutrition[hidden]{display:none!important}.mt15-nutrition-view{padding-top:8px!important}.mt15-nutrition-view>.mt15-section-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.mt15-nutrition-view h2{margin:0;color:var(--xp-text)!important;font-size:26px}.mt15-nutrition-view #mt15-nutrition-selected{margin:5px 0 0!important;font-size:12px!important;color:var(--xp-muted)!important}
+.mt15-nutrition-view #mt13-nutrition{margin:0!important;padding:12px!important;width:100%;max-width:100%;background:transparent!important;border:0!important;box-shadow:none!important}
+.mt15-nutrition-view #mt13-nutrition>.mt13-head{display:none!important}
+.mt15-nutrition-view .mt141-overview{margin-top:4px!important}
+/* Include recovery in the dashboard without cluttering the training tab. */
+#view-dashboard>#mt14-rest{display:block;box-sizing:border-box;width:100%;padding:0!important;margin:14px 0!important;border:1px solid var(--xp-border)!important;border-radius:20px!important;background:var(--xp-card)!important;color:var(--xp-text)!important;box-shadow:none!important;overflow:hidden}
+#view-dashboard>#mt14-rest[hidden]{display:none!important}
+#view-dashboard>#mt14-rest .mt14-content{padding:0 14px 14px!important}
+#view-dashboard>#mt14-rest #daily-panel{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0!important}
+#view-training #cal-week-strip{display:none!important}
+#view-training .cal-date-head{padding:6px 0 12px!important;gap:8px!important}
+#view-training .cal-date-head>div{min-width:0;flex:1}
+#view-training .cal-date-head h2{font-size:clamp(16px,4.3vw,22px)!important;line-height:1.25!important}
+#view-training .cal-date-head p{font-size:12px!important;line-height:1.4}
+#view-training .cal-date-head>button{min-width:38px!important;max-width:42px!important;max-height:42px!important}
+.mt15-no-workout{margin:10px 0 20px;padding:16px;background:var(--xp-card);border:1px solid var(--xp-border);border-radius:14px;color:var(--xp-text)}
+.mt15-no-workout[hidden]{display:none!important}
+#view-training>#mt14-training{margin-top:4px!important;border:0!important;border-radius:0!important;background:transparent!important}
+#view-training>#mt14-training>.mt14-summary{padding:10px 0!important;min-height:50px!important}
+#view-training>#mt14-training>.mt14-content{padding:2px 0 12px!important}
+#view-training #trainingsform .training-day{padding:0!important;background:transparent!important;box-shadow:none!important;border:0!important}
+#view-training #trainingsform .training-day>h2{margin:6px 0!important;font-size:19px!important;color:var(--xp-text)!important}
+#view-training #trainingsform .training-day>.subtitle{margin:4px 0 12px!important;font-size:12px!important}
+.mt15-training-progress{display:grid;gap:10px;padding:12px 14px!important;margin:10px 0 16px;background:var(--xp-card);border:1px solid var(--xp-border);border-radius:15px}
+.mt15-progress-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.mt15-progress-header>strong{font-size:13px;color:var(--xp-text)!important}
+.mt15-training-buttons{display:flex;gap:5px;flex-wrap:wrap}.mt15-training-buttons button{min-height:34px!important;min-width:0!important;padding:7px 11px!important;border-radius:10px!important;font-size:11px!important;box-shadow:none!important;background:var(--xp-soft)!important;color:var(--xp-text)!important;border:1px solid var(--xp-border)!important}
+.mt15-progress{height:8px;background:var(--xp-soft);border-radius:999px;overflow:hidden}.mt15-progress>i{display:block;height:100%;width:0;background:#2c79df;border-radius:999px;transition:width .2s}
+#view-training #trainingsform .item{margin:7px 0!important;background:var(--xp-card)!important;border:1px solid var(--xp-border)!important;border-radius:14px!important;padding:13px 12px!important;box-shadow:none!important}
+#view-training #trainingsform .item.mt15-exercise{display:grid!important;grid-template-columns:26px minmax(0,1fr) 42px!important;gap:10px!important;align-items:start!important;position:relative}
+#view-training .mt15-exercise>input[data-check]{grid-column:1;grid-row:1;margin:8px 0 0!important;width:22px!important;height:22px!important;min-width:22px!important}
+#view-training .mt15-exercise>label{grid-column:2;grid-row:1;padding-right:18px!important;margin:0!important;min-width:0;font-size:15px!important;line-height:1.35;overflow-wrap:anywhere}
+#view-training .mt15-exercise-toggle{grid-column:3;grid-row:1;width:36px!important;min-width:36px!important;height:36px!important;min-height:36px!important;border:1px solid var(--xp-border)!important;background:var(--xp-soft)!important;color:var(--xp-text)!important;padding:0!important;border-radius:10px!important;font-size:22px!important;box-shadow:none!important;line-height:1!important;cursor:pointer}
+#view-training .mt15-exercise:not(.mt15-collapsed)>.mt15-exercise-toggle{transform:rotate(180deg)}
+#view-training .mt15-exercise .exercise-values{grid-column:1/-1;grid-row:auto;width:100%;max-width:100%;min-width:0;box-sizing:border-box;margin:4px 0 0!important}
+#view-training .mt15-exercise.mt15-collapsed>.exercise-values{display:none!important}
+#view-training .mt15-exercise .info-toggle{top:12px!important;right:53px!important;z-index:2!important}
+#view-training #trainingsform .mt15-exercise .value-field input,#view-training #trainingsform .mt15-exercise .set-rep-field input{min-width:0;max-width:100%;box-sizing:border-box}
+#view-training #trainingsform .mt15-exercise .exercise-values{border-radius:12px!important}
+#view-training #trainingsform .item>label>small{font-size:12px!important;color:var(--xp-muted)!important}
+/* Reserve bottom safe area for app navigation. */
+#training-dashboard-shell{padding-bottom:calc(94px + env(safe-area-inset-bottom,0px))}
+@media(max-width:440px){.mt15-app-header{width:calc(100% - 26px)}.mt15-app-header img{width:43px!important;height:43px!important}.mt15-app-header strong{font-size:17px!important}.mt15-app-header small{font-size:10px!important}.mt15-app-header .mt15-calendar-shortcut{min-width:93px;padding:7px 8px!important}.mt15-progress-header{align-items:flex-start}.mt15-nutrition-view #mt13-nutrition{padding:0!important}}
+
+#view-training #cal-rest{display:none!important}
+#view-dashboard .daily-dashboard{display:none!important}
+.mt15-more-actions{border:1px solid var(--xp-border);border-radius:16px;background:var(--xp-card);margin:16px 0;padding:14px;overflow:hidden}
+.mt15-more-actions>summary{color:var(--xp-text);font-weight:800;cursor:pointer;font-size:14px;list-style-position:inside}
+.mt15-more-actions>.foot{background:transparent!important;border:0!important;box-shadow:none!important;margin:10px 0 0!important;padding:0!important}
+.mt15-more-actions button{min-width:0;box-shadow:none!important}

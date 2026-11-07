@@ -1,8 +1,8 @@
 # MyTraining
 
-**Aktuelle App-Version: 1.4.1.** Diese Versionsnummer erscheint unter „Mehr → Über die App“. Frühere Versionsnummern in diesem Dokument sind Teil der Änderungshistorie.
+**Aktuelle App-Version: 1.4.2.** Diese Versionsnummer erscheint unter „Mehr → Über die App“. Frühere Versionsnummern in diesem Dokument sind Teil der Änderungshistorie.
 
-Eine installierbare, offlinefähige Trainingsplan-App (Progressive Web App, PWA) mit eigener lokaler Datenspeicherung. Die ANIMUS-Mockups dienten nur als gestalterische Referenz. Die App ist ein **Trainingsplan**, kein Mood- oder Ernährungstracker.
+Eine installierbare, offlinefähige Trainingsplan-App (Progressive Web App, PWA) mit eigener lokaler Datenspeicherung. Die ANIMUS-Mockups dienten nur als gestalterische Referenz. Die App verbindet **Trainingsplan, Ernährung und Regeneration** in einer lokalen, offlinefähigen Anwendung.
 
 ## 1. Funktionen
 
@@ -412,3 +412,13 @@ Der Bereich **Training** zeigt für Montag, Mittwoch und Freitag den aufklappbar
 - Lebensmittelsuche, Barcode und Online-Suche sind über kompakte Schaltflächen erreichbar.
 - Produkte der gewählten Mahlzeit werden übersichtlich angezeigt; eigene Lebensmittel und manuelle Eingaben bleiben aufklappbar erhalten.
 - Unveränderte lokale Speicherung für bestehende Tage, Mahlzeiten und Nährwerte.
+
+
+## MyTraining 1.4.2 – Navigation und kompakter Trainingsplan
+
+- Navigation: Heute, Ernährung, Training, Statistik und Mehr.
+- Kalender von jeder Hauptansicht über die Kopfzeile erreichbar; der zuletzt angezeigte Monat bleibt beim Wechsel erhalten.
+- Ernährung hat einen eigenen Tab, bei unveränderter Speicherung und vollständiger Lebensmittelsammlung.
+- Training zeigt kompakte Übungszeilen. Satz- und Gewichtsangaben lassen sich individuell oder gesammelt ein- und ausklappen.
+- Regeneration wird auf der Startseite als eigener Tagesbereich geführt, damit Training nicht mit Ernährung und Regeneration überladen ist.
+- Push-Dienst unverändert. Keine Cloudflare-Neubereitstellung erforderlich.

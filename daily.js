@@ -63,7 +63,7 @@ function build(){if(ready||!$('cal-rest')||!$('view-stats'))return;ready=true;
  $('view-stats').append(summary);
  const dash=document.createElement('div');dash.className='cal-panel daily-dashboard';dash.innerHTML='<h3>Auch an Ruhetagen aktiv</h3><p>Schritte, Schlaf, Wasser, Ernährung und Regeneration für deinen Tag festhalten.</p><button id="daily-open-today" type="button">Heutigen Tag öffnen</button>';
  $('view-dashboard').append(dash);
- $('daily-open-today').onclick=()=>{window.TrainingCalendar?.openDate(today());document.dispatchEvent(new CustomEvent('mytraining-navigate',{detail:{view:'training'}}));};
+ $('daily-open-today').onclick=()=>{window.TrainingCalendar?.openDate(today());document.dispatchEvent(new CustomEvent('mytraining-navigate',{detail:{view:'dashboard'}}));setTimeout(()=>document.getElementById('mt14-rest')?.scrollIntoView({behavior:'smooth',block:'center'}),60);};
  let timer=null;
  $('daily-form').addEventListener('input',()=>{if(!editable)return;clearTimeout(timer);timer=setTimeout(save,450);});
  $('daily-form').addEventListener('change',()=>{if(!editable)return;clearTimeout(timer);save();});
