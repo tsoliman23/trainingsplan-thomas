@@ -1658,5 +1658,95 @@
     "en": "Cloudflare Worker configured. On iPhone, add MyTraining to the Home Screen and open it there.",
     "fr": "Worker Cloudflare configuré. Sur iPhone, ajoute MyTraining à l’écran d’accueil et ouvre-le depuis cet écran.",
     "ar-EG": "خدمة كلاودفلير جاهزة. على آيفون ضيف MyTraining للشاشة الرئيسية وافتحه منها."
+  },
+  "Trainingserinnerung um 06:00 Uhr": {
+    "en": "Training reminder at 6:00 AM",
+    "fr": "Rappel d’entraînement à 06 h 00",
+    "ar-EG": "تذكير التمرين الساعة ٦ صباحاً"
+  },
+  "Montag, Mittwoch und Freitag um 06:00 Uhr": {
+    "en": "Monday, Wednesday and Friday at 6:00 AM",
+    "fr": "Lundi, mercredi et vendredi à 06 h 00",
+    "ar-EG": "الاثنين والأربعاء والجمعة الساعة ٦ صباحاً"
+  },
+  "Persönliche Angaben": {
+    "en": "Personal details",
+    "fr": "Informations personnelles",
+    "ar-EG": "البيانات الشخصية"
+  },
+  "Gewicht und Ziel": {
+    "en": "Weight and target",
+    "fr": "Poids et objectif",
+    "ar-EG": "الوزن والهدف"
+  },
+  "Trainingsziele bearbeiten": {
+    "en": "Edit training goals",
+    "fr": "Modifier les objectifs",
+    "ar-EG": "تعديل أهداف التمرين"
+  },
+  "Profilübersicht": {
+    "en": "Profile overview",
+    "fr": "Vue du profil",
+    "ar-EG": "ملخص الملف الشخصي"
+  },
+  "Angaben ändern": {
+    "en": "Edit details",
+    "fr": "Modifier les informations",
+    "ar-EG": "تعديل البيانات"
+  },
+  "Änderungen speichern": {
+    "en": "Save changes",
+    "fr": "Enregistrer les modifications",
+    "ar-EG": "حفظ التعديلات"
+  },
+  "Zur Übersicht": {
+    "en": "Back to overview",
+    "fr": "Retour à la vue du profil",
+    "ar-EG": "العودة للملخص"
+  },
+  "Geburtsdatum": {
+    "en": "Date of birth",
+    "fr": "Date de naissance",
+    "ar-EG": "تاريخ الميلاد"
+  },
+  "Körpergröße (cm)": {
+    "en": "Height (cm)",
+    "fr": "Taille (cm)",
+    "ar-EG": "الطول (سم)"
+  },
+  "Startgewicht (kg)": {
+    "en": "Starting weight (kg)",
+    "fr": "Poids initial (kg)",
+    "ar-EG": "الوزن عند البداية (كجم)"
+  },
+  "Zielgewicht (kg)": {
+    "en": "Target weight (kg)",
+    "fr": "Poids cible (kg)",
+    "ar-EG": "الوزن المستهدف (كجم)"
+  },
+  "Mindestens ein Trainingsziel auswählen.": {
+    "en": "Choose at least one training goal.",
+    "fr": "Choisis au moins un objectif.",
+    "ar-EG": "اختار هدف تمرين واحد على الأقل."
+  },
+  "Abnehmen und Zunehmen können nicht gleichzeitig gewählt werden.": {
+    "en": "Losing and gaining weight cannot be selected together.",
+    "fr": "Perte et prise de poids ne peuvent pas être choisies ensemble.",
+    "ar-EG": "مينفعش تختار خسارة الوزن وزيادته مع بعض."
+  },
+  "Bitte gültige Angaben eingeben.": {
+    "en": "Please enter valid details.",
+    "fr": "Saisis des informations valides.",
+    "ar-EG": "من فضلك دخل بيانات صحيحة."
+  },
+  "Profil aktualisiert.": {
+    "en": "Profile updated.",
+    "fr": "Profil mis à jour.",
+    "ar-EG": "تم تحديث الملف الشخصي."
+  },
+  "06:00 Uhr": {
+    "en": "6:00 AM",
+    "fr": "06 h 00",
+    "ar-EG": "٦ صباحاً"
   }
 }

@@ -62,7 +62,7 @@ const calendar=$('view-calendar');const jump=document.createElement('button');ju
 const settingsView=document.createElement('section');settingsView.className='cal-view xp-settings';settingsView.id='xp-settings';settingsView.hidden=true;settingsView.innerHTML=`<h2>Einstellungen</h2>
 <div class="cal-panel"><h3>Dein Profil</h3><p class="muted">Vorname, Nachname, Geburtstag, Körpergröße, Startgewicht, Ziel und Zielgewicht.</p><button type="button" id="xp-edit-profile">Profil bearbeiten</button></div>
 <div class="cal-panel"><h3>Design</h3><div class="xp-theme-switch" role="group" aria-label="Farbschema"><button type="button" data-theme="light">Hell</button><button type="button" data-theme="dark">Dunkel</button><button type="button" data-theme="system">System</button></div><p class="muted">Blautöne passend zu deinem App-Logo. Dein Wunsch wird lokal gespeichert.</p></div>
-<div class="cal-panel"><h3>Trainingserinnerung um 08:00 Uhr</h3><label class="xp-setting-row xp-switch-row" for="xp-remind"><span><strong>Erinnerungen aktivieren</strong><small>Montag, Mittwoch und Freitag um 08:00 Uhr</small></span><span class="xp-toggle"><input id="xp-remind" type="checkbox" aria-label="Erinnerungen einschalten"><span class="xp-toggle-slider" aria-hidden="true"></span></span></label><p id="xp-reminder-state" class="muted" role="status" aria-live="polite">Push-Dienst wird geprüft.</p><button type="button" id="xp-push-test" hidden>Testbenachrichtigung senden</button></div>
+<div class="cal-panel"><h3>Trainingserinnerung um 06:00 Uhr</h3><label class="xp-setting-row xp-switch-row" for="xp-remind"><span><strong>Erinnerungen aktivieren</strong><small>Montag, Mittwoch und Freitag um 06:00 Uhr</small></span><span class="xp-toggle"><input id="xp-remind" type="checkbox" aria-label="Erinnerungen einschalten"><span class="xp-toggle-slider" aria-hidden="true"></span></span></label><p id="xp-reminder-state" class="muted" role="status" aria-live="polite">Push-Dienst wird geprüft.</p></div>
 <div class="cal-panel"><h3>Sicherung und Dokumente</h3><div class="xp-settings-actions"><button type="button" id="xp-to-backup">Dateisicherung öffnen</button><button type="button" id="xp-to-pdfs">PDF-Archiv öffnen</button></div><p class="muted">Daten und PDFs liegen lokal im Speicher dieser App. Für einen Gerätewechsel die JSON-Sicherung und PDF-Dateien separat herunterladen.</p></div>
 <div class="cal-panel xp-danger-zone"><h3>App zurücksetzen</h3><p class="muted">Alle lokalen Daten dieser App werden gelöscht: Profil, Trainingsstand, Historie, PDFs und Einstellungen.</p><button type="button" id="xp-reset-app" class="xp-danger-button">App zurücksetzen</button></div>
 <div class="cal-panel xp-about"><h3>Über die App</h3><strong>MyTraining</strong><p>Version 1.0</p><p>Dein persönlicher Trainingsbegleiter für Planung, Fortschritt und Motivation.</p></div>`;
@@ -73,27 +73,27 @@ navEl.innerHTML=items.map(([v,icon,label])=>`<button type="button" data-xp-view=
 navEl.querySelectorAll('[data-xp-view]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.xpView)));
 function show(view){settingsView.hidden=view!=='settings';if(view==='settings'){for(const v of ['dashboard','calendar','training','stats','documents']){const e=$('view-'+v);if(e)e.hidden=true;}document.querySelectorAll('.cal-tabs button').forEach(x=>x.classList.remove('active'));}else{nav(view);}document.querySelectorAll('[data-xp-view]').forEach(b=>{const a=b.dataset.xpView===view;b.classList.toggle('selected',a);b.setAttribute('aria-current',a?'page':'false');});window.scrollTo(0,0);}
 document.addEventListener('mytraining-navigate',e=>{if(e.detail?.view)show(e.detail.view);});
-$('xp-go-today').onclick=()=>{window.TrainingCalendar?.openDate(TODAY());show('training');};$('xp-go-calendar').onclick=()=>show('calendar');$('xp-edit-profile').onclick=()=>$('editProfile').click();$('xp-to-backup').onclick=()=>{show('stats');$('download-backup')?.scrollIntoView({behavior:'smooth',block:'center'});};$('xp-to-pdfs').onclick=()=>show('documents');
+$('xp-go-today').onclick=()=>{window.TrainingCalendar?.openDate(TODAY());show('training');};$('xp-go-calendar').onclick=()=>show('calendar');$('xp-edit-profile').onclick=()=>window.MyTrainingProfileEditor?.open();$('xp-to-backup').onclick=()=>{show('stats');$('download-backup')?.scrollIntoView({behavior:'smooth',block:'center'});};$('xp-to-pdfs').onclick=()=>show('documents');
 settingsView.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{settings.theme=b.dataset.theme;saveSettings();paintTheme();});
 function paintTheme(){settingsView.querySelectorAll('[data-theme]').forEach(b=>b.classList.toggle('selected',b.dataset.theme===settings.theme));}
 paintTheme();
-const pushSwitch=$('xp-remind'),pushTest=$('xp-push-test'),pushState=$('xp-reminder-state');
+const pushSwitch=$('xp-remind'),pushState=$('xp-reminder-state');
 let pushBusy=false;
-function updatePushUi(active){pushSwitch.checked=Boolean(active);settings.reminder=Boolean(active);saveSettings();pushTest.hidden=!window.MyTrainingPush?.configured;pushTest.disabled=!active||pushBusy;}
+function updatePushUi(active){pushSwitch.checked=Boolean(active);settings.reminder=Boolean(active);saveSettings();}
 if(!window.MyTrainingPush?.configured){
- pushSwitch.checked=false;pushSwitch.disabled=true;pushTest.hidden=true;
+ pushSwitch.checked=false;pushSwitch.disabled=true;
  pushState.textContent='Push noch nicht eingerichtet. Bitte zuerst den kostenlosen Cloudflare Worker bereitstellen (README, Abschnitt 10).';
 }else if(!window.MyTrainingPush.support()){
- pushSwitch.checked=false;pushSwitch.disabled=true;pushTest.hidden=true;
+ pushSwitch.checked=false;pushSwitch.disabled=true;
  pushState.textContent='Cloudflare Worker konfiguriert. Für Push auf dem iPhone MyTraining zum Home-Bildschirm hinzufügen und dort öffnen.';
 }else{
- pushSwitch.disabled=false;pushTest.hidden=false;pushTest.disabled=true;
+ pushSwitch.disabled=false;
  pushState.textContent='Cloudflare Worker konfiguriert. Schalter aktivieren, um die Push-Berechtigung anzufordern.';
- window.MyTrainingPush.isSubscribed().then(active=>{updatePushUi(active);pushState.textContent=active?'Push-Registrierung vorhanden. Mit dem Test-Button die Zustellung prüfen.':'Cloudflare Worker konfiguriert. Erinnerungen sind derzeit ausgeschaltet.';});
+ window.MyTrainingPush.isSubscribed().then(active=>{updatePushUi(active);pushState.textContent=active?'Push-Registrierung vorhanden. Erinnerungen um 06:00 Uhr aktiv.':'Cloudflare Worker konfiguriert. Erinnerungen sind derzeit ausgeschaltet.';});
 }
 pushSwitch.addEventListener('change',async e=>{
  if(pushBusy)return;
- const desired=e.target.checked;pushBusy=true;pushSwitch.disabled=true;pushTest.disabled=true;
+ const desired=e.target.checked;pushBusy=true;pushSwitch.disabled=true;
  // No await before update(): it must request iOS notification permission from the user gesture.
  const resultPromise=window.MyTrainingPush?.update(desired);
  const result=await resultPromise;
@@ -101,12 +101,7 @@ pushSwitch.addEventListener('change',async e=>{
  if(result===null||result===undefined){updatePushUi(!desired);return;}
  updatePushUi(result);
 });
-pushTest.addEventListener('click',async()=>{
- if(pushBusy||!settings.reminder)return;
- pushBusy=true;pushTest.disabled=true;
- await window.MyTrainingPush.sendTest();
- pushBusy=false;pushTest.disabled=false;
-});
+
 
 async function deleteDatabase(name){
  return await new Promise(resolve=>{
@@ -163,18 +158,40 @@ document.querySelectorAll('.cal-tabs [data-view]').forEach(b=>b.addEventListener
 $('view-dashboard').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{if(b.id==='dash-open-training')nav('training');}));
 const obs=new MutationObserver(()=>{title();});obs.observe($('personalGreeting'),{childList:true});
 title();syncWeightCard();show('dashboard');
-  // Compact optional explanations; preserve all text for translation and accessibility.
-  const helpSelectors=['.xp-settings .cal-panel>p.muted','#view-documents>p.muted','.xp-info>p','#xp-weight-hint','#view-stats>.muted','.history-panel>p.muted','#view-calendar .cal-legend-note','#trainingsform .muted'];
-  const helpTexts=[...document.querySelectorAll(helpSelectors.join(','))];
-  helpTexts.forEach((el,i)=>{if(el.closest('.xp-danger-zone')||el.id==='xp-reminder-state')return;
-    const id='xp-help-'+i;el.id=el.id||id;el.hidden=true;el.classList.add('xp-help-text');
-    const toggle=document.createElement('button');toggle.type='button';toggle.className='xp-info-toggle';toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-controls',el.id);
-    toggle.setAttribute('aria-label','Information anzeigen oder ausblenden');toggle.textContent='i';
-    toggle.onclick=()=>{el.hidden=!el.hidden;toggle.setAttribute('aria-expanded',String(!el.hidden));};
-    el.before(toggle);
-  });
+  // Group supplementary explanations per heading, with one small inline i-button.
+  const reminderSmall=settingsView.querySelector('.xp-switch-row small');
+  if(reminderSmall){const note=document.createElement('p');note.className='muted xp-reminder-help';note.textContent=reminderSmall.textContent;reminderSmall.remove();settingsView.querySelector('#xp-reminder-state').before(note);}
+  const helpSelectors=['.xp-settings .cal-panel>p.muted','.xp-info>p','#xp-weight-hint','#view-stats>.muted','.history-panel>p.muted','#view-calendar .cal-legend-note','#trainingsform .muted'];
+  const groups=new Map();
+  for(const el of document.querySelectorAll(helpSelectors.join(','))){
+   if(el.closest('.xp-danger-zone')||el.id==='xp-reminder-state'||!el.textContent.trim())continue;
+   let heading=null;
+   if(el.classList.contains('cal-legend-note'))heading=$('view-calendar').querySelector('.cal-legend');
+   else{
+    let prev=el.previousElementSibling;
+    while(prev&&!prev.matches('h2,h3'))prev=prev.previousElementSibling;
+    heading=prev||el.closest('.cal-panel,.history-panel,.training-day')?.querySelector('h2,h3');
+   }
+   if(!heading)continue;
+   if(!groups.has(heading))groups.set(heading,[]);
+   groups.get(heading).push(el);
+  }
+  for(const [h,notes] of groups){
+   let heading=h;
+   const firstNote=notes[0];
+   if(heading.classList.contains('cal-legend')){
+     const holder=document.createElement('div');holder.className='xp-inline-info';heading.parentElement.insertBefore(holder,heading.nextSibling);heading=holder;
+   }
+   const wrap=document.createElement('span');wrap.className='xp-heading-row';
+   heading.parentNode.insertBefore(wrap,heading);wrap.appendChild(heading);
+   const toggle=document.createElement('button');toggle.type='button';toggle.className='xp-info-toggle';toggle.textContent='i';
+   toggle.setAttribute('aria-label','Information anzeigen oder ausblenden');toggle.setAttribute('aria-expanded','false');wrap.appendChild(toggle);
+   const content=document.createElement('div');content.className='xp-help-group';content.hidden=true;wrap.after(content);
+   notes.forEach(n=>{n.hidden=false;n.classList.add('xp-help-text');content.append(n);});
+   toggle.onclick=()=>{content.hidden=!content.hidden;toggle.setAttribute('aria-expanded',String(!content.hidden));};
+  }
 }
-async function remind(){if(window.MyTrainingPush?.configured)return;if(!settings.reminder||!('Notification'in window)||Notification.permission!=='granted')return;const now=new Date();if(now.getHours()!==8||![1,3,5].includes(now.getDay()))return;const id='train-remind-'+TODAY();if(localStorage.getItem(id))return;const d=read('training-calendar-days-v1',{});if(d[TODAY()]?.completed)return;localStorage.setItem(id,'1');const opts={body:'Dein Training steht heute an. Öffne die App und dokumentiere deine Einheit.',icon:'./icons/icon-192.png',tag:'training-morning'};try{const sw=await navigator.serviceWorker?.ready;if(sw?.showNotification){await sw.showNotification('Dein Training um 08:00 Uhr',opts);}else new Notification('Dein Training um 08:00 Uhr',opts);}catch(e){console.warn('Erinnerung nicht verfügbar',e);}}
+async function remind(){if(window.MyTrainingPush?.configured)return;if(!settings.reminder||!('Notification'in window)||Notification.permission!=='granted')return;const now=new Date();if(now.getHours()!==6||![1,3,5].includes(now.getDay()))return;const id='train-remind-'+TODAY();if(localStorage.getItem(id))return;const d=read('training-calendar-days-v1',{});if(d[TODAY()]?.completed)return;localStorage.setItem(id,'1');const opts={body:'Dein Training steht heute an. Öffne die App und dokumentiere deine Einheit.',icon:'./icons/icon-192.png',tag:'training-morning'};try{const sw=await navigator.serviceWorker?.ready;if(sw?.showNotification){await sw.showNotification('Dein Training um 06:00 Uhr',opts);}else new Notification('Dein Training um 06:00 Uhr',opts);}catch(e){console.warn('Erinnerung nicht verfügbar',e);}}
 theme();try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',theme);}catch{}
 let attempts=0;const ready=setInterval(()=>{if($('view-dashboard')){clearInterval(ready);build();remind();setInterval(remind,60000);}else if(++attempts>150)clearInterval(ready);},100);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden){remind();title();}});

@@ -13,7 +13,7 @@ async function deliver(env,subscription,data){
 }
 async function scheduledPush(env){
  const local=berlinTime();
- if(local.hour!=='08'||!ALLOWED_DAYS.includes(local.weekday))return;
+ if(local.hour!=='06'||!ALLOWED_DAYS.includes(local.weekday))return;
  const stamp=`${local.year}-${local.month}-${local.day}`;
  let cursor;
  do{

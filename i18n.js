@@ -34,7 +34,7 @@ function translateAttr(el,attr){if(!el.hasAttribute(attr))return;const prop='i18
 function apply(root=document.body){if(!root)return;
 const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let node;while((node=walker.nextNode()))textNode(node);
 const attrs=root.querySelectorAll?.('[placeholder],[title],[aria-label]')||[];for(const e of attrs){for(const a of ['placeholder','title','aria-label'])translateAttr(e,a);}
-document.documentElement.lang=lang==='ar-EG'?'ar-EG':lang;document.documentElement.dir=lang==='ar-EG'?'rtl':'ltr';
+const displayLanguage=initialGate&&!initialGate.hidden?(selectedIntroLanguage||'de'):lang;document.documentElement.lang=displayLanguage==='ar-EG'?'ar-EG':displayLanguage;document.documentElement.dir=displayLanguage==='ar-EG'?'rtl':'ltr';
 }
 let queued=false;function requestApply(){if(queued||!ready)return;queued=true;requestAnimationFrame(()=>{queued=false;apply();});}
 function setLanguage(code){if(!LOCALES[code])return;lang=code;localStorage.setItem(KEY,code);window.MyTrainingBirthday?.refreshLabels?.();apply();document.dispatchEvent(new CustomEvent('mytraining-language-change',{detail:{language:lang}}));}
@@ -62,6 +62,7 @@ function renderIntroSelection(){
  initialGate.querySelector('.language-dialog').dir=selectedIntroLanguage==='ar-EG'?'rtl':'ltr';
  initialGate.querySelector('.language-dialog').style.direction=selectedIntroLanguage==='ar-EG'?'rtl':'ltr';
  initialGate.querySelector('.language-dialog').style.textAlign=selectedIntroLanguage==='ar-EG'?'right':'left';
+ document.documentElement.dir=selectedIntroLanguage==='ar-EG'?'rtl':'ltr';
  initialGate.querySelectorAll('.lang-option').forEach(button=>{
   const chosen=button.dataset.lang===selectedIntroLanguage;
   button.setAttribute('aria-pressed',String(chosen));

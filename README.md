@@ -13,7 +13,7 @@ Eine installierbare, offlinefähige Trainingsplan-App (Progressive Web App, PWA)
 - **PDF:** kompakter Report mit bis zu drei Trainingstagen pro Ausgabe; Hinweise optional, PDF-Archiv mit Datum und lokalem Download.
 - **Sicherung:** JSON-Datei mit Trainingsstand, Historie, Kalenderdaten, Profil und Einstellungen herunterladen und wiederherstellen. PDFs müssen getrennt gesichert werden.
 - **Design:** Blau aus dem vorhandenen Logo, Light Mode, Dark Mode und Systemeinstellung. Untere Hauptnavigation auf Mobilgeräten.
-- **Erinnerung:** optionale Benachrichtigungsprüfung um 08:00 Uhr an Trainingstagen, solange die App ausgeführt wird (siehe Einschränkungen).
+- **Erinnerung:** optionale Benachrichtigungsprüfung um 06:00 Uhr an Trainingstagen, solange die App ausgeführt wird (siehe Einschränkungen).
 
 ## 2. Technische Entscheidung
 
@@ -137,7 +137,7 @@ Im zweiten Einrichtungsschritt werden Tag, Monat und Jahr in drei getrennten ver
 
 ### Funktion und Datenschutz
 
-- Der Cloudflare-Cron-Trigger läuft Montag, Mittwoch und Freitag um 06:00 bzw. 07:00 UTC und sendet ausschließlich, wenn es in der Zeitzone `Europe/Berlin` tatsächlich 08:00 Uhr ist. Eine exakte Zustellsekunde wird nicht garantiert.
+- Der Cloudflare-Cron-Trigger läuft Montag, Mittwoch und Freitag um 04:00 bzw. 05:00 UTC und sendet ausschließlich, wenn es in der Zeitzone `Europe/Berlin` tatsächlich 06:00 Uhr ist. Eine exakte Zustellsekunde wird nicht garantiert.
 - Der Worker speichert nur Push-Endpunkt, kryptografische Subscription-Schlüssel und ein zufälliges Registrierungstoken in Cloudflare KV. **Keine Namen, Geburtsdaten, Körpergewichte, Trainingsinhalte oder PDF-Dateien.**
 - Nach einer Abmeldung wird die Registrierung am Server gelöscht und die Browser-Push-Subscription beendet (Internetverbindung erforderlich).
 - Der Worker weiß nicht, ob du das heutige Training bereits abgeschlossen hast. Die Erinnerung wird unabhängig vom lokal gespeicherten Trainingsstatus versendet.
@@ -224,7 +224,7 @@ Die Ziele werden im lokalen Profil unter `trainingGoals` als Liste gespeichert. 
 
 - **Gewicht:** Die Karte „Körperwerte“ auf dem Dashboard erfasst ausschließlich das heutige Gewicht (Schrittweite 0,1 kg), auch wenn zuletzt ein anderer Kalendertag geöffnet war. Das Gewicht wird in `training-calendar-days-v1` unter dem Tagesdatum gespeichert. Das bei der Profilerstellung hinterlegte Startgewicht dient als unveränderter Ausgangswert. Zielgewicht steht daneben. Für frühere Werte den jeweiligen Tag in der Trainingsansicht öffnen.
 - **Zurücksetzen:** In **Mehr > App zurücksetzen** muss zuerst das Bestätigungsfenster mit rotem „Alles löschen“ bestätigt werden. Danach wird die laufende Speicherung gestoppt, die Trainings- und PDF-Datenbank geschlossen und gelöscht sowie die MyTraining-spezifischen lokalen Schlüssel entfernt. Andere Dateien auf dem Gerät werden nicht angerührt. Der Browser-Cache mit dem App-Code bleibt für die Offline-Nutzung erhalten. Bestehende PDF-Downloads in der Dateien-App können nicht automatisch gelöscht werden.
-- **Push:** Bei eingerichteter Cloudflare-Verbindung wird vor dem lokalen Reset auch die Push-Registrierung abgemeldet; bei nicht erreichbarem Server wird der Reset unterbrochen und ein Fehler angezeigt. Ohne Cloudflare ist die Erinnerung nur als lokale Prüfung bei laufender App verfügbar; 08:00 Uhr im geschlossenen Zustand ist damit nicht garantiert.
+- **Push:** Bei eingerichteter Cloudflare-Verbindung wird vor dem lokalen Reset auch die Push-Registrierung abgemeldet; bei nicht erreichbarem Server wird der Reset unterbrochen und ein Fehler angezeigt. Ohne Cloudflare ist die Erinnerung nur als lokale Prüfung bei laufender App verfügbar; 06:00 Uhr im geschlossenen Zustand ist damit nicht garantiert.
 - **Einstellungen:** Apple-artiger Schalter, lesbare Sicherungsbuttons, einheitliche Kontraste und der explizite Hidden-Zustand des Reset-Dialogs.
 - **Übersetzungen:** Korrigierter Zugriff auf `aria-label`-Attribute; Monatsnamen werden nur bei tatsächlichem Sprachwechsel neu aufgebaut.
 
@@ -267,7 +267,7 @@ git push
 - Die Push-Berechtigung wird auf iOS **unmittelbar beim Antippen des Schalters** angefordert. Ohne eingerichtete Worker-Adresse kann der Schalter nicht fälschlich einen funktionierenden Hintergrund-Push anzeigen.
 - Der Cloudflare-Worker bietet `POST /test` für einen echten Testversand an die **zuvor registrierte Push-Subscription**. Der Test wird mittels gerätebezogenem Token und einfachem 60-Sekunden-Limit geschützt.
 - Im Einstellungsbereich erscheint nach der Cloudflare-Konfiguration ein Button „Testbenachrichtigung senden“. Dieser wird erst nach aktivierter Push-Registrierung anklickbar.
-- Der regelmäßige Cron-Versand ist auf Mo/Mi/Fr, 08:00 Uhr `Europe/Berlin` ausgelegt. Die Zustellung kann durch Betriebssystem und Netzzustand verzögert werden.
+- Der regelmäßige Cron-Versand ist auf Mo/Mi/Fr, 06:00 Uhr `Europe/Berlin` ausgelegt. Die Zustellung kann durch Betriebssystem und Netzzustand verzögert werden.
 - **Deployment ist weiterhin erforderlich:** `cloudflare-push/wrangler.toml` mit KV-Namespace, VAPID Public Key, VAPID Subject und Origin befüllen; Private Key als Cloudflare-Secret setzen; Worker deployen; öffentliche URL in `push-config.js` eintragen.
 - **Datenschutz:** Der Worker speichert nur Push-Empfangsdaten und das zufällige Registrierungstoken, keine Trainingsdaten. Bei Deaktivierung wird die Registrierung gelöscht.
 
@@ -286,3 +286,12 @@ Die App wurde nicht auf einem realen iPhone mit einem aktiven Cloudflare-Worker 
 - Kalender: Regenerationstage nutzen denselben blauen Statuspunkt wie die Legende.
 
 Die erweiterte ZIP enthaelt keine Git-Verzeichnisse, node_modules oder lokalen Wrangler-Caches. Ein kompletter iPhone-Test muss auf dem Endgeraet erfolgen.
+
+
+## MyTraining 1.0.2 – Profil & Erinnerungen
+
+- Persönliche Profilbearbeitung ist unabhängig vom Einrichtungsassistenten.
+- Push-Erinnerungen laufen jetzt Mo/Mi/Fr um 06:00 Uhr Europe/Berlin, inklusive Sommerzeit.
+- **Cloudflare muss nach der Änderung separat erneut bereitgestellt werden:** im Ordner `cloudflare-push` `npm.cmd run deploy` ausführen. Ein GitHub-Push allein aktualisiert den bereits veröffentlichten Worker nicht.
+- Der Testnachrichten-Button wurde aus den Einstellungen entfernt.
+- Ergänzende Hilfetexte stehen gesammelt hinter einem Info-Button neben der zugehörigen Überschrift.

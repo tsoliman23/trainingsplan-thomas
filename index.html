@@ -402,7 +402,7 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   window.MyTrainingContinueOnboarding=continueAfterLanguage;
   document.addEventListener('mytraining-initial-language-confirmed',continueAfterLanguage);
   document.getElementById('profileCancel').addEventListener('click',function(){profileOverlay.hidden=true;document.documentElement.classList.remove('profile-boot-active');});
-  document.getElementById('editProfile').addEventListener('click',function(){showProfile(validProfile(profile));});
+  document.getElementById('editProfile').addEventListener('click',function(){if(validProfile(profile)){window.MyTrainingProfileEditor?.open();}else showProfile(false);});
 
   var custom={montag:[],mittwoch:[],freitag:[]};
   var customCounter=0;
@@ -719,8 +719,8 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   window.addEventListener('appinstalled',function(){installButton.hidden=true;appStatus.textContent='App installiert. Deine Daten bleiben lokal auf dem Gerät.';});
   if(/iPhone|iPad|iPod/.test(navigator.userAgent)&&!window.navigator.standalone){appStatus.textContent='iPhone: In Safari öffnen, Teilen wählen und „Zum Home-Bildschirm“ hinzufügen. Danach auch offline nutzbar.';}
   document.addEventListener('visibilitychange',function(){if(document.hidden&&!loading&&!window.__mytrainingResetting){if(queuedSave){clearTimeout(queuedSave);queuedSave=null;}persist(data());}});
-  window.TrainingApp={getSnapshot:data,applySnapshot:function(snapshot){apply(snapshot);save();},save:save,refresh:update,closeStorage:async function(){if(queuedSave){clearTimeout(queuedSave);queuedSave=null;}try{await lastWrite;}catch(_){}if(db){db.close();db=null;}return true;}};
+  window.TrainingApp={updateProfile:function(p){if(!validProfile(p))return false;profile={firstName:p.firstName.trim(),goalWeight:String(p.goalWeight)};profileDisplay();try{localStorage.setItem('training-profile-v1',JSON.stringify(profile));}catch(_){}if(!loading)save();return true;},getSnapshot:data,applySnapshot:function(snapshot){apply(snapshot);save();},save:save,refresh:update,closeStorage:async function(){if(queuedSave){clearTimeout(queuedSave);queuedSave=null;}try{await lastWrite;}catch(_){}if(db){db.close();db=null;}return true;}};
   window.addEventListener('beforeprint',preparePrint);
   update();
 })();
-</script><script src="./calendar.js"></script><script src="./push-config.js"></script><script src="./push-client.js"></script><script src="./experience.js"></script><script src="./birth-wheel.js"></script><script src="./wizard.js"></script><script src="./pdf-preview.js"></script><script src="./i18n.js"></script></body></html>
+</script><script src="./calendar.js"></script><script src="./push-config.js"></script><script src="./push-client.js"></script><script src="./experience.js"></script><script src="./birth-wheel.js"></script><script src="./wizard.js"></script><script src="./profile-editor.js"></script><script src="./pdf-preview.js"></script><script src="./i18n.js"></script></body></html>

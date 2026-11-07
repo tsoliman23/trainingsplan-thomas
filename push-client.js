@@ -24,7 +24,7 @@ async function subscribe(){
  if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:decode(config.publicKey)});
  try{await request('/subscription','POST',{token:token(),subscription:sub.toJSON()});}
  catch(e){await sub.unsubscribe().catch(()=>{});throw e;}
- status('Push aktiv. Erinnerungen: Montag, Mittwoch, Freitag um 08:00 Uhr (Berlin).');
+ status('Push aktiv. Erinnerungen: Montag, Mittwoch, Freitag um 06:00 Uhr (Berlin).');
  return true;
 }
 async function unsubscribe(){

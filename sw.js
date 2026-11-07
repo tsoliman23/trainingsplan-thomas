@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v29-ui-weight-fixes';
+const CACHE = 'mytraining-v30-profile-reminder-ui';
 
 const ASSETS = [
     './',
@@ -7,6 +7,7 @@ const ASSETS = [
     './progress.js',
     './calendar.js',
     './experience.js',
+  './profile-editor.js',
     './theme.css',
     './wizard.css',
     './wizard.js',
