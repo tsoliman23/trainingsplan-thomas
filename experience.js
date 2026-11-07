@@ -52,7 +52,7 @@ function adjustBodyWeight(delta){
  if(!Number.isFinite(start)||start<20||start>350)return;
  const next=Math.round((start+delta)*10)/10;
  if(next<20||next>350)return;
- if(window.TrainingCalendar?.setWeightForDate?.(TODAY(),next))syncWeightCard();
+ if(window.TrainingCalendar?.setWeightForDate?.(TODAY(),next)){syncWeightCard();window.MyTrainingToast?.autoSaved();}
 }
 $('xp-weight-minus').addEventListener('click',()=>adjustBodyWeight(-0.1));
 $('xp-weight-plus').addEventListener('click',()=>adjustBodyWeight(0.1));
@@ -74,7 +74,7 @@ navEl.querySelectorAll('[data-xp-view]').forEach(b=>b.addEventListener('click',(
 function show(view){settingsView.hidden=view!=='settings';if(view==='settings'){for(const v of ['dashboard','calendar','training','stats','documents']){const e=$('view-'+v);if(e)e.hidden=true;}document.querySelectorAll('.cal-tabs button').forEach(x=>x.classList.remove('active'));}else{nav(view);}document.querySelectorAll('[data-xp-view]').forEach(b=>{const a=b.dataset.xpView===view;b.classList.toggle('selected',a);b.setAttribute('aria-current',a?'page':'false');});window.scrollTo(0,0);}
 document.addEventListener('mytraining-navigate',e=>{if(e.detail?.view)show(e.detail.view);});
 $('xp-go-today').onclick=()=>{window.TrainingCalendar?.openDate(TODAY());show('training');};$('xp-go-calendar').onclick=()=>show('calendar');$('xp-edit-profile').onclick=()=>window.MyTrainingProfileEditor?.open();$('xp-to-backup').onclick=()=>{show('stats');$('download-backup')?.scrollIntoView({behavior:'smooth',block:'center'});};$('xp-to-pdfs').onclick=()=>show('documents');
-settingsView.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{settings.theme=b.dataset.theme;saveSettings();paintTheme();});
+settingsView.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{settings.theme=b.dataset.theme;saveSettings();paintTheme();window.MyTrainingToast?.success('Design gespeichert');});
 function paintTheme(){settingsView.querySelectorAll('[data-theme]').forEach(b=>b.classList.toggle('selected',b.dataset.theme===settings.theme));}
 paintTheme();
 const pushSwitch=$('xp-remind'),pushState=$('xp-reminder-state');
@@ -99,7 +99,7 @@ pushSwitch.addEventListener('change',async e=>{
  const result=await resultPromise;
  pushBusy=false;pushSwitch.disabled=false;
  if(result===null||result===undefined){updatePushUi(!desired);return;}
- updatePushUi(result);
+ updatePushUi(result);window.MyTrainingToast?.success(result?'Erinnerungen aktiviert':'Erinnerungen deaktiviert');
 });
 
 

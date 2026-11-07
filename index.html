@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="de"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>MyTraining</title><script>/* Avoid first-paint flash before localization. */
+<html lang="de"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" name="viewport"/><title>MyTraining</title><script>/* Avoid first-paint flash before localization. */
 (function(){try{var language=localStorage.getItem('mytraining-language-v1');if(!language)document.documentElement.classList.add('language-boot-first');else if(language!=='de')document.documentElement.classList.add('language-boot-loading');}catch(e){document.documentElement.classList.add('language-boot-first');}})();
 </script><style>
 html.language-boot-first{background:#07162c!important;color-scheme:dark}
@@ -329,7 +329,7 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   <p aria-live="polite" id="saveState">Speicherung wird geprüft.</p><p aria-live="polite" id="pdf-status" class="muted"></p>
   <div hidden aria-hidden="true"><button id="manualLoad" type="button"></button><button id="loadTop" type="button"></button><button id="exportJsonTop" type="button"></button><button id="backup" type="button"></button><button id="restore" type="button"></button><input accept="application/json,.json" hidden id="backupFile" type="file"></div>
   <div id="manualPanel" hidden style="display:none"><p id="manualHelp"></p><textarea id="manualCode"></textarea><button id="copyCode" type="button"></button><button id="pasteCode" type="button"></button><button id="applyCode" type="button"></button><button id="closeCode" type="button"></button></div>
-</div></div></form></div><script src="./modern-pdf.js"></script><script src="./progress.js"></script><script>
+</div></div></form></div><script src="./toast.js"></script><script src="./modern-pdf.js"></script><script src="./progress.js"></script><script>
 (function(){
   'use strict';
   var KEY='cleverfit_training_v16', OLDKEY='cleverfit_training_v5';
@@ -442,7 +442,7 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
     var text=JSON.stringify(data(),null,2),blob=new Blob([text],{type:'application/json;charset=utf-8'});
     var filename='Trainingscheckliste_'+(profile.firstName||'Training').replace(/[^a-zA-Z0-9äöüÄÖÜß_-]/g,'_')+'_Sicherung_'+new Date().toISOString().slice(0,10)+'.json';
     var url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},60000);
-    label.textContent='JSON-Sicherung erstellt. Bitte die Datei außerhalb der App aufbewahren.';
+    label.textContent='JSON-Sicherung erstellt. Bitte die Datei außerhalb der App aufbewahren.';window.MyTrainingToast?.success('Sicherung erstellt');
   }
   document.querySelector('header').appendChild(panel);
   try{localStorage.setItem('__cf_test','1');localStorage.removeItem('__cf_test');available=true;}catch(e){}
@@ -487,12 +487,12 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   function importCode(v){var t=v.trim();if(t.slice(0,4)==='CF1.')return JSON.parse(decodeURIComponent(escape(atob(t.slice(4)))));return JSON.parse(t);}
   function showPanel(help,value,kind){mode=kind;panel.style.display='block';document.getElementById('manualHelp').textContent=help;code.value=value;document.getElementById('applyCode').style.display=kind==='load'?'inline-block':'none';document.getElementById('copyCode').style.display=kind==='load'?'none':'inline-block';document.getElementById('pasteCode').style.display=kind==='load'?'inline-block':'none';panel.scrollIntoView({block:'nearest'});}
   document.getElementById('manualSave').addEventListener('click',function(){
-    var snapshot=data();try{localStorage.setItem('training-manual-restore-v1',JSON.stringify(snapshot));save();label.textContent='Wiederherstellungspunkt gespeichert.';}catch(e){label.textContent='Speichern fehlgeschlagen: Gerätespeicher prüfen.';}
+    var snapshot=data();try{localStorage.setItem('training-manual-restore-v1',JSON.stringify(snapshot));save();label.textContent='Wiederherstellungspunkt gespeichert.';window.MyTrainingToast?.success('Speichern erfolgreich');}catch(e){label.textContent='Speichern fehlgeschlagen: Gerätespeicher prüfen.';}
   });
   document.getElementById('restoreSaved').addEventListener('click',function(){
     try{var raw=localStorage.getItem('training-manual-restore-v1');if(!raw){label.textContent='Kein Wiederherstellungspunkt vorhanden. Zuerst „Speichern“ wählen.';return;}
     if(!confirm('Den zuletzt manuell gespeicherten Stand wiederherstellen? Aktuelle Änderungen werden überschrieben.'))return;
-    apply(JSON.parse(raw));save();document.getElementById('resetAll').hidden=false;document.getElementById('undoReset').hidden=true;label.textContent='Gespeicherten Trainingsstand wiederhergestellt.';
+    apply(JSON.parse(raw));save();document.getElementById('resetAll').hidden=false;document.getElementById('undoReset').hidden=true;label.textContent='Gespeicherten Trainingsstand wiederhergestellt.';window.MyTrainingToast?.success('Wiederherstellung erfolgreich');
     }catch(e){label.textContent='Wiederherstellung fehlgeschlagen.';}
   });
   document.getElementById('manualLoad').addEventListener('click',function(){if(panel.parentNode!==document.querySelector('header'))document.querySelector('.foot').appendChild(panel);showPanel('Sicherungscode aus Notizen kopieren. Dann ins Feld tippen, gedrückt halten und im iPhone-Menü „Einsetzen“ wählen. Der Button „Code einsetzen“ versucht es zusätzlich automatisch, wenn iOS dies erlaubt.','', 'load');});
@@ -689,7 +689,7 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
     }
     return out;
   }
-  function informPdf(msg){var l=document.getElementById('pdf-status');if(l)l.textContent=msg;}
+  function informPdf(msg){var l=document.getElementById('pdf-status');if(l)l.textContent=msg;if(/PDF erstellt|PDF bereitgestellt/.test(msg))window.MyTrainingToast?.success('PDF erstellt');}
   var pdfOptionsOverlay=document.getElementById('pdfOptionsOverlay');
   document.getElementById('pdfCancel').addEventListener('click',function(){pdfOptionsOverlay.hidden=true;});
   Array.prototype.forEach.call(document.querySelectorAll('.pdf-export'),function(btn){btn.addEventListener('click',function(){pdfOptionsOverlay.hidden=false;});});

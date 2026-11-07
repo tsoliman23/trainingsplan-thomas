@@ -295,3 +295,11 @@ Die erweiterte ZIP enthaelt keine Git-Verzeichnisse, node_modules oder lokalen W
 - **Cloudflare muss nach der Änderung separat erneut bereitgestellt werden:** im Ordner `cloudflare-push` `npm.cmd run deploy` ausführen. Ein GitHub-Push allein aktualisiert den bereits veröffentlichten Worker nicht.
 - Der Testnachrichten-Button wurde aus den Einstellungen entfernt.
 - Ergänzende Hilfetexte stehen gesammelt hinter einem Info-Button neben der zugehörigen Überschrift.
+
+
+## Update 1.0.3 – iPhone-Bedienung und Rückmeldungen
+
+- Unbeabsichtigte Seitenvergrößerung per Doppeltipp/Pinch in der App unterdrückt. Die System-Zoomfunktionen bleiben davon unabhängig.
+- Das Geburtsdatumsfeld in der separaten Profilbearbeitung ist auf die Dialogbreite begrenzt.
+- Der PDF-Erstellungsbutton ist im Dunkelmodus blau mit weißer Schrift.
+- Speicher-, Sicherungs-, PDF- und Profilaktionen zeigen kurz eine Bestätigung unten am Bildschirm. Häufige automatische Speichervorgänge werden gedrosselt.

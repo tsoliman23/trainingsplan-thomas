@@ -80,7 +80,7 @@
     if(!info.finished&&!confirm('Für diesen Trainingstag ist noch keine Übung als erledigt markiert. Trotzdem archivieren?'))return;
     const record={id:'d-'+Date.now()+'-'+Math.random().toString(36).slice(2,7),date:(window.TrainingCalendar?.selectedDate?.() || isoDay()),createdAt:Date.now(),kind:'day',weight:$('bodyWeight').value, ...info};
     const history=listHistory();history.unshift(record);
-    try{storeHistory(history);renderHistory();notify(info.dayName+' als Trainingseinheit archiviert.');}catch(e){notify('Historie konnte nicht gespeichert werden. Bitte zuerst eine Sicherung herunterladen.');}
+    try{storeHistory(history);renderHistory();notify(info.dayName+' als Trainingseinheit archiviert.');window.MyTrainingToast?.success('Training gespeichert');}catch(e){notify('Historie konnte nicht gespeichert werden. Bitte zuerst eine Sicherung herunterladen.');}
   }
   function archiveWeek(){
     if(!window.TrainingApp)return;
@@ -136,7 +136,7 @@
   function downloadBackup(){
     if(!window.TrainingApp){notify('App noch nicht bereit.');return;}
     const payload={format:'training-full-backup',version:2,createdAt:new Date().toISOString(),snapshot:window.TrainingApp.getSnapshot(),history:listHistory(),calendarDays:JSON.parse(localStorage.getItem('training-calendar-days-v1')||'{}'),fullProfile:JSON.parse(localStorage.getItem('training-full-profile-v1')||'null'),setupDate:localStorage.getItem('training-setup-date-v1'),preferences:JSON.parse(localStorage.getItem('training-preferences-v1')||'{}')};
-    downloadFile(payload,'Trainingsplan_Sicherung_'+isoDay()+'.json');notify('Vollständige Sicherung heruntergeladen. Datei separat aufbewahren.');
+    downloadFile(payload,'Trainingsplan_Sicherung_'+isoDay()+'.json');notify('Vollständige Sicherung heruntergeladen. Datei separat aufbewahren.');window.MyTrainingToast?.success('Sicherung erstellt');
   }
   async function importBackup(e){
     const file=e.target.files?.[0];e.target.value='';if(!file)return;

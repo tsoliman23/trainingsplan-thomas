@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v30-profile-reminder-ui';
+const CACHE = 'mytraining-v31-zoom-profile-feedback';
 
 const ASSETS = [
     './',
@@ -7,6 +7,7 @@ const ASSETS = [
     './progress.js',
     './calendar.js',
     './experience.js',
+    './toast.js',
   './profile-editor.js',
     './theme.css',
     './wizard.css',

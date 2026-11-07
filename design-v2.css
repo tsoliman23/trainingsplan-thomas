@@ -285,3 +285,19 @@ html[data-theme="dark"] #view-documents .pdf-always-note{color:#ecf3ff!important
 #ep-save{background:#265bcd;color:#fff;border:1px solid #265bcd}
 .xp-profile-error{color:#c44a56;font-weight:700}
 .xp-profile-error[hidden]{display:none!important}
+
+/* iPhone: prevent accidental viewport zoom from double-taps while preserving scrolling. */
+html,body{touch-action:manipulation;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+button,a,select,input,textarea{touch-action:manipulation}
+/* Date inputs on iOS have a large intrinsic width; contain them within the profile dialog. */
+.xp-profile-dialog,.xp-profile-content,.xp-edit-form,.xp-edit-form>label{box-sizing:border-box;min-width:0;max-width:100%}
+.xp-edit-form input:not([type="checkbox"]),.xp-edit-form input[type="date"]{display:block;box-sizing:border-box!important;min-width:0!important;max-width:100%!important;width:100%!important;overflow:hidden!important;-webkit-appearance:none;appearance:none}
+.xp-edit-form input[type="date"]{padding-inline:10px!important;font-size:16px!important;line-height:normal!important}
+/* A distinct high-contrast PDF creation button, also with inherited legacy rules. */
+html[data-theme="dark"] #view-documents button.pdf-export,
+html[data-theme="dark"] #view-documents .pdf-bottom-actions .pdf-export{background:#285fda!important;background-image:none!important;color:#fff!important;border:1px solid #4276e7!important;-webkit-text-fill-color:#fff!important}
+/* Global transient feedback. */
+#mytraining-toast[hidden]{display:none!important}
+#mytraining-toast{position:fixed;z-index:90000;left:50%;bottom:calc(94px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;align-items:center;justify-content:center;gap:10px;width:max-content;max-width:calc(100vw - 36px);min-height:44px;padding:11px 18px;border-radius:14px;background:#173a72;color:#fff;border:1px solid #5476a5;box-shadow:0 10px 32px #0005;font-size:14px;font-weight:700;text-align:center;pointer-events:none}
+#mytraining-toast .toast-check{font-size:21px;font-weight:900;color:#9af3c7;line-height:1}
+html[data-theme="light"] #mytraining-toast{background:#193b73;color:#fff}
