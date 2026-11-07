@@ -22,15 +22,15 @@ function loadEntry(date){const day=read()[date]||{};const v=day.nutrition;if(v&&
  for(const k of ['calories','protein'])if(legacy[k]!==undefined&&legacy[k]!=='')result.meals.snacks[k]=String(legacy[k]);
  return result;
 }
-function sums(entry){const totals={};for(const k of metrics){const values=meals.map(m=>parse(entry?.meals?.[m]?.[k],cfg[k].max)).filter(x=>x!==null);totals[k]=values.length?values.reduce((a,b)=>a+b,0):null;}return totals;}
+function sums(entry){const totals={};for(const k of metrics){const values=meals.map(m=>parse(entry?.meals?.[m]?.[k],cfg[k].max)).filter(x=>x!==null);for(const item of Array.isArray(entry?.items)?entry.items:[]){const v=parse(item?.[k],cfg[k].max);if(v!==null)values.push(v);}totals[k]=values.length?values.reduce((a,b)=>a+b,0):null;}return totals;}
 function number(n,k){return n===null?'–':Number(n).toLocaleString(locale(),{maximumFractionDigits:k==='calories'?0:1});}
 let ready=false,date=localToday(),canEdit=false,saveTimer=null;
-function renderTotals(){const entry=collect(false),total=sums(entry),goal=targets();for(const k of metrics){const val=total[k],g=parse(goal[k],cfg[k].max);$('mt13-total-'+k).textContent=number(val,k)+(k==='calories'?' kcal':' g');const info=$('mt13-target-'+k);info.textContent=g!==null&&g>0?'/ '+number(g,k)+(k==='calories'?' kcal':' g'):'';const pct=val===null||g===null||g<=0?0:Math.min(100,val/g*100);$('mt13-meter-'+k).style.width=pct+'%';}}
-function collect(verify){const entry={meals:emptyMeals()};let valid=true;
+function renderTotals(){const entry=collect(false),total=sums(entry),goal=targets();for(const k of metrics){const val=total[k],g=parse(goal[k],cfg[k].max);$('mt13-total-'+k).textContent=number(val,k)+(k==='calories'?' kcal':' g');const info=$('mt13-target-'+k);info.textContent=g!==null&&g>0?'/ '+number(g,k)+(k==='calories'?' kcal':' g'):'';const pct=val===null||g===null||g<=0?0:Math.min(100,val/g*100);$('mt13-meter-'+k).style.width=pct+'%';}window.MyTrainingNutrition132?.refreshRings?.();}
+function collect(verify){const entry={meals:emptyMeals(),items:Array.isArray(loadEntry(date).items)?loadEntry(date).items:[]};let valid=true;
  for(const input of $('mt13-form').querySelectorAll('[data-m][data-k]')){const k=input.dataset.k,v=input.value.trim();const n=parse(v,cfg[k].max);if(v!==''&&n===null){valid=false;if(verify){input.setCustomValidity('Bitte gültige Zahl eingeben.');input.reportValidity();}}else{input.setCustomValidity('');entry.meals[input.dataset.m][k]=v;}}
  return valid?entry:null;
 }
-function save(){if(!canEdit||window.__mytrainingResetting)return;const entry=collect(true);if(!entry)return;try{if(!window.TrainingCalendar?.setNutritionForDate(date,entry))throw new Error('date unavailable');window.MyTrainingToast?.autoSaved?.();renderStats();}catch(e){$('mt13-status').textContent='Speichern nicht möglich. Bitte Speicher prüfen.';}}
+function save(){if(!canEdit||window.__mytrainingResetting)return;const entry=collect(true);if(!entry)return;try{if(!window.TrainingCalendar?.setNutritionForDate(date,entry))throw new Error('date unavailable');window.MyTrainingToast?.autoSaved?.();renderStats();window.MyTrainingNutrition132?.refresh?.();}catch(e){$('mt13-status').textContent='Speichern nicht möglich. Bitte Speicher prüfen.';}}
 function show(dateValue,editable){if(!ready)return;date=dateValue;canEdit=!!editable;const earliest=localStorage.getItem('training-setup-date-v1')||localToday();const allowed=date>=earliest;const panel=$('mt13-nutrition');panel.hidden=!allowed;
  if(!allowed)return;const entry=loadEntry(date);const dt=new Date(date+'T12:00:00');$('mt13-date').textContent=new Intl.DateTimeFormat(locale(),{weekday:'long',day:'numeric',month:'long'}).format(dt);
  for(const inp of $('mt13-form').querySelectorAll('[data-m][data-k]')){inp.value=String(entry.meals?.[inp.dataset.m]?.[inp.dataset.k]??'');inp.disabled=!canEdit;inp.setCustomValidity('');}
@@ -60,12 +60,12 @@ function make(){if(ready||!$('view-training')||!$('view-stats'))return;ready=tru
  $('mt13-form').addEventListener('input',()=>{renderTotals();clearTimeout(saveTimer);saveTimer=setTimeout(save,480)});
  $('mt13-form').addEventListener('change',()=>{clearTimeout(saveTimer);renderTotals();save();});
  document.addEventListener('mytraining-date-changed',event=>{if(saveTimer){clearTimeout(saveTimer);saveTimer=null;save();}if(event.detail)show(event.detail.date,event.detail.editable);});
- document.addEventListener('mytraining-data-updated',renderStats);
+ document.addEventListener('mytraining-data-updated',()=>{renderStats();window.MyTrainingNutrition132?.refresh?.();});
  document.addEventListener('visibilitychange',()=>{if(document.hidden&&saveTimer){clearTimeout(saveTimer);saveTimer=null;save();}});
  window.addEventListener('pagehide',()=>{if(saveTimer){clearTimeout(saveTimer);saveTimer=null;save();}});
  document.addEventListener('mytraining-language-change',syncLabels);
  syncLabels();const current=window.TrainingCalendar?.selectedDate?.()||localToday();show(current,current<=localToday());renderStats();
 }
 const timer=setInterval(()=>{if($('view-training')&&$('view-stats')){clearInterval(timer);make();}},100);
-window.MyTrainingNutrition={refresh:()=>{if(!ready)return;show(date,canEdit);renderStats();},totals:sums,loadEntry};
+window.MyTrainingNutrition={refresh:()=>{if(!ready)return;show(date,canEdit);renderStats();},totals:sums,loadEntry,selectedDate:()=>date,editable:()=>canEdit,refreshTotals:renderTotals};
 })();

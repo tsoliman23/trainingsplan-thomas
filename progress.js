@@ -135,7 +135,7 @@
   function downloadFile(payload,name){const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);}
   function downloadBackup(){
     if(!window.TrainingApp){notify('App noch nicht bereit.');return;}
-    const payload={format:'training-full-backup',version:2,createdAt:new Date().toISOString(),snapshot:window.TrainingApp.getSnapshot(),history:listHistory(),calendarDays:JSON.parse(localStorage.getItem('training-calendar-days-v1')||'{}'),fullProfile:JSON.parse(localStorage.getItem('training-full-profile-v1')||'null'),setupDate:localStorage.getItem('training-setup-date-v1'),preferences:JSON.parse(localStorage.getItem('training-preferences-v1')||'{}'),nutritionTargets:JSON.parse(localStorage.getItem('training-nutrition-targets-v1')||'{}')};
+    const payload={format:'training-full-backup',version:2,createdAt:new Date().toISOString(),snapshot:window.TrainingApp.getSnapshot(),history:listHistory(),calendarDays:JSON.parse(localStorage.getItem('training-calendar-days-v1')||'{}'),fullProfile:JSON.parse(localStorage.getItem('training-full-profile-v1')||'null'),setupDate:localStorage.getItem('training-setup-date-v1'),preferences:JSON.parse(localStorage.getItem('training-preferences-v1')||'{}'),nutritionTargets:JSON.parse(localStorage.getItem('training-nutrition-targets-v1')||'{}'),foodLibrary:JSON.parse(localStorage.getItem('mytraining-food-library-v1')||'[]'),waterGoal:localStorage.getItem('mytraining-water-goal-v1')};
     downloadFile(payload,'Trainingsplan_Sicherung_'+isoDay()+'.json');notify('Vollständige Sicherung heruntergeladen. Datei separat aufbewahren.');window.MyTrainingToast?.success('Sicherung erstellt');
   }
   async function importBackup(e){
@@ -153,6 +153,8 @@
       if(/^\d{4}-\d{2}-\d{2}$/.test(payload.setupDate||''))localStorage.setItem('training-setup-date-v1',payload.setupDate);
       if(payload.preferences&&typeof payload.preferences==='object')localStorage.setItem('training-preferences-v1',JSON.stringify(payload.preferences));
       if(payload.nutritionTargets&&typeof payload.nutritionTargets==='object'&&!Array.isArray(payload.nutritionTargets))localStorage.setItem('training-nutrition-targets-v1',JSON.stringify(payload.nutritionTargets));
+      if(Array.isArray(payload.foodLibrary))localStorage.setItem('mytraining-food-library-v1',JSON.stringify(payload.foodLibrary.slice(0,500)));
+      if(payload.waterGoal!==undefined&&payload.waterGoal!==null&&Number(payload.waterGoal)>0&&Number(payload.waterGoal)<=8)localStorage.setItem('mytraining-water-goal-v1',String(payload.waterGoal));
       window.TrainingApp.applySnapshot(payload.snapshot);
       // Profile is also stored separately in the legacy app.
       if(payload.snapshot.profile)localStorage.setItem('training-profile-v1',JSON.stringify(payload.snapshot.profile));

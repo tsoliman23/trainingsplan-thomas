@@ -1,0 +1,41 @@
+/* MyTraining 1.3.2 – high contrast, compact target rings and food search */
+.mt132-rings{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:10px 0 18px}
+.mt132-ring-box{display:grid;justify-items:center;text-align:center;gap:6px;min-width:0;color:var(--xp-text)}
+.mt132-ring-box>strong{font-size:12px}.mt132-ring-box>small{font-size:10px;color:var(--xp-muted)!important;line-height:1.4}
+.mt132-ring{--fill:0deg;width:min(100%,108px);aspect-ratio:1;border-radius:100%;background:conic-gradient(#3986e7 0deg,#3986e7 var(--fill),var(--xp-border) var(--fill),var(--xp-border) 360deg);padding:9px;display:grid;place-items:center}
+.mt132-ring>div{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;background:var(--xp-card);color:var(--xp-text);border-radius:50%;gap:1px}
+.mt132-ring strong{font-size:clamp(12px,3vw,20px);font-variant-numeric:tabular-nums}.mt132-ring small{font-size:10px;color:var(--xp-muted)!important}
+.mt132-hide-bars{display:none!important}
+.mt132-library{margin:12px 0 20px;min-width:0}.mt132-library h4{font-size:17px;margin:8px 0 10px;color:var(--xp-text)!important}
+.mt132-search-row{display:grid;grid-template-columns:minmax(0,2fr) minmax(105px,1fr);gap:8px;margin-bottom:10px}
+.mt132-library input,.mt132-library select,.mt132-goals input{font-size:16px!important;padding:9px 10px!important;min-width:0!important;max-width:100%!important;width:100%!important;border:1px solid var(--xp-border)!important;background:var(--xp-soft)!important;color:var(--xp-text)!important;border-radius:10px!important;box-sizing:border-box}
+.mt132-food-row{display:flex;align-items:center;gap:7px;border-bottom:1px solid var(--xp-border);padding:8px 0;min-width:0}
+.mt132-food-row>div{display:grid;gap:3px;flex:1;min-width:0}.mt132-food-row strong{font-size:13px;overflow-wrap:anywhere}.mt132-food-row small{font-size:11px;color:var(--xp-muted)!important}
+.mt132-food-row button{padding:0!important;min-height:36px!important;min-width:36px!important;border-radius:10px!important;background:#275fd0!important;color:#fff!important;font-size:23px!important}
+.mt132-food-row button.mt132-delete{background:var(--xp-soft)!important;color:var(--xp-text)!important}
+.mt132-new-food,.mt132-manual,.mt132-goals{border:1px solid var(--xp-border)!important;border-radius:13px;padding:12px;margin:12px 0;background:var(--xp-card)!important}
+.mt132-new-food>summary,.mt132-manual>summary,.mt132-goals>summary{font-weight:800;cursor:pointer;color:var(--xp-text)!important}
+.mt132-new-food form{display:grid;gap:11px;padding-top:10px}.mt132-new-food label,.mt132-goals label{font-size:12px;display:grid;gap:6px;color:var(--xp-text);font-weight:650;min-width:0}
+.mt132-food-fields,#mt132-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.mt132-food-fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+#mt132-save-food{background:#275fd0!important;color:white!important;border-radius:12px!important}
+.mt132-mode{display:flex;gap:16px;margin:12px 0}.mt132-mode label{display:flex;align-items:center;gap:6px;font-size:14px}.mt132-mode input{width:18px!important;height:18px!important;accent-color:#275fd0}
+.mt132-calorie-target{max-width:240px;margin-bottom:12px!important}.mt132-goals p{font-size:12px;color:var(--xp-muted)!important;line-height:1.5}.mt132-goals p#mt132-goal-status{font-weight:750}
+@media(max-width:540px){.mt132-rings{gap:5px}.mt132-ring{padding:7px}.mt132-ring-box>strong{font-size:11px}.mt132-ring-box>small{font-size:9px}.mt132-ring strong{font-size:13px}}
+/* One-tap water logging */
+.mt132-original-water{margin:9px 0!important}
+.mt132-water{grid-column:1/-1;background:var(--xp-soft);border-radius:16px;padding:15px;display:grid;gap:10px;color:var(--xp-text)}
+.mt132-water-top{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:17px}
+.mt132-water-sub{margin:0!important;font-size:12px!important}
+.mt132-water-track{height:9px;background:var(--xp-border);border-radius:999px;overflow:hidden}.mt132-water-track>i{height:100%;display:block;background:#2a71d5;border-radius:999px;width:0;transition:width .2s}
+.mt132-glasses{display:flex;gap:5px;flex-wrap:wrap}
+.mt132-cup{display:inline-block;width:17px;height:25px;flex:none;clip-path:polygon(0% 0%,100% 0%,87% 100%,13% 100%);border-radius:3px;background:var(--xp-border)}
+.mt132-cup.filled{background:#2c81e5}
+.mt132-water-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.mt132-water-buttons button{min-width:0!important;min-height:42px;background:#265fc6!important;color:#fff!important;font-size:12px!important;padding:8px 4px!important;border-radius:11px!important}
+.mt132-goal-row{display:flex!important;align-items:center;justify-content:space-between;gap:10px;font-size:12px!important}.mt132-goal-row input{width:90px!important;min-width:60px!important}
+.mt132-water details>summary{font-size:12px;cursor:pointer}
+.mt132-health{padding:18px;margin:12px 0}.mt132-health p{font-size:12px;line-height:1.5}.mt132-upload-label{display:grid;gap:7px;color:var(--xp-text);font-size:13px;font-weight:700}.mt132-upload-label input{width:100%;max-width:100%;font-size:13px}
+/* Four rings must not overlap on iPhone-sized screens. */
+.mt132-rings{grid-template-columns:repeat(4,minmax(0,1fr))!important;column-gap:7px!important}
+.mt132-ring-box{min-width:0!important;width:100%!important;overflow:hidden}
+.mt132-ring{box-sizing:border-box!important;width:min(100%,84px)!important;max-width:84px!important;min-width:0!important;margin:0 auto!important;flex:none}
+@media(max-width:400px){.mt132-ring{width:min(100%,74px)!important;max-width:74px!important;padding:6px!important}.mt132-ring-box>strong{font-size:10px!important}.mt132-ring-box>small{font-size:9px!important;overflow-wrap:anywhere}.mt132-ring strong{font-size:12px!important}}

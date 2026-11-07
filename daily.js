@@ -16,7 +16,7 @@ function save(){
    const value=el.type==='checkbox'?el.checked:el.value.trim();
    if(!valid(el.name,value)){el.setCustomValidity('Bitte einen gültigen Wert eingeben.');el.reportValidity();return;}el.setCustomValidity('');values[el.name]=value;
  }
- try{if(!window.TrainingCalendar?.setDailyForDate?.(shown,values))throw new Error('Tagesdatum nicht freigegeben');window.MyTrainingToast?.autoSaved?.();renderWeekly();}catch(e){$('daily-feedback').textContent='Speichern fehlgeschlagen. Bitte Datensicherung prüfen.';}
+ try{if(!window.TrainingCalendar?.setDailyForDate?.(shown,values))throw new Error('Tagesdatum nicht freigegeben');window.MyTrainingToast?.autoSaved?.();renderWeekly();window.MyTrainingWater132?.sync?.();}catch(e){$('daily-feedback').textContent='Speichern fehlgeschlagen. Bitte Datensicherung prüfen.';}
 }
 function renderDay(date,rest,canEdit){
  if(!ready)return;
@@ -31,7 +31,7 @@ function renderDay(date,rest,canEdit){
   el.disabled=!editable;el.setCustomValidity('');
  }
  $('daily-feedback').textContent=!editable?'Zukünftige Tage sind nur zur Ansicht verfügbar.':'Alle Angaben sind freiwillig und werden lokal für diesen Tag gespeichert.';
- panel.classList.toggle('daily-readonly',!editable);
+ panel.classList.toggle('daily-readonly',!editable);window.MyTrainingWater132?.sync?.();
 }
 function renderWeekly(){
  const card=$('daily-weekly');if(!card)return;
