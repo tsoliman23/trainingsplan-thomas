@@ -1,5 +1,7 @@
 # MyTraining
 
+**Aktuelle App-Version: 1.3.1.** Diese Versionsnummer erscheint unter „Mehr → Über die App“. Frühere Versionsnummern in diesem Dokument sind Teil der Änderungshistorie.
+
 Eine installierbare, offlinefähige Trainingsplan-App (Progressive Web App, PWA) mit eigener lokaler Datenspeicherung. Die ANIMUS-Mockups dienten nur als gestalterische Referenz. Die App ist ein **Trainingsplan**, kein Mood- oder Ernährungstracker.
 
 ## 1. Funktionen

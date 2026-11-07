@@ -1629,11 +1629,6 @@
     "fr": "Avant ta première configuration",
     "ar-EG": "قبل ما بدأت تستخدم التطبيق"
   },
-  "Version 1.0": {
-    "en": "Version 1.0",
-    "fr": "Version 1.0",
-    "ar-EG": "الإصدار 1.0"
-  },
   "Dein persönlicher Trainingsbegleiter für Planung, Fortschritt und Motivation.": {
     "en": "Your personal training companion for planning, progress and motivation.",
     "fr": "Ton compagnon pour planifier tes entraînements, suivre tes progrès et rester motivé.",
@@ -2078,5 +2073,10 @@
     "en": "View weekly review",
     "fr": "Voir le bilan hebdomadaire",
     "ar-EG": "شوف ملخص الأسبوع"
+  },
+  "Version 1.3.1": {
+    "en": "Version 1.3.1",
+    "fr": "Version 1.3.1",
+    "ar-EG": "الإصدار 1.3.1"
   }
 }

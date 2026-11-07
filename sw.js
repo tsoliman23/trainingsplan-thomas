@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v36-collapsible-days';
+const CACHE = 'mytraining-v37-version-131';
 
 const ASSETS = [
     './',
