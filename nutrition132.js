@@ -1,4 +1,4 @@
-/* MyTraining 1.3.2: local food catalog, target calculations and progress rings. */
+/* MyTraining 1.3.3: local food catalog, target calculations and progress rings. */
 (()=>{'use strict';
 const $=id=>document.getElementById(id), FOOD_KEY='mytraining-food-library-v1', GOAL_KEY='training-nutrition-targets-v1';
 const N=['calories','protein','carbs','fat'], LIMIT={calories:15000,protein:800,carbs:2000,fat:1000};

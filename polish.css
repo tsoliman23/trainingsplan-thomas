@@ -40,13 +40,24 @@ html,body{max-width:100%;overflow-x:clip}
 .pdf-action-row{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px!important}
 .pdf-action-row button{min-width:0!important;padding:10px 8px!important;white-space:normal!important;font-size:13px!important}
 .pdf-entry-actions{display:flex;gap:6px;flex-wrap:wrap}.pdf-entry-actions button{font-size:12px}
+#pdfCancel{background:#111826!important;color:#fff!important;border:1px solid #293447!important;-webkit-text-fill-color:#fff!important}
+#pdfPreview,#pdfConfirm{background:#2f5be8!important;color:#fff!important;border:1px solid #2f5be8!important;-webkit-text-fill-color:#fff!important}
 #mytraining-pdf-viewer[hidden]{display:none!important}
 #mytraining-pdf-viewer{position:fixed;inset:0;z-index:12000;background:rgba(5,16,36,.87);display:flex;align-items:center;justify-content:center;padding:max(8px,env(safe-area-inset-top)) 8px max(8px,env(safe-area-inset-bottom))}
 .mt-viewer-panel{background:var(--xp-card,#fff);color:var(--xp-text,#102545);width:min(100%,820px);height:min(94dvh,1040px);border-radius:18px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 90px #0007}
-.mt-viewer-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 15px;border-bottom:1px solid var(--xp-border,#dde7f8)}
-.mt-viewer-heading{display:grid;gap:4px;min-width:0}.mt-viewer-heading small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--xp-muted,#667c9c);max-width:52vw}
-.mt-viewer-toolbar button,.mt-viewer-actions button{border:0;padding:11px 14px;border-radius:11px;font-weight:700;background:var(--xp-soft,#e5f0ff);color:var(--xp-text,#183454)}
-.mt-viewer-canvas{min-height:0;flex:1;background:#dde6f4}.mt-viewer-canvas iframe{display:block;width:100%;height:100%;border:0}
+.mt-viewer-toolbar{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:12px 15px;border-bottom:1px solid var(--xp-border,#dde7f8);background:linear-gradient(180deg,#3159db,#2c50c8);color:#fff}
+.mt-viewer-heading{display:grid;gap:4px;min-width:0}.mt-viewer-heading strong{color:#fff}.mt-viewer-heading small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:rgba(255,255,255,.96);max-width:min(54vw,340px);font-weight:700}
+.mt-viewer-toolbar-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.mt-viewer-zoom-controls{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.18);padding:6px 8px;border-radius:12px}
+.mt-viewer-zoom-controls button{min-width:38px!important;min-height:38px!important;padding:0 12px!important;background:#111826!important;color:#fff!important;border:1px solid rgba(255,255,255,.22)!important;box-shadow:none!important}
+#mt-viewer-zoom-label{min-width:56px;text-align:center;font-weight:800;color:#fff}
+.mt-viewer-toolbar button,.mt-viewer-actions button{border:0;padding:11px 14px;border-radius:11px;font-weight:700}
+#mt-viewer-close,#mt-viewer-open{background:#111826!important;color:#fff!important;border:1px solid #293447!important;box-shadow:none!important}
+#mt-viewer-download{background:#2f5be8!important;color:#fff!important;border:1px solid #2f5be8!important;box-shadow:none!important}
+.mt-viewer-canvas{min-height:0;flex:1;background:#dde6f4;padding:12px}
+.mt-viewer-scroll{height:100%;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom;border-radius:12px;overscroll-behavior:contain}
+.mt-viewer-document{width:100%;height:100%;min-width:100%;min-height:100%;background:#fff;transition:width .15s ease,height .15s ease}
+.mt-viewer-canvas iframe{display:block;width:100%;height:100%;border:0;background:#fff}
 .mt-viewer-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px 14px}.mt-viewer-actions button:last-child{background:#2f5be8;color:white}
 .mt-viewer-help{color:var(--xp-muted,#5d728e);font-size:12px;padding:0 14px 12px;margin:0;line-height:1.4}
 body.mt-modal-open{overflow:hidden!important}
@@ -67,3 +78,5 @@ body.mt-modal-open{overflow:hidden!important}
 .profile-dialog .birth-wheel{scrollbar-width:none;touch-action:pan-y;overscroll-behavior-y:contain;direction:ltr!important}
 .profile-dialog .birth-option{min-height:44px;flex:none;line-height:1.25!important}
 .profile-dialog .birth-wheel-wrap:after{top:calc(50% + 4px)!important}
+
+@media(max-width:560px){.mt-viewer-toolbar{flex-direction:column;align-items:stretch}.mt-viewer-toolbar-actions{justify-content:space-between}.mt-viewer-heading small{max-width:100%}.mt-viewer-zoom-controls{width:max-content;max-width:100%}.mt-viewer-actions{grid-template-columns:1fr 1fr}}

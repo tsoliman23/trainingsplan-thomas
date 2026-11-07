@@ -1,6 +1,6 @@
 # MyTraining
 
-**Aktuelle App-Version: 1.3.2.** Diese Versionsnummer erscheint unter „Mehr → Über die App“. Frühere Versionsnummern in diesem Dokument sind Teil der Änderungshistorie.
+**Aktuelle App-Version: 1.3.3.** Diese Versionsnummer erscheint unter „Mehr → Über die App“. Frühere Versionsnummern in diesem Dokument sind Teil der Änderungshistorie.
 
 Eine installierbare, offlinefähige Trainingsplan-App (Progressive Web App, PWA) mit eigener lokaler Datenspeicherung. Die ANIMUS-Mockups dienten nur als gestalterische Referenz. Die App ist ein **Trainingsplan**, kein Mood- oder Ernährungstracker.
 
@@ -351,6 +351,13 @@ Der Bereich **Training** zeigt für Montag, Mittwoch und Freitag den aufklappbar
 
 ## Version 1.3.2 – Ernährungsübersicht, eigene Lebensmittel, Wasser und Health-Import
 
+- Fortschrittsringe für Kalorien, Eiweiß, Kohlenhydrate und Fett.
+- Schnelle Wassererfassung über +250 ml / +500 ml.
+- Eigene Lebensmittel mit Suche und Portionsberechnung.
+- Lokaler CSV-Import für Schritte und Schlaf.
+
+## Version 1.3.3 – PDF-Bedienung und Vorschau
+
 - Vier Fortschrittsringe zeigen den aufgenommenen Ist-Wert und optional das Tagesziel für Kalorien, Kohlenhydrate, Eiweiß und Fett. Fehlende Ziele werden als offen angezeigt.
 - Tagesziele: Nach Eingabe eines eigenen Kalorienziels kann die Makroverteilung prozentual gewählt werden. Die **veränderbare Beispielverteilung** 50 % Kohlenhydrate / 25 % Eiweiß / 25 % Fett ist **keine persönliche Ernährungsempfehlung**. Formel: Kohlenhydrate und Eiweiß je 4 kcal/g, Fett 9 kcal/g. Die Prozentwerte müssen zusammen 100 % ergeben. Beim Modus »Gramm« berechnet die App umgekehrt Kalorien und Prozentanteile.
 - Eigene Lebensmittel lassen sich einmalig mit Name, Portionsmenge und vier Nährwerten lokal speichern, suchen und mit **+** und der Portionszahl einer Mahlzeit hinzufügen. Alle hinzugefügten Einträge bleiben als Momentaufnahme erhalten, auch wenn ein Lebensmittel später aus der Sammlung gelöscht wird.
@@ -359,3 +366,9 @@ Der Bereich **Training** zeigt für Montag, Mittwoch und Freitag den aufklappbar
 - **Apple Health und Apple Watch:** MyTraining bleibt eine Offline-PWA und hat **keinen direkten Zugriff auf HealthKit**. Unter »Mehr« gibt es einen Import für eine **selbst erstellte CSV-Datei** mit Kopfzeile `date,steps,sleep` und Zeilen wie `2026-11-07,6500,7.5`. Akzeptiert werden auch `Datum;Schritte;Schlaf` mit dem Datumsformat `07.11.2026`. Schritte stehen als ganze Anzahl, Schlaf in Stunden. Nur fehlende Werte ab dem Einrichtungsdatum bis heute werden importiert; bestehende manuelle Einträge werden nicht überschrieben. Der Import erfolgt vollständig auf dem Gerät. Apples regulärer Health-Export liefert XML/ZIP, **nicht direkt dieses CSV-Format**. Bei Bedarf ist die CSV lokal mit einem geeigneten Exportwerkzeug oder Kurzbefehle-Workflow zu erzeugen. Kein automatischer Abgleich im Hintergrund.
 - Die JSON-Datensicherung enthält nun auch die persönliche Lebensmittelsammlung, das Wasserziel sowie bisherige Makroziele und Tagesdatensätze. Die PDF-Dateien werden weiterhin separat gespeichert und gesichert.
 - Push-Worker und Trainingszeiten bleiben unverändert; **kein erneutes Cloudflare-Deployment erforderlich**.
+
+
+- Schaltflächen im PDF-Export und in der PDF-Vorschau farblich klar getrennt: dunkle Aktionsbuttons und blaue Primärbuttons jeweils mit weißer Schrift.
+- Der Dateititel in der PDF-Vorschau ist gekürzt, kontraststark und besser lesbar.
+- Direkt in der Vorschau kann jetzt nur das Dokument gezoomt werden, ohne die restliche Oberfläche zu vergrößern.
+- Service-Worker-Version erhöht, damit die Änderungen auf iPhone/iPad zuverlässiger neu geladen werden.

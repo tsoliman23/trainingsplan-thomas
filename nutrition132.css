@@ -1,4 +1,4 @@
-/* MyTraining 1.3.2 – high contrast, compact target rings and food search */
+/* MyTraining 1.3.3 – high contrast, compact target rings and food search */
 .mt132-rings{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:10px 0 18px}
 .mt132-ring-box{display:grid;justify-items:center;text-align:center;gap:6px;min-width:0;color:var(--xp-text)}
 .mt132-ring-box>strong{font-size:12px}.mt132-ring-box>small{font-size:10px;color:var(--xp-muted)!important;line-height:1.4}

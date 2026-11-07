@@ -1,4 +1,4 @@
-/* MyTraining 1.3.2: one-tap hydration and privacy-preserving Apple Health CSV import. */
+/* MyTraining 1.3.3: one-tap hydration and privacy-preserving Apple Health CSV import. */
 (()=>{'use strict';
 const $=id=>document.getElementById(id), TODAY=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');};
 const tx={
