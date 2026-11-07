@@ -1,0 +1,21 @@
+/* MyTraining 1.3.1: compact collapsible day sections and flat surfaces. */
+#view-training>.mt14-section[hidden],.mt14-section[hidden]{display:none!important}
+#view-training>.mt14-section{display:block;box-sizing:border-box;width:100%;padding:0!important;margin:14px 0!important;border:1px solid var(--xp-border)!important;border-radius:20px!important;background:var(--xp-card)!important;color:var(--xp-text)!important;box-shadow:none!important;overflow:hidden}
+.mt14-section::before,.mt14-section .mt14-content::before{content:none!important;display:none!important}
+.mt14-summary{display:flex;align-items:center;justify-content:space-between;gap:12px;list-style:none;cursor:pointer;padding:18px!important;min-height:76px;color:var(--xp-text)!important;-webkit-tap-highlight-color:transparent}
+.mt14-summary::-webkit-details-marker{display:none}
+.mt14-summary::marker{content:''}
+.mt14-head{display:grid;gap:5px;min-width:0}
+.mt14-title{font-size:19px;font-weight:800;line-height:1.25;color:var(--xp-text)!important}
+.mt14-hint{font-size:12px;font-weight:550;color:var(--xp-muted)!important;line-height:1.3}
+.mt14-chevron{width:12px;height:12px;flex:none;border-right:2px solid var(--xp-text);border-bottom:2px solid var(--xp-text);transform:rotate(45deg);transition:transform .15s;margin:0 7px 5px 0}
+.mt14-section[open] .mt14-chevron{transform:rotate(225deg);margin-top:8px;margin-bottom:0}
+.mt14-summary:focus-visible{outline:2px solid var(--xp-primary);outline-offset:-3px}
+.mt14-content{padding:0 14px 16px!important}
+.mt14-section .mt14-content>#trainingsform,.mt14-section .mt14-content>#daily-panel,.mt14-section .mt14-content>#mt13-nutrition{margin:0!important;width:100%!important;max-width:100%!important;box-shadow:none!important;border:0!important;padding:4px 0 12px!important;border-radius:0!important;background:transparent!important}
+.mt14-section #finish-day{display:block;width:100%;margin:6px 0 15px!important}
+.mt14-section #finish-day[hidden]{display:none!important}
+/* Remove decorative horizontal blue section rules throughout the app, not data visualizations. */
+#training-dashboard-shell>section::before,#training-dashboard-shell section.cal-panel::before,#view-training section::before,#view-stats section::before,#view-dashboard section::before,#view-documents section::before,#trainingsform section::before,.history-panel::before,.daily-panel::before,#mt13-nutrition::before{content:none!important;display:none!important;background:none!important;border:0!important}
+#view-training .training-day,#view-stats .history-panel{border-top:0!important;box-shadow:none!important}
+@media(max-width:480px){.mt14-summary{padding:16px!important;min-height:69px}.mt14-content{padding:0 11px 13px!important}.mt14-title{font-size:18px}}

@@ -340,3 +340,8 @@ Die Profilübersicht zeigt das Geburtsdatum sprachabhängig mit `Intl.DateTimeFo
 - Die Übungsvorgaben (Sätze, Wiederholungsbereich und Satzpause in Minuten) stehen in der aufklappbaren Übungsbeschreibung, während die Titel den Übungsnamen zeigen.
 - Hinweise lassen sich über ein `i` direkt neben der jeweiligen Übung anzeigen. Im Dark Mode sind die Trainingsstand-Aktionsbuttons blau mit weißer Schrift.
 - Für dieses Update ist kein erneutes Cloudflare-Deployment notwendig.
+
+
+## Version 1.3.1 – Tagesansichten
+
+Der Bereich **Training** zeigt für Montag, Mittwoch und Freitag den aufklappbaren Trainingsplan sowie eine separate aufklappbare Ernährungserfassung. An den übrigen vier Tagen stehen **Regeneration** und **Ernährung** zur Auswahl. Standardmäßig ist nur der Tageshauptbereich geöffnet, die Ernährung bleibt für eine kompakte Ansicht eingeklappt. Beim Datumswechsel werden die Bereiche entsprechend angepasst. Die bestehenden lokalen Kalendereinträge und Speicherfunktionen bleiben erhalten. Dekorative blaue Abschnittsstreifen wurden entfernt.

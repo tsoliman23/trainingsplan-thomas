@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v35-nutrition-v13';
+const CACHE = 'mytraining-v36-collapsible-days';
 
 const ASSETS = [
     './',
@@ -12,6 +12,8 @@ const ASSETS = [
     './analytics.css',
     './nutrition.js',
     './nutrition.css',
+    './day-sections.js',
+    './day-sections.css',
     './experience.js',
     './toast.js',
   './profile-editor.js',
