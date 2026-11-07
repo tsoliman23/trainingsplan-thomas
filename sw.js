@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v39-version-133';
+const CACHE = 'mytraining-v40-pdf-dialog-zoom-133';
 
 const ASSETS = [
     './',

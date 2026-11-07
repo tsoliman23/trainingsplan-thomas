@@ -80,3 +80,29 @@ body.mt-modal-open{overflow:hidden!important}
 .profile-dialog .birth-wheel-wrap:after{top:calc(50% + 4px)!important}
 
 @media(max-width:560px){.mt-viewer-toolbar{flex-direction:column;align-items:stretch}.mt-viewer-toolbar-actions{justify-content:space-between}.mt-viewer-heading small{max-width:100%}.mt-viewer-zoom-controls{width:max-content;max-width:100%}.mt-viewer-actions{grid-template-columns:1fr 1fr}}
+
+
+/* MyTraining 1.3.3 hotfix: PDF modal contrast, native-Safari safe area, and precise zoom. */
+.pdf-options-dialog #pdfOptionsTitle{color:#fff!important;-webkit-text-fill-color:#fff!important}
+.pdf-options-dialog{background:#192b44!important;color:#f4f7ff!important}
+.pdf-options-dialog>p{color:#eaf2ff!important}
+.pdf-options-dialog .pdf-choice{background:#254fa5!important;color:#fff!important;-webkit-text-fill-color:#fff!important;border:1px solid #487ad9!important}
+.pdf-options-dialog .pdf-choice input{accent-color:#fff!important;color:#fff!important;flex:none}
+.pdf-options-dialog #pdfCancel{background:#111827!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+.pdf-options-dialog #pdfPreview{background:#386ff2!important;color:#fff!important;-webkit-text-fill-color:#fff!important;border-color:#386ff2!important}
+.pdf-options-dialog #pdfConfirm{background:#2350c1!important;color:#fff!important;-webkit-text-fill-color:#fff!important;border-color:#2350c1!important}
+.pdf-options-dialog button:disabled{opacity:.6!important}
+#mytraining-pdf-viewer{align-items:stretch!important;padding:max(64px, calc(env(safe-area-inset-top, 0px) + 18px)) 12px max(12px, env(safe-area-inset-bottom, 0px))!important}
+#mytraining-pdf-viewer .mt-viewer-panel{height:100%!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;outline:none!important;border-radius:19px!important;background:#192b44!important;box-shadow:0 20px 60px #0006!important;overflow:hidden!important}
+#mytraining-pdf-viewer .mt-viewer-panel::before,#mytraining-pdf-viewer .mt-viewer-panel::after{content:none!important;display:none!important}
+#mytraining-pdf-viewer .mt-viewer-toolbar{margin:0!important;padding:12px 14px!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;flex:none!important}
+#mytraining-pdf-viewer .mt-viewer-toolbar::before,#mytraining-pdf-viewer .mt-viewer-toolbar::after{content:none!important;display:none!important}
+#mytraining-pdf-viewer .mt-viewer-heading strong,#mytraining-pdf-viewer .mt-viewer-heading small{color:#fff!important;-webkit-text-fill-color:#fff!important}
+#mytraining-pdf-viewer .mt-viewer-canvas{background:#152238!important;padding:0!important;min-height:0!important;overflow:hidden!important}
+#mytraining-pdf-viewer .mt-viewer-scroll{border-radius:0!important;overflow:auto!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important}
+#mytraining-pdf-viewer .mt-viewer-document{min-width:0!important;min-height:0!important;background:transparent!important;transition:width .16s ease,height .16s ease!important}
+#mytraining-pdf-viewer #mt-viewer-frame{display:block!important;border:0!important;background:transparent!important;transform-origin:top left!important;transition:transform .16s ease!important}
+#mytraining-pdf-viewer .mt-viewer-zoom-controls button:disabled{opacity:.35!important;cursor:default}
+#mytraining-pdf-viewer .mt-viewer-help{color:#f0f5ff!important;flex:none!important}
+#mytraining-pdf-viewer .mt-viewer-actions{flex:none!important}
+@media(max-width:560px){#mytraining-pdf-viewer{padding-top:max(64px,calc(env(safe-area-inset-top,0px) + 18px))!important;padding-bottom:max(10px,env(safe-area-inset-bottom,0px))!important}}

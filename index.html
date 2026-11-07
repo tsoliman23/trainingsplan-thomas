@@ -251,7 +251,7 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   <p class="wizard-error" id="wizardError" role="alert" hidden></p>
   <div class="wizard-actions"><button type="button" id="wizardBack" class="wizard-secondary" hidden>Zurück</button><button type="button" id="wizardNext" class="wizard-primary">Weiter <span aria-hidden="true">→</span></button><button type="submit" id="wizardSubmit" class="wizard-primary" hidden>Profil speichern</button></div>
   <button type="button" class="profile-cancel" id="profileCancel" hidden>Abbrechen</button>
-</form></div><div class="pdf-options-overlay" id="pdfOptionsOverlay" hidden><div class="pdf-options-dialog" role="dialog" aria-modal="true" aria-labelledby="pdfOptionsTitle"><h2 id="pdfOptionsTitle">PDF exportieren</h2><p>Dein Trainingsplan wird kompakt auf drei Seiten dargestellt.</p><label class="pdf-choice"><input id="pdfIncludeInfo" type="checkbox"> Übungsinformationen und Beschreibungen in PDF einblenden</label><p class="muted">Ohne Informationen bleiben Übungsnamen, Trainingswerte und erledigte Übungen sichtbar.</p><div class="buttons pdf-action-row"><button type="button" id="pdfCancel">Schließen</button><button type="button" id="pdfPreview">Vorschau</button><button type="button" id="pdfConfirm">Speichern / Teilen</button></div></div></div><div class="wrap"><header>
+</form></div><div class="pdf-options-overlay" id="pdfOptionsOverlay" hidden><div class="pdf-options-dialog" role="dialog" aria-modal="true" aria-labelledby="pdfOptionsTitle"><h2 id="pdfOptionsTitle">PDF exportieren</h2><p>Dein Trainingsplan wird kompakt auf drei Seiten dargestellt.</p><label class="pdf-choice"><input id="pdfIncludeInfo" type="checkbox"> Übungsinformationen und Beschreibungen in PDF einblenden</label><p class="muted">Ohne Informationen bleiben Übungsnamen, Trainingswerte und erledigte Übungen sichtbar.</p><div class="buttons pdf-action-row"><button type="button" id="pdfCancel">Schließen</button><button type="button" id="pdfPreview">Vorschau</button><button type="button" id="pdfConfirm">Speichern</button></div></div></div><div class="wrap"><header>
   <div class="hero-top">
     <div class="hero-logo"><img src="./icons/icon-192.png" alt="Trainingsplan-Logo" /></div>
     <div class="hero-copy">
@@ -696,19 +696,14 @@ input[type="number"]:focus,textarea:focus,.add-editor input[type=text]:focus{out
   document.getElementById('pdfConfirm').addEventListener('click',async function(){
       pdfOptionsOverlay.hidden=true;
       var pdf;
-      try{pdf=window.TrainingCalendar?await window.TrainingCalendar.makeWeeklyPdf(function(){return makeModernPdf({includeInfo:document.getElementById('pdfIncludeInfo').checked});}):await makeModernPdf({includeInfo:document.getElementById('pdfIncludeInfo').checked});}catch(error){informPdf('PDF-Erstellung fehlgeschlagen: '+error.message);return;}
-      var pdfDate=window.TrainingCalendar?window.TrainingCalendar.selectedDate():new Date().toISOString().slice(0,10);var filename='Trainingsplan_'+(profile.firstName||'Training').replace(/[^a-zA-Z0-9äöüÄÖÜß_-]/g,'_')+'_Woche_'+pdfDate+'.pdf';if(window.TrainingCalendar){try{await window.TrainingCalendar.savePdf(pdf,filename,pdfDate);}catch(e){informPdf('PDF wurde erzeugt, konnte aber nicht im Dokumentenarchiv gespeichert werden.');}}
-      var file=new File([pdf],filename,{type:'application/pdf'});
-      // On iOS Safari the native share sheet can save the real PDF to Files.
-      if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
-        navigator.share({files:[file],title:'Trainingscheckliste '+(profile.firstName||'')}).then(function(){informPdf('PDF bereitgestellt. Über "In Dateien sichern" ablegen.');}).catch(function(e){if(e.name!=='AbortError')downloadPdf();});
-      }else downloadPdf();
-      function downloadPdf(){
-        var url=URL.createObjectURL(pdf),a=document.createElement('a');
-        a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();
-        informPdf('PDF erstellt. Wenn kein Download erscheint: Datei in Safari öffnen und erneut versuchen.');
-        setTimeout(function(){URL.revokeObjectURL(url);},60000);
-      }
+      try{pdf=window.TrainingCalendar?await window.TrainingCalendar.makeWeeklyPdf(function(){return makeModernPdf({includeInfo:document.getElementById('pdfIncludeInfo').checked});}):await makeModernPdf({includeInfo:document.getElementById('pdfIncludeInfo').checked});}
+      catch(error){informPdf('PDF-Erstellung fehlgeschlagen: '+error.message);return;}
+      var pdfDate=window.TrainingCalendar?window.TrainingCalendar.selectedDate():new Date().toISOString().slice(0,10);
+      var filename='Trainingsplan_'+(profile.firstName||'Training').replace(/[^a-zA-Z0-9äöüÄÖÜß_-]/g,'_')+'_Woche_'+pdfDate+'.pdf';
+      if(window.TrainingCalendar){
+        try{await window.TrainingCalendar.savePdf(pdf,filename,pdfDate);informPdf('PDF im lokalen Archiv gespeichert.');window.MyTrainingToast?.success('PDF gespeichert');}
+        catch(error){informPdf('PDF konnte nicht im lokalen Archiv gespeichert werden. Bitte Speicherplatz prüfen.');}
+      }else{informPdf('PDF-Archiv ist noch nicht bereit. Bitte die App erneut öffnen.');}
   });
   var appStatus=document.getElementById('app-status'),installButton=document.getElementById('installApp'),installPrompt=null;
   if('serviceWorker' in navigator && (location.protocol==='https:'||location.hostname==='localhost')){

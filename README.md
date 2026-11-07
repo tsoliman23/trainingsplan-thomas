@@ -372,3 +372,13 @@ Der Bereich **Training** zeigt für Montag, Mittwoch und Freitag den aufklappbar
 - Der Dateititel in der PDF-Vorschau ist gekürzt, kontraststark und besser lesbar.
 - Direkt in der Vorschau kann jetzt nur das Dokument gezoomt werden, ohne die restliche Oberfläche zu vergrößern.
 - Service-Worker-Version erhöht, damit die Änderungen auf iPhone/iPad zuverlässiger neu geladen werden.
+
+
+### Nachbesserung der PDF-Oberfläche (1.3.3)
+
+- Im PDF-Exportdialog bleiben alle Beschriftungen im Dark Mode lesbar. Die Option „Übungsinformationen und Beschreibungen“ hat einen kräftig blauen Hintergrund mit weißer Schrift.
+- Der Titel „PDF exportieren“ ist weiß. Die Buttons sind dunkel bzw. in zwei Blautönen mit weißem Text.
+- Der Button „Speichern“ speichert ausschließlich im lokalen PDF-Archiv. Der native iOS-Teilen-Dialog wird dabei nicht mehr automatisch geöffnet. Der PDF-Download steht weiterhin in der Vorschau bereit.
+- Die Vorschau beginnt mit Abstand zum iPhone-Statusbereich und nutzt den verfügbaren Raum nach unten. Rahmen, versetzte weiße Flächen und unnötiges Außenpadding im Dokumentbereich wurden entfernt.
+- Die Vorschau skaliert ausschließlich das eingebettete PDF in 10-%-Schritten von **50 % bis 150 %**. Der übrige Bildschirm bleibt unverändert; iOS kann die Darstellung eingebetteter PDFs versionsabhängig einschränken.
+- Service-Worker-Cache-Version wurde erhöht, damit die Korrektur nach dem Deployment geladen wird.
