@@ -1,0 +1,23 @@
+/* MyTraining 1.1 daily tracking, responsive in light and dark themes */
+#daily-panel[hidden]{display:none!important}
+.daily-panel{padding:20px!important;margin:16px 0!important;border-radius:21px!important;color:var(--xp-text)!important}
+.daily-kicker{font-size:11px;letter-spacing:.12em;font-weight:800;color:var(--xp-primary)}
+.daily-top h3{font-size:23px!important;margin:8px 0 4px!important;color:var(--xp-text)!important}
+.daily-date{margin:0;color:var(--xp-muted)!important;font-size:14px}
+.daily-intro{margin:16px 0!important;color:var(--xp-muted)!important;line-height:1.5}
+.daily-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+#daily-form label{display:grid;gap:7px;font-size:13px;font-weight:750;color:var(--xp-text)!important;min-width:0}
+#daily-form input:not([type="checkbox"]),#daily-form select,#daily-form textarea{width:100%;min-width:0;max-width:100%;box-sizing:border-box;min-height:46px;border:1px solid var(--xp-border)!important;border-radius:12px;background:var(--xp-soft)!important;color:var(--xp-text)!important;padding:10px 12px;font-size:16px}
+#daily-form input::placeholder,#daily-form textarea::placeholder{color:var(--xp-muted)!important;opacity:.9}
+#daily-form .daily-note-label{margin-top:15px}
+#daily-form .daily-note-label textarea{height:75px;resize:vertical}
+#daily-form .daily-check{display:flex;align-items:center;gap:10px;margin-top:16px;line-height:1.45}
+#daily-form .daily-check input{width:23px;height:23px;accent-color:var(--xp-primary);flex:none}
+#daily-feedback{font-size:12px;margin:12px 0 0}
+.daily-readonly{opacity:.85}
+.daily-dashboard h3,.daily-summary h3{color:var(--xp-text)!important}
+.daily-dashboard p{color:var(--xp-muted)!important}
+#daily-open-today{background:#285fc8!important;color:#fff!important;border:1px solid #285fc8!important}
+@media(max-width:400px){.daily-fields{gap:9px}.daily-panel{padding:14px!important}#daily-form label{font-size:12px}}
+/* The daily card replaces the old one-line regeneration placeholder. */
+#view-training #cal-rest{display:none!important}

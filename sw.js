@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v32-locale-birthday-nav-icons';
+const CACHE = 'mytraining-v33-daily-recovery';
 
 const ASSETS = [
     './',
@@ -6,6 +6,8 @@ const ASSETS = [
     './modern-pdf.js',
     './progress.js',
     './calendar.js',
+    './daily.js',
+    './daily.css',
     './experience.js',
     './toast.js',
   './profile-editor.js',

@@ -307,3 +307,12 @@ Die erweiterte ZIP enthaelt keine Git-Verzeichnisse, node_modules oder lokalen W
 ## Profilanzeige und Navigation
 
 Die Profilübersicht zeigt das Geburtsdatum sprachabhängig mit `Intl.DateTimeFormat` (`de-DE`, `en-GB`, `fr-FR`, `ar-EG`). Intern bleibt das unveränderte ISO-Datum (`YYYY-MM-DD`) gespeichert und in Datumsformularen verwendet. Die Navigation nutzt für Training ein Hantelsymbol und für Statistik ein Balkendiagramm. Diese Änderung benötigt kein erneutes Cloudflare-Deployment.
+
+
+## MyTraining 1.1 – Tagesübersicht an Regenerationstagen
+
+- Dienstag, Donnerstag, Samstag und Sonntag haben jetzt eine eigene Tagesansicht. Erfassung optional: Schritte, Bewegungsminuten, Wasser, Schlaf, Kalorien, Protein, Energie, Muskelkater und Notiz.
+- Werte werden je Datum unter `training-calendar-days-v1[YYYY-MM-DD].daily` gespeichert. Diese Daten sind bereits Teil der vollständigen JSON-Sicherung und ihrer Wiederherstellung.
+- Daten vor der Ersteinrichtung und in der Zukunft sind nicht bearbeitbar. Der bestehende Krafttrainingsplan bleibt unverändert.
+- Eine kompakte Übersicht der letzten dokumentierten Tage wird unter Statistik angezeigt.
+- Für diese Änderung ist kein erneutes Cloudflare-Deployment nötig.

@@ -526,8 +526,8 @@
   },
   "Heutigen Tag öffnen": {
     "en": "Open today",
-    "fr": "Ouvrir aujourd'hui",
-    "ar-EG": "فتح النهارده"
+    "fr": "Ouvrir aujourd’hui",
+    "ar-EG": "افتح النهاردة"
   },
   "Kalender ansehen": {
     "en": "View calendar",
@@ -1748,5 +1748,145 @@
     "en": "6:00 AM",
     "fr": "06 h 00",
     "ar-EG": "٦ صباحاً"
+  },
+  "DEIN TAG": {
+    "en": "YOUR DAY",
+    "fr": "TA JOURNÉE",
+    "ar-EG": "يومك"
+  },
+  "Aktiv bleiben und erholen": {
+    "en": "Stay active and recover",
+    "fr": "Bouger et récupérer",
+    "ar-EG": "خليك نشيط وخد راحتك"
+  },
+  "Trainingsfreier Tag: Bewegung und Erholung sind freiwillig. Hier kannst du deine Tageswerte festhalten.": {
+    "en": "Rest day: movement and recovery are optional. Track your daily values here.",
+    "fr": "Jour de repos : bouger et récupérer sont facultatifs. Note tes valeurs du jour ici.",
+    "ar-EG": "يوم راحة: الحركة والتعافي اختياريين. سجل بيانات يومك هنا."
+  },
+  "Schritte": {
+    "en": "Steps",
+    "fr": "Pas",
+    "ar-EG": "خطوات"
+  },
+  "Bewegung (Minuten)": {
+    "en": "Activity (minutes)",
+    "fr": "Activité (minutes)",
+    "ar-EG": "الحركة (بالدقائق)"
+  },
+  "Wasser (Liter)": {
+    "en": "Water (litres)",
+    "fr": "Eau (litres)",
+    "ar-EG": "المياه (لتر)"
+  },
+  "Schlaf (Stunden)": {
+    "en": "Sleep (hours)",
+    "fr": "Sommeil (heures)",
+    "ar-EG": "النوم (ساعات)"
+  },
+  "Kalorien (kcal)": {
+    "en": "Calories (kcal)",
+    "fr": "Calories (kcal)",
+    "ar-EG": "السعرات (كيلو كالوري)"
+  },
+  "Protein (g)": {
+    "en": "Protein (g)",
+    "fr": "Protéines (g)",
+    "ar-EG": "البروتين (جم)"
+  },
+  "Energiegefühl": {
+    "en": "Energy level",
+    "fr": "Niveau d’énergie",
+    "ar-EG": "مستوى الطاقة"
+  },
+  "Muskelkater": {
+    "en": "Muscle soreness",
+    "fr": "Courbatures",
+    "ar-EG": "وجع العضلات"
+  },
+  "Nicht angegeben": {
+    "en": "Not specified",
+    "fr": "Non renseigné",
+    "ar-EG": "مش محدد"
+  },
+  "Sehr gut": {
+    "en": "Excellent",
+    "fr": "Très bien",
+    "ar-EG": "ممتاز"
+  },
+  "Gut": {
+    "en": "Good",
+    "fr": "Bien",
+    "ar-EG": "كويس"
+  },
+  "Mittel": {
+    "en": "Average",
+    "fr": "Moyen",
+    "ar-EG": "متوسط"
+  },
+  "Erschöpft": {
+    "en": "Exhausted",
+    "fr": "Épuisé",
+    "ar-EG": "مرهق"
+  },
+  "Keiner": {
+    "en": "None",
+    "fr": "Aucune",
+    "ar-EG": "مفيش"
+  },
+  "Leicht": {
+    "en": "Mild",
+    "fr": "Légères",
+    "ar-EG": "خفيف"
+  },
+  "Stark": {
+    "en": "Severe",
+    "fr": "Fortes",
+    "ar-EG": "شديد"
+  },
+  "Tagesnotiz": {
+    "en": "Daily note",
+    "fr": "Note du jour",
+    "ar-EG": "ملاحظة اليوم"
+  },
+  "Heute bewusst auf Regeneration geachtet": {
+    "en": "Focused on recovery today",
+    "fr": "J’ai pris soin de ma récupération aujourd’hui",
+    "ar-EG": "اهتميت بالتعافي النهاردة"
+  },
+  "Alle Angaben sind freiwillig und werden lokal für diesen Tag gespeichert.": {
+    "en": "All entries are optional and saved locally for this day.",
+    "fr": "Toutes les saisies sont facultatives et enregistrées localement pour ce jour.",
+    "ar-EG": "كل البيانات اختيارية وبتتحفظ على جهازك لليوم ده."
+  },
+  "Zukünftige Tage sind nur zur Ansicht verfügbar.": {
+    "en": "Future days are view-only.",
+    "fr": "Les jours à venir sont en lecture seule.",
+    "ar-EG": "الأيام الجاية للعرض بس."
+  },
+  "Deine Alltagseinträge": {
+    "en": "Your daily entries",
+    "fr": "Tes saisies quotidiennes",
+    "ar-EG": "بياناتك اليومية"
+  },
+  "Noch keine Tageswerte erfasst.": {
+    "en": "No daily entries yet.",
+    "fr": "Aucune saisie quotidienne pour le moment.",
+    "ar-EG": "لسه مفيش بيانات يومية."
+  },
+  "Auch an Ruhetagen aktiv": {
+    "en": "Active on rest days too",
+    "fr": "Actif aussi les jours de repos",
+    "ar-EG": "نشاط حتى في أيام الراحة"
+  },
+  "Schritte, Schlaf, Wasser, Ernährung und Regeneration für deinen Tag festhalten.": {
+    "en": "Log steps, sleep, water, nutrition and recovery for your day.",
+    "fr": "Note tes pas, ton sommeil, ton eau, ton alimentation et ta récupération.",
+    "ar-EG": "سجل الخطوات والنوم والمياه والأكل والتعافي."
+  },
+  "Speichern fehlgeschlagen. Bitte Datensicherung prüfen.": {
+    "en": "Could not save. Please check your backup.",
+    "fr": "Enregistrement impossible. Vérifie ta sauvegarde.",
+    "ar-EG": "الحفظ فشل. راجع النسخة الاحتياطية."
   }
 }
