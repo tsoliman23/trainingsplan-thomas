@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v40-pdf-dialog-zoom-133';
+const CACHE = 'mytraining-v42-140-water-rings-fix';
 
 const ASSETS = [
     './',
@@ -14,6 +14,8 @@ const ASSETS = [
     './nutrition.css',
     './nutrition132.css',
     './nutrition132.js',
+    './food-search14.css',
+    './food-search14.js',
     './water-health132.js',
     './day-sections.js',
     './day-sections.css',

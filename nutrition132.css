@@ -28,7 +28,7 @@
 .mt132-water-sub{margin:0!important;font-size:12px!important}
 .mt132-water-track{height:9px;background:var(--xp-border);border-radius:999px;overflow:hidden}.mt132-water-track>i{height:100%;display:block;background:#2a71d5;border-radius:999px;width:0;transition:width .2s}
 .mt132-glasses{display:flex;gap:5px;flex-wrap:wrap}
-.mt132-cup{display:inline-block;width:17px;height:25px;flex:none;clip-path:polygon(0% 0%,100% 0%,87% 100%,13% 100%);border-radius:3px;background:var(--xp-border)}
+.mt132-cup{display:inline-block;width:17px;height:25px;flex:none;clip-path:polygon(0% 0%,100% 0%,87% 100%,13% 100%);border-radius:3px;background:linear-gradient(to top,#2c81e5 var(--glass-fill,0%),var(--xp-border) var(--glass-fill,0%))}
 .mt132-cup.filled{background:#2c81e5}
 .mt132-water-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.mt132-water-buttons button{min-width:0!important;min-height:42px;background:#265fc6!important;color:#fff!important;font-size:12px!important;padding:8px 4px!important;border-radius:11px!important}
 .mt132-goal-row{display:flex!important;align-items:center;justify-content:space-between;gap:10px;font-size:12px!important}.mt132-goal-row input{width:90px!important;min-width:60px!important}
@@ -39,3 +39,7 @@
 .mt132-ring-box{min-width:0!important;width:100%!important;overflow:hidden}
 .mt132-ring{box-sizing:border-box!important;width:min(100%,84px)!important;max-width:84px!important;min-width:0!important;margin:0 auto!important;flex:none}
 @media(max-width:400px){.mt132-ring{width:min(100%,74px)!important;max-width:74px!important;padding:6px!important}.mt132-ring-box>strong{font-size:10px!important}.mt132-ring-box>small{font-size:9px!important;overflow-wrap:anywhere}.mt132-ring strong{font-size:12px!important}}
+
+/* Keep the nutrition progress rings visible when the Nutrition panel is opened. */
+#mt13-nutrition .mt132-rings{display:grid!important;visibility:visible!important;opacity:1!important}
+#mt13-nutrition .mt132-ring-box{overflow:visible!important}

@@ -1,6 +1,6 @@
 # MyTraining
 
-**Aktuelle App-Version: 1.3.3.** Diese Versionsnummer erscheint unter „Mehr → Über die App“. Frühere Versionsnummern in diesem Dokument sind Teil der Änderungshistorie.
+**Aktuelle App-Version: 1.4.** Diese Versionsnummer erscheint unter „Mehr → Über die App“. Frühere Versionsnummern in diesem Dokument sind Teil der Änderungshistorie.
 
 Eine installierbare, offlinefähige Trainingsplan-App (Progressive Web App, PWA) mit eigener lokaler Datenspeicherung. Die ANIMUS-Mockups dienten nur als gestalterische Referenz. Die App ist ein **Trainingsplan**, kein Mood- oder Ernährungstracker.
 
@@ -382,3 +382,24 @@ Der Bereich **Training** zeigt für Montag, Mittwoch und Freitag den aufklappbar
 - Die Vorschau beginnt mit Abstand zum iPhone-Statusbereich und nutzt den verfügbaren Raum nach unten. Rahmen, versetzte weiße Flächen und unnötiges Außenpadding im Dokumentbereich wurden entfernt.
 - Die Vorschau skaliert ausschließlich das eingebettete PDF in 10-%-Schritten von **50 % bis 150 %**. Der übrige Bildschirm bleibt unverändert; iOS kann die Darstellung eingebetteter PDFs versionsabhängig einschränken.
 - Service-Worker-Cache-Version wurde erhöht, damit die Korrektur nach dem Deployment geladen wird.
+
+
+## MyTraining 1.4 – Lebensmitteldatenbank und Barcode-Scanner
+
+- Online-Suche nach Produktnamen und Herstellern bei Open Food Facts.
+- Barcode-Abfrage sowie Barcode-Live-Scan über die iPhone-/Smartphone-Kamera. Die Erkennung verwendet bevorzugt die BarcodeDetector-API und als Fallback einen integrierten lokalen EAN-13-/UPC-A-Bilddecoder. Nicht jeder Barcode oder jedes Kamerabild wird erkannt; die manuelle Barcode-Eingabe steht immer zur Verfügung.
+- Angaben werden aus der öffentlich bearbeitbaren Open-Food-Facts-Datenbank gelesen. **Die Werte können fehlen oder falsch sein; vor Übernahme die Produktverpackung prüfen.** Produkte ohne vollständige Nährwerte können nicht mit erfundenen Zahlen hinzugefügt werden.
+- Nährwertangaben je 100 g bzw. 100 ml und portionsabhängige Hochrechnung; Übernahme als Tagesmahlzeit in die vorhandene lokale Tagesstruktur.
+- Favoriten und zuletzt verwendete Produkte sowie lokaler Produktcache; bereits geladene Produkte sind offline nutzbar. Neue Abfragen benötigen Internet.
+- Lokale Sammlung mit maximal 500 selbst gespeicherten/übernommenen Produkten; das vorhandene Backup enthält sie bereits. In Version 1.4 werden Favoriten und Produktcache ebenfalls im JSON-Backup gesichert.
+- Datenquelle: **Open Food Facts** (https://world.openfoodfacts.org), Datenlizenz **Open Database License (ODbL)**. Hinweise zur Weiterverwendung/Weitergabe und Quellenattribution: https://world.openfoodfacts.org/terms-of-use . Für reine private Nutzung erfolgt kein öffentliches Weiterveröffentlichen der gesammelten Produktdaten.
+- Die App sendet für neue Produktsuchen nur Sucheingaben oder Barcodes an Open Food Facts. Persönliche Profile, Gewichtswerte und Ernährungsprotokolle werden dafür nicht übertragen.
+- Beim ersten Kamera-Aufruf die Geräteberechtigung erteilen. Die Kameraübertragung erfolgt lokal im Browser; Videodaten werden nicht auf den Server geladen.
+- Cloudflare-Push-Dienst ist von dieser Erweiterung unabhängig. Kein neues Worker-Deployment notwendig.
+
+
+## MyTraining 1.4 – Wasser- und Nährstoffringe-Korrektur
+
+- Die Wasser-Glasanzeige erweitert sich ab Überschreiten des Tagesziels automatisch: Pro 250 ml wird ein weiteres Glas dargestellt. Angefangene Gläser werden anteilig gefüllt. Das Wasserziel begrenzt nicht die Darstellung der tatsächlich getrunkenen Menge.
+- Die Ernährungsübersicht zeigt beim Öffnen von **Training → Ernährung** die vier Fortschrittsringe für Kalorien, Eiweiß, Kohlenhydrate und Fett. Der Fehler bei der Initialisierung des Ringbereichs und der Lebensmittelbibliothek wurde behoben.
+- Die Datenformate bleiben unverändert; Trainings- und Ernährungsdaten werden nicht migriert oder gelöscht. Der Offline-Cache wurde aktualisiert.

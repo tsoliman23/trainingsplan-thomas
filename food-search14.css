@@ -1,0 +1,41 @@
+/* MyTraining 1.4 – search, scan and saved-product panel */
+.mt14-products{display:grid;gap:12px;padding:17px;margin:12px 0 20px;border:1px solid var(--xp-border,#cad5e6);border-radius:17px;background:var(--xp-card,#fff);color:var(--xp-text,#182b44)}
+.mt14-products h4,.mt14-products h5{margin:0;color:var(--xp-text);font-size:17px}
+.mt14-products h5{font-size:15px;margin:6px 0}
+.mt14-note,.mt14-status{margin:0;font-size:13px;line-height:1.55;color:var(--xp-muted)}
+.mt14-search{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.mt14-products input,.mt14-products select{min-width:0;max-width:100%;width:100%;min-height:44px;border-radius:11px;background:var(--xp-soft,#eaf1fc)!important;border:1px solid var(--xp-border,#cad5e6)!important;color:var(--xp-text,#182b44)!important;padding:9px 12px;font-size:16px;box-sizing:border-box}
+.mt14-products button{min-height:44px;border-radius:11px;padding:9px 14px;background:#275ac6!important;color:white!important;border:1px solid #275ac6!important;box-shadow:none!important;-webkit-text-fill-color:white!important}
+.mt14-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mt14-buttons button:nth-child(2){background:#142b51!important;border-color:#142b51!important}
+.mt14-barcode{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.mt14-result{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;margin:5px 0;text-align:left;background:var(--xp-soft)!important;color:var(--xp-text)!important;border:1px solid var(--xp-border)!important;-webkit-text-fill-color:var(--xp-text)!important}
+.mt14-result span:first-child{min-width:0;display:grid;gap:3px}
+.mt14-result strong{font-size:14px;overflow-wrap:anywhere}
+.mt14-result small{font-size:12px;color:var(--xp-muted)!important;-webkit-text-fill-color:var(--xp-muted)!important;line-height:1.4}
+.mt14-result>small{min-width:83px;text-align:right}
+.mt14-detail-head{display:flex;align-items:start;justify-content:space-between;gap:8px}
+.mt14-detail-head>div{min-width:0}
+.mt14-detail-head p{margin:5px 0;font-size:13px;color:var(--xp-muted)}
+.mt14-detail-head small{color:var(--xp-muted);font-size:11px}
+.mt14-detail-head .mt14-star{flex:none;background:#142b51!important;border-color:#142b51!important;font-size:23px;width:48px}
+.mt14-source{font-size:12px;color:var(--xp-muted);margin:12px 0}
+.mt14-nutrition{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.mt14-nutrition>div{display:grid;gap:6px;text-align:center;border-radius:10px;padding:10px 2px;background:var(--xp-soft)}
+.mt14-nutrition small{font-size:11px;color:var(--xp-muted)}
+.mt14-nutrition strong{font-size:18px;color:var(--xp-text)}
+.mt14-entry{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.mt14-entry label{display:grid;gap:5px;font-size:12px;color:var(--xp-muted);font-weight:750}
+.mt14-calculated{font-size:13px;color:var(--xp-text);font-weight:750;margin:12px 0}
+.mt14-detail-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mt14-detail-actions [data-mt14-action=save]{background:#142b51!important;border-color:#142b51!important}
+.mt14-detail-actions button:disabled{opacity:.45;cursor:not-allowed}
+.mt14-warning{background:#4d3725;border-radius:9px;color:#fff;padding:10px;font-size:13px}
+.mt14-scanner{display:grid;gap:8px;border-radius:12px;background:#111e36;color:#fff;padding:10px}
+.mt14-scanner p{font-size:13px;line-height:1.5;color:#fff}
+.mt14-scanner video{width:100%;height:230px;max-height:35dvh;object-fit:cover;border-radius:10px;background:#000}
+.mt14-scanner button{background:#111826!important;border-color:#344056!important}
+.mt14-products [hidden]{display:none!important}
+html[data-theme=dark] .mt14-products{background:var(--xp-card);border-color:var(--xp-border)}
+html[data-theme=dark] .mt14-note,html[data-theme=dark] .mt14-status,html[data-theme=dark] .mt14-result small,html[data-theme=dark] .mt14-source,html[data-theme=dark] .mt14-detail-head p,html[data-theme=dark] .mt14-entry label{color:#f0f5ff!important;-webkit-text-fill-color:#f0f5ff!important}
+@media(max-width:440px){.mt14-search{grid-template-columns:1fr}.mt14-detail-actions{grid-template-columns:1fr}.mt14-nutrition strong{font-size:15px}.mt14-buttons button{padding:9px 5px;font-size:13px}}
