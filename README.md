@@ -1,6 +1,6 @@
 # MyTraining
 
-**Aktuelle App-Version: 1.4.2.** Diese Versionsnummer erscheint unter „Mehr → Über die App“. Frühere Versionsnummern in diesem Dokument sind Teil der Änderungshistorie.
+**Aktuelle App-Version: 1.4.3.** Diese Versionsnummer erscheint unter „Mehr → Über die App“. Frühere Versionsnummern in diesem Dokument sind Teil der Änderungshistorie.
 
 Eine installierbare, offlinefähige Trainingsplan-App (Progressive Web App, PWA) mit eigener lokaler Datenspeicherung. Die ANIMUS-Mockups dienten nur als gestalterische Referenz. Die App verbindet **Trainingsplan, Ernährung und Regeneration** in einer lokalen, offlinefähigen Anwendung.
 
@@ -414,7 +414,7 @@ Der Bereich **Training** zeigt für Montag, Mittwoch und Freitag den aufklappbar
 - Unveränderte lokale Speicherung für bestehende Tage, Mahlzeiten und Nährwerte.
 
 
-## MyTraining 1.4.2 – Navigation und kompakter Trainingsplan
+## MyTraining 1.4.3 – Navigation und kompakter Trainingsplan
 
 - Navigation: Heute, Ernährung, Training, Statistik und Mehr.
 - Kalender von jeder Hauptansicht über die Kopfzeile erreichbar; der zuletzt angezeigte Monat bleibt beim Wechsel erhalten.

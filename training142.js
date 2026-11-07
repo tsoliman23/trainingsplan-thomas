@@ -1,4 +1,4 @@
-/* MyTraining 1.4.2: compact exercise cards. No changes to exercise fields or local data. */
+/* MyTraining 1.4.3: compact exercise cards. No changes to exercise fields or local data. */
 (()=>{'use strict';const $=id=>document.getElementById(id);const lang=()=>window.MyTrainingI18n?.current?.()||'de';
 const text={de:{progress:'Übungen',expand:'Satzwerte öffnen',collapse:'Satzwerte schließen',open:'Alle öffnen',close:'Alle schließen',more:'Weitere Trainingsaktionen'},en:{progress:'Exercises',expand:'Show sets',collapse:'Hide sets',open:'Expand all',close:'Collapse all',more:'More workout options'},fr:{progress:'Exercices',expand:'Voir les séries',collapse:'Masquer les séries',open:'Tout ouvrir',close:'Tout fermer',more:'Autres options d’entraînement'},'ar-EG':{progress:'تمارين',expand:'أظهر المجموعات',collapse:'اخف المجموعات',open:'افتح الكل',close:'اقفل الكل',more:'خيارات تمرين إضافية'}};
 const tr=k=>(text[lang()]||text.de)[k];let ready=false;

@@ -1,4 +1,4 @@
-/* MyTraining 1.4.2: separate Nutrition and Workout tabs with a compact daily recovery card. */
+/* MyTraining 1.4.3: separate Nutrition and Workout tabs with a compact daily recovery card. */
 (()=>{'use strict';
  const $=id=>document.getElementById(id);
  const LANG={de:{training:'Trainingsplan',rest:'Regeneration',hintTraining:'Übungen und Satzwerte',hintRest:'Bewegung, Schlaf und Erholung',empty:'An diesem Tag ist kein Krafttraining geplant. Deine Regeneration kannst du unter Heute dokumentieren.'},en:{training:'Workout plan',rest:'Recovery',hintTraining:'Exercises and sets',hintRest:'Activity, sleep and recovery',empty:'No strength training is planned for this day. Log your recovery on Today.'},fr:{training:'Entraînement',rest:'Récupération',hintTraining:'Exercices et séries',hintRest:'Activité, sommeil et repos',empty:'Aucun entraînement prévu ce jour. Note ta récupération sous Aujourd’hui.'},'ar-EG':{training:'خطة التمرين',rest:'التعافي',hintTraining:'التمارين والمجموعات',hintRest:'الحركة والنوم والتعافي',empty:'مفيش تمرين قوة متخطط لليوم. سجل التعافي في صفحة النهارده.'}};
