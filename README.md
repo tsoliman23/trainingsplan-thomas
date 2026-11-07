@@ -116,7 +116,7 @@ Im zweiten Einrichtungsschritt werden Tag, Monat und Jahr in drei getrennten ver
 
 ## 10. Kostenloser Push-Dienst mit Cloudflare Workers
 
-**Wichtig:** Die ZIP enthält die Push-Anbindung und den Cloudflare-Worker als **Quellcode**, aber keinen bereits bereitgestellten Worker. Hintergrund-Push funktioniert erst nach der folgenden Einrichtung. Ohne Worker bleibt der Erinnerungs-Schalter deaktiviert; es wird keine bereits funktionierende Erinnerung vorgetäuscht.
+**Wichtig:** Die ZIP enthält die Push-Anbindung und den Cloudflare-Worker als **Quellcode**, aber keinen bereits bereitgestellten Worker. Hintergrund-Push funktioniert erst nach der folgenden Einrichtung. Ohne Worker bleibt der Erinnerungs-Schalter deaktiviert; es wird keine bereits funktionierende Erinnerung vorgetäuscht. Nach Aktivierung kann eine echte Testbenachrichtigung über den Worker ausgelöst werden.
 
 ### Voraussetzungen
 
@@ -133,7 +133,7 @@ Im zweiten Einrichtungsschritt werden Tag, Monat und Jahr in drei getrennten ver
 4. Im Worker-Verzeichnis `npx wrangler secret put VAPID_SERVER_PRIVATE_KEY` ausführen und den privaten VAPID-Key im Terminal eingeben.
 5. `ALLOWED_ORIGIN` in `wrangler.toml` auf die GitHub-Pages-**Origin** setzen, normalerweise `https://tsoliman23.github.io` (ohne Repository-Pfad).
 6. `npm run deploy` starten. Die ausgegebene Worker-URL in `push-config.js` bei `MYTRAINING_PUSH_URL` eintragen. Die Konfigurationsdatei enthält **nur die öffentliche Worker-Adresse**, keine geheimen Schlüssel.
-7. Änderungen in Git committen und GitHub Pages aktualisieren. Danach MyTraining auf dem iPhone einmal online starten, in **Mehr → Einstellungen** die Erinnerungen aktivieren und die Berechtigung erlauben.
+7. Änderungen in Git committen und GitHub Pages aktualisieren. Danach MyTraining auf dem iPhone einmal online starten, in **Mehr → Einstellungen** die Erinnerungen aktivieren und die Berechtigung erlauben. Anschließend **„Testbenachrichtigung senden“** antippen und die Zustellung prüfen. Der Test ist auf höchstens einen Versand pro 60 Sekunden und registriertem Gerät begrenzt.
 
 ### Funktion und Datenschutz
 
@@ -260,3 +260,15 @@ git push
 3. Vor Einrichtungsdatum: keine Eingabefelder und kein aktiver Abschluss-Knopf.
 4. Einstellungen: Sprachwechsel und Hilfeknöpfe prüfen. Den Schalter für Erinnerungen nicht als erfolgreich aktivierte iOS-Push-Zustellung interpretieren, bevor der Worker konfiguriert wurde.
 5. Vor dem Update JSON-Sicherung und PDFs separat sichern.
+
+
+## Update 28 – echter Web-Push und Testbenachrichtigung
+
+- Die Push-Berechtigung wird auf iOS **unmittelbar beim Antippen des Schalters** angefordert. Ohne eingerichtete Worker-Adresse kann der Schalter nicht fälschlich einen funktionierenden Hintergrund-Push anzeigen.
+- Der Cloudflare-Worker bietet `POST /test` für einen echten Testversand an die **zuvor registrierte Push-Subscription**. Der Test wird mittels gerätebezogenem Token und einfachem 60-Sekunden-Limit geschützt.
+- Im Einstellungsbereich erscheint nach der Cloudflare-Konfiguration ein Button „Testbenachrichtigung senden“. Dieser wird erst nach aktivierter Push-Registrierung anklickbar.
+- Der regelmäßige Cron-Versand ist auf Mo/Mi/Fr, 08:00 Uhr `Europe/Berlin` ausgelegt. Die Zustellung kann durch Betriebssystem und Netzzustand verzögert werden.
+- **Deployment ist weiterhin erforderlich:** `cloudflare-push/wrangler.toml` mit KV-Namespace, VAPID Public Key, VAPID Subject und Origin befüllen; Private Key als Cloudflare-Secret setzen; Worker deployen; öffentliche URL in `push-config.js` eintragen.
+- **Datenschutz:** Der Worker speichert nur Push-Empfangsdaten und das zufällige Registrierungstoken, keine Trainingsdaten. Bei Deaktivierung wird die Registrierung gelöscht.
+
+Die App wurde nicht auf einem realen iPhone mit einem aktiven Cloudflare-Worker end-to-end getestet. Eine erfolgreiche Syntaxprüfung ersetzt weder Deployment noch einen Zustelltest auf dem Gerät.

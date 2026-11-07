@@ -1,4 +1,4 @@
-const CACHE = 'mytraining-v27-navigation-help-i18n';
+const CACHE = 'mytraining-v28-web-push-test';
 
 const ASSETS = [
     './',

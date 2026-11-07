@@ -35,7 +35,7 @@ const calendar=$('view-calendar');const jump=document.createElement('button');ju
 const settingsView=document.createElement('section');settingsView.className='cal-view xp-settings';settingsView.id='xp-settings';settingsView.hidden=true;settingsView.innerHTML=`<h2>Einstellungen</h2>
 <div class="cal-panel"><h3>Dein Profil</h3><p class="muted">Vorname, Nachname, Geburtstag, Körpergröße, Startgewicht, Ziel und Zielgewicht.</p><button type="button" id="xp-edit-profile">Profil bearbeiten</button></div>
 <div class="cal-panel"><h3>Design</h3><div class="xp-theme-switch" role="group" aria-label="Farbschema"><button type="button" data-theme="light">Hell</button><button type="button" data-theme="dark">Dunkel</button><button type="button" data-theme="system">System</button></div><p class="muted">Blautöne passend zu deinem App-Logo. Dein Wunsch wird lokal gespeichert.</p></div>
-<div class="cal-panel"><h3>Trainingserinnerung um 08:00 Uhr</h3><label class="xp-setting-row xp-switch-row" for="xp-remind"><span><strong>Erinnerungen aktivieren</strong><small>Montag, Mittwoch und Freitag um 08:00 Uhr</small></span><span class="xp-toggle"><input id="xp-remind" type="checkbox" aria-label="Erinnerungen einschalten"><span class="xp-toggle-slider" aria-hidden="true"></span></span></label><p id="xp-reminder-state" class="muted">Lokale Browser-Erinnerung, solange Benachrichtigungen erlaubt sind. Optional zusätzlich per Cloudflare Worker als Push bei geschlossener App.</p></div>
+<div class="cal-panel"><h3>Trainingserinnerung um 08:00 Uhr</h3><label class="xp-setting-row xp-switch-row" for="xp-remind"><span><strong>Erinnerungen aktivieren</strong><small>Montag, Mittwoch und Freitag um 08:00 Uhr</small></span><span class="xp-toggle"><input id="xp-remind" type="checkbox" aria-label="Erinnerungen einschalten"><span class="xp-toggle-slider" aria-hidden="true"></span></span></label><p id="xp-reminder-state" class="muted" role="status" aria-live="polite">Push-Dienst wird geprüft.</p><button type="button" id="xp-push-test" hidden>Testbenachrichtigung senden</button></div>
 <div class="cal-panel"><h3>Sicherung und Dokumente</h3><div class="xp-settings-actions"><button type="button" id="xp-to-backup">Dateisicherung öffnen</button><button type="button" id="xp-to-pdfs">PDF-Archiv öffnen</button></div><p class="muted">Daten und PDFs liegen lokal im Speicher dieser App. Für einen Gerätewechsel die JSON-Sicherung und PDF-Dateien separat herunterladen.</p></div>
 <div class="cal-panel xp-danger-zone"><h3>App zurücksetzen</h3><p class="muted">Alle lokalen Daten dieser App werden gelöscht: Profil, Trainingsstand, Historie, PDFs und Einstellungen.</p><button type="button" id="xp-reset-app" class="xp-danger-button">App zurücksetzen</button></div>
 <div class="cal-panel"><h3>Über die App</h3><p>Lokale Trainingsverwaltung · Offline-PWA · Keine Cloud, keine Anmeldung, kein Tracking.</p></div>`;
@@ -49,44 +49,36 @@ document.addEventListener('mytraining-navigate',e=>{if(e.detail?.view)show(e.det
 $('xp-go-today').onclick=()=>{window.TrainingCalendar?.openDate(TODAY());show('training');};$('xp-go-calendar').onclick=()=>show('calendar');$('xp-edit-profile').onclick=()=>$('editProfile').click();$('xp-to-backup').onclick=()=>{show('stats');$('download-backup')?.scrollIntoView({behavior:'smooth',block:'center'});};$('xp-to-pdfs').onclick=()=>show('documents');
 settingsView.querySelectorAll('[data-theme]').forEach(b=>b.onclick=()=>{settings.theme=b.dataset.theme;saveSettings();paintTheme();});
 function paintTheme(){settingsView.querySelectorAll('[data-theme]').forEach(b=>b.classList.toggle('selected',b.dataset.theme===settings.theme));}
-paintTheme();$('xp-remind').checked=!!settings.reminder;
-if(window.MyTrainingPush?.configured){$('xp-reminder-state').textContent='Push ist eingerichtet. Die Erinnerung kann lokal und zusätzlich als Push genutzt werden.';}else{$('xp-reminder-state').textContent='Lokale Browser-Erinnerung verfügbar. Für Push bei geschlossener App kann später ein Cloudflare Worker ergänzt werden.';}
-function syncWeightCard(){
- const input=$('bodyWeight');
- const full=read('training-full-profile-v1',{});
- const base=read('training-profile-v1',{});
- const current=Number(String(window.TrainingCalendar?.getWeightForDate?.(TODAY())||'').replace(',', '.'));
- const goal=Number(String(base.goalWeight||full.goalWeight||'').replace(',', '.'));
- const start=Number(String(full.currentWeight||'').replace(',', '.'));
- $('xp-weight-display').textContent=Number.isFinite(current)&&current>0?current.toLocaleString('de-DE',{minimumFractionDigits:1,maximumFractionDigits:1})+' kg':'–';
- $('xp-weight-target').textContent='Ziel: '+(Number.isFinite(goal)&&goal>0?goal.toLocaleString('de-DE',{minimumFractionDigits:1,maximumFractionDigits:1})+' kg':'–');
- $('xp-weight-start').textContent='Startgewicht: '+(Number.isFinite(start)&&start>0?start.toLocaleString('de-DE',{minimumFractionDigits:1,maximumFractionDigits:1})+' kg':'–');
+paintTheme();
+const pushSwitch=$('xp-remind'),pushTest=$('xp-push-test'),pushState=$('xp-reminder-state');
+let pushBusy=false;
+function updatePushUi(active){pushSwitch.checked=Boolean(active);settings.reminder=Boolean(active);saveSettings();pushTest.hidden=!window.MyTrainingPush?.configured;pushTest.disabled=!active||pushBusy;}
+if(!window.MyTrainingPush?.configured){
+ pushSwitch.checked=false;pushSwitch.disabled=true;pushTest.hidden=true;
+ pushState.textContent='Push noch nicht eingerichtet. Bitte zuerst den kostenlosen Cloudflare Worker bereitstellen (README, Abschnitt 10).';
+}else if(!window.MyTrainingPush.support()){
+ pushSwitch.checked=false;pushSwitch.disabled=true;pushTest.hidden=true;
+ pushState.textContent='Web Push wird in dieser Browseransicht nicht unterstützt. Auf iOS die App zum Home-Bildschirm hinzufügen und dort öffnen.';
+}else{
+ pushSwitch.disabled=false;pushTest.hidden=false;pushTest.disabled=true;
+ pushState.textContent='Tippe auf den Schalter, um die Push-Berechtigung anzufordern.';
+ window.MyTrainingPush.isSubscribed().then(active=>{updatePushUi(active);pushState.textContent=active?'Push-Registrierung vorhanden. Mit dem Test-Button die Zustellung prüfen.':'Push ist noch ausgeschaltet.';});
 }
-function nudgeWeight(step){
- if(!window.TrainingCalendar?.setWeightForDate)return;
- const current=Number(String(window.TrainingCalendar?.getWeightForDate?.(TODAY())||'').replace(',', '.'));
- const base=Number(read('training-full-profile-v1',{}).currentWeight||0);
- const start=Number.isFinite(current)&&current>0?current:(Number.isFinite(base)&&base>0?base:80);
- const next=Math.max(20,Math.min(350,Math.round((start+step)*10)/10));
- window.TrainingCalendar?.setWeightForDate?.(TODAY(),String(next.toFixed(1)));
- syncWeightCard();
-}
-$('xp-weight-minus').onclick=()=>nudgeWeight(-0.1);
-$('xp-weight-plus').onclick=()=>nudgeWeight(0.1);
-$('bodyWeight')?.addEventListener('input',syncWeightCard);
-$('bodyWeight')?.addEventListener('change',syncWeightCard);
-syncWeightCard();
-$('xp-remind').addEventListener('change',async e=>{
- const desired=e.target.checked;
- if(window.MyTrainingPush?.configured){
-  const result=await window.MyTrainingPush.update(desired);
-  if(result===null||result===undefined){e.target.checked=!!settings.reminder;return;}
-  settings.reminder=result;saveSettings();e.target.checked=result;return;
- }
- // Save a local preference even when iOS does not expose Notification from this browser view.
- // Never describe this setting as a working background push subscription.
- settings.reminder=desired;saveSettings();
- $('xp-reminder-state').textContent=desired?'Erinnerung vorgemerkt. Für zuverlässige iPhone-Benachrichtigungen bei geschlossener App muss zuerst der Push-Dienst eingerichtet werden.':'Erinnerungen deaktiviert.';
+pushSwitch.addEventListener('change',async e=>{
+ if(pushBusy)return;
+ const desired=e.target.checked;pushBusy=true;pushSwitch.disabled=true;pushTest.disabled=true;
+ // No await before update(): it must request iOS notification permission from the user gesture.
+ const resultPromise=window.MyTrainingPush?.update(desired);
+ const result=await resultPromise;
+ pushBusy=false;pushSwitch.disabled=false;
+ if(result===null||result===undefined){updatePushUi(!desired);return;}
+ updatePushUi(result);
+});
+pushTest.addEventListener('click',async()=>{
+ if(pushBusy||!settings.reminder)return;
+ pushBusy=true;pushTest.disabled=true;
+ await window.MyTrainingPush.sendTest();
+ pushBusy=false;pushTest.disabled=false;
 });
 
 async function deleteDatabase(name){
